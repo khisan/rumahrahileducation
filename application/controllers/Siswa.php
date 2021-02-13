@@ -52,9 +52,9 @@ class Siswa extends CI_Controller
       $row[] = $siswa->sekolah;
       $row[] = $siswa->alamat;
       $row[] = $siswa->email;
-      $row[] = $siswa->image != null ? '<img src="' . site_url('uploads/siswa/') . $siswa->image . '"  class="img-thumbnail" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="img-thumbnail">';
-      $row[] = $siswa->created;
-      $row[] = $siswa->updated;
+      $row[] = $siswa->image != null ? '<img src="' . site_url('uploads/siswa/') . $siswa->image . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
+      // $row[] = $siswa->created;
+      // $row[] = $siswa->updated;
       $row[] = '
           <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
@@ -115,6 +115,9 @@ class Siswa extends CI_Controller
 
       if (@$_FILES['image']['name'] != null) {
         if ($this->upload->do_upload('image')) {
+          if ($post['jurusan'] == '') {
+            $post['jurusan'] = null;
+          }
           $post['image'] = $this->upload->data('file_name');
           $data = $this->siswa->create($post);
           echo json_encode($data);
@@ -123,9 +126,12 @@ class Siswa extends CI_Controller
           echo json_encode($error);
         }
       } else {
+        if ($post['jurusan'] == '') {
+          $post['jurusan'] = null;
+        }
         $post['image'] = null;
         $data = $this->siswa->create($post);
-        json_encode($data);
+        echo json_encode($data);
       }
     }
   }
@@ -140,8 +146,15 @@ class Siswa extends CI_Controller
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('username', 'Username', 'required');
-    $this->form_validation->set_rules('name', 'Name', 'required');
+    $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('jenjang_id', 'Jenjang', 'required');
+    $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
+    $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
+    $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email', [
+      'valid_email' => '%s bukan email',
+      'is_unique' => '%s sudah di pakai'
+    ]);
     if ($this->input->post('password1')) {
       $this->form_validation->set_rules('password1', 'Password', 'required|min_length[8]', [
         'min_length' => '%s minimal 8 karakter'
@@ -157,14 +170,62 @@ class Siswa extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $data = $this->siswa->update($post);
-      echo json_encode($data);
+      $jj = '';
+      if ($post['jenjang_id'] == 1) {
+        $jj = 'SD';
+      } elseif ($post['jenjang_id'] == 2) {
+        $jj = 'SMP';
+      } else {
+        $jj = 'SMA';
+      }
+      $config['upload_path']    = './uploads/siswa/';
+      $config['allowed_types']  = 'gif|png|jpg|jpeg';
+      $config['max_size']       = 2048;
+      $config['file_name']       = "SISWA-$jj-$post[kelas_id]-" . date('ymd') . '-' . substr(md5(rand()), 0, 10);
+
+      $this->load->library('upload', $config);
+
+      if (@$_FILES['image']['name'] != null) {
+        if ($this->upload->do_upload('image')) {
+          if ($post['jurusan'] == '') {
+            $post['jurusan'] = null;
+          }
+          $siswa = $this->siswa->get($post['id_siswa'])->row();
+
+          if ($siswa->image != null) {
+            $target_file = './uploads/siswa/' . $siswa->image;
+            unlink($target_file);
+          }
+
+
+          $post['image'] = $this->upload->data('file_name');
+          $data = $this->siswa->update($post);
+          echo json_encode($data);
+        } else {
+          $error = $this->upload->display_errors();
+          echo json_encode($error);
+        }
+      } else {
+        if ($post['jurusan'] == '') {
+          $post['jurusan'] = null;
+        }
+        $post['image'] = null;
+        $data = $this->siswa->update($post);
+        echo json_encode($data);
+      }
     }
   }
 
   public function delete()
   {
     $post = $this->input->post(null, TRUE);
+    $siswa = $this->siswa->get($post['id'])->row();
+
+    if ($siswa->image != null) {
+      $target_file = './uploads/siswa/' . $siswa->image;
+      unlink($target_file);
+    }
+
     $data = $this->siswa->delete($post['id']);
     echo $data;
   }

@@ -40,8 +40,8 @@
                                 <th>Alamat</th>
                                 <th>Email</th>
                                 <th>Image</th>
-                                <th>Created</th>
-                                <th>Updated</th>
+                                <!-- <th>Created</th>
+                                <th>Updated</th> -->
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -62,7 +62,7 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title judul">siswa</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button type="button" class="close tutup-modal" data-dismiss="modal">×</button>
             </div>
 
             <!-- Modal body -->
@@ -123,6 +123,7 @@
                         <div class="form-group col-md-6 fill">
                             <label for="password1">Password</label>
                             <input type="password" class="form-control" id="password1" name="password1" placeholder="Email">
+                            <div class="pass"></div>
                         </div>
                         <div class="form-group col-md-6 fill">
                             <label for="password2">Confirm Password</label>
@@ -131,6 +132,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputGroupFile01">Photo Profile</label>
+                        <div class="image"></div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01" name="image" accept="image/*">
                             <label class="custom-file-label" for="inputGroupFile01">Pilih Photo Profile</label>
@@ -159,6 +161,8 @@
             $('.simpan').attr('id', 'add');
             $("#myModal").modal('show');
             $('.validation').html(null);
+            $('.image').html(null);
+            $('.pass').html(null);
 
         });
 
@@ -180,8 +184,15 @@
                 dataType: "JSON",
                 success: function(response) {
                     $('#id').val(response.id_siswa_profile);
-                    $('#username').val(response.username);
-                    $('#name').val(response.name);
+                    $('#nama').val(response.nama);
+                    $('#kelas').val(response.kelas_id);
+                    $('#jenjang').val(response.jenjang_id);
+                    $('#jurusan').val(response.jurusan);
+                    $('#sekolah').val(response.sekolah);
+                    $('#alamat').val(response.alamat);
+                    $('#email').val(response.email);
+                    $('.image').html(`<img src="<?= site_url('uploads/siswa/'); ?>${response.image}" class="rounded mx-auto d-block" alt="" width="200px">`);
+                    $('.pass').html(`<small>Kosongkan saja jika tidak ingin merubah password</small>`);
                 }
             });
 
@@ -232,6 +243,7 @@
                 contentType: false,
                 dataType: "JSON",
                 success: function(response) {
+                    //console.log(response);
                     if (response >= 0) {
                         reloadTable();
                         $("#myModal").modal('hide');
@@ -243,6 +255,10 @@
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                 </div>`);
                     }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
                 }
             });
         });
@@ -297,6 +313,10 @@
                     orderable: false
                 }
             ]
+        });
+
+        $('.tutup-modal').on('click', function() {
+            $('#submitForm')[0].reset();
         });
 
         $('.tutup').on('click', function() {

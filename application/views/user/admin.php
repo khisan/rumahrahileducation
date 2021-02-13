@@ -219,6 +219,10 @@
             ]
         });
 
+        $('.tutup-modal').on('click', function() {
+            $('#submitForm')[0].reset();
+        });
+
         $('.tutup').on('click', function() {
             $('#submitForm')[0].reset();
             $("#myModal").modal('hide');

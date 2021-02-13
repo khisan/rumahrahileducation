@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Model Admin_model
+ * Model Guru_model
  *
  * This Model for ...
  * 
@@ -16,12 +16,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Admin_model extends CI_Model
+class Guru_model extends CI_Model
 {
-  var $column_order = [null, 'username', 'name'];
-  var $column_search = ['username', 'name'];
 
-  var $order = ['id_admin' => 'asc'];
+  // ------------------------------------------------------------------------
+
+  var $column_order = [null, 'nama', 'alamat', 'email'];
+  var $column_search = ['nama', 'alamat', 'email'];
+
+  var $order = ['id_guru_profile' => 'asc'];
   // ------------------------------------------------------------------------
 
   // ------------------------------------------------------------------------
@@ -31,8 +34,8 @@ class Admin_model extends CI_Model
 
   public function _getDataTablesQuery()
   {
-    $this->db->select('*');
-    $this->db->from('tb_admin');
+    $this->db->select("*");
+    $this->db->from("tb_guru_profile");
 
     $i = 0;
 
@@ -77,15 +80,15 @@ class Admin_model extends CI_Model
 
   public function countAll()
   {
-    $this->db->from('tb_admin');
+    $this->db->from('tb_guru_profile');
     return $this->db->count_all_results();
   }
 
   public function get($id = null)
   {
-    $this->db->from('tb_admin');
+    $this->db->from('tb_guru_profile');
     if ($id != null) {
-      $this->db->where('id_admin', $id);
+      $this->db->where('id_guru_profile', $id);
     }
     $query = $this->db->get();
     return $query;
@@ -93,33 +96,39 @@ class Admin_model extends CI_Model
 
   public function create($post)
   {
-    $params = [
-      'username' => htmlspecialchars($post['username']),
-      'name' => htmlspecialchars($post['name']),
-      'password' => sha1($post['password1']),
-    ];
-    $this->db->insert('tb_admin', $params);
+    $params['id_guru_profile'] = htmlspecialchars($post['id_guru_profile']);
+    $params['nama'] = htmlspecialchars($post['nama']);
+    $params['alamat'] = htmlspecialchars($post['alamat']);
+    $params['email'] = htmlspecialchars($post['email']);
+    $params['password'] = sha1($post['password1']);
+    $params['image'] = htmlspecialchars($post['image']);
+
+    $this->db->insert('tb_guru_profile', $params);
     return $this->db->affected_rows();
   }
 
   public function update($post)
   {
-    $params['username'] = htmlspecialchars($post['username']);
-    $params['name'] = htmlspecialchars($post['name']);
+    $params['nama'] = htmlspecialchars($post['nama']);
+    $params['alamat'] = htmlspecialchars($post['alamat']);
+    $params['email'] = htmlspecialchars($post['email']);
     if (!empty($post['password1'])) {
       $params['password'] = sha1($post['password1']);
     }
+    if ($post['image'] != null) {
+      $params['image'] = htmlspecialchars($post['image']);
+    }
     $params['updated'] = date('Y-m-d H:i:s');
 
-    $this->db->where('id_admin', $post['id_admin']);
-    $this->db->update('tb_admin', $params);
+    $this->db->where('id_guru_profile', $post['id_guru']);
+    $this->db->update('tb_guru_profile', $params);
     return $this->db->affected_rows();
   }
 
   public function delete($id)
   {
-    $this->db->where('id_admin', $id);
-    $this->db->delete('tb_admin');
+    $this->db->where('id_guru_profile', $id);
+    $this->db->delete('tb_guru_profile');
     return $this->db->affected_rows();
   }
 
@@ -127,5 +136,5 @@ class Admin_model extends CI_Model
 
 }
 
-/* End of file Admin_model.php */
-/* Location: ./application/models/Admin_model.php */
+/* End of file Guru_model.php */
+/* Location: ./application/models/Guru_model.php */

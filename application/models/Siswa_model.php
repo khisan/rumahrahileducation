@@ -108,18 +108,29 @@ class Siswa_model extends CI_Model
     $params['email'] = htmlspecialchars($post['email']);
     $params['password'] = sha1($post['password1']);
     $params['image'] = htmlspecialchars($post['image']);
+
     $this->db->insert('tb_siswa_profile', $params);
     return $this->db->affected_rows();
   }
 
   public function update($post)
   {
-    $params['username'] = htmlspecialchars($post['username']);
-    $params['name'] = htmlspecialchars($post['name']);
+    $params['nama'] = htmlspecialchars($post['nama']);
+    $params['jenjang_id'] = htmlspecialchars($post['jenjang_id']);
+    $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
+    $params['jurusan'] = htmlspecialchars($post['jurusan']);
+    $params['sekolah'] = htmlspecialchars($post['sekolah']);
+    $params['alamat'] = htmlspecialchars($post['alamat']);
+    $params['email'] = htmlspecialchars($post['email']);
     if (!empty($post['password1'])) {
       $params['password'] = sha1($post['password1']);
     }
-    $this->db->where('id_siswa_profile', $post['id_siswa_profile']);
+    if ($post['image'] != null) {
+      $params['image'] = htmlspecialchars($post['image']);
+    }
+    $params['updated'] = date('Y-m-d H:i:s');
+
+    $this->db->where('id_siswa_profile', $post['id_siswa']);
     $this->db->update('tb_siswa_profile', $params);
     return $this->db->affected_rows();
   }
