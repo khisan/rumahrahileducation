@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Model Admin_model
+ * Model Mapel_model
  *
  * This Model for ...
  * 
@@ -16,23 +16,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Admin_model extends CI_Model
+class Mapel_model extends CI_Model
 {
-  var $column_order = [null, 'username', 'name'];
-  var $column_search = ['username', 'name'];
-
-  var $order = ['id_admin' => 'asc'];
-  // ------------------------------------------------------------------------
 
   // ------------------------------------------------------------------------
 
-
-  // ------------------------------------------------------------------------
-
-  public function _getDataTablesQuery()
+  public function __construct()
   {
-    $this->db->select('*');
-    $this->db->from('tb_admin');
+    parent::__construct();
+  }
+
+  // ------------------------------------------------------------------------
+
+
+  // ------------------------------------------------------------------------
+  var $column_order = [null, null, 'mapel', 'kelas', 'sekolah'];
+  var $column_search = ['mapel', 'kelas', 'sekolah'];
+
+  var $order = ['id_mapel_guru' => 'asc'];
+  // ------------------------------------------------------------------------
+
+  // ------------------------------------------------------------------------
+
+
+  // ------------------------------------------------------------------------
+
+  public function _getDataTablesQuery($id = null)
+  {
+    $this->db->select("tb_mapel_guru.*, tb_guru_profile.nama as nama, tb_kelas.nama_kelas as kelas");
+    $this->db->from("tb_mapel_guru");
+    $this->db->join("tb_guru_profile", "tb_guru_profile.id_guru_profile = tb_mapel_guru.guru_profile_id");
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel_guru.kelas_id");
+    $this->db->where('guru_profile_id', $id);
 
     $i = 0;
 
@@ -58,9 +73,9 @@ class Admin_model extends CI_Model
     }
   }
 
-  public function getDataTables()
+  public function getDataTables($id = null)
   {
-    $this->_getDataTablesQuery();
+    $this->_getDataTablesQuery($id);
 
     if (@$_POST['length'] != -1)
       $this->db->limit(@$_POST['length'], @$_POST['start']);
@@ -77,65 +92,26 @@ class Admin_model extends CI_Model
 
   public function countAll()
   {
-    $this->db->from('tb_admin');
+    $this->db->from('tb_mapel_guru');
     return $this->db->count_all_results();
-  }
-
-  public function get($id = null)
-  {
-    $this->db->from('tb_admin');
-    if ($id != null) {
-      $this->db->where('id_admin', $id);
-    }
-    $query = $this->db->get();
-    return $query;
-  }
-
-  public function login($post)
-  {
-    $this->db->select('*');
-    $this->db->from('tb_admin');
-    $this->db->where('username', $post['username']);
-    $this->db->where('password', sha1($post['password']));
-    $query = $this->db->get();
-    return $query;
   }
 
   public function create($post)
   {
-    $params = [
-      'username' => htmlspecialchars($post['username']),
-      'name' => htmlspecialchars($post['name']),
-      'password' => sha1($post['password1']),
-    ];
-    $this->db->insert('tb_admin', $params);
+    $params = [];
+    $params['id_mapel_guru'] = htmlspecialchars($post['id_mapel_guru']);
+    $params['guru_profile_id'] = htmlspecialchars($post['guru_profile_id']);
+    $params['mapel'] = htmlspecialchars($post['mapel']);
+    $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
+    $params['sekolah'] = htmlspecialchars($post['sekolah']);
+    $this->db->insert('tb_mapel_guru', $params);
     return $this->db->affected_rows();
   }
 
-  public function update($post)
-  {
-    $params['username'] = htmlspecialchars($post['username']);
-    $params['name'] = htmlspecialchars($post['name']);
-    if (!empty($post['password1'])) {
-      $params['password'] = sha1($post['password1']);
-    }
-    $params['updated'] = date('Y-m-d H:i:s');
-
-    $this->db->where('id_admin', $post['id_admin']);
-    $this->db->update('tb_admin', $params);
-    return $this->db->affected_rows();
-  }
-
-  public function delete($id)
-  {
-    $this->db->where('id_admin', $id);
-    $this->db->delete('tb_admin');
-    return $this->db->affected_rows();
-  }
 
   // ------------------------------------------------------------------------
 
 }
 
-/* End of file Admin_model.php */
-/* Location: ./application/models/Admin_model.php */
+/* End of file Mapel_model.php */
+/* Location: ./application/models/Mapel_model.php */

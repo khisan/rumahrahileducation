@@ -133,7 +133,7 @@
                     <div class="form-group mb-3">
                         <label for="inputGroupFile01">Photo Profile</label>
                         <div class="image"></div>
-                        <div class="custom-file">
+                        <div class=" custom-file mt-3">
                             <input type="file" class="custom-file-input" id="inputGroupFile01" name="image" accept="image/*">
                             <label class="custom-file-label" for="inputGroupFile01">Pilih Photo Profile</label>
                         </div>
@@ -191,7 +191,7 @@
                     $('#sekolah').val(response.sekolah);
                     $('#alamat').val(response.alamat);
                     $('#email').val(response.email);
-                    $('.image').html(`<img src="<?= site_url('uploads/siswa/'); ?>${response.image}" class="rounded mx-auto d-block" alt="" width="200px">`);
+                    $('.image').html(`<img src="<?= site_url('uploads/siswa/'); ?>${response.image}" class="rounded mx-auto d-block alt="" width="200px">`);
                     $('.pass').html(`<small>Kosongkan saja jika tidak ingin merubah password</small>`);
                 }
             });
