@@ -37,6 +37,13 @@ class Mapel extends CI_Controller
     $this->template->load('template', 'user/guru_mapel', $data);
   }
 
+  public function getMapel()
+  {
+    $get = $this->input->get(null, TRUE);
+    $query = $this->mapel->get($get['id']);
+    echo json_encode($query->row());
+  }
+
   public function getAjax($id = null)
   {
     $list = $this->mapel->getDataTables($id);
@@ -83,6 +90,29 @@ class Mapel extends CI_Controller
       $data = $this->mapel->create($post);
       echo json_encode($data);
     }
+  }
+  public function update()
+  {
+    $post = $this->input->post(null, TRUE);
+
+    $this->form_validation->set_rules('mapel', 'Mapel', 'required');
+    $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
+    $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
+    $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
+
+    if ($this->form_validation->run() == false) {
+      echo json_encode(validation_errors());
+    } else {
+      $data = $this->mapel->update($post);
+      echo json_encode($data);
+    }
+  }
+  public function delete()
+  {
+    $post = $this->input->post(null, TRUE);
+
+    $data = $this->mapel->delete($post['id']);
+    echo json_encode($data);
   }
 }
 

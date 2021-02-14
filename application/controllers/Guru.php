@@ -50,9 +50,9 @@ class Guru extends CI_Controller
       // $row[] = $guru->created;
       // $row[] = $guru->updated;
       $row[] = '
+          <a href="' . site_url('mapel/get/') . $guru->id_guru_profile . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-list"></i>Lihat Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
           <button type="button" value="' . $guru->id_guru_profile . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $guru->id_guru_profile . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-          <a href="' . site_url('mapel/get/') . $guru->id_guru_profile . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-list"></i>Lihat Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
       ';
 
       $data[] = $row;
@@ -193,7 +193,7 @@ class Guru extends CI_Controller
     }
 
     $data = $this->guru->delete($post['id']);
-    echo $data;
+    echo json_encode($data);
   }
 }
 
