@@ -75,7 +75,7 @@ class Mapel extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->mapel->countAll(),
-      'recordsFiltered' => $this->mapel->countFiltered(),
+      'recordsFiltered' => $this->mapel->countFiltered($id),
       'data' => $data
     ];
     echo json_encode($output);

@@ -69,7 +69,7 @@ class Paket extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->paket->countAll(),
-      'recordsFiltered' => $this->paket->countFiltered(),
+      'recordsFiltered' => $this->paket->countFiltered($id),
       'data' => $data
     ];
     echo json_encode($output);

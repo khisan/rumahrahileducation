@@ -73,9 +73,9 @@ class Bab_model extends CI_Model
     return $query->result();
   }
 
-  public function countFiltered()
+  public function countFiltered($id = null)
   {
-    $this->_getDataTablesQuery();
+    $this->_getDataTablesQuery($id);
     $query = $this->db->get();
     return $query->num_rows();
   }

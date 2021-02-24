@@ -65,7 +65,7 @@ class Latihan extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->latihan->countAll(),
-      'recordsFiltered' => $this->latihan->countFiltered(),
+      'recordsFiltered' => $this->latihan->countFiltered($id),
       'data' => $data
     ];
     echo json_encode($output);

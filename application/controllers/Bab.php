@@ -79,7 +79,7 @@ class Bab extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->bab->countAll(),
-      'recordsFiltered' => $this->bab->countFiltered(),
+      'recordsFiltered' => $this->bab->countFiltered($id),
       'data' => $data
     ];
     echo json_encode($output);
