@@ -39,7 +39,7 @@
                         <h4 class="mb-3 f-w-400">Signin</h4>
                         <form action="<?= site_url('auth/process'); ?>" method="post">
                             <div class="form-group mb-3">
-                                <label class="floating-label" for="username">Email address</label>
+                                <label class="floating-label" for="username">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="">
                             </div>
                             <div class="form-group mb-4">

@@ -3,12 +3,13 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Mapel</h5>
+                    <h5 class="m-b-10">bab</h5>
                 </div>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?= site_url('dashboard'); ?>"><i class="feather icon-users"></i></a></li>
-                    <li class="breadcrumb-item"><a href="<?= site_url('guru'); ?>">Guru</a></li>
-                    <li class="breadcrumb-item"><a href="#!">Mapel</a></li>
+                    <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>"><?= $kelas->nama_kelas; ?></a></li>
+                    <li class="breadcrumb-item"><a href="#!"><?= $mapel->nama_mapel; ?></a></li>
                 </ul>
             </div>
         </div>
@@ -16,39 +17,27 @@
 </div>
 <!-- [ breadcrumb ] end -->
 <!-- [ Main Content ] start -->
-<div class="row mapel-isi">
+<div class="row bab-isi">
     <!-- [ static-layout ] start -->
-
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header text-center">
-                <h3 class="text-primary"><strong>Mapel Guru</strong></h3>
+                <h3 class="text-primary"><strong><?= $kelas->id_kelas == 1 ? 'Subtema' : 'Bab'; ?></strong></h3>
             </div>
             <div class="card-body">
                 <div class="row mb-3">
-                    <div class="col-sm-12">
+                    <div class="col-sm-5">
+                        <h1><?= $mapel->nama_mapel; ?></h1>
+                    </div>
+                    <div class="offset-sm-6 col-sm-1">
                         <div class="float-right">
-                            <a href="<?= site_url('guru'); ?>" class="btn btn-warning btn-flat">
+                            <a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>" class="btn btn-warning btn-flat">
                                 <i class="fa fa-undo"></i> Back</a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6 mb-3">
-                        <h5>Nama : </h5>
-                        <p><?= $guru->nama; ?></p>
-                        <h5>Alamat : </h5>
-                        <p><?= $guru->alamat; ?></p>
-                        <h5>Email : </h5>
-                        <p><?= $guru->email; ?></p>
-                    </div>
-                    <div class="col-sm-6">
-                        <?= $guru->image != null ? '<img src="' . site_url('uploads/guru/') . $guru->image . '" alt="" class="img-thumbnail rounded float-right" width="250px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" alt="" class="img-thumbnail rounded float-right" width="250px">'; ?>
-                    </div>
-                </div>
-                <hr>
                 <div class="float-right mb-3">
-                    <button type="button" class="btn btn-primary has-ripple" id="mapelAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+                    <button type="button" class="btn btn-primary has-ripple" id="babAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
 
                 </div>
                 <div class="table-responsive">
@@ -56,13 +45,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID</th>
-                                <th>mapel</th>
-                                <th>kelas</th>
-                                <th>sekolah</th>
-                                <th>Keterangan</th>
-                                <th>created</th>
-                                <th>updated</th>
+                                <th><?= $kelas->id_kelas == 1 ? 'Subtema' : 'bab'; ?></th>
+                                <th>Semester</th>
+                                <th>Created</th>
+                                <th>Updated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -82,7 +68,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title judul">Mapel</h4>
+                <h4 class="modal-title judul">bab</h4>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
 
@@ -92,45 +78,26 @@
 
                 </div>
                 <form id="submitForm">
+                    <input type="hidden" name="id_bab" id="id">
+                    <input type="hidden" name="mapel_id" id="mapel" value="<?= $mapel->id_mapel; ?>">
                     <div class="form-group fill">
-                        <input type="hidden" name="id_mapel_guru" id="id">
-                        <label for="Nama">Nama</label>
-                        <input type="hidden" class="form-control" id="guru_profile_id" name="guru_profile_id" value="<?= $guru->id_guru_profile; ?>">
-                        <input type="text" class="form-control" id="Nama" placeholder="Nama" value="<?= $guru->nama; ?>" readonly>
+                        <label for="bab"><?= $kelas->id_kelas == 1 ? 'Subtema' : 'bab'; ?></label>
+                        <input type="text" class="form-control" id="bab" name="nama_bab" placeholder="<?= $kelas->id_kelas == 1 ? 'Ketik Nama Subtema' : 'Ketik Nama bab'; ?>">
                     </div>
                     <div class="form-group fill">
-                        <label for="mapel">mapel</label>
-                        <select name="mapel_id" id="mapel" class="form-control">
-                            <option value="">--pilih salah satu--</option>
-                            <?php foreach ($mapel as $map) { ?>
-                                <option value="<?= $map->id_mapel; ?>"><?= $map->nama_mapel; ?></option>
-                            <?php } ?>
+                        <label for="bab">Semester</label>
+                        <select name="semester" id="semester" class="form-control">
+                            <option value="">-- Pilih Salah Satu --</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
                         </select>
-                    </div>
-                    <div class="form-group fill">
-                        <label for="kelas">kelas</label>
-                        <select name="kelas_id" id="kelas" class="form-control">
-                            <option value="">--pilih salah satu--</option>
-                            <?php foreach ($kelas as $kel) { ?>
-                                <option value="<?= $kel->id_kelas; ?>"><?= $kel->nama_kelas; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group fill">
-                        <label for="sekolah">Sekolah</label>
-                        <input type="text" class="form-control" id="sekolah" name="sekolah" placeholder="sekolah">
-                        <small>Contoh : SDN Polehan 1, SMPN 1 Karangploso, SMAN 1 Kepanjen</small>
-                    </div>
-                    <div class="form-group fill">
-                        <label for="keterangan">Keterangan</label>
-                        <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="keterangan">
-                        <small>Dapat di isi nama kelas, seperti: 12 IPA 2, Kelas 7 B, Kelas 1</small>
                     </div>
                 </form>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary reset" id="reset">Reset</button>
                 <button type="button" class="btn btn-success simpan" id="save">Submit</button>
                 <button type="button" class="btn btn-danger tutup" id="close">Close</button>
             </div>
@@ -138,12 +105,11 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
-        const site_url = "<?= site_url('mapelguru/'); ?>";
-        $('.mapel-isi').on('click', '#mapelAdd', function() {
-            $('.judul').html('Tambah Mapel Guru');
+        const site_url = "<?= site_url('bab/'); ?>";
+        $('.bab-isi').on('click', '#babAdd', function() {
+            $('.judul').html('Tambah <?= $kelas->id_kelas == 1 ? 'Subtema' : 'bab'; ?>');
             $('.simpan').html('Tambah Data');
             $('.simpan').attr('id', 'add');
             $("#myModal").modal('show');
@@ -151,8 +117,8 @@
 
         });
 
-        $('.mapel-isi').on('click', '.update', function() {
-            $('.judul').html('Update Mapel Guru');
+        $('.bab-isi').on('click', '.update', function() {
+            $('.judul').html('Update <?= $kelas->id_kelas == 1 ? 'Subtema' : 'bab'; ?>');
             $('.simpan').html('Update Data');
             $('.simpan').attr('id', 'update');
             $("#myModal").modal('show');
@@ -162,18 +128,16 @@
 
             $.ajax({
                 type: "GET",
-                url: site_url + "getMapel",
+                url: site_url + "get",
                 data: {
                     id: id
                 },
                 dataType: "JSON",
                 success: function(response) {
-                    console.log(response);
-                    $('#id').val(response.id_mapel_guru);
+                    $('#id').val(response.id_bab);
                     $('#mapel').val(response.mapel_id);
-                    $('#kelas').val(response.kelas_id);
-                    $('#sekolah').val(response.sekolah);
-                    $('#keterangan').val(response.keterangan);
+                    $('#bab').val(response.nama_bab);
+                    $('#semester').val(response.semester);
                 }
             });
 
@@ -210,10 +174,10 @@
             });
         });
 
-        $('.mapel-isi').on('click', '.delete', function() {
+        $('.bab-isi').on('click', '.delete', function() {
             let id = $(this).attr('value');
 
-            console.log(id);
+
 
             swal({
                     title: "Apakah anda yakin?",
@@ -231,7 +195,9 @@
                                 id: id
                             },
                             dataType: "JSON",
+
                             success: function(response) {
+
                                 reloadTable();
                                 swal("Selamat, file berhasil di hapus!", {
                                     icon: "success",
@@ -248,7 +214,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: '<?= site_url('mapelguru/getAjax/') . $guru->id_guru_profile; ?>',
+                url: '<?= site_url('bab/getAjax/') . $mapel->id_mapel; ?>',
                 type: 'POST'
             },
             columnDefs: [{

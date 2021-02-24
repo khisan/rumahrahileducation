@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Model Mapel_model
+ * Model Paket_model
  *
  * This Model for ...
  * 
@@ -16,15 +16,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Mapel_model extends CI_Model
+class Paket_model extends CI_Model
 {
 
   // ------------------------------------------------------------------------
 
-  var $column_order = [null, 'nama_mapel', 'created'];
-  var $column_search = ['nama_mapel'];
+  var $column_order = [null, 'nama_paket', 'created'];
+  var $column_search = ['nama_paket'];
 
-  var $order = ['id_mapel' => 'asc'];
+  var $order = ['id_paket' => 'asc'];
   // ------------------------------------------------------------------------
 
   // ------------------------------------------------------------------------
@@ -34,10 +34,10 @@ class Mapel_model extends CI_Model
 
   public function _getDataTablesQuery($id = null)
   {
-    $this->db->select("tb_mapel.*, tb_kelas.nama_kelas");
-    $this->db->from("tb_mapel");
-    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id");
-    $this->db->where('kelas_id', $id);
+    $this->db->select("tb_paket.*, tb_latihan.nama_latihan");
+    $this->db->from("tb_paket");
+    $this->db->join("tb_latihan", "tb_latihan.id_latihan = tb_paket.latihan_id");
+    $this->db->where('latihan_id', $id);
 
     $i = 0;
 
@@ -82,19 +82,19 @@ class Mapel_model extends CI_Model
 
   public function countAll()
   {
-    $this->db->from('tb_mapel');
+    $this->db->from('tb_paket');
     return $this->db->count_all_results();
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_kelas = null)
+  public function get($id = null, $id_latihan = null)
   {
-    $this->db->from('tb_mapel');
+    $this->db->from('tb_paket');
     if ($id != null) {
-      $this->db->where('id_mapel', $id);
+      $this->db->where('id_paket', $id);
     }
-    if ($id_kelas != null) {
-      $this->db->where('kelas_id', $id_kelas);
+    if ($id_latihan != null) {
+      $this->db->where('latihan_id', $id_latihan);
     }
     $query = $this->db->get();
     return $query;
@@ -102,33 +102,34 @@ class Mapel_model extends CI_Model
 
   public function create($post)
   {
-    $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
-    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
-    $this->db->insert('tb_mapel', $params);
+    $params['latihan_id'] = htmlspecialchars($post['latihan_id']);
+    $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
+    $params['waktu'] = htmlspecialchars($post['waktu']);
+    $this->db->insert('tb_paket', $params);
     return $this->db->affected_rows();
   }
 
   public function update($post)
   {
-    $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
-    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
+    $params['latihan_id'] = htmlspecialchars($post['latihan_id']);
+    $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
+    $params['waktu'] = htmlspecialchars($post['waktu']);
     $params['updated'] = date('Y-m-d H:i:s');
-    $this->db->where('id_mapel', $post['id_mapel']);
-    $this->db->update('tb_mapel', $params);
+    $this->db->where('id_paket', $post['id_paket']);
+    $this->db->update('tb_paket', $params);
     return $this->db->affected_rows();
   }
 
   public function delete($id)
   {
-    $this->db->where('id_mapel', $id);
-    $this->db->delete('tb_mapel');
+    $this->db->where('id_paket', $id);
+    $this->db->delete('tb_paket');
     return $this->db->affected_rows();
   }
-
 
   // ------------------------------------------------------------------------
 
 }
 
-/* End of file Mapel_model.php */
-/* Location: ./application/models/Mapel_model.php */
+/* End of file Paket_model.php */
+/* Location: ./application/models/Paket_model.php */

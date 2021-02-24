@@ -21,8 +21,8 @@ class Pengajar_model extends CI_Model
 
   // ------------------------------------------------------------------------
 
-  var $column_order = [null, 'id', 'nama', 'mapel'];
-  var $column_search = ['nama', 'mapel'];
+  var $column_order = [null, 'id_code_guru', 'tb_guru_profile.nama', 'tb_mapel.nama_mapel'];
+  var $column_search = ['tb_guru_profile.nama', 'tb_mapel.nama_mapel'];
 
   var $order = ['nama' => 'asc'];
   // ------------------------------------------------------------------------
@@ -34,10 +34,11 @@ class Pengajar_model extends CI_Model
 
   public function _getDataTablesQuery($id = null)
   {
-    $this->db->select("tb_code_guru.id_code_guru, tb_code_guru.siswa_profile_id ,tb_code_guru.mapel_guru_id, tb_guru_profile.nama, tb_mapel_guru.mapel, tb_code_guru.created, tb_code_guru.updated ");
+    $this->db->select("tb_code_guru.id_code_guru, tb_code_guru.siswa_profile_id ,tb_code_guru.mapel_guru_id, tb_guru_profile.nama, tb_mapel_guru.mapel_id, tb_mapel.nama_mapel, tb_code_guru.created, tb_code_guru.updated");
     $this->db->from("tb_mapel_guru");
     $this->db->join("tb_guru_profile", "tb_guru_profile.id_guru_profile = tb_mapel_guru.guru_profile_id");
     $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel_guru.kelas_id");
+    $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_mapel_guru.mapel_id");
     $this->db->join("tb_code_guru", "tb_code_guru.mapel_guru_id = tb_mapel_guru.id_mapel_guru");
     $this->db->join("tb_siswa_profile", "tb_siswa_profile.id_siswa_profile = tb_code_guru.siswa_profile_id");
     $this->db->where('siswa_profile_id', $id);

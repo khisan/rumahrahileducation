@@ -45,9 +45,8 @@ class Pengajar extends CI_Controller
       $row[] = $no . '.';
       $row[] = $pengajar->mapel_guru_id;
       $row[] = $pengajar->nama;
-      $row[] = $pengajar->mapel;
+      $row[] = $pengajar->nama_mapel;
       $row[] = $pengajar->created;
-      $row[] = $pengajar->updated;
       $row[] = '
           <button type="button" value="' . $pengajar->id_code_guru . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';

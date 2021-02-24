@@ -24,28 +24,36 @@ class Mapel extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
-    $this->load->model('Mapel_model', 'mapel');
-    $this->load->model('Guru_model', 'guru');
+    $this->load->model('Jenjang_model', 'jenjang');
     $this->load->model('Kelas_model', 'kelas');
+    $this->load->model('Mapel_model', 'mapel');
   }
 
-  public function get($id = null)
+  public function sd($id = null)
   {
-    $data['guru'] = $this->guru->get($id)->row();
-    $data['kelas'] = $this->kelas->get()->result();
-    $this->template->load('template', 'user/guru_mapel', $data);
+    $data['kelas'] = $this->kelas->get($id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'tes/mapel', $data);
   }
 
-  public function getMapel()
+  public function smp($id = null)
   {
-    $get = $this->input->get(null, TRUE);
-    $query = $this->mapel->get($get['id']);
-    echo json_encode($query->row());
+    $data['kelas'] = $this->kelas->get($id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'tes/mapel', $data);
+  }
+
+  public function sma($id = null)
+  {
+    $data['kelas'] = $this->kelas->get($id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'tes/mapel', $data);
   }
 
   public function getAjax($id = null)
   {
+    $kelas = $this->kelas->get($id)->row();
+    $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
     $list = $this->mapel->getDataTables($id);
     $data = [];
     $no = @$_POST['start'];
@@ -53,15 +61,13 @@ class Mapel extends CI_Controller
       $no++;
       $row = [];
       $row[] = $no . '.';
-      $row[] = $mapel->id_mapel_guru;
-      $row[] = $mapel->mapel;
-      $row[] = $mapel->kelas;
-      $row[] = $mapel->sekolah;
+      $row[] = $mapel->nama_mapel;
       $row[] = $mapel->created;
       $row[] = $mapel->updated;
       $row[] = '
-          <button type="button" value="' . $mapel->id_mapel_guru . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-          <button type="button" value="' . $mapel->id_mapel_guru . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+          <a  href="' . site_url("bab/$jenjang->nama_jenjang/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+          <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+          <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';
 
       $data[] = $row;
@@ -74,30 +80,36 @@ class Mapel extends CI_Controller
     ];
     echo json_encode($output);
   }
+
+  public function get()
+  {
+    $get = $this->input->get(null, TRUE);
+    $query = $this->mapel->get($get['id']);
+    echo json_encode($query->row());
+  }
+
   public function add()
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('mapel', 'Mapel', 'required');
     $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
-    $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
+    $this->form_validation->set_rules('nama_mapel', 'Mapel', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
 
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $post['id_mapel_guru'] = substr(md5(rand()), 0, 7);
       $data = $this->mapel->create($post);
       echo json_encode($data);
     }
   }
+
   public function update()
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('mapel', 'Mapel', 'required');
     $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
-    $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
+    $this->form_validation->set_rules('nama_mapel', 'Mapel', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
 
     if ($this->form_validation->run() == false) {
@@ -107,10 +119,10 @@ class Mapel extends CI_Controller
       echo json_encode($data);
     }
   }
+
   public function delete()
   {
     $post = $this->input->post(null, TRUE);
-
     $data = $this->mapel->delete($post['id']);
     echo json_encode($data);
   }

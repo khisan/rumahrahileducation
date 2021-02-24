@@ -16,15 +16,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Mapel_model extends CI_Model
+class MapelGuru_model extends CI_Model
 {
 
   // ------------------------------------------------------------------------
 
-  var $column_order = [null, 'nama_mapel', 'created'];
-  var $column_search = ['nama_mapel'];
+  public function __construct()
+  {
+    parent::__construct();
+  }
 
-  var $order = ['id_mapel' => 'asc'];
+  // ------------------------------------------------------------------------
+
+
+  // ------------------------------------------------------------------------
+  var $column_order = [null, 'id_mapel_guru', 'tb_mapel.nama_mapel', 'tb_kelas.nama_kelas', 'sekolah', 'keterangan', 'created'];
+  var $column_search = ['tb_mapel.nama_mapel', 'tb_kelas.nama_kelas', 'sekolah', 'keterangan'];
+
+  var $order = ['id_mapel_guru' => 'asc'];
   // ------------------------------------------------------------------------
 
   // ------------------------------------------------------------------------
@@ -34,10 +43,12 @@ class Mapel_model extends CI_Model
 
   public function _getDataTablesQuery($id = null)
   {
-    $this->db->select("tb_mapel.*, tb_kelas.nama_kelas");
-    $this->db->from("tb_mapel");
-    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id");
-    $this->db->where('kelas_id', $id);
+    $this->db->select("tb_mapel_guru.*, tb_mapel.nama_mapel, tb_guru_profile.nama as nama, tb_kelas.nama_kelas");
+    $this->db->from("tb_mapel_guru");
+    $this->db->join("tb_guru_profile", "tb_guru_profile.id_guru_profile = tb_mapel_guru.guru_profile_id");
+    $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_mapel_guru.mapel_id");
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel_guru.kelas_id");
+    $this->db->where('guru_profile_id', $id);
 
     $i = 0;
 
@@ -82,19 +93,15 @@ class Mapel_model extends CI_Model
 
   public function countAll()
   {
-    $this->db->from('tb_mapel');
+    $this->db->from('tb_mapel_guru');
     return $this->db->count_all_results();
   }
 
-  // ------------------------------------------------------------------------
-  public function get($id = null, $id_kelas = null)
+  public function get($id = null)
   {
-    $this->db->from('tb_mapel');
+    $this->db->from('tb_mapel_guru');
     if ($id != null) {
-      $this->db->where('id_mapel', $id);
-    }
-    if ($id_kelas != null) {
-      $this->db->where('kelas_id', $id_kelas);
+      $this->db->where('id_mapel_guru', $id);
     }
     $query = $this->db->get();
     return $query;
@@ -102,29 +109,37 @@ class Mapel_model extends CI_Model
 
   public function create($post)
   {
+    $params = [];
+    $params['id_mapel_guru'] = htmlspecialchars($post['id_mapel_guru']);
+    $params['guru_profile_id'] = htmlspecialchars($post['guru_profile_id']);
+    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
     $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
-    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
-    $this->db->insert('tb_mapel', $params);
+    $params['sekolah'] = htmlspecialchars($post['sekolah']);
+    $params['keterangan'] = htmlspecialchars($post['keterangan']);
+    $this->db->insert('tb_mapel_guru', $params);
     return $this->db->affected_rows();
   }
 
   public function update($post)
   {
+    $params = [];
+    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
     $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
-    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
+    $params['sekolah'] = htmlspecialchars($post['sekolah']);
+    $params['keterangan'] = htmlspecialchars($post['keterangan']);
     $params['updated'] = date('Y-m-d H:i:s');
-    $this->db->where('id_mapel', $post['id_mapel']);
-    $this->db->update('tb_mapel', $params);
+
+    $this->db->where('id_mapel_guru', $post['id_mapel_guru']);
+    $this->db->update('tb_mapel_guru', $params);
     return $this->db->affected_rows();
   }
 
   public function delete($id)
   {
-    $this->db->where('id_mapel', $id);
-    $this->db->delete('tb_mapel');
+    $this->db->where('id_mapel_guru', $id);
+    $this->db->delete('tb_mapel_guru');
     return $this->db->affected_rows();
   }
-
 
   // ------------------------------------------------------------------------
 

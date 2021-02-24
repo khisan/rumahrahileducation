@@ -64,12 +64,37 @@
                     <li class="nav-item">
                         <a href="<?= site_url('dashboard'); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>User</label>
+                    </li>
                     <li class="nav-item pcoded-hasmenu">
                         <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">User Management</span></a>
                         <ul class="pcoded-submenu">
                             <li><a href="<?= site_url('admin'); ?>">Admin</a></li>
                             <li><a href="<?= site_url('siswa'); ?>">Siswa</a></li>
                             <li><a href="<?= site_url('guru'); ?>">Guru</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Test Online</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Test Management</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
+                            <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
+                            <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Quiz Online</label>
+                    </li>
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Quiz Management</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="#!">SD</a></li>
+                            <li><a href="#!">SMP</a></li>
+                            <li><a href="#!">SMA</a></li>
                         </ul>
                     </li>
 

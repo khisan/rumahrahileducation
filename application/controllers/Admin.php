@@ -120,7 +120,7 @@ class Admin extends CI_Controller
   {
     $post = $this->input->post(null, TRUE);
     $data = $this->admin->delete($post['id']);
-    echo $data;
+    echo json_encode($data);
   }
 }
 

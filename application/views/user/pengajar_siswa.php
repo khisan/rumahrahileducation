@@ -3,11 +3,12 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Pengajar</h5>
+                    <h5 class="m-b-10">Guru</h5>
                 </div>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-users"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#!">Pengajar</a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url('dashboard'); ?>"><i class="feather icon-users"></i></a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url('siswa'); ?>">Siswa</a></li>
+                    <li class="breadcrumb-item"><a href="#!">Guru</a></li>
                 </ul>
             </div>
         </div>
@@ -20,7 +21,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header text-center">
-                <h3 class="text-primary"><strong>Pengajar</strong></h3>
+                <h3 class="text-primary"><strong>Guru yang di ikuti</strong></h3>
             </div>
             <div class="card-body">
                 <div class="row mb-3">
@@ -60,7 +61,6 @@
                                 <th>nama guru</th>
                                 <th>mapel</th>
                                 <th>Created</th>
-                                <th>Updated</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -115,7 +115,7 @@
     $(document).ready(function() {
         const site_url = "<?= site_url('pengajar/'); ?>";
         $('.pengajar-isi').on('click', '#pengajarAdd', function() {
-            $('.judul').html('Tambah pengajar');
+            $('.judul').html('Tambah Guru');
             $('.simpan').html('Tambah Data');
             $('.simpan').attr('id', 'add');
             $("#myModal").modal('show');

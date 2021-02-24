@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Model Kelas_model
+ * Model Soal_model
  *
  * This Model for ...
  * 
@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Kelas_model extends CI_Model
+class Soal_model extends CI_Model
 {
 
   // ------------------------------------------------------------------------
@@ -30,25 +30,14 @@ class Kelas_model extends CI_Model
 
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $jenjang = null)
+  public function index()
   {
-    if ($id != null) {
-      $this->db->where('id_kelas', $id);
-    }
-    if ($jenjang == "sd") {
-      $this->db->where("id_kelas <", 7);
-    } elseif ($jenjang == "smp") {
-      $this->db->where("id_kelas >", 6);
-      $this->db->where("id_kelas <", 10);
-    } elseif ($jenjang == "sma") {
-      $this->db->where("id_kelas >", 9);
-    }
-    $query = $this->db->get('tb_kelas');
-    return $query;
+    // 
   }
+
   // ------------------------------------------------------------------------
 
 }
 
-/* End of file Kelas_model.php */
-/* Location: ./application/models/Kelas_model.php */
+/* End of file Soal_model.php */
+/* Location: ./application/models/Soal_model.php */
