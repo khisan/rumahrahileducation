@@ -23,6 +23,17 @@
                 <h3 class="text-primary"><strong>soal</strong></h3>
             </div>
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-5">
+                        <h1>Soal</h1>
+                    </div>
+                    <div class="offset-sm-6 col-sm-1">
+                        <div class="float-right">
+                            <a href="<?= site_url("paket/index/$paket->latihan_id"); ?>" class="btn btn-warning btn-flat">
+                                <i class="fa fa-undo"></i> Back</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="float-right mb-3">
                     <button type="button" class="btn btn-primary has-ripple" id="soalAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
 
@@ -86,27 +97,27 @@
                         <label for="soal_text">Soal</label>
                         
                         <!--<input type="text" class="form-control" id="soal_text" name="soal_text" placeholder="soal_text"> -->
-                        <textarea name="soal_text" id="soal_text" class="form-control"></textarea>
+                        <textarea name="soal_text" id="soal_text" class="form-control texteditor "></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="option_a">Option A</label>
-                        <textarea name="option_a" id="option_a" class="form-control"></textarea>
+                        <textarea name="option_a" id="option_a" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="option_b">Option B</label>
-                        <textarea name="option_b" id="option_b" class="form-control"></textarea>
+                        <textarea name="option_b" id="option_b" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="option_c">Option C</label>
-                        <textarea name="option_c" id="option_c" class="form-control"></textarea>
+                        <textarea name="option_c" id="option_c" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="option_d">Option D</label>
-                        <textarea name="option_d" id="option_d" class="form-control"></textarea>
+                        <textarea name="option_d" id="option_d" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="option_e">Option E</label>
-                        <textarea name="option_e" id="option_e" class="form-control"></textarea>
+                        <textarea name="option_e" id="option_e" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
                         <label for="jawaban">Jawaban</label>
@@ -144,6 +155,9 @@
         </div>
     </div>
 </div>
+<!-- <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> -->
+<script src="<?= site_url("assets/ckeditor")?>/ckeditor.js"></script>
+
 
 <script>
     $(document).ready(function() {
@@ -198,7 +212,7 @@
             let url = '';
 
             let id = $('#id').val();
-            let soal_text = $('#soal_text').val();
+            let soal_text = CKEDITOR.instances['soal_text'].getData();
             let paket_id = $('#paket_id').val();
             
             // let soal_suara = $('#soal_suara').val();
@@ -209,7 +223,7 @@
             let option_e = $('#option_e').val();
             let jawaban_benar = $('#jawaban_benar').val();
             let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
-
+console.log(soal_text);
             let formData = new FormData();
 
             formData.append('id_soal', id);
@@ -341,6 +355,11 @@
             let fileName = $(this).val().split('\\').pop();
             $(this).next('.custom-file-label').addClass("selected").html(fileName);
         });
-
+        
+                // Replace the <textarea id="editor1"> with a CKEditor 4
+                // instance, using default configuration.
+                CKEDITOR.replace( 'soal_text' );
+            
     })
+
 </script>
