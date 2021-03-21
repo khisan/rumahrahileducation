@@ -24,6 +24,9 @@ class Auth extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->model('Admin_model', 'admin');
+    $this->load->model('Guru_model', 'guru');
+    $this->load->model('Siswa_model', 'siswa');
   }
 
   public function login()
@@ -36,13 +39,27 @@ class Auth extends CI_Controller
   {
     $post = $this->input->post(null, TRUE);
     if (isset($post['login'])) {
-      $query = $this->admin->login($post);
-      if ($query->num_rows() > 0) {
-        $row = $query->row();
-        $params = [
-          'userid' => $row->id_admin
+      $cek_admin = $this->admin->login($post);
+      $cek_guru = $this->guru->login($post);
+      if ($cek_admin->num_rows() > 0) {
+        $row = $cek_admin->row();
+        $session_admin = [
+          'userid'  => $row->id_admin,
+          'nama'    => $row->name
         ];
-        $this->session->set_userdata($params);
+        $this->session->set_userdata($session_admin);
+        echo '<script>
+                alert("selamat, Login Berhasil");
+                window.location = `' . site_url('Dashboard') . '`;
+              </script>';
+      } elseif ($cek_guru->num_rows() > 0) {
+        $row = $cek_guru->row();
+        $session_guru = [
+          'userid'  => $row->id_guru_profile,
+          'nama'    => $row->nama,
+          'gambar'  => $row->image
+        ];
+        $this->session->set_userdata($session_guru);
         echo '<script>
                 alert("selamat, Login Berhasil");
                 window.location = `' . site_url('Dashboard') . '`;

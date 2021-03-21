@@ -100,6 +100,7 @@ class Siswa_model extends CI_Model
   {
     $params['id_siswa_profile'] = htmlspecialchars($post['id_siswa_profile']);
     $params['nama'] = htmlspecialchars($post['nama']);
+    $params['username'] = htmlspecialchars($post['username']);
     $params['jenjang_id'] = htmlspecialchars($post['jenjang_id']);
     $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
     $params['jurusan'] = htmlspecialchars($post['jurusan']);
@@ -116,6 +117,7 @@ class Siswa_model extends CI_Model
   public function update($post)
   {
     $params['nama'] = htmlspecialchars($post['nama']);
+    $params['username'] = htmlspecialchars($post['username']);
     $params['jenjang_id'] = htmlspecialchars($post['jenjang_id']);
     $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
     $params['jurusan'] = htmlspecialchars($post['jurusan']);

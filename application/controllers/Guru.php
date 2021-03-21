@@ -43,6 +43,7 @@ class Guru extends CI_Controller
       $row = [];
       $row[] = $no . '.';
       $row[] = $guru->nama;
+      $row[] = $guru->username;
       $row[] = $guru->alamat;
       $row[] = $guru->email;
       $row[] = $guru->password;
@@ -71,6 +72,7 @@ class Guru extends CI_Controller
     $post = $this->input->post(null, TRUE);
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('alamat', 'Alamat', 'required');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tb_guru_profile.email]', [
       'valid_email' => '%s bukan email',
@@ -129,6 +131,7 @@ class Guru extends CI_Controller
     $post = $this->input->post(null, TRUE);
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('alamat', 'Alamat', 'required');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email', [
       'valid_email' => '%s bukan email',

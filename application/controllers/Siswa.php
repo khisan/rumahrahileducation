@@ -47,6 +47,7 @@ class Siswa extends CI_Controller
       $row = [];
       $row[] = $no . '.';
       $row[] = $siswa->nama;
+      $row[] = $siswa->username;
       $row[] = $siswa->jenjang_name;
       $row[] = $siswa->kelas_name;
       $row[] = $siswa->jurusan;
@@ -78,6 +79,7 @@ class Siswa extends CI_Controller
     $post = $this->input->post(null, TRUE);
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('jenjang_id', 'Jenjang', 'required');
     $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
     $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
@@ -115,7 +117,7 @@ class Siswa extends CI_Controller
 
       $this->load->library('upload', $config);
 
-      if (@$_FILES['image']['name'] != null) {
+      if ($_FILES['image']['name'] != null) {
         if ($this->upload->do_upload('image')) {
           if ($post['jurusan'] == '') {
             $post['jurusan'] = null;
@@ -149,6 +151,7 @@ class Siswa extends CI_Controller
     $post = $this->input->post(null, TRUE);
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('jenjang_id', 'Jenjang', 'required');
     $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
     $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');

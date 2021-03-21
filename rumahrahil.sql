@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 24 Feb 2021 pada 11.35
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.4.10
+-- Host: localhost
+-- Waktu pembuatan: 21 Mar 2021 pada 14.00
+-- Versi server: 10.4.17-MariaDB
+-- Versi PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,11 +41,7 @@ CREATE TABLE `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `username`, `name`, `password`, `created`, `updated`) VALUES
-(1, 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '2021-02-06 11:42:24', NULL),
-(2, 'admin1', 'admin1', '7c222fb2927d828af22f592134e8932480637c0d', '2021-02-08 13:29:44', NULL),
-(3, 'admin2', 'admin2', '7c222fb2927d828af22f592134e8932480637c0d', '2021-02-08 13:50:24', NULL),
-(4, 'admin3', 'admin3', 'a4811a6f1e3f9d28cd65dcc2df64480593af4519', '2021-02-08 15:25:51', NULL),
-(6, '', '', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '2021-02-21 13:32:30', NULL);
+(1, 'admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '2021-02-06 11:42:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -97,6 +93,7 @@ CREATE TABLE `tb_code_guru` (
 CREATE TABLE `tb_guru_profile` (
   `id_guru_profile` varchar(128) NOT NULL,
   `nama` varchar(256) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL,
@@ -109,8 +106,9 @@ CREATE TABLE `tb_guru_profile` (
 -- Dumping data untuk tabel `tb_guru_profile`
 --
 
-INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
-('SD00001', 'Bambang', 'Klojen, Malang', 'bambang@gmail.com', '40deeb9b48ab6f238f76a1a6322e1099ed064428', NULL, '2021-02-08 23:12:34', NULL);
+INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
+('guru-210320-730a1', 'coba', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'guru-210224-bea72ff5f4.jpg', '2021-03-20 15:28:29', '2021-03-20 09:30:13'),
+('SD00001', 'Bambang', 'bambang', 'Klojen, Malang', 'bambang@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', NULL, '2021-02-08 23:12:34', '2021-03-20 13:34:36');
 
 -- --------------------------------------------------------
 
@@ -281,8 +279,8 @@ CREATE TABLE `tb_siswa_profile` (
 --
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
-('SD11061c', 'Budi', 1, 2, '', 'SMAN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-02-13 23:00:01'),
-('SD1fdebf', 'dsadsadadasd', 1, 2, '', 'dsa', 'dsa', 'dsa@mail.com', 'cc4723995ce819915e734147a77850427a9e95f9', '', '2021-02-12 18:00:51', NULL),
+('SD11061c', 'Budi', 1, 2, '', 'SMAN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
+('SD1968c4', 'coba1', 2, 2, 'IPS', 'coba1', 'coba1', 'coba1@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMP-2-210320-f02ea703db.jpg', '2021-03-20 15:26:38', '2021-03-20 09:27:26'),
 ('SMP38ed27', 'Bagas', 2, 3, '', 'SMPN 3 Pacet', 'Pacet, Mojokerto', 'bagas@gmail.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '', '2021-02-14 05:10:13', NULL);
 
 -- --------------------------------------------------------
@@ -404,7 +402,7 @@ ALTER TABLE `tb_soal`
 -- AUTO_INCREMENT untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_bab`

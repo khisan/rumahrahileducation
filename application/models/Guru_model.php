@@ -94,10 +94,22 @@ class Guru_model extends CI_Model
     return $query;
   }
 
+  public function login($post)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_guru_profile');
+    $this->db->where('username', $post['username']);
+    $this->db->where('password', sha1($post['password']));
+    $query = $this->db->get();
+    return $query;
+  }
+
+
   public function create($post)
   {
     $params['id_guru_profile'] = htmlspecialchars($post['id_guru_profile']);
     $params['nama'] = htmlspecialchars($post['nama']);
+    $params['username'] = htmlspecialchars($post['username']);
     $params['alamat'] = htmlspecialchars($post['alamat']);
     $params['email'] = htmlspecialchars($post['email']);
     $params['password'] = sha1($post['password1']);
@@ -110,6 +122,7 @@ class Guru_model extends CI_Model
   public function update($post)
   {
     $params['nama'] = htmlspecialchars($post['nama']);
+    $params['username'] = htmlspecialchars($post['username']);
     $params['alamat'] = htmlspecialchars($post['alamat']);
     $params['email'] = htmlspecialchars($post['email']);
     if (!empty($post['password1'])) {
