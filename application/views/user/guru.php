@@ -84,7 +84,7 @@
           </div>
           <div class="form-group fill">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
             <small>Contoh : budi@gmail.com</small>
           </div>
           <div class="form-row">

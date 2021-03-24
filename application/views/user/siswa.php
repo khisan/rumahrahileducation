@@ -117,18 +117,18 @@
           </div>
           <div class="form-group fill">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
             <small>Contoh : budi@gmail.com</small>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6 fill">
               <label for="password1">Password</label>
-              <input type="password" class="form-control" id="password1" name="password1" placeholder="Email">
+              <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
               <div class="pass"></div>
             </div>
             <div class="form-group col-md-6 fill">
               <label for="password2">Confirm Password</label>
-              <input type="password" class="form-control" id="password2" name="password2" placeholder="Password">
+              <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password">
             </div>
           </div>
           <div class="form-group mb-3">

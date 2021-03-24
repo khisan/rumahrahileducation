@@ -24,7 +24,7 @@ class Siswa extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
+    // check_not_login();
     $this->load->model('Siswa_model', 'siswa');
     $this->load->model('Jenjang_model', 'jenjang');
     $this->load->model('Kelas_model', 'kelas');
@@ -142,8 +142,13 @@ class Siswa extends CI_Controller
   public function get()
   {
     $get = $this->input->get(null, TRUE);
-    $query = $this->siswa->get($get['id']);
-    echo json_encode($query->row());
+    if ($get == null) {
+      $query = $this->siswa->get();
+      echo json_encode($query->result_array());
+    } else {
+      $query = $this->siswa->get($get['id']);
+      echo json_encode($query->row());
+    }
   }
 
   public function update()
