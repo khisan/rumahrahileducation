@@ -90,12 +90,12 @@
           <div class="form-row">
             <div class="form-group col-md-6 fill">
               <label for="password1">Password</label>
-              <input type="password" class="form-control" id="password1" name="password1" placeholder="Email">
+              <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
               <div class="pass"></div>
             </div>
             <div class="form-group col-md-6 fill">
               <label for="password2">Confirm Password</label>
-              <input type="password" class="form-control" id="password2" name="password2" placeholder="Password">
+              <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password">
             </div>
           </div>
           <div class="form-group mb-3">
@@ -190,10 +190,6 @@
       formData.append('id_guru', id);
       formData.append('nama', nama);
       formData.append('username', username);
-      formData.append('jenjang_id', jenjang);
-      formData.append('kelas_id', kelas);
-      formData.append('jurusan', jurusan);
-      formData.append('sekolah', sekolah);
       formData.append('alamat', alamat);
       formData.append('email', email);
       formData.append('password1', password1);

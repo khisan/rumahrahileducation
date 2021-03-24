@@ -24,7 +24,7 @@ class Guru extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
+    // check_not_login();
     $this->load->model('Guru_model', 'guru');
   }
 
@@ -99,9 +99,6 @@ class Guru extends CI_Controller
 
       if (@$_FILES['image']['name'] != null) {
         if ($this->upload->do_upload('image')) {
-          if ($post['jurusan'] == '') {
-            $post['jurusan'] = null;
-          }
           $post['image'] = $this->upload->data('file_name');
           $data = $this->guru->create($post);
           echo json_encode($data);
@@ -110,9 +107,6 @@ class Guru extends CI_Controller
           echo json_encode($error);
         }
       } else {
-        if ($post['jurusan'] == '') {
-          $post['jurusan'] = null;
-        }
         $post['image'] = null;
         $data = $this->guru->create($post);
         echo json_encode($data);
@@ -122,8 +116,13 @@ class Guru extends CI_Controller
   public function get()
   {
     $get = $this->input->get(null, TRUE);
-    $query = $this->guru->get($get['id']);
-    echo json_encode($query->row());
+    if ($get == null) {
+      $query = $this->guru->get();
+      echo json_encode($query->result_array());
+    } else {
+      $query = $this->guru->get($get['id']);
+      echo json_encode($query->row());
+    }
   }
 
   public function update()
