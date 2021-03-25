@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 24 Mar 2021 pada 10.04
+-- Waktu pembuatan: 25 Mar 2021 pada 07.49
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -282,7 +282,7 @@ CREATE TABLE `tb_siswa_profile` (
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
 ('SD11061c', 'Budi', 'budi', 1, 2, '', 'SMAN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
-('SD1968c4', 'coba', 'coba', 2, 2, 'IPS', 'coba1', 'coba1', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMP-2-210320-f02ea703db.jpg', '2021-03-20 15:26:38', '2021-03-20 09:27:26'),
+('SD179322', 'coba', 'coba', 1, 1, '', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210325-28add851fb.png', '2021-03-25 07:37:37', NULL),
 ('SMP38ed27', 'Bagas', 'bagas', 2, 3, '', 'SMPN 3 Pacet', 'Pacet, Mojokerto', 'bagas@gmail.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '', '2021-02-14 05:10:13', NULL);
 
 -- --------------------------------------------------------
@@ -296,7 +296,6 @@ CREATE TABLE `tb_soal` (
   `paket_id` int(11) NOT NULL,
   `soal_text` text NOT NULL,
   `soal_gambar` varchar(256) NOT NULL,
-  `soal_suara` varchar(256) NOT NULL,
   `option_a` text NOT NULL,
   `option_b` text NOT NULL,
   `option_c` text NOT NULL,
@@ -404,7 +403,7 @@ ALTER TABLE `tb_soal`
 -- AUTO_INCREMENT untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_bab`
