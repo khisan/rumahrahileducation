@@ -35,9 +35,9 @@ class Soal extends CI_Controller
     // var_dump($data['paket']);
     // die;
     $data['soal'] = $this->soal->get(null, $data['paket']->id_paket)->row();
-  // var_dump($data['soal']);
-  //   die;
-    $this->template->load('template', 'tes/soal',$data);
+    // var_dump($data['soal']);
+    //   die;
+    $this->template->load('template', 'tes/soal', $data);
 
     // 
   }
@@ -51,18 +51,14 @@ class Soal extends CI_Controller
       $no++;
       $row = [];
       $row[] = $no . '.';
-      $row[] = $soal->soal_text;
       $row[] = $soal->soal_gambar != null ? '<img src="' . site_url('uploads/soal/') . $soal->soal_gambar . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
-      $row[] = $soal->soal_suara;
+      $row[] = $soal->soal_text;
       $row[] = $soal->option_a;
       $row[] = $soal->option_b;
       $row[] = $soal->option_c;
       $row[] = $soal->option_d;
       $row[] = $soal->option_e;
       $row[] = $soal->jawaban_benar;
-      
-      // $row[] = $soal->created;
-      // $row[] = $soal->updated;
       $row[] = '
           <button type="button" value="' . $soal->id_soal . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $soal->id_soal . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
@@ -82,8 +78,13 @@ class Soal extends CI_Controller
   public function get()
   {
     $get = $this->input->get(null, TRUE);
-    $query = $this->soal->get($get['id']);
-    echo json_encode($query->row());
+    if ($get == null) {
+      $query = $this->soal->get();
+      echo json_encode($query->result_array());
+    } else {
+      $query = $this->soal->get($get['id']);
+      echo json_encode($query->row());
+    }
   }
 
   public function add()
@@ -103,7 +104,7 @@ class Soal extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      
+
       $config['upload_path']    = './uploads/soal/';
       $config['allowed_types']  = 'gif|png|jpg|jpeg';
       $config['max_size']       = 2048;
@@ -127,7 +128,7 @@ class Soal extends CI_Controller
       }
     }
   }
- 
+
 
   public function update()
   {
@@ -145,7 +146,7 @@ class Soal extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-     
+
       $config['upload_path']    = './uploads/soal/';
       $config['allowed_types']  = 'gif|png|jpg|jpeg';
       $config['max_size']       = 204800;
