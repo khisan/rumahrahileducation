@@ -24,7 +24,7 @@ class Admin extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
+    // check_not_login();
   }
 
   public function index()
@@ -86,8 +86,13 @@ class Admin extends CI_Controller
   public function get()
   {
     $get = $this->input->get(null, TRUE);
-    $query = $this->admin->get($get['id']);
-    echo json_encode($query->row());
+    if ($get == null) {
+      $query = $this->admin->get();
+      echo json_encode($query->result_array());
+    } else {
+      $query = $this->admin->get($get['id']);
+      echo json_encode($query->row());
+    }
   }
 
   public function update()

@@ -24,7 +24,7 @@ class Siswa extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    // check_not_login();
+    check_not_login();
     $this->load->model('Siswa_model', 'siswa');
     $this->load->model('Jenjang_model', 'jenjang');
     $this->load->model('Kelas_model', 'kelas');
