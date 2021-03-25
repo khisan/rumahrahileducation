@@ -104,19 +104,6 @@
               <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
             </ul>
           </li>
-          <li class="nav-item pcoded-menu-caption">
-            <label>Quiz Online</label>
-          </li>
-          <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-school"></i></span><span class="pcoded-mtext">Quiz Management</span></a>
-            <ul class="pcoded-submenu">
-              <li><a href="#!">SD</a></li>
-              <li><a href="#!">SMP</a></li>
-              <li><a href="#!">SMA</a></li>
-              <li><a href="<?= site_url('kelas/sbmptn'); ?>">SBMPTN</a></li>
-              <li><a href="<?= site_url('kelas/kedinasan'); ?>">Kedinasan</a></li>
-            </ul>
-          </li>
         </ul>
       </div>
     </div>
