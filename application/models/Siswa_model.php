@@ -96,6 +96,16 @@ class Siswa_model extends CI_Model
     return $query;
   }
 
+  public function login($post)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_siswa_profile');
+    $this->db->where('username', $post['username']);
+    $this->db->where('password', sha1($post['password']));
+    $query = $this->db->get();
+    return $query;
+  }
+
   public function create($post)
   {
     $params['id_siswa_profile'] = htmlspecialchars($post['id_siswa_profile']);

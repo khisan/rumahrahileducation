@@ -45,15 +45,21 @@
         <div class="">
           <div class="main-menu-header">
             <?php
+            $id = $this->session->userdata('userid');
             $nama = $this->session->userdata('nama');
-            if ($nama === "admin") {
+            if (is_numeric($id) == 'true') {
             ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
               </div>
-            <?php } else { ?>
+            <?php } elseif (str_contains($id, 'guru') == 'true') { ?>
               <img class="img-radius" src="<?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image">
+              <div class="user-details">
+                <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
+              </div>
+            <?php } else { ?>
+              <img class="img-radius" src="<?= base_url() . 'uploads/siswa/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
               </div>
@@ -61,6 +67,7 @@
           </div>
           <div class="collapse" id="nav-user-link">
             <ul class="list-unstyled">
+              <!-- <?= $id ?> -->
               <li class="list-group-item"><a href="<?= site_url('auth/logout'); ?>"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
             </ul>
           </div>
@@ -139,13 +146,17 @@
             <div class="dropdown-menu dropdown-menu-right profile-notification">
               <div class="pro-head">
                 <?php
+                $id = $this->session->userdata('userid');
                 $nama = $this->session->userdata('nama');
-                if ($nama === "admin") {
+                if (is_numeric($id) === 'true') {
                 ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
-                <?php } else { ?>
+                <?php } elseif (strpos($id, 'guru') === 'true') { ?>
                   <img src=" <?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">
+                  <span><?= $nama; ?></span>
+                <?php } else { ?>
+                  <img src=" <?= base_url() . 'uploads/siswa/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">
                   <span><?= $nama; ?></span>
                 <?php } ?>
               </div>

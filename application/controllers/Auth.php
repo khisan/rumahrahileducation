@@ -41,6 +41,7 @@ class Auth extends CI_Controller
     if (isset($post['login'])) {
       $cek_admin = $this->admin->login($post);
       $cek_guru = $this->guru->login($post);
+      $cek_siswa = $this->siswa->login($post);
       if ($cek_admin->num_rows() > 0) {
         $row = $cek_admin->row();
         $session_admin = [
@@ -60,6 +61,18 @@ class Auth extends CI_Controller
           'gambar'  => $row->image
         ];
         $this->session->set_userdata($session_guru);
+        echo '<script>
+                alert("selamat, Login Berhasil");
+                window.location = `' . site_url('Dashboard') . '`;
+              </script>';
+      } elseif ($cek_siswa->num_rows() > 0) {
+        $row = $cek_siswa->row();
+        $session_siswa = [
+          'userid'  => $row->id_siswa_profile,
+          'nama'    => $row->nama,
+          'gambar'  => $row->image
+        ];
+        $this->session->set_userdata($session_siswa);
         echo '<script>
                 alert("selamat, Login Berhasil");
                 window.location = `' . site_url('Dashboard') . '`;
