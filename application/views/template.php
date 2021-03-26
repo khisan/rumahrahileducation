@@ -80,7 +80,7 @@
           <li class="nav-item">
             <a href="<?= site_url('dashboard'); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
           </li>
-          <?php if ($this->session->userdata('nama') === 'admin') { ?>
+          <?php if (is_numeric($id) == 'true') { ?>
             <li class="nav-item pcoded-menu-caption">
               <label>User</label>
             </li>
@@ -92,18 +92,33 @@
                 <li><a href="<?= site_url('guru'); ?>">Guru</a></li>
               </ul>
             </li>
+          <?php }
+          if (is_numeric($id) == 'true' or str_contains($id, 'guru') == 'true') { ?>
+            <li class="nav-item pcoded-menu-caption">
+              <label>Test Online</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">Test Management</span></a>
+              <ul class="pcoded-submenu">
+                <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
+                <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
+                <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
+              </ul>
+            </li>
           <?php } ?>
-          <li class="nav-item pcoded-menu-caption">
-            <label>Test Online</label>
-          </li>
-          <li class="nav-item pcoded-hasmenu">
-            <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">Test Management</span></a>
-            <ul class="pcoded-submenu">
-              <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
-              <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
-              <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-            </ul>
-          </li>
+          <?php if (str_contains($id, 'SD') == 'true' or str_contains($id, 'SMP') == 'true' or str_contains($id, 'SMA') == 'true') { ?>
+            <li class="nav-item pcoded-menu-caption">
+              <label>Test Online</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
+              <ul class="pcoded-submenu">
+                <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
+                <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
+                <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
+              </ul>
+            </li>
+          <?php } ?>
         </ul>
       </div>
     </div>
@@ -135,11 +150,11 @@
                 <?php
                 $id = $this->session->userdata('userid');
                 $nama = $this->session->userdata('nama');
-                if (is_numeric($id) === 'true') {
+                if (is_numeric($id) == 'true') {
                 ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
-                <?php } elseif (strpos($id, 'guru') === 'true') { ?>
+                <?php } elseif (str_contains($id, 'guru') == 'true') { ?>
                   <img src=" <?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">
                   <span><?= $nama; ?></span>
                 <?php } else { ?>

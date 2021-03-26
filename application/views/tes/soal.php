@@ -43,9 +43,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Soal Text</th>
                                 <th>Soal Gambar</th>
-                                <th>Soal Suara</th>
+                                <th>Soal Text</th>
                                 <th>Option A</th>
                                 <th>Option B</th>
                                 <th>Option C</th>
@@ -84,7 +83,7 @@
                 </div>
                 <form id="submitForm" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
-                        <label for="inputGroupFile01">Gambar Soal</label>
+                        <label for="inputGroupFile01">Soal Gambar</label>
                         <div class="image"></div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01" name="soal_gambar" accept="image/*">
@@ -93,10 +92,8 @@
                     </div>
                     <div class="form-group fill">
                         <input type="hidden" name="id_soal" id="id">
-                        <input type="hidden" name="paket_id" id="paket_id" value="<?=$paket->id_paket;?>" >
-                        <label for="soal_text">Soal</label>
-                        
-                        <!--<input type="text" class="form-control" id="soal_text" name="soal_text" placeholder="soal_text"> -->
+                        <input type="hidden" name="paket_id" id="paket_id" value="<?= $paket->id_paket; ?>">
+                        <label for="soal_text">Soal Text</label>
                         <textarea name="soal_text" id="soal_text" class="form-control texteditor "></textarea>
                     </div>
                     <div class="form-group fill">
@@ -120,8 +117,8 @@
                         <textarea name="option_e" id="option_e" class="form-control texteditor"></textarea>
                     </div>
                     <div class="form-group fill">
-                        <label for="jawaban">Jawaban</label>
-                        <select class="form-control" name="jawaban" id="jawaban">
+                        <label for="jawaban">Jawaban Benar</label>
+                        <select class="form-control" name="jawaban_benar" id="jawaban_benar">
                             <option value="">--Pilih Salah Satu--</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -130,18 +127,6 @@
                             <option value="E">E</option>
                         </select>
                     </div>
-                   <!-- <div class="form-row">
-                        <div class="form-group col-md-6 fill">
-                            <label for="password1">Password</label>
-                            <input type="password" class="form-control" id="password1" name="password1" placeholder="Email">
-                            <div class="pass"></div>
-                        </div>
-                        <div class="form-group col-md-6 fill">
-                            <label for="password2">Confirm Password</label>
-                            <input type="password" class="form-control" id="password2" name="password2" placeholder="Password">
-                        </div>
-                    </div> -->
-                    
                 </form>
             </div>
 
@@ -156,7 +141,7 @@
     </div>
 </div>
 <!-- <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> -->
-<script src="<?= site_url("assets/ckeditor")?>/ckeditor.js"></script>
+<script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
 
 
 <script>
@@ -169,7 +154,7 @@
             $("#myModal").modal('show');
             $('.validation').html(null);
             $('.image').html(null);
-            
+
 
         });
 
@@ -192,7 +177,6 @@
                 success: function(response) {
                     $('#id').val(response.id_soal);
                     $('#soal_text').val(response.soal_text);
-        
                     $('#option_a').val(response.option_a);
                     $('#option_b').val(response.option_b);
                     $('#option_c').val(response.option_c);
@@ -200,7 +184,7 @@
                     $('#option_e').val(response.option_e);
                     $('#jawaban_benar').val(response.jawaban_benar);
                     $('.image').html(`<img src="<?= site_url('uploads/soal/'); ?>${response.soal_gambar}" class="rounded mx-auto d-block" alt="" width="200px">`);
-                    
+
                 }
             });
 
@@ -214,7 +198,7 @@
             let id = $('#id').val();
             let soal_text = CKEDITOR.instances['soal_text'].getData();
             let paket_id = $('#paket_id').val();
-            
+
             // let soal_suara = $('#soal_suara').val();
             let option_a = $('#option_a').val();
             let option_b = $('#option_b').val();
@@ -223,7 +207,7 @@
             let option_e = $('#option_e').val();
             let jawaban_benar = $('#jawaban_benar').val();
             let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
-console.log(soal_text);
+            console.log(soal_text);
             let formData = new FormData();
 
             formData.append('id_soal', id);
@@ -236,7 +220,7 @@ console.log(soal_text);
             formData.append('option_d', option_d);
             formData.append('option_e', option_e);
             formData.append('jawaban_benar', jawaban_benar);
-           
+
 
             console.log(formData);
             if ($(this).attr('id') == 'update') {
@@ -294,8 +278,8 @@ console.log(soal_text);
                             },
                             dataType: "JSON",
                             success: function(response)
-                            
-                             {
+
+                            {
 
                                 reloadTable();
                                 swal("Selamat, file berhasil di hapus!", {
@@ -303,10 +287,10 @@ console.log(soal_text);
 
                                 });
                             }
-        //,
-        //                     error: function (request, status, error) {
-        // alert(request.responseText);
-    //}
+                            //,
+                            //                     error: function (request, status, error) {
+                            // alert(request.responseText);
+                            //}
                         });
                     } else {
                         swal("Data batal di hapus!");
@@ -355,11 +339,10 @@ console.log(soal_text);
             let fileName = $(this).val().split('\\').pop();
             $(this).next('.custom-file-label').addClass("selected").html(fileName);
         });
-        
-                // Replace the <textarea id="editor1"> with a CKEditor 4
-                // instance, using default configuration.
-                CKEDITOR.replace( 'soal_text' );
-            
-    })
 
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace('soal_text');
+
+    })
 </script>
