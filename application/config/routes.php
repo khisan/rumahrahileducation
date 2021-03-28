@@ -52,3 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// $route['mapel/1/:num'] = 'mapel$1/$1';
+// $route['mapel/2/:num'] = 'mapel/$1/$1';
+// $route['mapel/3/:num'] = 'mapel/$1/$1';

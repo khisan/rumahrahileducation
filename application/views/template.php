@@ -47,6 +47,15 @@
             <?php
             $id = $this->session->userdata('userid');
             $nama = $this->session->userdata('nama');
+            $jenjang_id = $this->session->userdata('jenjang_id');
+            if ($jenjang_id == '1') {
+              $jenjang = 'SD';
+            } elseif ($jenjang_id == '2') {
+              $jenjang = 'SMP';
+            } else {
+              $jenjang = 'SMA';
+            }
+            $kelas_id = $this->session->userdata('kelas_id');
             if (is_numeric($id) == 'true') {
             ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" alt="User-Profile-Image">
@@ -67,8 +76,9 @@
           </div>
           <div class="collapse" id="nav-user-link">
             <ul class="list-unstyled">
-              <!-- <?= $id ?> -->
-              <li class="list-group-item"><a href="<?= site_url('auth/logout'); ?>"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+              <a href="<?= site_url('auth/logout'); ?>">
+                <li class="list-group-item"><i class="feather icon-log-out m-r-5"></i>Logout</li>
+              </a>
             </ul>
           </div>
         </div>
@@ -105,18 +115,9 @@
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
               </ul>
             </li>
-          <?php } ?>
-          <?php if (str_contains($id, 'SD') == 'true' or str_contains($id, 'SMP') == 'true' or str_contains($id, 'SMA') == 'true') { ?>
-            <li class="nav-item pcoded-menu-caption">
-              <label>Test Online</label>
-            </li>
-            <li class="nav-item pcoded-hasmenu">
-              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
-              <ul class="pcoded-submenu">
-                <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
-                <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
-                <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-              </ul>
+          <?php } else { ?>
+            <li class="nav-item">
+              <a href="<?= site_url("kelas/$jenjang"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
             </li>
           <?php } ?>
         </ul>

@@ -53,24 +53,26 @@ class Auth extends CI_Controller
                 alert("selamat, Login Berhasil");
                 window.location = `' . site_url('Dashboard') . '`;
               </script>';
-      } elseif ($cek_guru->num_rows() > 0) {
-        $row = $cek_guru->row();
-        $session_guru = [
-          'userid'  => $row->id_guru_profile,
-          'nama'    => $row->nama,
-          'gambar'  => $row->image
-        ];
-        $this->session->set_userdata($session_guru);
-        echo '<script>
-                alert("selamat, Login Berhasil");
-                window.location = `' . site_url('Dashboard') . '`;
-              </script>';
+        // } elseif ($cek_guru->num_rows() > 0) {
+        //   $row = $cek_guru->row();
+        //   $session_guru = [
+        //     'userid'  => $row->id_guru_profile,
+        //     'nama'    => $row->nama,
+        //     'gambar'  => $row->image
+        //   ];
+        //   $this->session->set_userdata($session_guru);
+        //   echo '<script>
+        //           alert("selamat, Login Berhasil");
+        //           window.location = `' . site_url('Dashboard') . '`;
+        //         </script>';
       } elseif ($cek_siswa->num_rows() > 0) {
         $row = $cek_siswa->row();
         $session_siswa = [
-          'userid'  => $row->id_siswa_profile,
-          'nama'    => $row->nama,
-          'gambar'  => $row->image
+          'userid'      => $row->id_siswa_profile,
+          'nama'        => $row->nama,
+          'gambar'      => $row->image,
+          'jenjang_id'  => $row->jenjang_id,
+          'kelas'       => $row->kelas_id
         ];
         $this->session->set_userdata($session_siswa);
         echo '<script>

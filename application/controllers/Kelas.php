@@ -29,21 +29,21 @@ class Kelas extends CI_Controller
 
   public function SD()
   {
-    $data['jenjang'] = 'SD';
+    $data['jenjang'] = 'SD' or 1;
     $data['kelas'] = $this->kelas->get(null, "sd")->result();
     $this->template->load('template', 'tes/kelas', $data);
   }
 
   public function SMP()
   {
-    $data['jenjang'] = 'SMP';
+    $data['jenjang'] = 'SMP' or 2;
     $data['kelas'] = $this->kelas->get(null, "smp")->result();
     $this->template->load('template', 'tes/kelas', $data);
   }
 
   public function SMA()
   {
-    $data['jenjang'] = 'SMA';
+    $data['jenjang'] = 'SMA' or 3;
     $data['kelas'] = $this->kelas->get(null, "sma")->result();
     $this->template->load('template', 'tes/kelas', $data);
   }

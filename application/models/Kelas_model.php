@@ -36,12 +36,12 @@ class Kelas_model extends CI_Model
       $this->db->where('id_kelas', $id);
     }
     if ($jenjang == "sd") {
-      $this->db->where("id_kelas <", 7);
+      $this->db->where("id_kelas <= 6");
     } elseif ($jenjang == "smp") {
-      $this->db->where("id_kelas >", 6);
-      $this->db->where("id_kelas <", 10);
+      $this->db->where("id_kelas >= 7");
+      $this->db->where("id_kelas <= 9");
     } elseif ($jenjang == "sma") {
-      $this->db->where("id_kelas >", 9);
+      $this->db->where("id_kelas >= 10");
     }
     $query = $this->db->get('tb_kelas');
     return $query;
