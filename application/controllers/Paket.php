@@ -29,14 +29,12 @@ class Paket extends CI_Controller
     $this->load->model('Kelas_model', 'kelas');
     $this->load->model('Mapel_model', 'mapel');
     $this->load->model('Bab_model', 'bab');
-    $this->load->model('Latihan_model', 'latihan');
     $this->load->model('Paket_model', 'paket');
   }
 
   public function index($id = null)
   {
-    $data['latihan'] = $this->latihan->get($id)->row();
-    $data['bab'] = $this->bab->get($data['latihan']->bab_id)->row();
+    $data['bab'] = $this->bab->get($id)->row();
     $data['mapel'] = $this->mapel->get($data['bab']->mapel_id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
@@ -86,7 +84,7 @@ class Paket extends CI_Controller
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('latihan_id', 'Latihan', 'required');
+    $this->form_validation->set_rules('bab_id', 'Bab', 'required');
     $this->form_validation->set_rules('nama_paket', 'Paket', 'required');
     $this->form_validation->set_rules('waktu', 'Waktu', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');

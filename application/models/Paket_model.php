@@ -34,10 +34,10 @@ class Paket_model extends CI_Model
 
   public function _getDataTablesQuery($id = null)
   {
-    $this->db->select("tb_paket.*, tb_latihan.nama_latihan");
+    $this->db->select("tb_paket.*, tb_bab.nama_bab");
     $this->db->from("tb_paket");
-    $this->db->join("tb_latihan", "tb_latihan.id_latihan = tb_paket.latihan_id");
-    $this->db->where('latihan_id', $id);
+    $this->db->join("tb_bab", "tb_bab.id_bab = tb_paket.bab_id");
+    $this->db->where('bab_id', $id);
 
     $i = 0;
 
@@ -87,14 +87,14 @@ class Paket_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_latihan = null)
+  public function get($id = null, $id_bab = null)
   {
     $this->db->from('tb_paket');
     if ($id != null) {
       $this->db->where('id_paket', $id);
     }
-    if ($id_latihan != null) {
-      $this->db->where('latihan_id', $id_latihan);
+    if ($id_bab != null) {
+      $this->db->where('bab_id', $id_bab);
     }
     $query = $this->db->get();
     return $query;
@@ -102,7 +102,7 @@ class Paket_model extends CI_Model
 
   public function create($post)
   {
-    $params['latihan_id'] = htmlspecialchars($post['latihan_id']);
+    $params['bab_id'] = htmlspecialchars($post['bab_id']);
     $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
     $params['waktu'] = htmlspecialchars($post['waktu']);
     $this->db->insert('tb_paket', $params);
@@ -111,7 +111,7 @@ class Paket_model extends CI_Model
 
   public function update($post)
   {
-    $params['latihan_id'] = htmlspecialchars($post['latihan_id']);
+    $params['bab_id'] = htmlspecialchars($post['bab_id']);
     $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
     $params['waktu'] = htmlspecialchars($post['waktu']);
     $params['updated'] = date('Y-m-d H:i:s');

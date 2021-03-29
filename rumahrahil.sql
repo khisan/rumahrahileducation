@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 25 Mar 2021 pada 07.49
+-- Waktu pembuatan: 29 Mar 2021 pada 14.22
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -107,7 +107,7 @@ CREATE TABLE `tb_guru_profile` (
 --
 
 INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
-('guru-210324-940c0', 'cobacuy', 'cobacuy', 'cobacuy', 'cobacuy@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'guru-210324-bfe63281cc.png', '2021-03-24 15:52:46', '2021-03-24 09:54:41'),
+('guru-210324-940c0', 'cobacuy Guru', 'cobacuy', 'cobacuy', 'cobacuy@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'guru-210324-bfe63281cc.png', '2021-03-24 15:52:46', '2021-03-26 01:17:41'),
 ('SD00001', 'Bambang', 'bambang', 'Klojen, Malang', 'bambang@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', NULL, '2021-02-08 23:12:34', '2021-03-20 13:34:36');
 
 -- --------------------------------------------------------
@@ -170,29 +170,6 @@ INSERT INTO `tb_kelas` (`id_kelas`, `jenjang_id`, `nama_kelas`, `jurusan`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_latihan`
---
-
-CREATE TABLE `tb_latihan` (
-  `id_latihan` int(11) NOT NULL,
-  `bab_id` int(11) NOT NULL,
-  `nama_latihan` varchar(128) NOT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_latihan`
---
-
-INSERT INTO `tb_latihan` (`id_latihan`, `bab_id`, `nama_latihan`, `created`, `updated`) VALUES
-(6, 10, 'Latihan 1', '2021-02-23 22:17:53', '2021-02-23 16:19:45'),
-(8, 1, 'Latihan 1', '2021-02-24 00:05:51', NULL),
-(9, 12, 'coba', '2021-03-23 16:42:37', NULL);
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `tb_mapel`
 --
 
@@ -239,7 +216,7 @@ CREATE TABLE `tb_mapel_guru` (
 
 CREATE TABLE `tb_paket` (
   `id_paket` int(11) NOT NULL,
-  `latihan_id` int(11) NOT NULL,
+  `bab_id` int(11) NOT NULL,
   `nama_paket` varchar(128) NOT NULL,
   `waktu` int(11) DEFAULT NULL,
   `created` datetime DEFAULT current_timestamp(),
@@ -250,9 +227,8 @@ CREATE TABLE `tb_paket` (
 -- Dumping data untuk tabel `tb_paket`
 --
 
-INSERT INTO `tb_paket` (`id_paket`, `latihan_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
-(1, 6, 'Paket 1', NULL, '2021-02-24 00:01:13', '2021-02-23 18:02:23'),
-(2, 8, 'Paket 1', 60, '2021-02-24 00:06:01', '2021-02-23 18:21:50');
+INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
+(3, 1, 'Paket 1', 60, '2021-03-29 19:12:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -282,7 +258,11 @@ CREATE TABLE `tb_siswa_profile` (
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
 ('SD11061c', 'Budi', 'budi', 1, 2, '', 'SMAN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
-('SD179322', 'coba', 'coba', 1, 1, '', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210325-28add851fb.png', '2021-03-25 07:37:37', NULL),
+('SD179322', 'coba sd', 'coba', 1, 1, '', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210325-28add851fb.png', '2021-03-25 07:37:37', '2021-03-28 04:10:22'),
+('SMA1BAHASAcfce8', 'coba sma bahasa', 'bahasa', 3, 1, 'BAHASA', 'sma bahasa', 'coba', 'coba4@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-2cd064b347.jpg', '2021-03-28 09:13:17', '2021-03-28 05:00:20'),
+('SMA1IPA5416c', 'coba sma ipa', 'ipa', 3, 1, 'IPA', 'sma ipa', 'coba', 'coba2@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-c55f67b4e7.png', '2021-03-28 09:09:47', '2021-03-28 05:00:33'),
+('SMA1IPSa6b91', 'coba sma ips', 'ips', 3, 1, 'IPS', 'sma ips', 'coba', 'coba3@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-df0004801c.jpg', '2021-03-28 09:12:07', NULL),
+('SMP1f82d2', 'coba smp', 'smp', 2, 1, '', 'smp coba', 'coba', 'coba6@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMP-1-210328-cd7f3976b3.jpg', '2021-03-28 09:05:34', NULL),
 ('SMP38ed27', 'Bagas', 'bagas', 2, 3, '', 'SMPN 3 Pacet', 'Pacet, Mojokerto', 'bagas@gmail.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '', '2021-02-14 05:10:13', NULL);
 
 -- --------------------------------------------------------
@@ -305,6 +285,13 @@ CREATE TABLE `tb_soal` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_soal`
+--
+
+INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `soal_text`, `soal_gambar`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
+(7, 3, '&lt;p&gt;X=X&lt;sup&gt;2&lt;/sup&gt;+A&lt;sup&gt;-2&lt;/sup&gt;&lt;/p&gt;\n', 'soal-210329-75fc55e578.png', 'coba A', 'coba B', 'coba C', 'coba D', 'coba E', 'A', '2021-03-29 19:21:12', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -351,13 +338,6 @@ ALTER TABLE `tb_kelas`
   ADD KEY `jenjang_id` (`jenjang_id`);
 
 --
--- Indeks untuk tabel `tb_latihan`
---
-ALTER TABLE `tb_latihan`
-  ADD PRIMARY KEY (`id_latihan`),
-  ADD KEY `bab_id` (`bab_id`);
-
---
 -- Indeks untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
@@ -378,7 +358,7 @@ ALTER TABLE `tb_mapel_guru`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id_paket`),
-  ADD KEY `latihan_id` (`latihan_id`);
+  ADD KEY `bab_id` (`bab_id`);
 
 --
 -- Indeks untuk tabel `tb_siswa_profile`
@@ -430,12 +410,6 @@ ALTER TABLE `tb_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_latihan`
---
-ALTER TABLE `tb_latihan`
-  MODIFY `id_latihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
@@ -445,13 +419,13 @@ ALTER TABLE `tb_mapel`
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -477,12 +451,6 @@ ALTER TABLE `tb_kelas`
   ADD CONSTRAINT `tb_kelas_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_latihan`
---
-ALTER TABLE `tb_latihan`
-  ADD CONSTRAINT `tb_latihan_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`);
-
---
 -- Ketidakleluasaan untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
@@ -500,7 +468,7 @@ ALTER TABLE `tb_mapel_guru`
 -- Ketidakleluasaan untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`latihan_id`) REFERENCES `tb_latihan` (`id_latihan`);
+  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_siswa_profile`

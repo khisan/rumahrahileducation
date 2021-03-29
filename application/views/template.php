@@ -113,6 +113,7 @@
                 <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
                 <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
+                <li><a href="<?= site_url('kelas/s'); ?>">SBM</a></li>
               </ul>
             </li>
           <?php } else { ?>
