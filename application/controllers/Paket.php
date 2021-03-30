@@ -38,8 +38,6 @@ class Paket extends CI_Controller
     $data['mapel'] = $this->mapel->get($data['bab']->mapel_id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-
-
     $this->template->load('template', 'tes/paket', $data);
   }
 

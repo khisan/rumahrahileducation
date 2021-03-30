@@ -47,6 +47,13 @@ class Kelas extends CI_Controller
     $data['kelas'] = $this->kelas->get(null, "sma")->result();
     $this->template->load('template', 'tes/kelas', $data);
   }
+
+  public function Lainnya()
+  {
+    $data['jenjang'] = 'Lainnya' or 4;
+    $data['kelas'] = $this->kelas->get(null, "lainnya")->result();
+    $this->template->load('template', 'tes/kelas', $data);
+  }
 }
 
 
