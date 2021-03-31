@@ -41,6 +41,14 @@ class Paket extends CI_Controller
     $this->template->load('template', 'tes/paket', $data);
   }
 
+  public function lainnya($id = null)
+  {
+    $data['mapel'] = $this->mapel->get($id)->row();
+    $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'tes/paket_lainnya', $data);
+  }
+
   public function getAjax($id = null)
   {
     $list = $this->paket->getDataTables($id);
@@ -81,8 +89,8 @@ class Paket extends CI_Controller
   public function add()
   {
     $post = $this->input->post(null, TRUE);
-
-    $this->form_validation->set_rules('bab_id', 'Bab', 'required');
+    $this->form_validation->set_rules('bab_id', 'Bab ID');
+    $this->form_validation->set_rules('mapel_id', 'Mapel ID');
     $this->form_validation->set_rules('nama_paket', 'Paket', 'required');
     $this->form_validation->set_rules('waktu', 'Waktu', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
@@ -90,7 +98,11 @@ class Paket extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $data = $this->paket->create($post);
+      if ($this->input->post('bab_id') == false) {
+        $data = $this->paket->createLainnya($post);
+      } elseif ($this->input->post('mapel_id') == false) {
+        $data = $this->paket->create($post);
+      }
       echo json_encode($data);
     }
   }
@@ -98,8 +110,8 @@ class Paket extends CI_Controller
   public function update()
   {
     $post = $this->input->post(null, TRUE);
-
-    $this->form_validation->set_rules('latihan_id', 'Latihan', 'required');
+    $this->form_validation->set_rules('bab_id', 'Bab ID');
+    $this->form_validation->set_rules('mapel_id', 'Mapel ID');
     $this->form_validation->set_rules('nama_paket', 'Paket', 'required');
     $this->form_validation->set_rules('waktu', 'Waktu', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
@@ -107,7 +119,11 @@ class Paket extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $data = $this->paket->update($post);
+      if ($this->input->post('bab_id') == false) {
+        $data = $this->paket->updateLainnya($post);
+      } elseif ($this->input->post('mapel_id') == false) {
+        $data = $this->paket->update($post);
+      }
       echo json_encode($data);
     }
   }

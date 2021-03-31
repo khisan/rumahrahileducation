@@ -9,8 +9,7 @@
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
           <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
           <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>"><?= $kelas->nama_kelas; ?></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("bab/$jenjang->nama_jenjang/$bab->mapel_id"); ?>"><?= $mapel->nama_mapel; ?></a></li>
-          <li class="breadcrumb-item"><a href="#!"><?= $bab->nama_bab; ?></a></li>
+          <li class="breadcrumb-item"><a href="#!"><?= $mapel->nama_mapel; ?></a></li>
         </ul>
       </div>
     </div>
@@ -23,16 +22,16 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong>Paket : <?= $bab->nama_bab; ?></strong></h3>
+        <h3 class="text-primary"><strong>Paket : <?= $mapel->nama_mapel; ?></strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1><?= $bab->nama_bab; ?></h1>
+            <h1><?= $mapel->nama_mapel; ?></h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("bab/$jenjang->nama_jenjang/$bab->mapel_id"); ?>" class="btn btn-warning btn-flat">
+              <a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->id_mapel"); ?>" class="btn btn-warning btn-flat">
                 <i class="fa fa-undo"></i> Back</a>
             </div>
           </div>
@@ -80,8 +79,8 @@
         </div>
         <form id="submitForm">
           <input type="hidden" name="id_paket" id="id">
-          <input type="hidden" name="bab_id" id="bab" value="<?= $bab->id_bab; ?>">
-          <input type="hidden" name="mapel_id" id="mapel" value="">
+          <input type="hidden" name="bab_id" id="bab" value="">
+          <input type="hidden" name="mapel_id" id="mapel" value="<?= $mapel->id_mapel; ?>">
           <div class="form-group fill">
             <label for="paket">Paket</label>
             <input type="text" class="form-control" id="paket" name="nama_paket" placeholder="Ketik Nama Paket">
@@ -133,7 +132,7 @@
         dataType: "JSON",
         success: function(response) {
           $('#id').val(response.id_paket);
-          $('#bab').val(response.bab_id);
+          $('#mapel').val(response.mapel_id);
           $('#paket').val(response.nama_paket);
         }
       });
@@ -211,7 +210,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url('paket/getAjax/') . $bab->id_bab; ?>',
+        url: '<?= site_url('paket/getAjax/') . $mapel->id_mapel; ?>',
         type: 'POST'
       },
       columnDefs: [{

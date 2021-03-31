@@ -34,10 +34,12 @@ class Paket_model extends CI_Model
 
   public function _getDataTablesQuery($id = null)
   {
-    $this->db->select("tb_paket.*, tb_bab.nama_bab");
+    $this->db->select("*");
     $this->db->from("tb_paket");
-    $this->db->join("tb_bab", "tb_bab.id_bab = tb_paket.bab_id");
-    $this->db->where('bab_id', $id);
+    $this->db->join("tb_bab", "tb_bab.id_bab = tb_paket.bab_id", "left");
+    $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_paket.mapel_id", "left ");
+    $this->db->where('tb_paket.mapel_id', $id);
+    $this->db->or_where('tb_paket.bab_id', $id);
 
     $i = 0;
 
@@ -87,14 +89,15 @@ class Paket_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_bab = null)
+  public function get($id = null, $id_bab = null, $id_mapel = null)
   {
     $this->db->from('tb_paket');
     if ($id != null) {
       $this->db->where('id_paket', $id);
-    }
-    if ($id_bab != null) {
+    } elseif ($id_bab != null) {
       $this->db->where('bab_id', $id_bab);
+    } elseif ($id_mapel != null) {
+      $this->db->where('mapel_id', $id_mapel);
     }
     $query = $this->db->get();
     return $query;
@@ -109,9 +112,29 @@ class Paket_model extends CI_Model
     return $this->db->affected_rows();
   }
 
+  public function createLainnya($post)
+  {
+    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
+    $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
+    $params['waktu'] = htmlspecialchars($post['waktu']);
+    $this->db->insert('tb_paket', $params);
+    return $this->db->affected_rows();
+  }
+
   public function update($post)
   {
     $params['bab_id'] = htmlspecialchars($post['bab_id']);
+    $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
+    $params['waktu'] = htmlspecialchars($post['waktu']);
+    $params['updated'] = date('Y-m-d H:i:s');
+    $this->db->where('id_paket', $post['id_paket']);
+    $this->db->update('tb_paket', $params);
+    return $this->db->affected_rows();
+  }
+
+  public function updateLainnya($post)
+  {
+    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
     $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
     $params['waktu'] = htmlspecialchars($post['waktu']);
     $params['updated'] = date('Y-m-d H:i:s');

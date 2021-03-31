@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 29 Mar 2021 pada 14.22
+-- Waktu pembuatan: 01 Apr 2021 pada 01.34
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -128,7 +128,8 @@ CREATE TABLE `tb_jenjang` (
 INSERT INTO `tb_jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
 (1, 'SD'),
 (2, 'SMP'),
-(3, 'SMA');
+(3, 'SMA'),
+(4, 'Lainnya');
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,8 @@ INSERT INTO `tb_kelas` (`id_kelas`, `jenjang_id`, `nama_kelas`, `jurusan`) VALUE
 (15, 3, 'Kelas 11', 'BAHASA'),
 (16, 3, 'Kelas 12', 'IPA'),
 (17, 3, 'Kelas 12', 'IPS'),
-(18, 3, 'Kelas 12', 'BAHASA');
+(18, 3, 'Kelas 12', 'BAHASA'),
+(19, 4, 'Perguruan Tinggi', NULL);
 
 -- --------------------------------------------------------
 
@@ -189,7 +191,9 @@ INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `nama_mapel`, `created`, `update
 (10, 1, 'Tema 1', '2021-02-21 14:25:42', '2021-02-21 12:47:32'),
 (11, 7, 'Matematika', '2021-02-21 19:09:01', NULL),
 (12, 10, 'Matematika Wajib', '2021-02-21 19:12:12', '2021-02-21 13:12:32'),
-(13, 1, 'Tema 2', '2021-02-23 19:24:51', NULL);
+(13, 1, 'Tema 2', '2021-02-23 19:24:51', NULL),
+(19, 19, 'TKD', '2021-03-30 06:28:37', NULL),
+(20, 19, 'TPS', '2021-03-30 06:28:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -216,7 +220,8 @@ CREATE TABLE `tb_mapel_guru` (
 
 CREATE TABLE `tb_paket` (
   `id_paket` int(11) NOT NULL,
-  `bab_id` int(11) NOT NULL,
+  `bab_id` int(11) DEFAULT NULL,
+  `mapel_id` int(11) DEFAULT NULL,
   `nama_paket` varchar(128) NOT NULL,
   `waktu` int(11) DEFAULT NULL,
   `created` datetime DEFAULT current_timestamp(),
@@ -227,8 +232,10 @@ CREATE TABLE `tb_paket` (
 -- Dumping data untuk tabel `tb_paket`
 --
 
-INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
-(3, 1, 'Paket 1', 60, '2021-03-29 19:12:01', NULL);
+INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `mapel_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
+(17, NULL, 19, 'Paket SBM 1', 60, '2021-03-31 08:06:50', '2021-04-01 01:32:12'),
+(24, 1, NULL, 'Paket SD 1', 50, '2021-03-31 13:05:57', '2021-04-01 01:31:54'),
+(25, 9, NULL, 'Paket 2', 50, '2021-03-31 13:08:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -285,13 +292,6 @@ CREATE TABLE `tb_soal` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_soal`
---
-
-INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `soal_text`, `soal_gambar`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
-(7, 3, '&lt;p&gt;X=X&lt;sup&gt;2&lt;/sup&gt;+A&lt;sup&gt;-2&lt;/sup&gt;&lt;/p&gt;\n', 'soal-210329-75fc55e578.png', 'coba A', 'coba B', 'coba C', 'coba D', 'coba E', 'A', '2021-03-29 19:21:12', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -358,7 +358,8 @@ ALTER TABLE `tb_mapel_guru`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id_paket`),
-  ADD KEY `bab_id` (`bab_id`);
+  ADD KEY `bab_id` (`bab_id`),
+  ADD KEY `mapel_id` (`mapel_id`);
 
 --
 -- Indeks untuk tabel `tb_siswa_profile`
@@ -401,25 +402,25 @@ ALTER TABLE `tb_code_guru`
 -- AUTO_INCREMENT untuk tabel `tb_jenjang`
 --
 ALTER TABLE `tb_jenjang`
-  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_soal`
@@ -468,7 +469,8 @@ ALTER TABLE `tb_mapel_guru`
 -- Ketidakleluasaan untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`);
+  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`),
+  ADD CONSTRAINT `tb_paket_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_siswa_profile`

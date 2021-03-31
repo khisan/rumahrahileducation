@@ -20,7 +20,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mapel extends CI_Controller
 {
-  public $jenjang;
 
   public function __construct()
   {
@@ -34,7 +33,6 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->jenjang = $data['kelas']->jenjang_id;
     $this->template->load('template', 'tes/mapel', $data);
   }
 
@@ -42,7 +40,6 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->jenjang = $data['kelas']->jenjang_id;
     $this->template->load('template', 'tes/mapel', $data);
   }
 
@@ -50,7 +47,6 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->jenjang = $data['kelas']->jenjang_id;
     $this->template->load('template', 'tes/mapel', $data);
   }
 
@@ -58,7 +54,6 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->jenjang = $data['kelas']->jenjang_id;
     $this->template->load('template', 'tes/mapel', $data);
   }
 
@@ -78,7 +73,7 @@ class Mapel extends CI_Controller
       $row[] = $mapel->updated;
       $row[] = '
         ' . (($jenjang->id_jenjang == '4') ?
-        '<a  href="' . site_url("paket/index/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Paket Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+        '<a  href="' . site_url("paket/$jenjang->nama_jenjang/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Paket Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>'
         :
