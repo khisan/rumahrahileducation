@@ -37,8 +37,8 @@ class Paket_model extends CI_Model
     $this->db->select("*");
     $this->db->from("tb_paket");
     $this->db->join("tb_bab", "tb_bab.id_bab = tb_paket.bab_id", "left");
-    $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_paket.mapel_id", "left ");
-    $this->db->where('tb_paket.mapel_id', $id);
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_paket.kelas_id", "left ");
+    $this->db->where('tb_paket.kelas_id', $id);
     $this->db->or_where('tb_paket.bab_id', $id);
 
     $i = 0;
@@ -114,7 +114,7 @@ class Paket_model extends CI_Model
 
   public function createLainnya($post)
   {
-    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
+    $params['kelas_id'] = htmlspecialchars($post['kelas_id']);
     $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
     $params['waktu'] = htmlspecialchars($post['waktu']);
     $this->db->insert('tb_paket', $params);

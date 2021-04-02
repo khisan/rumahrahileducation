@@ -54,7 +54,6 @@ class Paket extends CI_Controller
     $kelas = $this->kelas->get($id)->row();
     $list = $this->paket->getDataTables($id);
     $mapel = $this->mapel->get($id)->row($id);
-    // $id_mapel = '10';
     $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
     $data = [];
     $no = @$_POST['start'];

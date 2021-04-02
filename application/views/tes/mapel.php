@@ -33,8 +33,13 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
-                <i class="fa fa-undo"></i> Back</a>
+              <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
+                <a href="<?= site_url("Paket/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
+                  <i class="fa fa-undo"></i> Back</a>
+              <?php } else { ?>
+                <a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
+                  <i class="fa fa-undo"></i> Back</a>
+              <?php } ?>
             </div>
           </div>
         </div>

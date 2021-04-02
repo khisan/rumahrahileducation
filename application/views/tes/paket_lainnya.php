@@ -8,7 +8,6 @@
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
           <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>"><?= $kelas->nama_kelas; ?></a></li>
         </ul>
       </div>
     </div>
@@ -29,10 +28,6 @@
             <h1>List Paket</h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
-            <div class="float-right">
-              <a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->id_mapel"); ?>" class="btn btn-warning btn-flat">
-                <i class="fa fa-undo"></i> Back</a>
-            </div>
           </div>
         </div>
         <div class="float-right mb-3">
@@ -79,7 +74,7 @@
         <form id="submitForm">
           <input type="hidden" name="id_paket" id="id">
           <input type="hidden" name="bab_id" id="bab" value="">
-          <input type="hidden" name="mapel_id" id="mapel" value="<?= $mapel->id_mapel; ?>">
+          <input type="hidden" name="kelas_id" id="kelas" value="<?= $kelas->id_kelas; ?>">
           <div class="form-group fill">
             <label for="paket">Paket</label>
             <input type="text" class="form-control" id="paket" name="nama_paket" placeholder="Ketik Nama Paket">
@@ -131,7 +126,7 @@
         dataType: "JSON",
         success: function(response) {
           $('#id').val(response.id_paket);
-          $('#mapel').val(response.mapel_id);
+          $('#kelas').val(response.kelas_id);
           $('#paket').val(response.nama_paket);
         }
       });
@@ -209,7 +204,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url('paket/getAjax/') . $mapel->id_mapel; ?>',
+        url: '<?= site_url('paket/getAjax/') . $kelas->id_kelas; ?>',
         type: 'POST'
       },
       columnDefs: [{
