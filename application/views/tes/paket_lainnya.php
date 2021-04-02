@@ -9,7 +9,6 @@
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
           <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
           <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>"><?= $kelas->nama_kelas; ?></a></li>
-          <li class="breadcrumb-item"><a href="#!"><?= $mapel->nama_mapel; ?></a></li>
         </ul>
       </div>
     </div>
@@ -22,12 +21,12 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong>Paket : <?= $mapel->nama_mapel; ?></strong></h3>
+        <h3 class="text-primary"><strong>Paket</strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1><?= $mapel->nama_mapel; ?></h1>
+            <h1>List Paket</h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">

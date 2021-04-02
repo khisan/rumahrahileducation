@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 01 Apr 2021 pada 01.34
+-- Waktu pembuatan: 03 Apr 2021 pada 01.15
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -192,7 +192,7 @@ INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `nama_mapel`, `created`, `update
 (11, 7, 'Matematika', '2021-02-21 19:09:01', NULL),
 (12, 10, 'Matematika Wajib', '2021-02-21 19:12:12', '2021-02-21 13:12:32'),
 (13, 1, 'Tema 2', '2021-02-23 19:24:51', NULL),
-(19, 19, 'TKD', '2021-03-30 06:28:37', NULL),
+(19, 19, 'TKD ', '2021-03-30 06:28:37', '2021-04-02 00:52:42'),
 (20, 19, 'TPS', '2021-03-30 06:28:42', NULL);
 
 -- --------------------------------------------------------
@@ -233,7 +233,7 @@ CREATE TABLE `tb_paket` (
 --
 
 INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `mapel_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
-(17, NULL, 19, 'Paket SBM 1', 60, '2021-03-31 08:06:50', '2021-04-01 01:32:12'),
+(17, NULL, 19, 'Paket SBM 1 ', 50, '2021-03-31 08:06:50', '2021-04-02 00:52:26'),
 (24, 1, NULL, 'Paket SD 1', 50, '2021-03-31 13:05:57', '2021-04-01 01:31:54'),
 (25, 9, NULL, 'Paket 2', 50, '2021-03-31 13:08:25', NULL);
 
@@ -281,6 +281,7 @@ INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang
 CREATE TABLE `tb_soal` (
   `id_soal` int(11) NOT NULL,
   `paket_id` int(11) NOT NULL,
+  `mapel_id` int(11) NOT NULL,
   `soal_text` text NOT NULL,
   `soal_gambar` varchar(256) NOT NULL,
   `option_a` text NOT NULL,
@@ -292,6 +293,18 @@ CREATE TABLE `tb_soal` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_soal`
+--
+
+INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal_text`, `soal_gambar`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
+(12, 24, 10, '&lt;p&gt;coba sd&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'A', '2021-04-02 07:10:42', '0000-00-00 00:00:00'),
+(14, 17, 19, '&lt;p&gt;coba sbm&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'A', '2021-04-02 07:20:41', '2021-04-02 02:20:55'),
+(15, 25, 10, '&lt;p&gt;Coba Paket 2&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'A', '2021-04-03 06:12:36', '0000-00-00 00:00:00'),
+(16, 24, 10, '&lt;p&gt;Coba sd 2&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'B', '2021-04-03 06:13:07', '0000-00-00 00:00:00'),
+(17, 17, 19, '&lt;p&gt;coba sbm 2&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'C', '2021-04-03 06:13:47', '0000-00-00 00:00:00'),
+(18, 17, 20, '&lt;p&gt;coba tps&lt;/p&gt;\n', '', 'a', 'b', 'c', 'd', 'e', 'D', '2021-04-03 06:14:12', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -374,7 +387,8 @@ ALTER TABLE `tb_siswa_profile`
 --
 ALTER TABLE `tb_soal`
   ADD PRIMARY KEY (`id_soal`),
-  ADD KEY `paket_id` (`paket_id`);
+  ADD KEY `paket_id` (`paket_id`),
+  ADD KEY `mapel_id` (`mapel_id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -414,7 +428,7 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_paket`
@@ -426,7 +440,7 @@ ALTER TABLE `tb_paket`
 -- AUTO_INCREMENT untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -483,7 +497,8 @@ ALTER TABLE `tb_siswa_profile`
 -- Ketidakleluasaan untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  ADD CONSTRAINT `tb_soal_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`);
+  ADD CONSTRAINT `tb_soal_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`),
+  ADD CONSTRAINT `tb_soal_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,24 +27,20 @@ class Soal extends CI_Controller
     check_not_login();
     $this->load->model('Soal_model', 'soal');
     $this->load->model('Paket_model', 'paket');
+    $this->load->model('Mapel_model', 'mapel');
   }
 
-  public function index($id = NULL)
+  public function index($id = NULL, $id_mapel = NULL)
   {
     $data['paket'] = $this->paket->get($id)->row();
-    // var_dump($data['paket']);
-    // die;
-    $data['soal'] = $this->soal->get(null, $data['paket']->id_paket)->row();
-    // var_dump($data['soal']);
-    //   die;
+    $data['mapel'] = $this->mapel->get($id_mapel)->row();
+    $data['soal'] = $this->soal->get($id_mapel)->row();
     $this->template->load('template', 'tes/soal', $data);
-
-    // 
   }
 
-  public function getAjax($id)
+  public function getAjax($id, $id_mapel)
   {
-    $list = $this->soal->getDataTables($id);
+    $list = $this->soal->getDataTables($id, $id_mapel);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $soal) {
@@ -93,6 +89,7 @@ class Soal extends CI_Controller
 
     $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
     $this->form_validation->set_rules('paket_id', 'paket_id', 'required');
+    $this->form_validation->set_rules('mapel_id', 'mapel_id', 'required');
     $this->form_validation->set_rules('option_a', 'option_a', 'required');
     $this->form_validation->set_rules('option_b', 'option_b', 'required');
     $this->form_validation->set_rules('option_c', 'option_c', 'required');

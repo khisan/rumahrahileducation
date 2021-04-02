@@ -29,7 +29,7 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("paket/index/$paket->bab_id"); ?>" class="btn btn-warning btn-flat">
+              <a href="<?= site_url("paket/index/"); ?>" class="btn btn-warning btn-flat">
                 <i class="fa fa-undo"></i> Back</a>
             </div>
           </div>
@@ -51,8 +51,6 @@
                 <th>Option D</th>
                 <th>Option E</th>
                 <th>Jawaban Benar</th>
-                <!-- <th>Created</th>
-                                <th>Updated</th> -->
                 <th>Action</th>
               </tr>
             </thead>
@@ -93,6 +91,7 @@
           <div class="form-group fill">
             <input type="hidden" name="id_soal" id="id">
             <input type="hidden" name="paket_id" id="paket_id" value="<?= $paket->id_paket; ?>">
+            <input type="hidden" name="mapel_id" id="mapel_id" value="<?= $mapel->id_mapel; ?>">
             <label for="soal_text">Soal Text</label>
             <textarea name="soal_text" id="soal_text" class="form-control texteditor "></textarea>
           </div>
@@ -198,8 +197,7 @@
       let id = $('#id').val();
       let soal_text = CKEDITOR.instances['soal_text'].getData();
       let paket_id = $('#paket_id').val();
-
-      // let soal_suara = $('#soal_suara').val();
+      let mapel_id = $('#mapel_id').val();
       let option_a = $('#option_a').val();
       let option_b = $('#option_b').val();
       let option_c = $('#option_c').val();
@@ -213,6 +211,7 @@
       formData.append('id_soal', id);
       formData.append('soal_text', soal_text);
       formData.append('paket_id', paket_id);
+      formData.append('mapel_id', mapel_id);
       formData.append('soal_gambar', soal_gambar);
       formData.append('option_a', option_a);
       formData.append('option_b', option_b);
@@ -302,7 +301,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url('soal/getAjax/') . $paket->id_paket; ?>',
+        url: '<?= site_url("soal/getAjax/$paket->id_paket/$mapel->id_mapel"); ?>',
         type: 'POST'
       },
       columnDefs: [{
