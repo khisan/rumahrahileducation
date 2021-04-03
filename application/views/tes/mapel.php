@@ -7,7 +7,11 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <?php if ($jenjang->nama_jenjang = "Lainnya") { ?>
+            <li class="breadcrumb-item"><a href="<?= site_url("Paket/lainnya/19"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <?php } else { ?>
+            <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <?php } ?>
           <li class="breadcrumb-item"><a href="#!"><?= $kelas->nama_kelas; ?></a></li>
         </ul>
       </div>
@@ -33,8 +37,8 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
-                <a href="<?= site_url("Paket/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
+              <?php if ($jenjang->nama_jenjang = "Lainnya") { ?>
+                <a href="<?= site_url("Paket/lainnya/19"); ?>" class="btn btn-warning btn-flat">
                   <i class="fa fa-undo"></i> Back</a>
               <?php } else { ?>
                 <a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">

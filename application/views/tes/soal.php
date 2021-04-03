@@ -29,8 +29,13 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("paket/index/"); ?>" class="btn btn-warning btn-flat">
-                <i class="fa fa-undo"></i> Back</a>
+              <?php if ($paket->kelas_id == 19) { ?>
+                <a href="<?= site_url("mapel/lainnya/$paket->kelas_id/$paket->id_paket"); ?>" class="btn btn-warning btn-flat">
+                  <i class="fa fa-undo"></i> Back</a>
+              <?php } else { ?>
+                <a href="<?= site_url("paket/index/"); ?>" class="btn btn-warning btn-flat">
+                  <i class="fa fa-undo"></i> Back</a>
+              <?php } ?>
             </div>
           </div>
         </div>
