@@ -96,9 +96,14 @@ class Mapel extends CI_Controller
 
   public function get()
   {
-    $get = $this->input->get(null, TRUE);
-    $query = $this->mapel->get($get['id']);
-    echo json_encode($query->row());
+    $get = $this->input->get($id = null, $id_kelas = null);
+    if ($id == null && $id_kelas = null) {
+      $query = $this->mapel->get();
+      echo json_encode($query->result_array());
+    } elseif ($id_kelas = null) {
+      $query = $this->mapel->get($get['id']);
+      echo json_encode($query->row());
+    }
   }
 
   public function add()

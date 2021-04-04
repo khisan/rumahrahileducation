@@ -215,7 +215,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url('mapel/getAjax/') . $kelas->id_kelas; ?>',
+        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
         type: 'POST'
       },
       columnDefs: [{

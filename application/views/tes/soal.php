@@ -41,7 +41,6 @@
         </div>
         <div class="float-right mb-3">
           <button type="button" class="btn btn-primary has-ripple" id="soalAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-
         </div>
         <div class="table-responsive">
           <table class="table table-bordered table-striped" id="table">

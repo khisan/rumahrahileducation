@@ -81,7 +81,6 @@
         <form id="submitForm">
           <input type="hidden" name="id_paket" id="id">
           <input type="hidden" name="bab_id" id="bab" value="<?= $bab->id_bab; ?>">
-          <input type="hidden" name="mapel_id" id="mapel" value="">
           <div class="form-group fill">
             <label for="paket">Paket</label>
             <input type="text" class="form-control" id="paket" name="nama_paket" placeholder="Ketik Nama Paket">
