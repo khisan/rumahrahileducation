@@ -24,7 +24,7 @@ class Soal extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
+    // check_not_login();
     $this->load->model('Soal_model', 'soal');
     $this->load->model('Paket_model', 'paket');
     $this->load->model('Mapel_model', 'mapel');
@@ -73,12 +73,20 @@ class Soal extends CI_Controller
 
   public function get()
   {
-    $get = $this->input->get(null, TRUE);
-    if ($get == null) {
+    $get_id = $this->input->get('id');
+    $get_idPaket = $this->input->get('paket_id');
+    $get_idMapel = $this->input->get('mapel_id');
+    if ($get_id == null && $get_idPaket == null && $get_idMapel == null) {
       $query = $this->soal->get();
       echo json_encode($query->result_array());
-    } else {
-      $query = $this->soal->get($get['id']);
+    } elseif ($get_id != null && $get_idPaket == null && $get_idMapel == null) {
+      $query = $this->soal->get($get_id);
+      echo json_encode($query->row());
+    } elseif ($get_idPaket != null && $get_id == null && $get_idMapel == null) {
+      $query = $this->soal->get($get_idPaket);
+      echo json_encode($query->row());
+    } elseif ($get_idMapel != null && $get_idPaket == null && $get_id == null) {
+      $query = $this->soal->get($get_idMapel);
       echo json_encode($query->row());
     }
   }

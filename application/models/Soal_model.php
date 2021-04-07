@@ -87,17 +87,17 @@ class Soal_model extends CI_Model
     return $this->db->count_all_results();
   }
 
-  public function get($id = null, $id_paket = null, $id_mapel = null)
+  public function get($id = null, $paket_id = null, $mapel_id = null)
   {
     $this->db->from('tb_soal');
-    if ($id != null) {
+    if ($id != null && $paket_id == null && $mapel_id == null) {
       $this->db->where('id_soal', $id);
     }
-    if ($id_paket != null && $id_mapel != null) {
-      $this->db->where('paket_id', $id_paket);
-      $this->db->where('mapel_id', $id_mapel);
+    if ($paket_id != null && $mapel_id == null && $id == null) {
+      $this->db->where('paket_id', $paket_id);
     }
-    if ($id_mapel != null) {
+    if ($mapel_id != null && $paket_id == null && $id == null) {
+      $this->db->where('mapel_id', $mapel_id);
     }
     $query = $this->db->get();
     return $query;

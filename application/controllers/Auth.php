@@ -40,7 +40,7 @@ class Auth extends CI_Controller
     $post = $this->input->post(null, TRUE);
     if (isset($post['login'])) {
       $cek_admin = $this->admin->login($post);
-      $cek_guru = $this->guru->login($post);
+      // $cek_guru = $this->guru->login($post);
       $cek_siswa = $this->siswa->login($post);
       if ($cek_admin->num_rows() > 0) {
         $row = $cek_admin->row();

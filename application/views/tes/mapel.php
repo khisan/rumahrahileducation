@@ -7,7 +7,7 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <?php if ($jenjang->nama_jenjang = "Lainnya") { ?>
+          <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
             <li class="breadcrumb-item"><a href="<?= site_url("Paket/lainnya/19"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
           <?php } else { ?>
             <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
@@ -37,7 +37,7 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <?php if ($jenjang->nama_jenjang = "Lainnya") { ?>
+              <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
                 <a href="<?= site_url("Paket/lainnya/19"); ?>" class="btn btn-warning btn-flat">
                   <i class="fa fa-undo"></i> Back</a>
               <?php } else { ?>
@@ -49,7 +49,6 @@
         </div>
         <div class="float-right mb-3">
           <button type="button" class="btn btn-primary has-ripple" id="mapelAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-
         </div>
         <div class="table-responsive">
           <table class="table table-bordered table-striped" id="table">
@@ -215,8 +214,13 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
-        type: 'POST'
+        <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
+          url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
+          type: 'POST'
+        <?php } else { ?>
+          url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/"); ?>',
+          type: 'POST'
+        <?php } ?>
       },
       columnDefs: [{
           targets: [-1],

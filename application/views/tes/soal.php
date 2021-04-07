@@ -169,12 +169,16 @@
       $('.validation').html(null);
 
       let id = $(this).attr('value');
+      let paket_id = $(this).attr('value');
+      let mapel_id = $(this).attr('value');
 
       $.ajax({
         type: "GET",
         url: site_url + "get",
         data: {
-          id: id
+          id: id,
+          paket_id: paket_id,
+          mapel_id: mapel_id
         },
         dataType: "JSON",
         success: function(response) {
