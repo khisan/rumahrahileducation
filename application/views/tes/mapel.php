@@ -93,6 +93,10 @@
             <label for="mapel"><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?></label>
             <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="<?= $jenjang->id_jenjang == 1 ? 'Ketik Nama Tema' : 'Ketik Nama Mapel'; ?>">
           </div>
+          <div class="form-group fill">
+            <label for="">Tanggal Mulai</label>
+            <input name="tgl_mulai" type="text" class="datetimepicke form-control">
+          </div>
         </form>
       </div>
 

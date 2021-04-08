@@ -134,6 +134,7 @@
           $('#id').val(response.id_paket);
           $('#bab').val(response.bab_id);
           $('#paket').val(response.nama_paket);
+          $('#waktu').val(response.waktu);
         }
       });
 
