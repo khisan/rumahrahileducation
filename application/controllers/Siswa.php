@@ -34,7 +34,7 @@ class Siswa extends CI_Controller
   {
     $data['jenjang'] = $this->jenjang->get();
     $data['kelas'] = $this->kelas->get();
-    $this->template->load('template', 'user/siswa', $data);
+    $this->template->load('template', 'master/user/siswa', $data);
   }
 
   public function getAjax()

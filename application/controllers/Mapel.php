@@ -34,21 +34,21 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/mapel', $data);
+    $this->template->load('template', 'master/tes-menu/-menumapel', $data);
   }
 
   public function smp($id = null)
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/mapel', $data);
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
   public function sma($id = null)
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/mapel', $data);
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
   public function lainnya($id = null, $id_paket = null)
@@ -56,7 +56,7 @@ class Mapel extends CI_Controller
     $data['paket'] = $this->paket->get($id_paket)->row();
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/mapel', $data);
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
   public function getAjax($id = null, $id_paket = null)

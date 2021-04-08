@@ -35,7 +35,7 @@ class Soal extends CI_Controller
     $data['paket'] = $this->paket->get($id)->row();
     $data['mapel'] = $this->mapel->get($id_mapel)->row();
     $data['soal'] = $this->soal->get($id_mapel)->row();
-    $this->template->load('template', 'tes/soal', $data);
+    $this->template->load('template', 'master/tes-menu/soal', $data);
   }
 
   public function getAjax($id, $id_mapel)

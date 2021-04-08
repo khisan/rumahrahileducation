@@ -29,7 +29,7 @@ class Admin extends CI_Controller
 
   public function index()
   {
-    $this->template->load('template', 'user/admin');
+    $this->template->load('template', 'master/user/admin');
   }
 
   public function getAjax()

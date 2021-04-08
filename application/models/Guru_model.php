@@ -133,7 +133,7 @@ class Guru_model extends CI_Model
     }
     $params['updated'] = date('Y-m-d H:i:s');
 
-    $this->db->where('id_guru_profile', $post['id_guru']);
+    $this->db->where('id_guru_profile', $post['id_guru_profile']);
     $this->db->update('tb_guru_profile', $params);
     return $this->db->affected_rows();
   }

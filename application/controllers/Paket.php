@@ -38,7 +38,7 @@ class Paket extends CI_Controller
     $data['mapel'] = $this->mapel->get($data['bab']->mapel_id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/paket', $data);
+    $this->template->load('template', 'master/tes-menu/paket', $data);
   }
 
   public function lainnya($id = null)
@@ -46,7 +46,7 @@ class Paket extends CI_Controller
     $data['mapel'] = $this->mapel->get($id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'tes/paket_lainnya', $data);
+    $this->template->load('template', 'master/tes-menu/paket_lainnya', $data);
   }
 
   public function getAjax($id = null)

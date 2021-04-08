@@ -31,28 +31,28 @@ class Kelas extends CI_Controller
   {
     $data['jenjang'] = 'SD' or 1;
     $data['kelas'] = $this->kelas->get(null, "sd")->result();
-    $this->template->load('template', 'tes/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
 
   public function SMP()
   {
     $data['jenjang'] = 'SMP' or 2;
     $data['kelas'] = $this->kelas->get(null, "smp")->result();
-    $this->template->load('template', 'tes/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
 
   public function SMA()
   {
     $data['jenjang'] = 'SMA' or 3;
     $data['kelas'] = $this->kelas->get(null, "sma")->result();
-    $this->template->load('template', 'tes/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
 
   public function Lainnya()
   {
     $data['jenjang'] = 'Lainnya' or 4;
     $data['kelas'] = $this->kelas->get(null, "lainnya")->result();
-    $this->template->load('template', 'tes/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
 }
 
