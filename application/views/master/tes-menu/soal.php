@@ -33,7 +33,7 @@
                 <a href="<?= site_url("mapel/lainnya/$paket->kelas_id/$paket->id_paket"); ?>" class="btn btn-warning btn-flat">
                   <i class="fa fa-undo"></i> Back</a>
               <?php } else { ?>
-                <a href="<?= site_url("paket/index/"); ?>" class="btn btn-warning btn-flat">
+                <a href="<?= site_url("paket/index/$paket->bab_id"); ?>" class="btn btn-warning btn-flat">
                   <i class="fa fa-undo"></i> Back</a>
               <?php } ?>
             </div>

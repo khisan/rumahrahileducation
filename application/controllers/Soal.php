@@ -24,7 +24,7 @@ class Soal extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    // check_not_login();
+    check_not_login();
     $this->load->model('Soal_model', 'soal');
     $this->load->model('Paket_model', 'paket');
     $this->load->model('Mapel_model', 'mapel');
