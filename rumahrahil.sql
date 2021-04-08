@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 03 Apr 2021 pada 01.42
+-- Waktu pembuatan: 09 Apr 2021 pada 01.22
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -73,20 +73,6 @@ INSERT INTO `tb_bab` (`id_bab`, `mapel_id`, `nama_bab`, `semester`, `created`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_code_guru`
---
-
-CREATE TABLE `tb_code_guru` (
-  `id_code_guru` int(11) NOT NULL,
-  `siswa_profile_id` varchar(128) NOT NULL,
-  `mapel_guru_id` varchar(128) NOT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `tb_guru_profile`
 --
 
@@ -108,6 +94,7 @@ CREATE TABLE `tb_guru_profile` (
 
 INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
 ('guru-210324-940c0', 'cobacuy Guru', 'cobacuy', 'cobacuy', 'cobacuy@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'guru-210324-bfe63281cc.png', '2021-03-24 15:52:46', '2021-03-26 01:17:41'),
+('guru-210408-c9298', 'Guru', 'coba_guru', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '', '2021-04-08 13:27:54', NULL),
 ('SD00001', 'Bambang', 'bambang', 'Klojen, Malang', 'bambang@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', NULL, '2021-02-08 23:12:34', '2021-03-20 13:34:36');
 
 -- --------------------------------------------------------
@@ -193,24 +180,7 @@ INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `nama_mapel`, `created`, `update
 (12, 10, 'Matematika Wajib', '2021-02-21 19:12:12', '2021-02-21 13:12:32'),
 (13, 1, 'Tema 2', '2021-02-23 19:24:51', NULL),
 (19, 19, 'TKD ', '2021-03-30 06:28:37', '2021-04-02 00:52:42'),
-(20, 19, 'TPS', '2021-03-30 06:28:42', NULL);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_mapel_guru`
---
-
-CREATE TABLE `tb_mapel_guru` (
-  `id_mapel_guru` varchar(128) NOT NULL,
-  `guru_profile_id` varchar(128) NOT NULL,
-  `mapel_id` int(11) DEFAULT NULL,
-  `kelas_id` int(11) NOT NULL,
-  `sekolah` varchar(256) NOT NULL,
-  `keterangan` varchar(256) DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(24, 19, 'TPS', '2021-04-08 15:28:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -233,10 +203,7 @@ CREATE TABLE `tb_paket` (
 --
 
 INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
-(28, NULL, 19, 'Paket SBM 1', 100, '2021-04-03 06:39:36', NULL),
-(29, 1, NULL, 'Paket SD 1', 20, '2021-04-03 06:40:06', NULL),
-(30, 9, NULL, 'Paket SD 2', 40, '2021-04-03 06:40:41', NULL),
-(31, NULL, 19, 'Paket SBM 2', 80, '2021-04-03 06:41:40', NULL);
+(29, 1, NULL, 'Paket SD 1', 20, '2021-04-03 06:40:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,7 +232,7 @@ CREATE TABLE `tb_siswa_profile` (
 --
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
-('SD11061c', 'Budi', 'budi', 1, 2, '', 'SMAN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
+('SD11061c', 'Budi', 'budi', 1, 2, '', 'SDN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
 ('SD179322', 'coba sd', 'coba', 1, 1, '', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210325-28add851fb.png', '2021-03-25 07:37:37', '2021-03-28 04:10:22'),
 ('SMA1BAHASAcfce8', 'coba sma bahasa', 'bahasa', 3, 1, 'BAHASA', 'sma bahasa', 'coba', 'coba4@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-2cd064b347.jpg', '2021-03-28 09:13:17', '2021-03-28 05:00:20'),
 ('SMA1IPA5416c', 'coba sma ipa', 'ipa', 3, 1, 'IPA', 'sma ipa', 'coba', 'coba2@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-c55f67b4e7.png', '2021-03-28 09:09:47', '2021-03-28 05:00:33'),
@@ -313,14 +280,6 @@ ALTER TABLE `tb_bab`
   ADD KEY `mapel_id` (`mapel_id`);
 
 --
--- Indeks untuk tabel `tb_code_guru`
---
-ALTER TABLE `tb_code_guru`
-  ADD PRIMARY KEY (`id_code_guru`),
-  ADD KEY `siswa_profile_id` (`siswa_profile_id`),
-  ADD KEY `mapel_guru_id` (`mapel_guru_id`);
-
---
 -- Indeks untuk tabel `tb_guru_profile`
 --
 ALTER TABLE `tb_guru_profile`
@@ -347,21 +306,12 @@ ALTER TABLE `tb_mapel`
   ADD KEY `kelas_id` (`kelas_id`);
 
 --
--- Indeks untuk tabel `tb_mapel_guru`
---
-ALTER TABLE `tb_mapel_guru`
-  ADD PRIMARY KEY (`id_mapel_guru`),
-  ADD KEY `guru_profile_id` (`guru_profile_id`),
-  ADD KEY `kelas_id` (`kelas_id`),
-  ADD KEY `mapel_id` (`mapel_id`);
-
---
 -- Indeks untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id_paket`),
-  ADD KEY `bab_id` (`bab_id`),
-  ADD KEY `kelas_id` (`kelas_id`);
+  ADD KEY `tb_paket_ibfk_1` (`bab_id`),
+  ADD KEY `tb_paket_ibfk_3` (`kelas_id`);
 
 --
 -- Indeks untuk tabel `tb_siswa_profile`
@@ -377,7 +327,7 @@ ALTER TABLE `tb_siswa_profile`
 ALTER TABLE `tb_soal`
   ADD PRIMARY KEY (`id_soal`),
   ADD KEY `paket_id` (`paket_id`),
-  ADD KEY `mapel_id` (`mapel_id`);
+  ADD KEY `tb_soal_ibfk_2` (`mapel_id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -396,12 +346,6 @@ ALTER TABLE `tb_bab`
   MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_code_guru`
---
-ALTER TABLE `tb_code_guru`
-  MODIFY `id_code_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
 -- AUTO_INCREMENT untuk tabel `tb_jenjang`
 --
 ALTER TABLE `tb_jenjang`
@@ -417,19 +361,19 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -439,56 +383,40 @@ ALTER TABLE `tb_soal`
 -- Ketidakleluasaan untuk tabel `tb_bab`
 --
 ALTER TABLE `tb_bab`
-  ADD CONSTRAINT `tb_bab_ibfk_1` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`);
-
---
--- Ketidakleluasaan untuk tabel `tb_code_guru`
---
-ALTER TABLE `tb_code_guru`
-  ADD CONSTRAINT `tb_code_guru_ibfk_1` FOREIGN KEY (`mapel_guru_id`) REFERENCES `tb_mapel_guru` (`id_mapel_guru`),
-  ADD CONSTRAINT `tb_code_guru_ibfk_2` FOREIGN KEY (`siswa_profile_id`) REFERENCES `tb_siswa_profile` (`id_siswa_profile`);
+  ADD CONSTRAINT `tb_bab_ibfk_1` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  ADD CONSTRAINT `tb_kelas_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`);
+  ADD CONSTRAINT `tb_kelas_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  ADD CONSTRAINT `tb_mapel_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`);
-
---
--- Ketidakleluasaan untuk tabel `tb_mapel_guru`
---
-ALTER TABLE `tb_mapel_guru`
-  ADD CONSTRAINT `tb_mapel_guru_ibfk_1` FOREIGN KEY (`guru_profile_id`) REFERENCES `tb_guru_profile` (`id_guru_profile`),
-  ADD CONSTRAINT `tb_mapel_guru_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`),
-  ADD CONSTRAINT `tb_mapel_guru_ibfk_3` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`);
+  ADD CONSTRAINT `tb_mapel_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`),
-  ADD CONSTRAINT `tb_paket_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `tb_mapel` (`id_mapel`),
-  ADD CONSTRAINT `tb_paket_ibfk_3` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`);
+  ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_paket_ibfk_3` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_siswa_profile`
 --
 ALTER TABLE `tb_siswa_profile`
-  ADD CONSTRAINT `tb_siswa_profile_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`),
-  ADD CONSTRAINT `tb_siswa_profile_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`);
+  ADD CONSTRAINT `tb_siswa_profile_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_siswa_profile_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  ADD CONSTRAINT `tb_soal_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`),
-  ADD CONSTRAINT `tb_soal_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`);
+  ADD CONSTRAINT `tb_soal_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_soal_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

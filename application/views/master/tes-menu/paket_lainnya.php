@@ -166,9 +166,6 @@
 
     $('.paket-isi').on('click', '.delete', function() {
       let id = $(this).attr('value');
-
-
-
       swal({
           title: "Apakah anda yakin?",
           text: "data akan terkapus secara permanent!",
