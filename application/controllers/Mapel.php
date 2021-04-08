@@ -34,7 +34,7 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'master/tes-menu/-menumapel', $data);
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
   public function smp($id = null)
