@@ -97,27 +97,27 @@
             <input type="hidden" name="paket_id" id="paket_id" value="<?= $paket->id_paket; ?>">
             <input type="hidden" name="mapel_id" id="mapel_id" value="<?= $mapel->id_mapel; ?>">
             <label for="soal_text">Soal Text</label>
-            <textarea name="soal_text" id="soal_text" class="form-control texteditor "></textarea>
+            <textarea name="soal_text" id="soal_text" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_a">Option A</label>
-            <textarea name="option_a" id="option_a" class="form-control texteditor"></textarea>
+            <textarea name="option_a" id="option_a" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_b">Option B</label>
-            <textarea name="option_b" id="option_b" class="form-control texteditor"></textarea>
+            <textarea name="option_b" id="option_b" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_c">Option C</label>
-            <textarea name="option_c" id="option_c" class="form-control texteditor"></textarea>
+            <textarea name="option_c" id="option_c" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_d">Option D</label>
-            <textarea name="option_d" id="option_d" class="form-control texteditor"></textarea>
+            <textarea name="option_d" id="option_d" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_e">Option E</label>
-            <textarea name="option_e" id="option_e" class="form-control texteditor"></textarea>
+            <textarea name="option_e" id="option_e" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="jawaban">Jawaban Benar</label>
@@ -203,14 +203,14 @@
       let url = '';
 
       let id = $('#id').val();
-      let soal_text = CKEDITOR.instances['soal_text'].getData();
       let paket_id = $('#paket_id').val();
       let mapel_id = $('#mapel_id').val();
-      let option_a = $('#option_a').val();
-      let option_b = $('#option_b').val();
-      let option_c = $('#option_c').val();
-      let option_d = $('#option_d').val();
-      let option_e = $('#option_e').val();
+      let soal_text = CKEDITOR.instances['soal_text'].getData();
+      let option_a = CKEDITOR.instances['option_a'].getData();
+      let option_b = CKEDITOR.instances['option_b'].getData();
+      let option_c = CKEDITOR.instances['option_c'].getData();
+      let option_d = CKEDITOR.instances['option_d'].getData();
+      let option_e = CKEDITOR.instances['option_e'].getData();
       let jawaban_benar = $('#jawaban_benar').val();
       let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
       console.log(soal_text);
@@ -349,7 +349,7 @@
 
     // Replace the <textarea id="editor1"> with a CKEditor 4
     // instance, using default configuration.
-    CKEDITOR.replace('soal_text');
+    // CKEDITOR.replace('soal_text', 'option_a', 'option_b', 'option_c', 'option_d', 'option_e');
 
   })
 </script>
