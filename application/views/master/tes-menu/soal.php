@@ -75,7 +75,6 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title judul">soal</h4>
-        <button type="button" class="close tutup-modal" data-dismiss="modal">×</button>
       </div>
 
       <!-- Modal body -->
@@ -341,7 +340,7 @@
     });
 
     $('#myModal').on('click', '.reset', function() {
-      $('#submitForm').reset();
+      $('#submitForm')[0].reset();
       $('.validation').html(null);
       $('#soal_gambar').next('label').html('Pilih Gambar');
       CKEDITOR.instances.soal_text.setData('');
