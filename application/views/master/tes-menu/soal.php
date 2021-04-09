@@ -86,9 +86,8 @@
         <form id="submitForm" method="post" enctype="multipart/form-data">
           <div class="form-group mb-3">
             <label for="inputGroupFile01">Soal Gambar</label>
-            <div class="image"></div>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" name="soal_gambar" accept="image/*">
+              <input type="file" id="soal_gambar" class="custom-file-input" name="soal_gambar" accept="image/*">
               <label class="custom-file-label" for="inputGroupFile01">Pilih Gambar</label>
             </div>
           </div>
@@ -122,7 +121,7 @@
           <div class="form-group fill">
             <label for="jawaban">Jawaban Benar</label>
             <select class="form-control" name="jawaban_benar" id="jawaban_benar">
-              <option value="">--Pilih Salah Satu--</option>
+              <option value="default">--Pilih Salah Satu--</option>
               <option value="A">A</option>
               <option value="B">B</option>
               <option value="C">C</option>
@@ -143,7 +142,6 @@
     </div>
   </div>
 </div>
-<!-- <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script> -->
 <script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
 
 
@@ -213,7 +211,6 @@
       let option_e = CKEDITOR.instances['option_e'].getData();
       let jawaban_benar = $('#jawaban_benar').val();
       let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
-      console.log(soal_text);
       let formData = new FormData();
 
       formData.append('id_soal', id);
@@ -248,6 +245,13 @@
             reloadTable();
             $("#myModal").modal('hide');
             $('#submitForm')[0].reset();
+            $('#soal_gambar').next('label').html('Pilih Gambar');
+            CKEDITOR.instances.soal_text.setData('');
+            CKEDITOR.instances.option_a.setData('');
+            CKEDITOR.instances.option_b.setData('');
+            CKEDITOR.instances.option_c.setData('');
+            CKEDITOR.instances.option_d.setData('');
+            CKEDITOR.instances.option_e.setData('');
             $('.validation').html(null);
           } else {
             $('.validation').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -325,17 +329,38 @@
 
     $('.tutup-modal').on('click', function() {
       $('#submitForm')[0].reset();
+      $('#soal_gambar').next('label').html('Pilih Gambar');
+      CKEDITOR.instances.soal_text.setData('');
+      CKEDITOR.instances.option_a.setData('');
+      CKEDITOR.instances.option_b.setData('');
+      CKEDITOR.instances.option_c.setData('');
+      CKEDITOR.instances.option_d.setData('');
+      CKEDITOR.instances.option_e.setData('');
     });
 
     $('.tutup').on('click', function() {
-      $('#submitForm')[0].reset();
+      $("#submitForm")[0].reset();
       $("#myModal").modal('hide');
+      $('#soal_gambar').next('label').html('Pilih Gambar');
+      CKEDITOR.instances.soal_text.setData('');
+      CKEDITOR.instances.option_a.setData('');
+      CKEDITOR.instances.option_b.setData('');
+      CKEDITOR.instances.option_c.setData('');
+      CKEDITOR.instances.option_d.setData('');
+      CKEDITOR.instances.option_e.setData('');
       $('.validation').html(null);
     });
 
     $('#myModal').on('click', '.reset', function() {
-      $('#submitForm')[0].reset();
+      $('#submitForm').reset();
       $('.validation').html(null);
+      $('#soal_gambar').next('label').html('Pilih Gambar');
+      CKEDITOR.instances.soal_text.setData('');
+      CKEDITOR.instances.option_a.setData('');
+      CKEDITOR.instances.option_b.setData('');
+      CKEDITOR.instances.option_c.setData('');
+      CKEDITOR.instances.option_d.setData('');
+      CKEDITOR.instances.option_e.setData('');
     });
 
     function reloadTable() {
@@ -346,10 +371,6 @@
       let fileName = $(this).val().split('\\').pop();
       $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
-
-    // Replace the <textarea id="editor1"> with a CKEditor 4
-    // instance, using default configuration.
-    // CKEDITOR.replace('soal_text', 'option_a', 'option_b', 'option_c', 'option_d', 'option_e');
 
   })
 </script>
