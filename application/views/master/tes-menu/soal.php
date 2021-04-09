@@ -327,17 +327,6 @@
       ]
     });
 
-    $('.tutup-modal').on('click', function() {
-      $('#submitForm')[0].reset();
-      $('#soal_gambar').next('label').html('Pilih Gambar');
-      CKEDITOR.instances.soal_text.setData('');
-      CKEDITOR.instances.option_a.setData('');
-      CKEDITOR.instances.option_b.setData('');
-      CKEDITOR.instances.option_c.setData('');
-      CKEDITOR.instances.option_d.setData('');
-      CKEDITOR.instances.option_e.setData('');
-    });
-
     $('.tutup').on('click', function() {
       $("#submitForm")[0].reset();
       $("#myModal").modal('hide');
