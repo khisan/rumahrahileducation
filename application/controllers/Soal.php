@@ -48,13 +48,13 @@ class Soal extends CI_Controller
       $row = [];
       $row[] = $no . '.';
       $row[] = $soal->soal_gambar != null ? '<img src="' . site_url('uploads/soal/') . $soal->soal_gambar . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
-      $row[] = $soal->soal_text;
-      $row[] = $soal->option_a;
-      $row[] = $soal->option_b;
-      $row[] = $soal->option_c;
-      $row[] = $soal->option_d;
-      $row[] = $soal->option_e;
-      $row[] = $soal->jawaban_benar;
+      $row[] = html_entity_decode($soal->soal_text);
+      $row[] = html_entity_decode($soal->option_a);
+      $row[] = html_entity_decode($soal->option_b);
+      $row[] = html_entity_decode($soal->option_c);
+      $row[] = html_entity_decode($soal->option_d);
+      $row[] = html_entity_decode($soal->option_e);
+      $row[] = html_entity_decode($soal->jawaban_benar);
       $row[] = '
           <button type="button" value="' . $soal->id_soal . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $soal->id_soal . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
@@ -73,27 +73,19 @@ class Soal extends CI_Controller
 
   public function get()
   {
-    $get_id = $this->input->get('id');
-    $get_idPaket = $this->input->get('paket_id');
-    $get_idMapel = $this->input->get('mapel_id');
-    if ($get_id == null && $get_idPaket == null && $get_idMapel == null) {
+    $get = $this->input->get(null, TRUE);
+    if ($get == null) {
       $query = $this->soal->get();
       echo json_encode($query->result_array());
-    } elseif ($get_id != null && $get_idPaket == null && $get_idMapel == null) {
-      $query = $this->soal->get($get_id);
-      echo json_encode($query->row());
-    } elseif ($get_idPaket != null && $get_id == null && $get_idMapel == null) {
-      $query = $this->soal->get($get_idPaket);
-      echo json_encode($query->row());
-    } elseif ($get_idMapel != null && $get_idPaket == null && $get_id == null) {
-      $query = $this->soal->get($get_idMapel);
+    } else {
+      $query = $this->soal->get($get['id']);
       echo json_encode($query->row());
     }
   }
 
   public function add()
   {
-    $post = $this->input->post(null, TRUE);
+    $post = $this->input->post();
 
     $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
     $this->form_validation->set_rules('paket_id', 'paket_id', 'required');

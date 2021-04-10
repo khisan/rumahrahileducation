@@ -154,8 +154,6 @@
       $("#myModal").modal('show');
       $('.validation').html(null);
       $('.image').html(null);
-
-
     });
 
     $('.soal-isi').on('click', '.update', function() {
@@ -180,14 +178,15 @@
         dataType: "JSON",
         success: function(response) {
           $('#id').val(response.id_soal);
-          $('#soal_text').val(response.soal_text);
+          $('.image').html(`<img src="<?= site_url('uploads/soal/'); ?>${response.soal_gambar}" class="rounded mx-auto d-block" alt="" width="200px">`);
+          // $('#soal_text').val(response.soal_text);
+          CKEDITOR.instances['soal_text'].insertHtml(response.soal_text);
           $('#option_a').val(response.option_a);
           $('#option_b').val(response.option_b);
           $('#option_c').val(response.option_c);
           $('#option_d').val(response.option_d);
           $('#option_e').val(response.option_e);
           $('#jawaban_benar').val(response.jawaban_benar);
-          $('.image').html(`<img src="<?= site_url('uploads/soal/'); ?>${response.soal_gambar}" class="rounded mx-auto d-block" alt="" width="200px">`);
 
         }
       });
@@ -213,9 +212,9 @@
       let formData = new FormData();
 
       formData.append('id_soal', id);
-      formData.append('soal_text', soal_text);
       formData.append('paket_id', paket_id);
       formData.append('mapel_id', mapel_id);
+      formData.append('soal_text', soal_text);
       formData.append('soal_gambar', soal_gambar);
       formData.append('option_a', option_a);
       formData.append('option_b', option_b);
