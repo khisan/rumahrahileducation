@@ -3,12 +3,14 @@
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-CKEDITOR.editorConfig = function( config ) {
+CKEDITOR.editorConfig = function (config) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
-	config.extraPlugins = 'eqneditor';
-	// config.extraPlugins = 'mathjax';
+	config.extraPlugins +=
+		(config.extraPlugins.length == 0 ? "" : ",") + "ckeditor_wiris";
+	config.allowedContent = true;
+	// config.extraPlugins = "mathjax";
+	// config.extraPlugins = "eqneditor";
 	// config.mathJaxClass = 'my-math';
 	// config.mathJaxLib = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
 	// config.mathJaxLib = 'http:\/\/localhost\/rumahrahileducation\/assets\/ckeditor\/plugin\/\/libs\/MathJax.js';

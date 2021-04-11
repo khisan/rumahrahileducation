@@ -24,9 +24,14 @@
   <!-- vendor css -->
   <link rel="stylesheet" href="<?= base_url('assets/able/'); ?>assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-
-
-
+  <script>
+    window.MathJax = {
+      MathML: {
+        extensions: ["mml3.js", "content-mathml.js"]
+      }
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
 </head>
 
 <body>

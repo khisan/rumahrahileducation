@@ -105,16 +105,16 @@ class Soal_model extends CI_Model
 
   public function create($post)
   {
-    $params['paket_id'] = htmlspecialchars($post['paket_id']);
-    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
-    $params['soal_text'] = htmlspecialchars($post['soal_text']);
-    $params['soal_gambar'] = htmlspecialchars($post['soal_gambar']);
-    $params['option_a'] = htmlspecialchars($post['option_a']);
-    $params['option_b'] = htmlspecialchars($post['option_b']);
-    $params['option_c'] = htmlspecialchars($post['option_c']);
-    $params['option_d'] = htmlspecialchars($post['option_d']);
-    $params['option_e'] = htmlspecialchars($post['option_e']);
-    $params['jawaban_benar'] = htmlspecialchars($post['jawaban_benar']);
+    $params['paket_id'] = $post['paket_id'];
+    $params['mapel_id'] = $post['mapel_id'];
+    $params['soal_text'] = $post['soal_text'];
+    $params['soal_gambar'] = $post['soal_gambar'];
+    $params['option_a'] = $post['option_a'];
+    $params['option_b'] = $post['option_b'];
+    $params['option_c'] = $post['option_c'];
+    $params['option_d'] = $post['option_d'];
+    $params['option_e'] = $post['option_e'];
+    $params['jawaban_benar'] = $post['jawaban_benar'];
 
     $this->db->insert('tb_soal', $params);
     return $this->db->affected_rows();
@@ -122,20 +122,18 @@ class Soal_model extends CI_Model
 
   public function update($post)
   {
-    $params['paket_id'] = htmlspecialchars($post['paket_id']);
-    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
-    $params['soal_text'] = htmlspecialchars($post['soal_text']);
+    $params['paket_id'] = $post['paket_id'];
+    $params['mapel_id'] = $post['mapel_id'];
+    $params['soal_text'] = $post['soal_text'];
     if ($post['soal_gambar'] != null) {
-      $params['soal_gambar'] = htmlspecialchars($post['soal_gambar']);
+      $params['soal_gambar'] = $post['soal_gambar'];
     }
-
-    // $params['soal_suara'] = htmlspecialchars($post['soal_suara']);
-    $params['option_a'] = htmlspecialchars($post['option_a']);
-    $params['option_b'] = htmlspecialchars($post['option_b']);
-    $params['option_c'] = htmlspecialchars($post['option_c']);
-    $params['option_d'] = htmlspecialchars($post['option_d']);
-    $params['option_e'] = htmlspecialchars($post['option_e']);
-    $params['jawaban_benar'] = htmlspecialchars($post['jawaban_benar']);
+    $params['option_a'] = $post['option_a'];
+    $params['option_b'] = $post['option_b'];
+    $params['option_c'] = $post['option_c'];
+    $params['option_d'] = $post['option_d'];
+    $params['option_e'] = $post['option_e'];
+    $params['jawaban_benar'] = $post['jawaban_benar'];
 
 
     $params['updated'] = date('Y-m-d H:i:s');

@@ -179,13 +179,12 @@
         success: function(response) {
           $('#id').val(response.id_soal);
           $('.image').html(`<img src="<?= site_url('uploads/soal/'); ?>${response.soal_gambar}" class="rounded mx-auto d-block" alt="" width="200px">`);
-          // $('#soal_text').val(response.soal_text);
-          CKEDITOR.instances['soal_text'].insertHtml(response.soal_text);
-          $('#option_a').val(response.option_a);
-          $('#option_b').val(response.option_b);
-          $('#option_c').val(response.option_c);
-          $('#option_d').val(response.option_d);
-          $('#option_e').val(response.option_e);
+          CKEDITOR.instances.soal_text.setData(response.soal_text);
+          CKEDITOR.instances.option_a.setData(response.option_a);
+          CKEDITOR.instances.option_b.setData(response.option_b);
+          CKEDITOR.instances.option_c.setData(response.option_c);
+          CKEDITOR.instances.option_d.setData(response.option_d);
+          CKEDITOR.instances.option_e.setData(response.option_e);
           $('#jawaban_benar').val(response.jawaban_benar);
 
         }
@@ -201,12 +200,12 @@
       let id = $('#id').val();
       let paket_id = $('#paket_id').val();
       let mapel_id = $('#mapel_id').val();
-      let soal_text = CKEDITOR.instances['soal_text'].getData();
-      let option_a = CKEDITOR.instances['option_a'].getData();
-      let option_b = CKEDITOR.instances['option_b'].getData();
-      let option_c = CKEDITOR.instances['option_c'].getData();
-      let option_d = CKEDITOR.instances['option_d'].getData();
-      let option_e = CKEDITOR.instances['option_e'].getData();
+      let soal_text = CKEDITOR.instances.soal_text.getData('');
+      let option_a = CKEDITOR.instances.option_a.getData('');
+      let option_b = CKEDITOR.instances.option_b.getData('');
+      let option_c = CKEDITOR.instances.option_c.getData('');
+      let option_d = CKEDITOR.instances.option_d.getData('');
+      let option_e = CKEDITOR.instances.option_e.getData('');
       let jawaban_benar = $('#jawaban_benar').val();
       let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
       let formData = new FormData();

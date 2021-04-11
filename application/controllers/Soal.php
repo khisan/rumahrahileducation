@@ -85,7 +85,7 @@ class Soal extends CI_Controller
 
   public function add()
   {
-    $post = $this->input->post();
+    $post = $this->input->post(null, TRUE);
 
     $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
     $this->form_validation->set_rules('paket_id', 'paket_id', 'required');
