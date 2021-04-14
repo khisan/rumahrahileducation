@@ -61,6 +61,7 @@ class Mapel extends CI_Controller
 
   public function getAjax($id = null, $id_paket = null)
   {
+    $id_user = $this->session->userdata('userid');
     $paket = $this->paket->get($id_paket)->row();
     $kelas = $this->kelas->get($id)->row();
     $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
@@ -75,14 +76,20 @@ class Mapel extends CI_Controller
       $row[] = $mapel->created;
       $row[] = $mapel->updated;
       $row[] = '
-        ' . (($jenjang->id_jenjang == '4') ?
+        ' . (($jenjang->id_jenjang == '4' && is_numeric($id_user) == true) ?
         '<a  href="' . site_url("soal/index/$paket->id_paket/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>'
-        :
-        '<a  href="' . site_url("bab/$jenjang->nama_jenjang/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>' . '
+        : (($jenjang->id_jenjang != '4' && is_numeric($id_user) == true) ?
+          '<a  href="' . site_url("bab/$jenjang->nama_jenjang/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-        <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>');
+        <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>'
+          : ((is_numeric($id_user) == false) ?
+            '<a  href="' . site_url("soal/index/$paket->id_paket/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>'
+            :
+            '<a  href="' . site_url("soal/index/$paket->id_paket/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+            <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+            <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>')));
       $data[] = $row;
     }
     $output = [

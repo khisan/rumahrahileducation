@@ -52,7 +52,7 @@
             <?php
             $id = $this->session->userdata('userid');
             $nama = $this->session->userdata('nama');
-            echo $jenjang_id = $this->session->userdata('jenjang_id');
+            $jenjang_id = $this->session->userdata('jenjang_id');
             if ($jenjang_id == '1') {
               $jenjang = 'SD';
             } elseif ($jenjang_id == '2') {
