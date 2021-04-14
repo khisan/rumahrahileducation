@@ -1,0 +1,1 @@
+{"result":{"text":"square root of 2 to the power of negative 1 end exponent plus open parentheses negative 20 close parentheses end root"},"status":"ok"}

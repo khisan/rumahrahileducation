@@ -85,7 +85,7 @@ class Soal extends CI_Controller
 
   public function add()
   {
-    $post = $this->input->post(null, TRUE);
+    $post = $this->input->post();
 
     $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
     $this->form_validation->set_rules('paket_id', 'paket_id', 'required');
@@ -114,9 +114,6 @@ class Soal extends CI_Controller
           $post['soal_gambar'] = $this->upload->data('file_name');
           $data = $this->soal->create($post);
           echo json_encode($data);
-        } else {
-          $error = $this->upload->display_errors();
-          echo json_encode($error);
         }
       } else {
         $post['soal_gambar'] = null;

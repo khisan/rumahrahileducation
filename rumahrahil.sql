@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 09 Apr 2021 pada 01.22
--- Versi server: 10.4.17-MariaDB
--- Versi PHP: 8.0.2
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 14 Apr 2021 pada 02.55
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -203,7 +203,8 @@ CREATE TABLE `tb_paket` (
 --
 
 INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
-(29, 1, NULL, 'Paket SD 1', 20, '2021-04-03 06:40:06', NULL);
+(29, 1, NULL, 'Paket SD 1', 20, '2021-04-03 06:40:06', NULL),
+(37, NULL, 19, 'Paket 1', 80, '2021-04-11 08:30:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -251,7 +252,7 @@ CREATE TABLE `tb_soal` (
   `paket_id` int(11) NOT NULL,
   `mapel_id` int(11) NOT NULL,
   `soal_text` text NOT NULL,
-  `soal_gambar` varchar(256) NOT NULL,
+  `soal_gambar` varchar(256) DEFAULT NULL,
   `option_a` text NOT NULL,
   `option_b` text NOT NULL,
   `option_c` text NOT NULL,
@@ -261,6 +262,13 @@ CREATE TABLE `tb_soal` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_soal`
+--
+
+INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal_text`, `soal_gambar`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
+(40, 37, 19, '<p>a</p>\n', NULL, '<p>a</p>\n', '<p>a</p>\n', '<p>a</p>\n', '<p>a</p>\n', '<p>a</p>\n', 'A', '2021-04-14 07:52:02', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -367,13 +375,13 @@ ALTER TABLE `tb_mapel`
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
