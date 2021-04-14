@@ -35,15 +35,16 @@ class Kelas_model extends CI_Model
     if ($id != null) {
       $this->db->where('id_kelas', $id);
     }
-    if ($jenjang == "sd") {
+    if ($jenjang == "SD") {
       $this->db->where("id_kelas <= 6");
-    } elseif ($jenjang == "smp") {
+    } elseif ($jenjang === "SMP") {
       $this->db->where("id_kelas >= 7");
       $this->db->where("id_kelas <= 9");
-    } elseif ($jenjang == "sma") {
+    } elseif ($jenjang === "SMA") {
       $this->db->where("id_kelas >= 10");
-    } else if ($jenjang == "lainnya") {
-      $this->db->where("id_kelas >= 19");
+      $this->db->where("id_kelas <= 18");
+    } else if ($jenjang === "Lainnya") {
+      $this->db->where("id_kelas > 18");
     }
     $query = $this->db->get('tb_kelas');
     return $query;

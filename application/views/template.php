@@ -52,13 +52,15 @@
             <?php
             $id = $this->session->userdata('userid');
             $nama = $this->session->userdata('nama');
-            $jenjang_id = $this->session->userdata('jenjang_id');
+            echo $jenjang_id = $this->session->userdata('jenjang_id');
             if ($jenjang_id == '1') {
               $jenjang = 'SD';
             } elseif ($jenjang_id == '2') {
               $jenjang = 'SMP';
-            } else {
+            } elseif ($jenjang_id == '3') {
               $jenjang = 'SMA';
+            } else {
+              $jenjang = 'Lainnya';
             }
             $kelas_id = $this->session->userdata('kelas_id');
             if (is_numeric($id) == 'true') {
