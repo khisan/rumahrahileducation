@@ -41,20 +41,18 @@ class Paket extends CI_Controller
     $this->template->load('template', 'master/tes-menu/paket', $data);
   }
 
-  public function lainnya($id = null)
+  public function lainnya($id_jenjang, $id_kelas)
   {
-    $data['mapel'] = $this->mapel->get($id)->row();
-    $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
-    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $data['kelas'] = $this->kelas->get($id_kelas)->row();
+    $data['jenjang'] = $this->jenjang->get($id_jenjang)->row();
     $this->template->load('template', 'master/tes-menu/paket_lainnya', $data);
   }
 
-  public function getAjax($id = null)
+  public function getAjax($id_jenjang, $id_kelas)
   {
-    $kelas = $this->kelas->get($id)->row();
-    $list = $this->paket->getDataTables($id);
-    $mapel = $this->mapel->get($id)->row($id);
-    $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
+    $kelas = $this->kelas->get($id_kelas)->row();
+    $list = $this->paket->getDataTables($id_kelas);
+    $jenjang = $this->jenjang->get($id_jenjang)->row();
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $paket) {
@@ -67,7 +65,7 @@ class Paket extends CI_Controller
       $row[] = $paket->updated;
       $row[] = '
       ' . (($jenjang->id_jenjang == '4') ?
-        '<a  href="' . site_url("mapel/lainnya/$mapel->id_mapel/$paket->id_paket") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+        '<a  href="' . site_url("mapel/lainnya/$paket->id_paket") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $paket->id_paket . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         <button type="button" value="' . $paket->id_paket . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>'
         :
@@ -79,7 +77,7 @@ class Paket extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->paket->countAll(),
-      'recordsFiltered' => $this->paket->countFiltered($id),
+      'recordsFiltered' => $this->paket->countFiltered($id_kelas),
       'data' => $data
     ];
     echo json_encode($output);

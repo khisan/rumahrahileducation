@@ -3,11 +3,10 @@
     <div class="row align-items-center">
       <div class="col-md-12">
         <div class="page-header-title">
-          <h5 class="m-b-10">Paket</h5>
+          <h5 class="m-b-10">Mapel</h5>
         </div>
         <ul class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= site_url("Paket/lainnya/"); ?>"><?= $paket->nama_paket; ?></a></li>
         </ul>
       </div>
     </div>
@@ -15,32 +14,34 @@
 </div>
 <!-- [ breadcrumb ] end -->
 <!-- [ Main Content ] start -->
-<div class="row paket-isi">
+<div class="row mapel-isi">
   <!-- [ static-layout ] start -->
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong>Paket</strong></h3>
+        <h3 class="text-primary"><strong>Mapel <?= $kelas->nama_kelas ?></strong></strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1>List Paket</h1>
+            <h1><?= $kelas->nama_kelas; ?></h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
+            <div class="float-right">
+              <a href="<?= site_url("Paket/lainnya/19"); ?>" class="btn btn-warning btn-flat">
+                <i class="fa fa-undo"></i> Back</a>
+            </div>
           </div>
         </div>
         <div class="float-right mb-3">
-          <button type="button" class="btn btn-primary has-ripple" id="paketAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
-
+          <button type="button" class="btn btn-primary has-ripple" id="mapelAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         </div>
         <div class="table-responsive">
           <table class="table table-bordered table-striped" id="table">
             <thead>
               <tr>
                 <th>No</th>
-                <th>paket</th>
-                <th>waktu</th>
+                <th>Mapel</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Action</th>
@@ -62,7 +63,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title judul">paket</h4>
+        <h4 class="modal-title judul">mapel</h4>
         <button type="button" class="close" data-dismiss="modal">×</button>
       </div>
 
@@ -72,16 +73,11 @@
 
         </div>
         <form id="submitForm">
-          <input type="hidden" name="id_paket" id="id">
-          <input type="hidden" name="bab_id" id="bab" value="">
+          <input type="hidden" name="id_mapel" id="id">
           <input type="hidden" name="kelas_id" id="kelas" value="<?= $kelas->id_kelas; ?>">
           <div class="form-group fill">
-            <label for="paket">Paket</label>
-            <input type="text" class="form-control" id="paket" name="nama_paket" placeholder="Ketik Nama Paket">
-          </div>
-          <div class="form-group fill">
-            <label for="waktu">Waktu dalam menit</label>
-            <input type="number" class="form-control" id="waktu" name="waktu" placeholder="Ketik Waktu dalam menit">
+            <label for="mapel">Mapel</label>
+            <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="Ketik Nama Mapel">
           </div>
         </form>
       </div>
@@ -98,9 +94,9 @@
 </div>
 <script>
   $(document).ready(function() {
-    const site_url = "<?= site_url('paket/'); ?>";
-    $('.paket-isi').on('click', '#paketAdd', function() {
-      $('.judul').html('Tambah Paket');
+    const site_url = "<?= site_url('mapel/'); ?>";
+    $('.mapel-isi').on('click', '#mapelAdd', function() {
+      $('.judul').html('Tambah Mapel');
       $('.simpan').html('Tambah Data');
       $('.simpan').attr('id', 'add');
       $("#myModal").modal('show');
@@ -108,8 +104,8 @@
 
     });
 
-    $('.paket-isi').on('click', '.update', function() {
-      $('.judul').html('Update Paket');
+    $('.mapel-isi').on('click', '.update', function() {
+      $('.judul').html('Update Mapel');
       $('.simpan').html('Update Data');
       $('.simpan').attr('id', 'update');
       $("#myModal").modal('show');
@@ -125,9 +121,9 @@
         },
         dataType: "JSON",
         success: function(response) {
-          $('#id').val(response.id_paket);
+          $('#id').val(response.id_mapel);
           $('#kelas').val(response.kelas_id);
-          $('#paket').val(response.nama_paket);
+          $('#mapel').val(response.nama_mapel);
         }
       });
 
@@ -164,8 +160,11 @@
       });
     });
 
-    $('.paket-isi').on('click', '.delete', function() {
+    $('.mapel-isi').on('click', '.delete', function() {
       let id = $(this).attr('value');
+
+
+
       swal({
           title: "Apakah anda yakin?",
           text: "data akan terkapus secara permanent!",
@@ -201,7 +200,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("paket/getAjax/$jenjang->id_jenjang/$kelas->id_kelas"); ?>',
+        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
         type: 'POST'
       },
       columnDefs: [{

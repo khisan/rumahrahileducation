@@ -69,7 +69,7 @@
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
               </div>
-            <?php } elseif (str_contains($id, 'guru') == 'true') { ?>
+            <?php } elseif (strpos($id, 'guru') == 'true') { ?>
               <img class="img-radius" src="<?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
@@ -110,7 +110,7 @@
               </ul>
             </li>
           <?php }
-          if (is_numeric($id) == 'true' or str_contains($id, 'guru') == 'true') { ?>
+          if (is_numeric($id) == 'true' or strpos($id, 'guru') == 'true') { ?>
             <li class="nav-item pcoded-menu-caption">
               <label>Test Online</label>
             </li>
@@ -120,7 +120,8 @@
                 <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
                 <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-                <li><a href="<?= site_url("paket/lainnya/19"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("paket/lainnya/4/19"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("paket/lainnya/4/20"); ?>">Kedinasan</a></li>
               </ul>
             </li>
           <?php } else { ?>
@@ -163,7 +164,7 @@
                 ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
-                <?php } elseif (str_contains($id, 'guru') == 'true') { ?>
+                <?php } elseif (strpos($id, 'guru') == 'true') { ?>
                   <img src=" <?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">
                   <span><?= $nama; ?></span>
                 <?php } else { ?>
