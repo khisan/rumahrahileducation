@@ -48,11 +48,12 @@ class Paket extends CI_Controller
     $this->template->load('template', 'master/tes-menu/paket_lainnya', $data);
   }
 
-  public function getAjax($id_jenjang, $id_kelas)
+  public function getAjax($id)
   {
-    $kelas = $this->kelas->get($id_kelas)->row();
-    $list = $this->paket->getDataTables($id_kelas);
-    $jenjang = $this->jenjang->get($id_jenjang)->row();
+
+    $list = $this->paket->getDataTables($id);
+    $kelas = $this->kelas->get($id)->row();
+    $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $paket) {
@@ -77,7 +78,7 @@ class Paket extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->paket->countAll(),
-      'recordsFiltered' => $this->paket->countFiltered($id_kelas),
+      'recordsFiltered' => $this->paket->countFiltered($id),
       'data' => $data
     ];
     echo json_encode($output);
