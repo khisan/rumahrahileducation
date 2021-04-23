@@ -134,7 +134,7 @@
           <div class="form-group mb-3">
             <label for="inputGroupFile01">Photo Profile</label>
             <div class="image"></div>
-            <div class=" custom-file mt-3">
+            <div class="custom-file mt-3">
               <input type="file" class="custom-file-input" id="inputGroupFile01" name="image" accept="image/*">
               <label class="custom-file-label" for="inputGroupFile01">Pilih Photo Profile</label>
             </div>

@@ -100,6 +100,8 @@ class Siswa_model extends CI_Model
   {
     $this->db->select('*');
     $this->db->from('tb_siswa_profile');
+    $this->db->join('tb_jenjang', 'tb_jenjang.id_jenjang = tb_siswa_profile.jenjang_id');
+    $this->db->join('tb_kelas', 'tb_kelas.id_kelas = tb_siswa_profile.kelas_id');
     $this->db->where('username', $post['username']);
     $this->db->where('password', sha1($post['password']));
     $query = $this->db->get();

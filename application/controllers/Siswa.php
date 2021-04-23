@@ -106,9 +106,15 @@ class Siswa extends CI_Controller
       } elseif ($post['jenjang_id'] == 2) {
         $jj = 'SMP';
         $post['id_siswa_profile'] = "$jj$post[kelas_id]" . substr(md5(rand()), 0, 5);
-      } else {
+      } elseif ($post['jenjang_id'] == 3) {
         $jj = 'SMA';
         $post['id_siswa_profile'] = "$jj$post[kelas_id]$post[jurusan]" . substr(md5(rand()), 0, 5);
+      } elseif ($post['kelas_id'] == 19) {
+        $jj = 'SBM';
+        $post['id_siswa_profile'] = "$jj$post[kelas_id]" . substr(md5(rand()), 0, 5);
+      } elseif ($post['kelas_id'] == 20) {
+        $jj = 'Kedinasan';
+        $post['id_siswa_profile'] = "$jj$post[kelas_id]" . substr(md5(rand()), 0, 5);
       }
       $config['upload_path']    = './uploads/siswa/';
       $config['allowed_types']  = 'gif|png|jpg|jpeg';
@@ -117,23 +123,15 @@ class Siswa extends CI_Controller
 
       $this->load->library('upload', $config);
 
-      if ($_FILES['image']['name'] != null) {
+      if ($_FILES['image']['name'] == "") {
         if ($this->upload->do_upload('image')) {
-          if ($post['jurusan'] == '') {
-            $post['jurusan'] = null;
-          }
           $post['image'] = $this->upload->data('file_name');
           $data = $this->siswa->create($post);
           echo json_encode($data);
-        } else {
-          $error = $this->upload->display_errors();
-          echo json_encode($error);
         }
       } else {
-        if ($post['jurusan'] == '') {
-          $post['jurusan'] = null;
-        }
-        $post['image'] = null;
+        $image_default = "./uploads/siswa/student.png";
+        $post['image'] = $this->upload->data($image_default);
         $data = $this->siswa->create($post);
         echo json_encode($data);
       }
