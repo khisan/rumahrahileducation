@@ -18,19 +18,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Jenjang_model extends CI_Model
 {
-
-  // ------------------------------------------------------------------------
-
-  public function __construct()
-  {
-    parent::__construct();
-  }
-
-  // ------------------------------------------------------------------------
-
-
-  // ------------------------------------------------------------------------
-  public function get($id = null)
+  public function get($id)
   {
     if ($id != null) {
       $this->db->where('id_jenjang', $id);

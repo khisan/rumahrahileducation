@@ -52,7 +52,9 @@
             <?php
             $id = $this->session->userdata('userid');
             $nama = $this->session->userdata('nama');
-            $jenjang_id = $this->session->userdata('jenjang_id');
+            $jenjang = $this->session->userdata('jenjang');
+            $kelas = $this->session->userdata('kelas');
+            $jenjang_id = $this->session->userdata('id_jenjang');
             if ($jenjang_id == '1') {
               $jenjang = 'SD';
             } elseif ($jenjang_id == '2') {
@@ -62,7 +64,7 @@
             } else {
               $jenjang = 'Lainnya';
             }
-            $kelas_id = $this->session->userdata('kelas_id');
+            $kelas_id = $this->session->userdata('id_kelas');
             if (is_numeric($id) == 'true') {
             ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" alt="User-Profile-Image">
@@ -126,7 +128,7 @@
             </li>
           <?php } else { ?>
             <li class="nav-item">
-              <a href="<?= site_url("kelas/$jenjang"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
+              <a href="<?= site_url("test/$jenjang_id/$kelas_id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
             </li>
           <?php } ?>
         </ul>
@@ -192,63 +194,12 @@
               <!-- [ breadcrumb ] start -->
               <script src="<?= base_url('assets/able/') ?>assets/js/jquery.js"></script>
               <?= $contents; ?>
-              <!-- [ Main Content ] end -->
-              <!-- [ Main Content ] start -->
-
-              <!-- [ Main Content ] end -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- [ Main Content ] end -->
-  <!-- Warning Section start -->
-  <!-- Older IE warning message -->
-  <!--[if lt IE 11]>
-            <div class="ie-warning">
-                <h1>Warning!!</h1>
-                <p>You are using an outdated version of Internet Explorer, please upgrade
-                   <br/>to any of the following web browsers to access this website.
-                </p>
-                <div class="iew-container">
-                    <ul class="iew-download">
-                        <li>
-                            <a href="http://www.google.com/chrome/">
-                                <img src="<?= base_url('assets/able/'); ?>assets/images/browser/chrome.png" alt="Chrome">
-                                <div>Chrome</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.mozilla.org/en-US/firefox/new/">
-                                <img src="<?= base_url('assets/able/'); ?>assets/images/browser/firefox.png" alt="Firefox">
-                                <div>Firefox</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.opera.com">
-                                <img src="<?= base_url('assets/able/'); ?>assets/images/browser/opera.png" alt="Opera">
-                                <div>Opera</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.apple.com/safari/">
-                                <img src="<?= base_url('assets/able/'); ?>assets/images/browser/safari.png" alt="Safari">
-                                <div>Safari</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                                <img src="<?= base_url('assets/able/'); ?>assets/images/browser/ie.png" alt="">
-                                <div>IE (11 & above)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <p>Sorry for the inconvenience!</p>
-            </div>
-        <![endif]-->
-  <!-- Warning Section Ends -->
 
   <!-- Required Js -->
   <script src="<?= base_url('assets/able/'); ?>assets/js/lottie.js"></script>
