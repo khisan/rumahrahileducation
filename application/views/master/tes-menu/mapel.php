@@ -7,11 +7,7 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
-            <li class="breadcrumb-item"><a href="<?= site_url("Paket/lainnya/19"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-          <?php } else { ?>
-            <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-          <?php } ?>
+          <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
           <li class="breadcrumb-item"><a href="#!"><?= $kelas->nama_kelas; ?></a></li>
         </ul>
       </div>
@@ -37,13 +33,8 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
-                <a href="<?= site_url("Paket/lainnya/19"); ?>" class="btn btn-warning btn-flat">
-                  <i class="fa fa-undo"></i> Back</a>
-              <?php } else { ?>
-                <a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
-                  <i class="fa fa-undo"></i> Back</a>
-              <?php } ?>
+              <a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
+                <i class="fa fa-undo"></i> Back</a>
             </div>
           </div>
         </div>
@@ -214,13 +205,8 @@
       processing: true,
       serverSide: true,
       ajax: {
-        <?php if ($jenjang->nama_jenjang == "Lainnya") { ?>
-          url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
-          type: 'POST'
-        <?php } else { ?>
-          url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/"); ?>',
-          type: 'POST'
-        <?php } ?>
+        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/"); ?>',
+        type: 'POST'
       },
       columnDefs: [{
           targets: [-1],
