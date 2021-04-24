@@ -21,6 +21,9 @@ class Test extends CI_Controller
     $data['id_kelas'] = $kelas;
     $data['jenjang'] = $this->jenjang->get($jenjang)->row();
     $data['kelas'] = $this->kelas->get($kelas)->row();
+    $data['mapel'] = $this->mapel->get()->result();
+    $data['bab'] = $this->bab->get()->result();
+    $data['paket'] = $this->paket->get()->result();
     $this->template->load('template', 'user/test', $data);
   }
 }
