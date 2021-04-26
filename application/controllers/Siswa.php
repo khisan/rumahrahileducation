@@ -76,7 +76,7 @@ class Siswa extends CI_Controller
 
   public function add()
   {
-    $post = $this->input->post(null, TRUE);
+    $post = $this->input->post(null);
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
     $this->form_validation->set_rules('username', 'Username', 'required');
@@ -183,8 +183,10 @@ class Siswa extends CI_Controller
         $jj = 'SD';
       } elseif ($post['jenjang_id'] == 2) {
         $jj = 'SMP';
-      } else {
+      } elseif ($post['jenjang_id'] == 3) {
         $jj = 'SMA';
+      } else {
+        $jj = 'Lainnya';
       }
       $config['upload_path']    = './uploads/siswa/';
       $config['allowed_types']  = 'gif|png|jpg|jpeg';

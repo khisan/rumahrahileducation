@@ -109,22 +109,19 @@ class Mapel extends CI_Controller
 
   public function listMapel()
   {
-    // Ambil data ID Provinsi yang dikirim via ajax post
     $id_kelas = $this->input->post('id_kelas');
 
     $mapels = $this->mapel->get(null, $id_kelas)->result();
 
-    // Buat variabel untuk menampung tag-tag option nya
-    // Set defaultnya dengan tag option Pilih
     $lists = "<option value=''>Pilih Mapel</option>";
 
     foreach ($mapels as $data) {
-      $lists .= "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>"; // Tambahkan tag option ke variabel $lists
+      $lists .= "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
     }
 
-    $callback = array('list_mapel' => $lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+    $callback = array('list_mapel' => $lists);
 
-    echo json_encode($callback); // konversi varibael $callback menjadi JSON
+    echo json_encode($callback);
   }
 
   public function add()

@@ -91,6 +91,23 @@ class Paket extends CI_Controller
     echo json_encode($query->row());
   }
 
+  public function listPaket()
+  {
+    $id_bab = $this->input->post('id_bab');
+
+    $pakets = $this->paket->get(null, $id_bab)->result();
+
+    $lists = "<option value=''>Pilih Paket</option>";
+
+    foreach ($pakets as $data) {
+      $lists .= "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
+    }
+
+    $callback = array('list_paket' => $lists);
+
+    echo json_encode($callback);
+  }
+
   public function add()
   {
     $post = $this->input->post(null, TRUE);

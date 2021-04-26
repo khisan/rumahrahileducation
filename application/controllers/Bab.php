@@ -92,6 +92,24 @@ class Bab extends CI_Controller
     echo json_encode($query->row());
   }
 
+  public function listBab()
+  {
+    $id_mapel = $this->input->post('id_mapel');
+    $semester = $this->input->post('semester');
+
+    $babs = $this->bab->get(null, $id_mapel, $semester)->result();
+
+    $lists = "<option value=''>Pilih Bab</option>";
+
+    foreach ($babs as $data) {
+      $lists .= "<option value='" . $data->id_bab . "'>" . $data->nama_bab . "</option>";
+    }
+
+    $callback = array('list_bab' => $lists);
+
+    echo json_encode($callback);
+  }
+
   public function add()
   {
     $post = $this->input->post(null, TRUE);

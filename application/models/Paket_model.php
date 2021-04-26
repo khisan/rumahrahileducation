@@ -89,15 +89,13 @@ class Paket_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_bab = null, $id_mapel = null)
+  public function get($id = null, $id_bab = null)
   {
     $this->db->from('tb_paket');
     if ($id != null) {
       $this->db->where('id_paket', $id);
     } elseif ($id_bab != null) {
       $this->db->where('bab_id', $id_bab);
-    } elseif ($id_mapel != null) {
-      $this->db->where('mapel_id', $id_mapel);
     }
     $query = $this->db->get();
     return $query;

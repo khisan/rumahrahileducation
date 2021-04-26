@@ -87,7 +87,7 @@ class Bab_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_mapel = null)
+  public function get($id = null, $id_mapel = null, $semester = null)
   {
     $this->db->from('tb_bab');
     if ($id != null) {
@@ -95,6 +95,9 @@ class Bab_model extends CI_Model
     }
     if ($id_mapel != null) {
       $this->db->where('mapel_id', $id_mapel);
+    }
+    if ($semester != null) {
+      $this->db->where('semester', $semester);
     }
     $query = $this->db->get();
     return $query;

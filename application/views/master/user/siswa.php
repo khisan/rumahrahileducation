@@ -187,8 +187,8 @@
           $('#id').val(response.id_siswa_profile);
           $('#nama').val(response.nama);
           $('#username').val(response.username);
-          $('#kelas').val(response.kelas_id);
           $('#jenjang').val(response.jenjang_id);
+          $('#kelas').val(response.kelas_id);
           $('#jurusan').val(response.jurusan);
           $('#sekolah').val(response.sekolah);
           $('#alamat').val(response.alamat);

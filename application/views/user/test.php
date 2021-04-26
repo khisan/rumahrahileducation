@@ -40,11 +40,21 @@
             <div class="col-sm-2">
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Mapel</label>
-                <select class="form-control" id="mapel">
+                <select class="form-control babChange" id="mapel">
                   <option selected value="">Pilih Mapel</option>
                   <?php foreach ($mapel as $data) {
                     echo "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
                   } ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Semester</label>
+                <select class="form-control babChange" id="semester">
+                  <option selected value="">Pilih Semester</option>
+                  <option value="1">Semester 1</option>
+                  <option value="2">Semester 2</option>
                 </select>
               </div>
             </div>
@@ -70,7 +80,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 mx-auto">
               <div class="form-group">
                 <button type="button" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
               </div>
@@ -82,26 +92,72 @@
   </div>
 </div>
 <script>
-  $(document).ready(function() { // Ketika halaman sudah siap (sudah selesai di load)
+  $(document).ready(function() {
     $.ajax({
-      type: "POST", // Method pengiriman data bisa dengan GET atau POST
-      url: "<?php echo base_url("mapel/listMapel"); ?>", // Isi dengan url/path file php yang dituju
+      type: "POST",
+      url: "<?php echo base_url("mapel/listMapel"); ?>",
       data: {
         id_kelas: $("#kelas").val()
-      }, // data yang akan dikirim ke file yang dituju
+      },
       dataType: "json",
       beforeSend: function(e) {
         if (e && e.overrideMimeType) {
           e.overrideMimeType("application/json;charset=UTF-8");
         }
       },
-      success: function(response) { // Ketika proses pengiriman berhasil
-        // set isi dari combobox kota
+      success: function(response) {
         $("#mapel").html(response.list_mapel);
       },
-      error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
-        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError); // Munculkan alert error
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
       }
+    });
+
+    $('.babChange').change(function() {
+
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("bab/listBab"); ?>",
+        data: {
+          id_mapel: $("#mapel").val(),
+          semester: $("#semester").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#bab").html(response.list_bab).show();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
+
+    $("#bab").change(function() {
+
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("paket/listPaket"); ?>",
+        data: {
+          id_bab: $("#bab").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#paket").html(response.list_paket).show();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
     });
   });
 </script>
