@@ -108,6 +108,23 @@ class Paket extends CI_Controller
     echo json_encode($callback);
   }
 
+  public function listPaketLainnya()
+  {
+    $id_kelas = $this->input->post('id_kelas');
+
+    $pakets = $this->paket->get(null, null, $id_kelas)->result();
+
+    $lists = "<option value=''>Pilih Paket</option>";
+
+    foreach ($pakets as $data) {
+      $lists .= "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
+    }
+
+    $callback = array('list_paket_lainnya' => $lists);
+
+    echo json_encode($callback);
+  }
+
   public function add()
   {
     $post = $this->input->post(null, TRUE);
