@@ -108,6 +108,14 @@ class Mapel_model extends CI_Model
     return $this->db->affected_rows();
   }
 
+  public function createLainnya($post)
+  {
+    $params['paket_id'] = htmlspecialchars($post['paket_id']);
+    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
+    $this->db->insert('tb_mapel', $params);
+    return $this->db->affected_rows();
+  }
+
   public function update($post)
   {
     $params['kelas_id'] = htmlspecialchars($post['kelas_id']);

@@ -135,7 +135,12 @@ class Mapel extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $data = $this->mapel->create($post);
+      if ($this->input->post('paket_id' == false)) {
+        $data = $this->mapel->createLainnya($post);
+      } else {
+
+        $data = $this->mapel->create($post);
+      }
       echo json_encode($data);
     }
   }

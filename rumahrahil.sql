@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Apr 2021 pada 04.01
+-- Waktu pembuatan: 27 Apr 2021 pada 04.10
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 7.4.16
 
@@ -63,10 +63,7 @@ CREATE TABLE `tb_bab` (
 --
 
 INSERT INTO `tb_bab` (`id_bab`, `mapel_id`, `nama_bab`, `semester`, `created`, `updated`) VALUES
-(10, 12, 'Aljabar Linier', 2, '2021-02-23 21:37:15', '2021-02-23 16:03:11'),
-(11, 12, 'SPLDV', 1, '2021-02-23 22:07:09', NULL),
-(12, 11, 'Bangun Datar', 1, '2021-02-23 22:22:13', NULL),
-(13, 11, 'Pitagoras', 1, '2021-02-23 22:22:42', NULL);
+(17, 40, 'Subtema 1', 1, '2021-04-27 09:07:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -163,7 +160,8 @@ INSERT INTO `tb_kelas` (`id_kelas`, `jenjang_id`, `nama_kelas`, `jurusan`) VALUE
 
 CREATE TABLE `tb_mapel` (
   `id_mapel` int(11) NOT NULL,
-  `kelas_id` int(11) NOT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `paket_id` int(11) DEFAULT NULL,
   `nama_mapel` varchar(256) NOT NULL,
   `created` datetime DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
@@ -173,10 +171,8 @@ CREATE TABLE `tb_mapel` (
 -- Dumping data untuk tabel `tb_mapel`
 --
 
-INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `nama_mapel`, `created`, `updated`) VALUES
-(11, 7, 'Matematika', '2021-02-21 19:09:01', NULL),
-(12, 10, 'Matematika Wajib', '2021-02-21 19:12:12', '2021-02-21 13:12:32'),
-(25, 19, 'SBM', '2021-04-20 08:47:48', NULL);
+INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `paket_id`, `nama_mapel`, `created`, `updated`) VALUES
+(40, 1, NULL, 'Tema 1', '2021-04-27 09:07:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -200,7 +196,8 @@ CREATE TABLE `tb_paket` (
 
 INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
 (40, NULL, 19, 'Paket 1', 120, '2021-04-19 15:36:00', NULL),
-(41, NULL, 20, 'Paket 1', 200, '2021-04-20 08:56:18', NULL);
+(41, NULL, 20, 'Paket 1', 200, '2021-04-20 08:56:18', NULL),
+(47, 17, NULL, 'Paket 1', 120, '2021-04-27 09:07:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,13 +226,11 @@ CREATE TABLE `tb_siswa_profile` (
 --
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
-('SD11061c', 'Budi', 'budi', 1, 2, '', 'SDN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
+('Kedinasan20a7f12', 'coba kedinasan', 'kedinasan', 4, 20, '', 'coba kedinasan', 'asd', 'kedinasan@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '', '2021-04-22 15:40:06', NULL),
+('SBM1908e13', 'coba sbm', 'sbm', 4, 19, '', 'coba sbm', 'asd', 'sbm@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '', '2021-04-22 15:36:07', NULL),
+('SD11061c', 'Budi', 'budi', 1, 1, '', 'SDN 1 Singasari', 'Pendem, Batu', 'budi@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210213-f42bab1f74.jpeg', '2021-02-13 16:07:22', '2021-03-20 13:33:50'),
 ('SD179322', 'coba sd', 'coba', 1, 1, '', 'coba', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SD-1-210325-28add851fb.png', '2021-03-25 07:37:37', '2021-03-28 04:10:22'),
-('SMA1BAHASAcfce8', 'coba sma bahasa', 'bahasa', 3, 1, 'BAHASA', 'sma bahasa', 'coba', 'coba4@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-2cd064b347.jpg', '2021-03-28 09:13:17', '2021-03-28 05:00:20'),
-('SMA1IPA5416c', 'coba sma ipa', 'ipa', 3, 1, 'IPA', 'sma ipa', 'coba', 'coba2@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-c55f67b4e7.png', '2021-03-28 09:09:47', '2021-03-28 05:00:33'),
-('SMA1IPSa6b91', 'coba sma ips', 'ips', 3, 1, 'IPS', 'sma ips', 'coba', 'coba3@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMA-1-210328-df0004801c.jpg', '2021-03-28 09:12:07', NULL),
-('SMP1f82d2', 'coba smp', 'smp', 2, 1, '', 'smp coba', 'coba', 'coba6@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'SISWA-SMP-1-210328-cd7f3976b3.jpg', '2021-03-28 09:05:34', NULL),
-('SMP38ed27', 'Bagas', 'bagas', 2, 3, '', 'SMPN 3 Pacet', 'Pacet, Mojokerto', 'bagas@gmail.com', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', '', '2021-02-14 05:10:13', NULL);
+('SMP7e5679', 'coba smp', 'smp', 2, 7, '', 'coba', 'coba', 'smp@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '', '2021-04-26 12:10:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -300,7 +295,8 @@ ALTER TABLE `tb_kelas`
 --
 ALTER TABLE `tb_mapel`
   ADD PRIMARY KEY (`id_mapel`),
-  ADD KEY `kelas_id` (`kelas_id`);
+  ADD KEY `kelas_id` (`kelas_id`),
+  ADD KEY `paket_id` (`paket_id`);
 
 --
 -- Indeks untuk tabel `tb_paket`
@@ -340,7 +336,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_bab`
 --
 ALTER TABLE `tb_bab`
-  MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_jenjang`
@@ -358,13 +354,13 @@ ALTER TABLE `tb_kelas`
 -- AUTO_INCREMENT untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_paket`
 --
 ALTER TABLE `tb_paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_soal`
@@ -392,7 +388,8 @@ ALTER TABLE `tb_kelas`
 -- Ketidakleluasaan untuk tabel `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  ADD CONSTRAINT `tb_mapel_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_mapel_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_mapel_ibfk_2` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_paket`

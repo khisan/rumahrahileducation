@@ -74,7 +74,7 @@
         </div>
         <form id="submitForm">
           <input type="hidden" name="id_mapel" id="id">
-          <input type="hidden" name="kelas_id" id="kelas" value="<?= $kelas->id_kelas; ?>">
+          <input type="hidden" name="paket_id" id="paket" value="<?= $paket->id_paket; ?>">
           <div class="form-group fill">
             <label for="mapel">Mapel</label>
             <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="Ketik Nama Mapel">
@@ -123,6 +123,7 @@
         success: function(response) {
           $('#id').val(response.id_mapel);
           $('#kelas').val(response.kelas_id);
+          $('#paket').val(response.paket_id);
           $('#mapel').val(response.nama_mapel);
         }
       });
@@ -162,9 +163,6 @@
 
     $('.mapel-isi').on('click', '.delete', function() {
       let id = $(this).attr('value');
-
-
-
       swal({
           title: "Apakah anda yakin?",
           text: "data akan terkapus secara permanent!",
