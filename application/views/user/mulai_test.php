@@ -59,6 +59,7 @@
 <script>
   var widget = $(".step");
   var total_widget = widget.length;
+  console.log(total_widget)
 
   $(document).ready(function() {
     buka(1);
@@ -77,7 +78,7 @@
     $(".ragu_ragu").attr("rel", id_widget);
     cek_terakhir(id_widget);
 
-    $("#soalke").html(id_widget);
+    $("#soalke").html("Soal " + id_widget);
 
     $(".step").hide();
     $("#widget_" + id_widget).show();
@@ -144,5 +145,18 @@
     }
 
     simpan();
+  }
+
+  function cek_terakhir(id_soal) {
+    var jml_soal = $("#jml_soal").val();
+    jml_soal = parseInt(jml_soal) - 1;
+
+    if (jml_soal === id_soal) {
+      $(".next").hide();
+      $(".selesai, .back").show();
+    } else {
+      $(".next").show();
+      $(".selesai, .back").hide();
+    }
   }
 </script>
