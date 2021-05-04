@@ -20,7 +20,7 @@
       </div>
       <?php if ($jenjang->id_jenjang != 4) { ?>
         <div class="card-body">
-          <form>
+          <form action="<?php echo site_url('test/mulaiTest'); ?>" method="post">
             <div class="row">
               <div class="col-sm-2">
                 <div class="form-group">
@@ -41,7 +41,7 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Mapel</label>
-                  <select class="form-control babChange" id="mapel">
+                  <select class="form-control babChange" id="mapel" name="mapel">
                     <option selected value="">Pilih Mapel</option>
                     <?php foreach ($mapel as $data) {
                       echo "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
@@ -73,7 +73,7 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Paket</label>
-                  <select class="form-control" id="paket">
+                  <select class="form-control" id="paket" name="paket">
                     <option selected value="">Pilih Paket</option>
                     <?php foreach ($paket as $data) {
                       echo "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
@@ -83,7 +83,7 @@
               </div>
               <div class="col-sm-2 mx-auto">
                 <div class="form-group">
-                  <button type="button" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
+                  <button type="submit" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
         </div>
       <?php } else { ?>
         <div class="card-body">
-          <form>
+          <form action="<?php echo site_url('test/mulaiTest'); ?>" method="post">
             <div class="row">
               <div class="col-sm-2">
                 <div class="form-group">
@@ -112,7 +112,7 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Paket</label>
-                  <select class="form-control" id="paket_lainnya">
+                  <select class="form-control" id="paket_lainnya" name="paket">
                     <option selected value="">Pilih Paket</option>
                     <?php foreach ($paket as $data) {
                       echo "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
@@ -123,7 +123,7 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Mapel</label>
-                  <select class="form-control babChange" id="mapel_lainnya">
+                  <select class="form-control babChange" id="mapel_lainnya" name="mapel">
                     <option selected value="">Pilih Mapel</option>
                     <?php foreach ($mapel as $data) {
                       echo "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
@@ -133,7 +133,7 @@
               </div>
               <div class="col-sm-2 mx-auto">
                 <div class="form-group">
-                  <button type="button" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
+                  <button type="submit" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
                 </div>
               </div>
             </div>

@@ -137,12 +137,10 @@ class Mapel extends CI_Controller
     } else {
       if ($this->input->post('paket_id' == false)) {
         $data = $this->mapel->createLainnya($post);
-      } else {
-
+      } else
         $data = $this->mapel->create($post);
-      }
-      echo json_encode($data);
     }
+    echo json_encode($data);
   }
 
   public function update()

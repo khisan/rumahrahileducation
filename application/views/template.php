@@ -23,7 +23,9 @@
   <link rel="stylesheet" href="<?= base_url('assets/able/'); ?>assets/css/plugins/prism-coy.css">
   <!-- vendor css -->
   <link rel="stylesheet" href="<?= base_url('assets/able/'); ?>assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+
+  <!-- funky radio css -->
+  <link rel="stylesheet" href="<?= base_url('assets/able/'); ?>assets/css/funkyRadio.css">
   <script>
     window.MathJax = {
       MathML: {
