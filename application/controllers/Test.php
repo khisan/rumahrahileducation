@@ -55,7 +55,8 @@ class Test extends CI_Controller
       $no++;
     }
     $data = array(
-      'html' => $html
+      'html' => $html,
+      'no'   => $no
     );
     $this->template->load('template', 'user/mulai_test', $data);
   }

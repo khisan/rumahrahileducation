@@ -43,16 +43,17 @@
   <div class="col-xl-9 col-md-12">
     <div class="card support-bar overflow-hidden">
       <div class="card-header">
-        <h3 class="text-primary" id="soalke"><strong>Soal </strong></h3>
+        <h3 class="text-primary"><strong>Soal <span id="soalke"></span></strong></h3>
       </div>
       <div class="card-body">
         <?= $html; ?>
       </div>
     </div>
     <div class="card-footer bg-gray text-white text-center">
-      <a class="action back btn btn-info" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
-      <a class="action next btn btn-info" rel="1" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
+      <a class="action back btn btn-success" rel="0" onclick="return back();"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+      <a class="action next btn btn-primary" rel="1" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
       <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
+      <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
     </div>
   </div>
 </div>
@@ -78,12 +79,12 @@
     $(".ragu_ragu").attr("rel", id_widget);
     cek_terakhir(id_widget);
 
-    $("#soalke").html("Soal " + id_widget);
+    $("#soalke").html(id_widget);
 
     $(".step").hide();
     $("#widget_" + id_widget).show();
 
-    simpan();
+    // simpan();
   }
 
   function next() {
@@ -96,7 +97,6 @@
     $(".next").attr("rel", berikutnya + 1);
     $(".back").attr("rel", berikutnya - 1);
     $(".ragu_ragu").attr("rel", berikutnya);
-    cek_status_ragu(berikutnya);
     cek_terakhir(berikutnya);
 
     var sudah_akhir = berikutnya == total_widget ? 1 : 0;
@@ -112,7 +112,7 @@
       $(".back").show();
     }
 
-    simpan();
+    // simpan();
   }
 
   function back() {
@@ -125,7 +125,6 @@
     $(".back").attr("rel", back - 1);
     $(".next").attr("rel", back + 1);
     $(".ragu_ragu").attr("rel", back);
-    cek_status_ragu(back);
     cek_terakhir(back);
 
     $(".step").hide();
@@ -144,7 +143,7 @@
       $(".back").show();
     }
 
-    simpan();
+    // simpan();
   }
 
   function cek_terakhir(id_soal) {
@@ -159,4 +158,20 @@
       $(".selesai, .back").hide();
     }
   }
+
+  // function simpan() {
+  //   // simpan_sementara();
+  //   var form = $("#ujian");
+
+  //   $.ajax({
+  //     type: "POST",
+  //     url: base_url + "ujian/simpan_satu",
+  //     data: form.serialize(),
+  //     dataType: "json",
+  //     success: function(data) {
+  //       // $('.ajax-loading').show();
+  //       console.log(data);
+  //     },
+  //   });
+  // }
 </script>
