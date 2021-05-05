@@ -25,17 +25,9 @@
         </center>
       </div>
       <div class="card-body p-0">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <tr>
-              <th>Nama</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Jenjang</th>
-              <td></td>
-            </tr>
-          </table>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
         </div>
       </div>
     </div>

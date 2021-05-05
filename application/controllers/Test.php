@@ -47,9 +47,9 @@ class Test extends CI_Controller
       for ($i = 0; $i < 5; $i++) {
         $opsi = "option_" . $arr_opsi[$i];
         $pilihan_opsi = !empty($test->$opsi) ? $test->$opsi : "";
-        $html .= '<div class="funkyradio-success"><input type="radio" name="radio" id="radio1"/>';
-        $html .= '<label for=""><div class="huruf_opsi">' . $arr_opsi[$i] . '</div>';
-        $html .= '<p>' . $pilihan_opsi . '</p></label></div>';
+        $html .= '<div class="funkyradio-success"><input type="radio" id="opsi_' . $arr_opsi[$i] . '" name="opsi_' . $arr_opsi[$i] . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
+        // $html .= '';
+        // $html .= '';
       }
       $html .= '</div></div>';
       $no++;
