@@ -47,9 +47,7 @@ class Test extends CI_Controller
       for ($i = 0; $i < 5; $i++) {
         $opsi = "option_" . $arr_opsi[$i];
         $pilihan_opsi = !empty($test->$opsi) ? $test->$opsi : "";
-        $html .= '<div class="funkyradio-success"><input type="radio" id="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '" name="opsi_' . $no . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
-        // $html .= '';
-        // $html .= '';
+        $html .= '<div class="funkyradio-success" onclick="return simpan_sementara();"><input type="radio" id="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '" name="opsi_' . $no . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
       }
       $html .= '</div></div>';
       $no++;
