@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Apr 2021 pada 04.10
+-- Waktu pembuatan: 08 Bulan Mei 2021 pada 10.43
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 7.4.16
 
@@ -91,6 +91,23 @@ INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, 
 ('guru-210324-940c0', 'cobacuy Guru', 'cobacuy', 'cobacuy', 'cobacuy@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', 'guru-210324-bfe63281cc.png', '2021-03-24 15:52:46', '2021-03-26 01:17:41'),
 ('guru-210408-c9298', 'Guru', 'coba_guru', 'coba', 'coba@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '', '2021-04-08 13:27:54', NULL),
 ('SD00001', 'Bambang', 'bambang', 'Klojen, Malang', 'bambang@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', NULL, '2021-02-08 23:12:34', '2021-03-20 13:34:36');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_h_test`
+--
+
+CREATE TABLE `tb_h_test` (
+  `id_h_test` int(11) NOT NULL,
+  `soal_id` int(11) NOT NULL,
+  `siswa_profile_id` int(11) NOT NULL,
+  `list_soal` longtext NOT NULL,
+  `list_jawaban` longtext NOT NULL,
+  `jml_benar` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `tgl_test` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -255,6 +272,14 @@ CREATE TABLE `tb_soal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `tb_soal`
+--
+
+INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal_text`, `soal_gambar`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
+(41, 47, 40, '<p>Apa itu yang dimaksudkan?</p>\n', NULL, '<p>coba A</p>\n', '<p>coba B</p>\n', '<p>coba c</p>\n', '<p>coba d</p>\n', '<p>coba e</p>\n', 'A', '2021-04-29 09:33:55', '0000-00-00 00:00:00'),
+(42, 47, 40, '<p>Apa yang dimaksud itukah?</p>\n\n<p>&nbsp;</p>\n', 'soal-210429-58e94e5f5c.png', '<p>coba A</p>\n', '<p>coba B</p>\n', '<p>coba C</p>\n', '<p>coba D</p>\n', '<p>coba E</p>\n', 'C', '2021-04-29 09:34:35', '0000-00-00 00:00:00');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -276,6 +301,12 @@ ALTER TABLE `tb_bab`
 --
 ALTER TABLE `tb_guru_profile`
   ADD PRIMARY KEY (`id_guru_profile`);
+
+--
+-- Indeks untuk tabel `tb_h_test`
+--
+ALTER TABLE `tb_h_test`
+  ADD PRIMARY KEY (`id_h_test`);
 
 --
 -- Indeks untuk tabel `tb_jenjang`
@@ -339,6 +370,12 @@ ALTER TABLE `tb_bab`
   MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_h_test`
+--
+ALTER TABLE `tb_h_test`
+  MODIFY `id_h_test` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_jenjang`
 --
 ALTER TABLE `tb_jenjang`
@@ -366,7 +403,7 @@ ALTER TABLE `tb_paket`
 -- AUTO_INCREMENT untuk tabel `tb_soal`
 --
 ALTER TABLE `tb_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

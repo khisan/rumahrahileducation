@@ -44,6 +44,9 @@
         <a class="action next btn btn-primary" rel="1" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
         <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
         <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
+        <input type="hidden" name="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
+        <input type="hidden" name="tgl_test" value="<?php date_default_timezone_set("Asia/Jakarta");
+                                                    echo date("Y-m-d h:i:sa") ?>">
       </div>
     </form>
   </div>
@@ -51,6 +54,7 @@
 <script>
   var widget = $(".step");
   var total_widget = widget.length;
+  var base_url = "<?php echo base_url(); ?>";
 
   $(document).ready(function() {
     simpan_sementara();
@@ -84,8 +88,6 @@
 
     $(".step").hide();
     $("#widget_" + id_widget).show();
-
-    // simpan();
   }
 
   function next() {
@@ -113,7 +115,7 @@
       $(".back").show();
     }
 
-    // simpan();
+    simpan();
   }
 
   function back() {
@@ -190,7 +192,7 @@
           hasil_jawaban +=
             '<a id="btn_soal_' +
             i +
-            '" class="btn btn-info btn-sm" style="margin: 10px 5px 10px 0px" onclick="return buka(' +
+            '" class="btn btn-success btn-sm" style="margin: 10px 5px 10px 0px" onclick="return buka(' +
             i +
             ');">' +
             i +
@@ -211,19 +213,49 @@
       $("#tampil_jawaban").html('<p></p>' + hasil_jawaban);
     }
   }
-  // function simpan() {
-  //   // simpan_sementara();
-  //   var form = $("#ujian");
 
-  //   $.ajax({
-  //     type: "POST",
-  //     url: base_url + "ujian/simpan_satu",
-  //     data: form.serialize(),
-  //     dataType: "json",
-  //     success: function(data) {
-  //       // $('.ajax-loading').show();
-  //       console.log(data);
-  //     },
-  //   });
-  // }
+  function simpan() {
+    simpan_sementara();
+    var form = $("#test");
+
+    $.ajax({
+      type: "POST",
+      url: base_url + "test/simpan_satu",
+      data: form.serialize(),
+      dataType: "json",
+      success: function(data) {
+        // $('.ajax-loading').show();
+        console.log(data);
+      },
+    });
+  }
+
+  function selesai() {
+    simpan();
+    ajaxcsrf();
+    $.ajax({
+      type: "POST",
+      url: base_url + "test/simpan_akhir",
+      data: {
+        id: id_tes
+      },
+      beforeSend: function() {
+        simpan();
+        // $('.ajax-loading').show();
+      },
+      success: function(r) {
+        console.log(r);
+        if (r.status) {
+          window.location.href = base_url + "ujian";
+        }
+      },
+    });
+  }
+
+  function simpan_akhir() {
+    simpan();
+    if (confirm("Yakin ingin mengakhiri tes?")) {
+      selesai();
+    }
+  }
 </script>
