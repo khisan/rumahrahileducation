@@ -15,24 +15,12 @@ class Test_model extends CI_Model
     return $this->db->affected_rows();
   }
 
-  // public function update($post)
-  // {
-  //   $params['username'] = htmlspecialchars($post['username']);
-  //   $params['name'] = htmlspecialchars($post['name']);
-  //   if (!empty($post['password1'])) {
-  //     $params['password'] = sha1($post['password1']);
-  //   }
-  //   $params['updated'] = date('Y-m-d H:i:s');
+  public function update($post)
+  {
+    $params['list_jawaban'] = $post['list_jawaban'];
 
-  //   $this->db->where('id_admin', $post['id_admin']);
-  //   $this->db->update('tb_admin', $params);
-  //   return $this->db->affected_rows();
-  // }
-
-  // public function delete($id)
-  // {
-  //   $this->db->where('id_admin', $id);
-  //   $this->db->delete('tb_admin');
-  //   return $this->db->affected_rows();
-  // }
+    $this->db->where('id_h_test', $post['id_test']);
+    $this->db->update('tb_h_test', $params);
+    return $this->db->affected_rows();
+  }
 }

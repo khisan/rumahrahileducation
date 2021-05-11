@@ -45,8 +45,7 @@
         <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
         <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
         <input type="hidden" name="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
-        <input type="hidden" name="tgl_test" value="<?php date_default_timezone_set("Asia/Jakarta");
-                                                    echo date("Y-m-d h:i:sa") ?>">
+        <input type="hidden" name="id_test" value="<?= $id_test; ?>">
       </div>
     </form>
   </div>

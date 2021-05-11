@@ -15,6 +15,7 @@ class Test extends CI_Controller
     $this->load->model('Paket_model', 'paket');
     $this->load->model('Soal_model', 'soal');
     $this->load->model('Test_model', 'test');
+    $this->load->model('Hasil_Test_model', 'h_test');
   }
 
   public function index($jenjang, $kelas)
@@ -31,7 +32,32 @@ class Test extends CI_Controller
 
   public function mulaiTest()
   {
+    $post   = $this->input->post();
+    $mapel_id = $this->input->post('mapel');
+    $paket_id = $this->input->post('paket');
     $siswa_profile_id = $this->session->userdata('userid');
+    $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
+    $list_id_soal = "";
+    $list_jw_soal   = "";
+    foreach ($soal as $soal) {
+      $list_id_soal .= $soal->id_soal . ",";
+      $list_jw_soal .= $soal->id_soal . ":" . ",";
+    }
+    $list_id_soal = substr($list_id_soal, 0, -1);
+    date_default_timezone_set("Asia/Jakarta");
+    $tgl_test =  date("Y-m-d h:i:sa");
+
+    $post['list_soal'] = $list_id_soal;
+    $post['list_jawaban'] = $list_jw_soal;
+    $post['siswa_profile_id'] = $siswa_profile_id;
+    $post['tgl_test'] = $tgl_test;
+    $post['jml_benar'] = 0;
+    $post['nilai'] = 0;
+    $data = $this->test->create($post);
+    json_encode($data);
+
+    $siswa_profile_id = $this->session->userdata('userid');
+    $siswa_id   = $this->h_test->get($siswa_profile_id)->row();
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $data = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
@@ -57,6 +83,7 @@ class Test extends CI_Controller
       'html' => $html,
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
+      'id_test' => $siswa_id->id_h_test
     );
     $this->template->load('template', 'user/mulai_test', $data);
   }
@@ -66,6 +93,9 @@ class Test extends CI_Controller
     $post   = $this->input->post();
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
+    $id_test = $this->input->post('id_test');
+    var_dump($id_test);
+    $jml_soal = $this->input->post('jml_soal');
     $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";
     foreach ($soal as $soal) {
@@ -73,7 +103,7 @@ class Test extends CI_Controller
     }
     $list_id_soal = substr($list_id_soal, 0, -1);
     $list_jawaban   = "";
-    for ($i = 1; $i < $post['jml_soal']; $i++) {
+    for ($i = 1; $i < $jml_soal; $i++) {
       $jawab   = "opsi_" . $i;
       $id_soal   = "id_soal_" . $i;
       $jawaban   = empty($post[$jawab]) ? "" : $post[$jawab];
@@ -81,12 +111,9 @@ class Test extends CI_Controller
     }
     $list_jawaban  = substr($list_jawaban, 0, -1);
 
-
-    $post['list_soal'] = $list_id_soal;
     $post['list_jawaban'] = $list_jawaban;
-    $post['jml_benar'] = 0;
-    $post['nilai'] = 0;
-    $data = $this->test->create($post);
+    $post['id_test'] = $id_test;
+    $data = $this->test->update($post);
     echo json_encode($data);
   }
 
