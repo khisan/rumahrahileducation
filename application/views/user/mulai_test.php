@@ -45,7 +45,7 @@
         <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
         <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
         <input type="hidden" name="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
-        <input type="hidden" name="id_test" value="<?= $id_test; ?>">
+        <input type="number" name="id_test" value="<?= $id_test; ?>">
       </div>
     </form>
   </div>
@@ -54,6 +54,7 @@
   var widget = $(".step");
   var total_widget = widget.length;
   var base_url = "<?php echo base_url(); ?>";
+  var id_test = "<?= $id_test; ?>";
 
   $(document).ready(function() {
     simpan_sementara();
@@ -223,7 +224,6 @@
       data: form.serialize(),
       dataType: "json",
       success: function(data) {
-        // $('.ajax-loading').show();
         console.log(data);
       },
     });
@@ -231,21 +231,19 @@
 
   function selesai() {
     simpan();
-    ajaxcsrf();
     $.ajax({
       type: "POST",
       url: base_url + "test/simpan_akhir",
       data: {
-        id: id_tes
+        id_test: id_test
       },
       beforeSend: function() {
         simpan();
-        // $('.ajax-loading').show();
       },
       success: function(r) {
         console.log(r);
         if (r.status) {
-          window.location.href = base_url + "ujian";
+          window.location.href = base_url + "test";
         }
       },
     });

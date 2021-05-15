@@ -121,11 +121,11 @@
             <label for="jawaban">Jawaban Benar</label>
             <select class="form-control" name="jawaban_benar" id="jawaban_benar">
               <option value="default">--Pilih Salah Satu--</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+              <option value="d">D</option>
+              <option value="e">E</option>
             </select>
           </div>
         </form>

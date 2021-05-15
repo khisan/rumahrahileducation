@@ -15,7 +15,6 @@ class Test extends CI_Controller
     $this->load->model('Paket_model', 'paket');
     $this->load->model('Soal_model', 'soal');
     $this->load->model('Test_model', 'test');
-    $this->load->model('Hasil_Test_model', 'h_test');
   }
 
   public function index($jenjang, $kelas)
@@ -57,7 +56,8 @@ class Test extends CI_Controller
     json_encode($data);
 
     $siswa_profile_id = $this->session->userdata('userid');
-    $siswa_id   = $this->h_test->get($siswa_profile_id)->row();
+    $siswa_id   = $this->test->get($siswa_profile_id)->row();
+    // var_dump($siswa_id->id_h_test);
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $data = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
@@ -94,7 +94,6 @@ class Test extends CI_Controller
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $id_test = $this->input->post('id_test');
-    var_dump($id_test);
     $jml_soal = $this->input->post('jml_soal');
     $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";
@@ -111,54 +110,48 @@ class Test extends CI_Controller
     }
     $list_jawaban  = substr($list_jawaban, 0, -1);
 
-    $post['list_jawaban'] = $list_jawaban;
-    $post['id_test'] = $id_test;
-    $data = $this->test->update($post);
+    // $post['list_jawaban'] = $list_jawaban;
+    // $post['id_test'] = $id_test;
+    $simpan = [
+      'list_jawaban' => $list_jawaban
+    ];
+    $data = $this->test->update('tb_h_test', $simpan, 'id_h_test', $id_test);
     echo json_encode($data);
   }
 
   public function simpan_akhir()
   {
-    // Decrypt Id
-    $id_tes = $this->input->post('id', true);
-    $id_tes = $this->encryption->decrypt($id_tes);
+    $id_test = $this->input->post('id_test');
 
-    // Get Jawaban
-    $list_jawaban = $this->ujian->getJawaban($id_tes);
+    $list_jawaban = $this->test->getJawaban($id_test)->row()->list_jawaban;
 
     // Pecah Jawaban
     $pc_jawaban = explode(",", $list_jawaban);
 
     $jumlah_benar   = 0;
     $jumlah_salah   = 0;
-    $jumlah_ragu    = 0;
-    $nilai_bobot   = 0;
-    $total_bobot  = 0;
     $jumlah_soal  = sizeof($pc_jawaban);
 
     foreach ($pc_jawaban as $jwb) {
       $pc_dt     = explode(":", $jwb);
       $id_soal   = $pc_dt[0];
       $jawaban   = $pc_dt[1];
-      $ragu     = $pc_dt[2];
 
-      $cek_jwb   = $this->soal->getSoalById($id_soal);
-      $total_bobot = $total_bobot + $cek_jwb->bobot;
+      $cek_jwb   = $this->soal->get($id_soal, $paket_id = null, $mapel_id = null)->row();
 
-      $jawaban == $cek_jwb->jawaban ? $jumlah_benar++ : $jumlah_salah++;
+      $jawaban == $cek_jwb->jawaban_benar ? $jumlah_benar++ : $jumlah_salah++;
     }
 
     $nilai = ($jumlah_benar / $jumlah_soal)  * 100;
-    $nilai_bobot = ($total_bobot / $jumlah_soal)  * 100;
 
-    $d_update = [
+    var_dump($jumlah_benar);
+
+    $update = [
       'jml_benar'    => $jumlah_benar,
       'nilai'      => number_format(floor($nilai), 0),
-      'nilai_bobot'  => number_format(floor($nilai_bobot), 0),
-      'status'    => 'N'
     ];
 
-    $this->master->update('h_ujian', $d_update, 'id', $id_tes);
-    $this->output_json(['status' => TRUE, 'data' => $d_update, 'id' => $id_tes]);
+    $data = $this->test->update('tb_h_test', $update, 'id_h_test', $id_test);
+    echo json_encode($data);
   }
 }
