@@ -35,6 +35,7 @@ class Test extends CI_Controller
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $siswa_profile_id = $this->session->userdata('userid');
+    $waktu = $this->session->userdata('waktu');
     $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";
     $list_jw_soal   = "";
@@ -57,9 +58,9 @@ class Test extends CI_Controller
 
     $siswa_profile_id = $this->session->userdata('userid');
     $siswa_id   = $this->test->get($siswa_profile_id)->row();
-    // var_dump($siswa_id->id_h_test);
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
+    $waktu = $this->input->post('waktu');
     $data = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
     $html = '';
     $no = 1;
@@ -83,7 +84,8 @@ class Test extends CI_Controller
       'html' => $html,
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
-      'id_test' => $siswa_id->id_h_test
+      'id_test' => $siswa_id->id_h_test,
+      'waktu' => $waktu
     );
     $this->template->load('template', 'user/mulai_test', $data);
   }
@@ -109,9 +111,6 @@ class Test extends CI_Controller
       $list_jawaban  .= "" . $post[$id_soal] . ":" . $jawaban . ",";
     }
     $list_jawaban  = substr($list_jawaban, 0, -1);
-
-    // $post['list_jawaban'] = $list_jawaban;
-    // $post['id_test'] = $id_test;
     $simpan = [
       'list_jawaban' => $list_jawaban
     ];

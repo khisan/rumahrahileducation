@@ -125,6 +125,19 @@ class Paket extends CI_Controller
     echo json_encode($callback);
   }
 
+  public function getWaktu()
+  {
+    $id = $this->input->post('id_paket');
+
+    $data = $this->paket->get($id, null, null)->row();
+
+    $data = "<input type='hidden' name='waktu' value='" . $data->waktu . "'/>";
+
+    $callback = array('waktu' => $data);
+
+    echo json_encode($callback);
+  }
+
   public function add()
   {
     $post = $this->input->post(null, TRUE);

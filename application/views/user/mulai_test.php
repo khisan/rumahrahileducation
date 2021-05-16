@@ -21,11 +21,11 @@
     <div class="card table-card">
       <div class="card-header">
         <center>
-          <h5>Navigasi Soal</h5>
+          <h5>Navigasi Soal
+          </h5>
         </center>
       </div>
       <div class="card-body p-0 text-center" id="tampil_jawaban">
-        <!-- <a id="btn_soal" class="btn btn-light btn-soal btn-sm" style="margin: 10px 0px 10px 0px">1. -</a> -->
       </div>
     </div>
   </div>
@@ -34,6 +34,10 @@
       <div class="card support-bar overflow-hidden">
         <div class="card-header">
           <h3 class="text-primary"><strong>Soal <span id="soalke"></span></strong></h3>
+          <div class="card-header-right" style="margin-top: 15px;">
+            <h5 class="text-warning"><strong>Sisa Waktu : <span id="sisawaktu" class="text-danger"><?= $waktu ?></span></strong></h5>
+            </button>
+          </div>
         </div>
         <div class="card-body">
           <?= $html; ?>
@@ -45,7 +49,7 @@
         <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
         <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
         <input type="hidden" name="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
-        <input type="number" name="id_test" value="<?= $id_test; ?>">
+        <input type="hidden" name="id_test" value="<?= $id_test; ?>">
       </div>
     </form>
   </div>

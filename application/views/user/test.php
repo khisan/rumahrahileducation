@@ -80,6 +80,8 @@
                     } ?>
                   </select>
                 </div>
+                <div class="form-group" id="waktu">
+                </div>
               </div>
               <div class="col-sm-2 mx-auto">
                 <div class="form-group">
@@ -206,6 +208,28 @@
           },
           success: function(response) {
             $("#paket").html(response.list_paket).show();
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+          }
+        });
+      });
+
+      $("#paket").change(function() {
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url("paket/getWaktu"); ?>",
+          data: {
+            id_paket: $("#paket").val()
+          },
+          dataType: "json",
+          beforeSend: function(e) {
+            if (e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response) {
+            $("#waktu").html(response.waktu).show();
           },
           error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
