@@ -34,8 +34,10 @@
       <div class="card support-bar overflow-hidden">
         <div class="card-header">
           <h3 class="text-primary"><strong>Soal <span id="soalke"></span></strong></h3>
+          <input type="hidden" id="waktu" value="<?= $waktu ?>">
           <div class="card-header-right" style="margin-top: 15px;">
-            <h5 class="text-warning"><strong>Sisa Waktu : <span id="sisawaktu" class="text-danger"><?= $waktu ?></span></strong></h5>
+            <h5 class="text-warning">Sisa Waktu : <span id="sisawaktu" class="text-danger">
+              </span></h5>
             </button>
           </div>
         </div>
@@ -60,7 +62,32 @@
   var base_url = "<?php echo base_url(); ?>";
   var id_test = "<?= $id_test; ?>";
 
+  function mulaiTimer(waktu, display) {
+    var timer = waktu,
+      hours, minutes, seconds;
+    setInterval(function() {
+      minutes = parseInt(timer / 60);
+      seconds = parseInt(timer % 60);
+
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      $('#sisawaktu').html(minutes + " menit " + seconds + " detik ");
+      console.log(display);
+
+      if (--timer < 0) {
+        timer = waktu;
+      }
+    }, 1000);
+  }
+
   $(document).ready(function() {
+    var waktuAwal = $("#waktu").val();
+    var waktu = waktuAwal * 60;
+    display = $('#sisawaktu');
+    mulaiTimer(waktu, display);
+
     simpan_sementara();
     buka(1);
     widget = $(".step");
@@ -251,6 +278,11 @@
         }
       },
     });
+  }
+
+  function waktuHabis() {
+    selesai();
+    alert("Waktu ujian telah habis!");
   }
 
   function simpan_akhir() {

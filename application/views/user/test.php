@@ -80,14 +80,13 @@
                     } ?>
                   </select>
                 </div>
-                <div class="form-group" id="waktu">
-                </div>
               </div>
               <div class="col-sm-2 mx-auto">
                 <div class="form-group">
                   <button type="submit" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
                   <input type="hidden" name="tgl_test" value="<?php date_default_timezone_set("Asia/Jakarta");
                                                               echo date("Y-m-d h:i:sa") ?>">
+                  <div id="waktu"></div>
                 </div>
               </div>
             </div>
