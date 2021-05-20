@@ -87,7 +87,7 @@ class Test extends CI_Controller
       'id_test' => $siswa_id->id_h_test,
       'waktu' => $waktu
     );
-    $this->template->load('template', 'user/mulai_test', $data);
+    $this->load->view('user/mulai_test', $data);
   }
 
   public function simpan_satu()
