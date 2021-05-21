@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -210,6 +209,9 @@
           timer = waktu;
         }
       }, 1000);
+      setTimeout(function() {
+        waktuHabis();
+      });
     }
 
     $(document).ready(function() {

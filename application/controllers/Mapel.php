@@ -64,7 +64,7 @@ class Mapel extends CI_Controller
     $paket = $this->paket->get($id_paket)->row();
     $kelas = $this->kelas->get($id)->row();
     $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
-    $list = $this->mapel->getDataTables($id);
+    $list = $this->mapel->getDataTables($id, $id_paket);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $mapel) {
@@ -128,14 +128,14 @@ class Mapel extends CI_Controller
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
     $this->form_validation->set_rules('nama_mapel', 'Mapel', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
+
 
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      if ($this->input->post('paket_id' == false)) {
+      if ($this->input->post('kelas_id') === NULL) {
         $data = $this->mapel->createLainnya($post);
       } else
         $data = $this->mapel->create($post);
