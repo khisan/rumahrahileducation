@@ -141,7 +141,6 @@ class Paket extends CI_Controller
   public function add()
   {
     $post = $this->input->post(null, TRUE);
-    $this->form_validation->set_rules('bab_id', 'Bab ID');
     $this->form_validation->set_rules('mapel_id', 'Mapel ID');
     $this->form_validation->set_rules('nama_paket', 'Paket', 'required');
     $this->form_validation->set_rules('waktu', 'Waktu', 'required');
@@ -162,7 +161,6 @@ class Paket extends CI_Controller
   public function update()
   {
     $post = $this->input->post(null, TRUE);
-    $this->form_validation->set_rules('bab_id', 'Bab ID');
     $this->form_validation->set_rules('mapel_id', 'Mapel ID');
     $this->form_validation->set_rules('nama_paket', 'Paket', 'required');
     $this->form_validation->set_rules('waktu', 'Waktu', 'required');

@@ -36,10 +36,8 @@ class Paket_model extends CI_Model
   {
     $this->db->select("*");
     $this->db->from("tb_paket");
-    $this->db->join("tb_bab", "tb_bab.id_bab = tb_paket.bab_id", "left");
-    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_paket.kelas_id", "left ");
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_paket.kelas_id");
     $this->db->where('tb_paket.kelas_id', $id);
-    $this->db->or_where('tb_paket.bab_id', $id);
 
     $i = 0;
 

@@ -25,17 +25,18 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenjang</label>
-                  <select class="form-control" id="jenjang">
-                    <option selected value="<?= $id_jenjang ?>"><?= $jenjang->nama_jenjang ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label><?= $jenjang->nama_jenjang ?></label>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Kelas</label>
-                  <select class="form-control" id="kelas">
-                    <option selected value="<?= $id_kelas ?>"><?= $kelas->nama_kelas ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label><?= $kelas->nama_kelas; ?></label>
+                    <input type="hidden" id="kelas" value="<?= $kelas->id_kelas; ?>" />
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
@@ -99,23 +100,24 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenjang</label>
-                  <select class="form-control" id="jenjang">
-                    <option selected value="<?= $id_jenjang ?>"><?= $jenjang->nama_jenjang ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label><?= $jenjang->nama_jenjang ?></label>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Kelas</label>
-                  <select class="form-control" id="kelas">
-                    <option selected value="<?= $id_kelas ?>"><?= $kelas->nama_kelas ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label><?= $kelas->nama_kelas; ?></label>
+                    <input type="hidden" id="kelas_lainnya" value="<?= $kelas->id_kelas; ?>" />
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Paket</label>
-                  <select class="form-control" id="paket_lainnya" name="paket">
+                  <select class="form-control" id="paket_lainnya" name="paket_lainnya">
                     <option selected value="">Pilih Paket</option>
                     <?php foreach ($paket as $data) {
                       echo "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
@@ -126,7 +128,7 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Mapel</label>
-                  <select class="form-control babChange" id="mapel_lainnya" name="mapel">
+                  <select class="form-control" id="mapel_lainnya" name="mapel_lainnya">
                     <option selected value="">Pilih Mapel</option>
                     <?php foreach ($mapel as $data) {
                       echo "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
@@ -238,9 +240,9 @@
     <?php } else { ?>
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("mapel/listMapel"); ?>",
+        url: "<?php echo base_url("mapel/listMapelLainnya"); ?>",
         data: {
-          id_kelas: $("#kelas").val(),
+          id_kelas: $("#kelas_lainnya").val(),
         },
         dataType: "json",
         beforeSend: function(e) {
@@ -249,30 +251,32 @@
           }
         },
         success: function(response) {
-          $("#mapel_lainnya").html(response.list_mapel).show();
+          $("#mapel_lainnya").html(response.list_mapel_lainnya).show();
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
         }
       });
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url("paket/listPaketLainnya"); ?>",
-        data: {
-          id_kelas: $("#kelas").val()
-        },
-        dataType: "json",
-        beforeSend: function(e) {
-          if (e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
+      $("#mapel_lainnya").change(function() {
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url("paket/listPaketLainnya"); ?>",
+          data: {
+            id_mapel: $("#mapel_lainnya").val()
+          },
+          dataType: "json",
+          beforeSend: function(e) {
+            if (e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response) {
+            $("#paket_lainnya").html(response.list_paket_lainnya);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
           }
-        },
-        success: function(response) {
-          $("#paket_lainnya").html(response.list_paket_lainnya);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
+        });
       });
     <?php } ?>
   });
