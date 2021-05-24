@@ -25,7 +25,7 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1>List Paket</h1>
+            <h1>List Paket <?= $kelas->nama_kelas; ?></h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
           </div>
@@ -73,7 +73,6 @@
         </div>
         <form id="submitForm">
           <input type="hidden" name="id_paket" id="id">
-          <input type="hidden" name="bab_id" id="bab" value="">
           <input type="hidden" name="kelas_id" id="kelas" value="<?= $kelas->id_kelas; ?>">
           <div class="form-group fill">
             <label for="paket">Paket</label>

@@ -122,14 +122,15 @@ class Mapel_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_kelas = null)
+  public function get($id = null, $id_kelas = null, $id_paket = null)
   {
     $this->db->from('tb_mapel');
     if ($id != null) {
       $this->db->where('id_mapel', $id);
-    }
-    if ($id_kelas != null) {
+    } elseif ($id_kelas != null) {
       $this->db->where('kelas_id', $id_kelas);
+    } elseif ($id_paket != null) {
+      $this->db->where('paket_id', $id_paket);
     }
     $query = $this->db->get();
     return $query;
