@@ -25,17 +25,17 @@
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Jenjang</label>
-                  <select class="form-control" id="jenjang">
-                    <option selected value="<?= $id_jenjang ?>"><?= $jenjang->nama_jenjang ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label for="exampleFormControlSelect1"><?= $jenjang->nama_jenjang ?></label>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Kelas</label>
-                  <select class="form-control" id="kelas">
-                    <option selected value="<?= $id_kelas ?>"><?= $kelas->nama_kelas ?></option>
-                  </select>
+                  <div class="form-control">
+                    <label for="exampleFormControlSelect1"><?= $kelas->nama_kelas ?></label>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2">
