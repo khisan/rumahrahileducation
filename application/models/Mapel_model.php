@@ -32,12 +32,14 @@ class Mapel_model extends CI_Model
 
   // ------------------------------------------------------------------------
 
-  public function _getDataTablesQuery($id = null)
+  public function _getDataTablesQuery($id = null, $id_paket = null)
   {
-    $this->db->select("tb_mapel.*, tb_kelas.nama_kelas");
+    $this->db->select("*");
     $this->db->from("tb_mapel");
-    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id");
-    $this->db->where('kelas_id', $id);
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id", "left");
+    $this->db->join("tb_paket", "tb_paket.id_paket = tb_mapel.paket_id", "left ");
+    $this->db->where('tb_mapel.kelas_id', $id);
+    $this->db->or_where('tb_mapel.paket_id', $id_paket);
 
     $i = 0;
 
@@ -87,7 +89,7 @@ class Mapel_model extends CI_Model
   }
 
   // ------------------------------------------------------------------------
-  public function get($id = null, $id_kelas = null)
+  public function get($id = null, $id_kelas = null, $id_paket = null)
   {
     $this->db->from('tb_mapel');
     if ($id != null) {
@@ -95,6 +97,9 @@ class Mapel_model extends CI_Model
     }
     if ($id_kelas != null) {
       $this->db->where('kelas_id', $id_kelas);
+    }
+    if ($id_paket != null) {
+      $this->db->where('paket_id', $id_paket);
     }
     $query = $this->db->get();
     return $query;
