@@ -91,7 +91,6 @@ class Paket_model extends CI_Model
   // ------------------------------------------------------------------------
   public function get($id = null, $id_bab = null, $id_kelas = null)
   {
-    $this->db->from('tb_paket');
     if ($id != null) {
       $this->db->where('id_paket', $id);
     } elseif ($id_bab != null) {
@@ -99,7 +98,7 @@ class Paket_model extends CI_Model
     } else {
       $this->db->where('kelas_id', $id_kelas);
     }
-    $query = $this->db->get();
+    $query = $this->db->get('tb_paket');
     return $query;
   }
 

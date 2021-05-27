@@ -95,7 +95,7 @@ class Paket extends CI_Controller
   {
     $id_bab = $this->input->post('id_bab');
 
-    $pakets = $this->paket->get(null, $id_bab)->result();
+    $pakets = $this->paket->get(null, $id_bab, null)->result();
 
     $lists = "<option value=''>Pilih Paket</option>";
 
@@ -112,11 +112,11 @@ class Paket extends CI_Controller
   {
     $id_kelas = $this->input->post('id_kelas');
 
-    $pakets = $this->paket->get(null, null, $id_kelas)->result();
+    $pakets_lainnya = $this->paket->get(null, null, $id_kelas)->result();
 
     $lists = "<option value=''>Pilih Paket</option>";
 
-    foreach ($pakets as $data) {
+    foreach ($pakets_lainnya as $data) {
       $lists .= "<option value='" . $data->id_paket . "'>" . $data->nama_paket . "</option>";
     }
 

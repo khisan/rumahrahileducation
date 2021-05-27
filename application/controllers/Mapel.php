@@ -111,7 +111,7 @@ class Mapel extends CI_Controller
   {
     $id_kelas = $this->input->post('id_kelas');
 
-    $mapels = $this->mapel->get(null, $id_kelas)->result();
+    $mapels = $this->mapel->get(null, $id_kelas, null)->result();
 
     $lists = "<option value=''>Pilih Mapel</option>";
 
@@ -120,6 +120,23 @@ class Mapel extends CI_Controller
     }
 
     $callback = array('list_mapel' => $lists);
+
+    echo json_encode($callback);
+  }
+
+  public function listMapelLainnya()
+  {
+    $id_paket = $this->input->post('id_paket');
+
+    $mapels_lainnya = $this->mapel->get(null, null, $id_paket)->result();
+
+    $lists = "<option value=''>Pilih Mapel</option>";
+
+    foreach ($mapels_lainnya as $data) {
+      $lists .= "<option value='" . $data->id_mapel . "'>" . $data->nama_mapel . "</option>";
+    }
+
+    $callback = array('list_mapel_lainnya' => $lists);
 
     echo json_encode($callback);
   }
