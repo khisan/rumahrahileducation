@@ -89,17 +89,14 @@ class Soal_model extends CI_Model
 
   public function get($id = null, $paket_id = null, $mapel_id = null)
   {
-    $this->db->from('tb_soal');
-    if ($id != null && $paket_id == null && $mapel_id == null) {
+    if ($id != null) {
       $this->db->where('id_soal', $id);
-    }
-    if ($paket_id != null && $mapel_id == null && $id == null) {
+    } elseif ($paket_id != null) {
       $this->db->where('paket_id', $paket_id);
-    }
-    if ($mapel_id != null && $paket_id == null && $id == null) {
+    } else {
       $this->db->where('mapel_id', $mapel_id);
     }
-    $query = $this->db->get();
+    $query = $this->db->get('tb_soal');
     return $query;
   }
 

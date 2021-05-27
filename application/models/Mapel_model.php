@@ -65,9 +65,9 @@ class Mapel_model extends CI_Model
     }
   }
 
-  public function getDataTables($id = null)
+  public function getDataTables($id = null, $id_paket = null)
   {
-    $this->_getDataTablesQuery($id);
+    $this->_getDataTablesQuery($id, $id_paket);
 
     if (@$_POST['length'] != -1)
       $this->db->limit(@$_POST['length'], @$_POST['start']);

@@ -142,8 +142,6 @@
   </div>
 </div>
 <script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
-
-
 <script>
   $(document).ready(function() {
     const site_url = "<?= site_url('soal/'); ?>";

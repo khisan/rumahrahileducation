@@ -123,6 +123,9 @@
               <div class="col-sm-2 mx-auto">
                 <div class="form-group">
                   <button type="submit" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
+                  <input type="hidden" name="tgl_test" value="<?php date_default_timezone_set("Asia/Jakarta");
+                                                              echo date("Y-m-d h:i:sa") ?>">
+                  <div id="waktu"></div>
                 </div>
               </div>
             </div>
@@ -257,6 +260,28 @@
           },
           success: function(response) {
             $("#mapel_lainnya").html(response.list_mapel_lainnya).show();
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+          }
+        });
+      });
+
+      $("#paket_lainnya").change(function() {
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url("paket/getWaktu"); ?>",
+          data: {
+            id_paket: $("#paket_lainnya").val()
+          },
+          dataType: "json",
+          beforeSend: function(e) {
+            if (e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response) {
+            $("#waktu").html(response.waktu).show();
           },
           error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
