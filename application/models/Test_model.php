@@ -15,15 +15,6 @@ class Test_model extends CI_Model
     return $this->db->affected_rows();
   }
 
-  // public function update($post)
-  // {
-  //   $params['list_jawaban'] = $post['list_jawaban'];
-
-  //   $this->db->where('id_h_test', $post['id_test']);
-  //   $this->db->update('tb_h_test', $params);
-  //   return $this->db->affected_rows();
-  // }
-
   public function update($table, $data, $pk, $id = null, $batch = false)
   {
     if ($batch === false) {

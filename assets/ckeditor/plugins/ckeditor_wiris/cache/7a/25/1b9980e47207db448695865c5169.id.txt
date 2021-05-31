@@ -1,0 +1,1 @@
+{"result":{"text":"√ a b space  space left parenthesis a plus b right parenthesis divided by 2 space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space space"},"status":"ok"}

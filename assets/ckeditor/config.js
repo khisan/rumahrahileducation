@@ -4,14 +4,62 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
+	// Define changes to default configuration here.
+	// For complete reference see:
+	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
+
+	// Integrasi kcfinder
+	config.filebrowserBrowseUrl =
+		"http://localhost/assets/kcfinder/browse.php?type=files";
+	config.filebrowserImageBrowseUrl =
+		"http://localhost/assets/kcfinder/browse.php?type=images";
+	config.filebrowserFlashBrowseUrl =
+		"http://localhost/assets/kcfinder/browse.php?type=flash";
+	config.filebrowserUploadUrl =
+		"http://localhost/assets/kcfinder/upload.php?type=files";
+	config.filebrowserImageUploadUrl =
+		"http://localhost/assets/kcfinder/upload.php?type=images";
+	config.filebrowserFlashUploadUrl =
+		"http://localhost/assets/kcfinder/upload.php?type=flash";
+
+	// The toolbar groups arrangement, optimized for two toolbar rows.
+	config.toolbarGroups = [
+		{ name: "clipboard", groups: ["clipboard", "undo"] },
+		{ name: "editing", groups: ["find", "selection", "spellchecker"] },
+		{ name: "links" },
+		{ name: "insert" },
+		{ name: "forms" },
+		{ name: "tools" },
+		{ name: "document", groups: ["mode", "document", "doctools"] },
+		{ name: "others" },
+		"/",
+		{ name: "basicstyles", groups: ["basicstyles", "cleanup"] },
+		{
+			name: "paragraph",
+			groups: ["list", "indent", "blocks", "align", "bidi"],
+		},
+		{ name: "styles" },
+		{ name: "colors" },
+		{ name: "about" },
+	];
+
+	// Remove some buttons provided by the standard plugins, which are
+	// not needed in the Standard(s) toolbar.
+	config.removeButtons = "Underline,Subscript,Superscript";
+
+	// Set the most common block elements.
+	config.format_tags = "p;h1;h2;h3;pre";
+
+	// Simplify the dialog windows.
+	config.removeDialogTabs = "image:advanced;link:advanced";
+
+	// add insert image function
+	config.filebrowserUploadMethod = "form";
+
+	// tambah plugin
+	// config.extraPlugins = "pasteUploadImage";
+	// config.extraPlugins = "uploadimage";
 	config.extraPlugins +=
 		(config.extraPlugins.length == 0 ? "" : ",") + "ckeditor_wiris";
 	config.allowedContent = true;
-	// config.extraPlugins = "mathjax";
-	// config.extraPlugins = "eqneditor";
-	// config.mathJaxClass = 'my-math';
-	// config.mathJaxLib = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML';
-	// config.mathJaxLib = 'http:\/\/localhost\/rumahrahileducation\/assets\/ckeditor\/plugin\/\/libs\/MathJax.js';
 };

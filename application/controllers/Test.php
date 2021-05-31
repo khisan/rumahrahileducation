@@ -85,6 +85,7 @@ class Test extends CI_Controller
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
       'id_test' => $siswa_id->id_h_test,
+      'soal_id' => $soal->id_soal,
       'waktu' => $waktu
     );
     $this->load->view('user/mulai_test', $data);
@@ -121,6 +122,9 @@ class Test extends CI_Controller
   public function simpan_akhir()
   {
     $id_test = $this->input->post('id_test');
+    $soal_id = $this->input->post('soal_id');
+    $siswa_profile_id = $this->input->post('siswa_profile_id');
+    var_dump($id_test, $soal_id, $siswa_profile_id);
 
     $list_jawaban = $this->test->getJawaban($id_test)->row()->list_jawaban;
 
@@ -143,9 +147,9 @@ class Test extends CI_Controller
 
     $nilai = ($jumlah_benar / $jumlah_soal)  * 100;
 
-    var_dump($jumlah_benar);
-
     $update = [
+      'soal_id' => $soal_id,
+      'siswa_profile_id' => $siswa_profile_id,
       'jml_benar'    => $jumlah_benar,
       'nilai'      => number_format(floor($nilai), 0),
     ];

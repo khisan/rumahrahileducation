@@ -1,0 +1,1 @@
+{"result":{"text":"C. space space √ a b space less or equal than space a b divided by 2"},"status":"ok"}

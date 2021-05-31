@@ -143,6 +143,10 @@
 </div>
 <script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
 <script>
+  CKEDITOR.replace('soal_text', {
+    height: 300,
+    filebrowserImageBrowseUrl: '<?php echo base_url('assets/kcfinder/browse.php'); ?>'
+  });
   $(document).ready(function() {
     const site_url = "<?= site_url('soal/'); ?>";
     $('.soal-isi').on('click', '#soalAdd', function() {

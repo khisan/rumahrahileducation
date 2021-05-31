@@ -128,6 +128,7 @@
           $('#id').val(response.id_paket);
           $('#kelas').val(response.kelas_id);
           $('#paket').val(response.nama_paket);
+          $('#waktu').val(response.waktu);
         }
       });
 

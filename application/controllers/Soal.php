@@ -101,25 +101,28 @@ class Soal extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
+      $data = $this->soal->create($post);
+      echo json_encode($data);
+    }
+  }
 
-      $config['upload_path']    = './uploads/soal/';
-      $config['allowed_types']  = 'gif|png|jpg|jpeg';
-      $config['max_size']       = 2048;
-      $config['file_name']       = "soal-" . date('ymd') . '-' . substr(md5(rand()), 0, 10);
+  public function insertImageSoal()
+  {
+    $config['upload_path']    = './uploads/soal/';
+    $config['allowed_types']  = 'gif|png|jpg|jpeg';
+    $config['max_size']       = 2048;
+    $config['file_name']       = "soal-" . date('ymd') . '-' . substr(md5(rand()), 0, 10);
 
-      $this->load->library('upload', $config);
+    $this->load->library('upload', $config);
 
-      if (@$_FILES['soal_gambar']['name'] != null) {
-        if ($this->upload->do_upload('soal_gambar')) {
-          $post['soal_gambar'] = $this->upload->data('file_name');
-          $data = $this->soal->create($post);
-          echo json_encode($data);
-        }
-      } else {
-        $post['soal_gambar'] = null;
+    if (@$_FILES['soal_gambar']['name'] != null) {
+      if ($this->upload->do_upload('soal_gambar')) {
+        $post['soal_gambar'] = $this->upload->data('file_name');
         $data = $this->soal->create($post);
         echo json_encode($data);
       }
+    } else {
+      $post['soal_gambar'] = null;
     }
   }
 
