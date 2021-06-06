@@ -10,17 +10,17 @@ CKEDITOR.editorConfig = function (config) {
 
 	// Integrasi kcfinder
 	config.filebrowserBrowseUrl =
-		"http://localhost/assets/kcfinder/browse.php?type=files";
+		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html";
 	config.filebrowserImageBrowseUrl =
-		"http://localhost/assets/kcfinder/browse.php?type=images";
+		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html?type=Images";
 	config.filebrowserFlashBrowseUrl =
-		"http://localhost/assets/kcfinder/browse.php?type=flash";
+		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html?type=Flash";
 	config.filebrowserUploadUrl =
-		"http://localhost/assets/kcfinder/upload.php?type=files";
+		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files";
 	config.filebrowserImageUploadUrl =
-		"http://localhost/assets/kcfinder/upload.php?type=images";
+		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images";
 	config.filebrowserFlashUploadUrl =
-		"http://localhost/assets/kcfinder/upload.php?type=flash";
+		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash";
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
@@ -52,9 +52,6 @@ CKEDITOR.editorConfig = function (config) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = "image:advanced;link:advanced";
-
-	// add insert image function
-	config.filebrowserUploadMethod = "form";
 
 	// tambah plugin
 	// config.extraPlugins = "pasteUploadImage";

@@ -47,8 +47,7 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Soal Gambar</th>
-                <th>Soal Text</th>
+                <th>Soal</th>
                 <th>Option A</th>
                 <th>Option B</th>
                 <th>Option C</th>
@@ -83,19 +82,12 @@
 
         </div>
         <form id="submitForm" method="post" enctype="multipart/form-data">
-          <div class="form-group mb-3">
-            <label for="inputGroupFile01">Soal Gambar</label>
-            <div class="custom-file">
-              <input type="file" id="soal_gambar" class="custom-file-input" name="soal_gambar" accept="image/*">
-              <label class="custom-file-label" for="inputGroupFile01">Pilih Gambar</label>
-            </div>
-          </div>
           <div class="form-group fill">
             <input type="hidden" name="id_soal" id="id">
             <input type="hidden" name="paket_id" id="paket_id" value="<?= $paket->id_paket; ?>">
             <input type="hidden" name="mapel_id" id="mapel_id" value="<?= $mapel->id_mapel; ?>">
-            <label for="soal_text">Soal Text</label>
-            <textarea name="soal_text" id="soal_text" class="form-control texteditor ckeditor"></textarea>
+            <label for="soal">Soal</label>
+            <textarea name="soal" id="soal" class="form-control texteditor ckeditor"></textarea>
           </div>
           <div class="form-group fill">
             <label for="option_a">Option A</label>
@@ -143,10 +135,6 @@
 </div>
 <script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
 <script>
-  CKEDITOR.replace('soal_text', {
-    height: 300,
-    filebrowserImageBrowseUrl: '<?php echo base_url('assets/kcfinder/browse.php'); ?>'
-  });
   $(document).ready(function() {
     const site_url = "<?= site_url('soal/'); ?>";
     $('.soal-isi').on('click', '#soalAdd', function() {
@@ -180,8 +168,7 @@
         dataType: "JSON",
         success: function(response) {
           $('#id').val(response.id_soal);
-          $('.image').html(`<img src="<?= site_url('uploads/soal/'); ?>${response.soal_gambar}" class="rounded mx-auto d-block" alt="" width="200px">`);
-          CKEDITOR.instances.soal_text.setData(response.soal_text);
+          CKEDITOR.instances.soal.setData(response.soal);
           CKEDITOR.instances.option_a.setData(response.option_a);
           CKEDITOR.instances.option_b.setData(response.option_b);
           CKEDITOR.instances.option_c.setData(response.option_c);
@@ -202,21 +189,19 @@
       let id = $('#id').val();
       let paket_id = $('#paket_id').val();
       let mapel_id = $('#mapel_id').val();
-      let soal_text = CKEDITOR.instances.soal_text.getData('');
+      let soal = CKEDITOR.instances.soal.getData('');
       let option_a = CKEDITOR.instances.option_a.getData('');
       let option_b = CKEDITOR.instances.option_b.getData('');
       let option_c = CKEDITOR.instances.option_c.getData('');
       let option_d = CKEDITOR.instances.option_d.getData('');
       let option_e = CKEDITOR.instances.option_e.getData('');
       let jawaban_benar = $('#jawaban_benar').val();
-      let soal_gambar = $('[name="soal_gambar"]')[0].files[0];
       let formData = new FormData();
 
       formData.append('id_soal', id);
       formData.append('paket_id', paket_id);
       formData.append('mapel_id', mapel_id);
-      formData.append('soal_text', soal_text);
-      formData.append('soal_gambar', soal_gambar);
+      formData.append('soal', soal);
       formData.append('option_a', option_a);
       formData.append('option_b', option_b);
       formData.append('option_c', option_c);
@@ -244,8 +229,7 @@
             reloadTable();
             $("#myModal").modal('hide');
             $('#submitForm')[0].reset();
-            $('#soal_gambar').next('label').html('Pilih Gambar');
-            CKEDITOR.instances.soal_text.setData('');
+            CKEDITOR.instances.soal.setData('');
             CKEDITOR.instances.option_a.setData('');
             CKEDITOR.instances.option_b.setData('');
             CKEDITOR.instances.option_c.setData('');
@@ -329,8 +313,7 @@
     $('.tutup').on('click', function() {
       $("#submitForm")[0].reset();
       $("#myModal").modal('hide');
-      $('#soal_gambar').next('label').html('Pilih Gambar');
-      CKEDITOR.instances.soal_text.setData('');
+      CKEDITOR.instances.soal.setData('');
       CKEDITOR.instances.option_a.setData('');
       CKEDITOR.instances.option_b.setData('');
       CKEDITOR.instances.option_c.setData('');
@@ -342,8 +325,7 @@
     $('#myModal').on('click', '.reset', function() {
       $('#submitForm')[0].reset();
       $('.validation').html(null);
-      $('#soal_gambar').next('label').html('Pilih Gambar');
-      CKEDITOR.instances.soal_text.setData('');
+      CKEDITOR.instances.soal.setData('');
       CKEDITOR.instances.option_a.setData('');
       CKEDITOR.instances.option_b.setData('');
       CKEDITOR.instances.option_c.setData('');

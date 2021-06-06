@@ -19,8 +19,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Soal_model extends CI_Model
 {
 
-  var $column_order = [null, 'soal_text'];
-  var $column_search = ['soal_text'];
+  var $column_order = [null, 'soal'];
+  var $column_search = ['soal'];
 
   var $order = ['id_soal' => 'asc'];
   // ------------------------------------------------------------------------
@@ -104,8 +104,7 @@ class Soal_model extends CI_Model
   {
     $params['paket_id'] = $post['paket_id'];
     $params['mapel_id'] = $post['mapel_id'];
-    $params['soal_text'] = $post['soal_text'];
-    $params['soal_gambar'] = $post['soal_gambar'];
+    $params['soal'] = $post['soal'];
     $params['option_a'] = $post['option_a'];
     $params['option_b'] = $post['option_b'];
     $params['option_c'] = $post['option_c'];
@@ -121,10 +120,7 @@ class Soal_model extends CI_Model
   {
     $params['paket_id'] = $post['paket_id'];
     $params['mapel_id'] = $post['mapel_id'];
-    $params['soal_text'] = $post['soal_text'];
-    if ($post['soal_gambar'] != null) {
-      $params['soal_gambar'] = $post['soal_gambar'];
-    }
+    $params['soal'] = $post['soal'];
     $params['option_a'] = $post['option_a'];
     $params['option_b'] = $post['option_b'];
     $params['option_c'] = $post['option_c'];

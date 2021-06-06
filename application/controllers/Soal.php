@@ -47,8 +47,7 @@ class Soal extends CI_Controller
       $no++;
       $row = [];
       $row[] = $no . '.';
-      $row[] = $soal->soal_gambar != null ? '<img src="' . site_url('uploads/soal/') . $soal->soal_gambar . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
-      $row[] = html_entity_decode($soal->soal_text);
+      $row[] = html_entity_decode($soal->soal);
       $row[] = html_entity_decode($soal->option_a);
       $row[] = html_entity_decode($soal->option_b);
       $row[] = html_entity_decode($soal->option_c);
@@ -87,7 +86,7 @@ class Soal extends CI_Controller
   {
     $post = $this->input->post();
 
-    $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
+    $this->form_validation->set_rules('soal', 'soal', 'required');
     $this->form_validation->set_rules('paket_id', 'paket_id', 'required');
     $this->form_validation->set_rules('mapel_id', 'mapel_id', 'required');
     $this->form_validation->set_rules('option_a', 'option_a', 'required');
@@ -106,32 +105,11 @@ class Soal extends CI_Controller
     }
   }
 
-  public function insertImageSoal()
-  {
-    $config['upload_path']    = './uploads/soal/';
-    $config['allowed_types']  = 'gif|png|jpg|jpeg';
-    $config['max_size']       = 2048;
-    $config['file_name']       = "soal-" . date('ymd') . '-' . substr(md5(rand()), 0, 10);
-
-    $this->load->library('upload', $config);
-
-    if (@$_FILES['soal_gambar']['name'] != null) {
-      if ($this->upload->do_upload('soal_gambar')) {
-        $post['soal_gambar'] = $this->upload->data('file_name');
-        $data = $this->soal->create($post);
-        echo json_encode($data);
-      }
-    } else {
-      $post['soal_gambar'] = null;
-    }
-  }
-
-
   public function update()
   {
     $post = $this->input->post(null, TRUE);
 
-    $this->form_validation->set_rules('soal_text', 'soal_text', 'required');
+    $this->form_validation->set_rules('soal', 'soal', 'required');
     $this->form_validation->set_rules('option_a', 'option_a', 'required');
     $this->form_validation->set_rules('option_b', 'option_b', 'required');
     $this->form_validation->set_rules('option_c', 'option_c', 'required');
@@ -142,50 +120,15 @@ class Soal extends CI_Controller
 
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
-    } else {
-
-      $config['upload_path']    = './uploads/soal/';
-      $config['allowed_types']  = 'gif|png|jpg|jpeg';
-      $config['max_size']       = 204800;
-      $config['file_name']       = "soal-" . date('ymd') . '-' . substr(md5(rand()), 0, 10);
-
-      $this->load->library('upload', $config);
-
-      if (@$_FILES['soal_gambar']['name'] != null) {
-        if ($this->upload->do_upload('soal_gambar')) {
-          $soal = $this->soal->get($post['id_soal'])->row();
-
-          if ($soal->soal_gambar != null) {
-            $target_file = './uploads/soal/' . $soal->soal_gambar;
-            unlink($target_file);
-          }
-
-
-          $post['soal_gambar'] = $this->upload->data('file_name');
-          $data = $this->soal->update($post);
-          echo json_encode($data);
-        } else {
-          $error = $this->upload->display_errors();
-          echo json_encode($error);
-        }
-      } else {
-        $post['soal_gambar'] = null;
-        $data = $this->soal->update($post);
-        echo json_encode($data);
-      }
+    }else {
+      $data = $this->soal->update($post);
+      echo json_encode($data);
     }
   }
 
   public function delete()
   {
     $post = $this->input->post(null, TRUE);
-    $soal = $this->soal->get($post['id'])->row();
-
-    if ($soal->soal_gambar != null) {
-      $target_file = './uploads/soal/' . $soal->soal_gambar;
-      unlink($target_file);
-    }
-
     $data = $this->soal->delete($post['id']);
     echo json_encode($data);
   }
