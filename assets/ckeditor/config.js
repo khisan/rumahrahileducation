@@ -8,7 +8,9 @@ CKEDITOR.editorConfig = function (config) {
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
 
-	// Integrasi kcfinder
+	config.mathJaxLib =
+		"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML";
+	// Integrasi ckfinder
 	config.filebrowserBrowseUrl =
 		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html";
 	config.filebrowserImageBrowseUrl =
@@ -56,7 +58,6 @@ CKEDITOR.editorConfig = function (config) {
 	// tambah plugin
 	// config.extraPlugins = "pasteUploadImage";
 	// config.extraPlugins = "uploadimage";
-	config.extraPlugins +=
-		(config.extraPlugins.length == 0 ? "" : ",") + "ckeditor_wiris";
+	config.extraPlugins = "ckeditor_wiris";
 	config.allowedContent = true;
 };

@@ -46,6 +46,7 @@ class Kelas_model extends CI_Model
     } else if ($jenjang === "Lainnya") {
       $this->db->where("id_kelas > 18");
     }
+    $this->db->group_by('nama_kelas')->order_by('id_kelas');
     $query = $this->db->get('tb_kelas');
     return $query;
   }
