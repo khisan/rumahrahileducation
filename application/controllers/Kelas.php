@@ -54,6 +54,23 @@ class Kelas extends CI_Controller
     $data['kelas'] = $this->kelas->get(null, "Lainnya")->result();
     $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
+
+  public function listKelas()
+  {
+    $id_jenjang = $this->input->post('id_jenjang');
+
+    $kelas = $this->kelas->get(null, $id_jenjang)->result();
+
+    $lists = "<option value=''>Pilih Kelas</option>";
+
+    foreach ($kelas as $data) {
+      $lists .= "<option value='" . $data->id_kelas . "'>" . $data->nama_kelas . "</option>";
+    }
+
+    $callback = array('list_kelas' => $lists);
+
+    echo json_encode($callback);
+  }
 }
 
 

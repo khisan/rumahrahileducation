@@ -81,7 +81,7 @@
             <div class="form-group col-md-4 fill">
               <label for="jenjang">Jenjang</label>
               <select class="form-control" name="jenjang_id" id="jenjang">
-                <option>--Pilih Salah Satu--</option>
+                <option selected value="">Pilih Jenjang</option>
                 <?php foreach ($jenjang->result() as $jen) { ?>
                   <option value="<?= $jen->id_jenjang; ?>"><?= $jen->nama_jenjang; ?></option>
                 <?php } ?>
@@ -90,16 +90,13 @@
             <div class="form-group col-md-4 fill">
               <label for="kelas">Kelas</label>
               <select class="form-control" name="kelas_id" id="kelas">
-                <option>--Pilih Salah Satu--</option>
-                <?php foreach ($kelas->result() as $kel) { ?>
-                  <option value="<?= $kel->id_kelas; ?>"><?= $kel->nama_kelas; ?></option>
-                <?php } ?>
+                <option selected value="">Pilih Kelas</option>
               </select>
             </div>
             <div class="form-group col-md-4 fill">
               <label for="jurusan">Jurusan</label>
               <select class="form-control" name="jurusan" id="jurusan">
-                <option value="">--Pilih Salah Satu--</option>
+                <option selected value="">Pilih Jurusan</option>
                 <option value="IPA">IPA</option>
                 <option value="IPS">IPS</option>
                 <option value="BAHASA">BAHASA</option>
@@ -152,9 +149,104 @@
     </div>
   </div>
 </div>
-
 <script>
   $(document).ready(function() {
+    // Chained Dropdown
+    $('#jenjang').change(function() {
+      if ($('#jenjang').val() == 1 || $('#jenjang').val() == 2) {
+        document.getElementById("jurusan").disabled = true;
+      } else {
+        document.getElementById("jurusan").disabled = false;
+      }
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listKelas"); ?>",
+        data: {
+          id_jenjang: $("#jenjang").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#kelas").html(response.list_kelas);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
+
+    // $('.babChange').change(function() {
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "<?php echo base_url("bab/listBab"); ?>",
+    //     data: {
+    //       id_mapel: $("#mapel").val(),
+    //       semester: $("#semester").val()
+    //     },
+    //     dataType: "json",
+    //     beforeSend: function(e) {
+    //       if (e && e.overrideMimeType) {
+    //         e.overrideMimeType("application/json;charset=UTF-8");
+    //       }
+    //     },
+    //     success: function(response) {
+    //       $("#bab").html(response.list_bab).show();
+    //     },
+    //     error: function(xhr, ajaxOptions, thrownError) {
+    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //     }
+    //   });
+    // });
+
+    // $("#bab").change(function() {
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "<?php echo base_url("paket/listPaket"); ?>",
+    //     data: {
+    //       id_bab: $("#bab").val()
+    //     },
+    //     dataType: "json",
+    //     beforeSend: function(e) {
+    //       if (e && e.overrideMimeType) {
+    //         e.overrideMimeType("application/json;charset=UTF-8");
+    //       }
+    //     },
+    //     success: function(response) {
+    //       $("#paket").html(response.list_paket).show();
+    //     },
+    //     error: function(xhr, ajaxOptions, thrownError) {
+    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //     }
+    //   });
+    // });
+
+    // $("#paket").change(function() {
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "<?php echo base_url("paket/getWaktu"); ?>",
+    //     data: {
+    //       id_paket: $("#paket").val()
+    //     },
+    //     dataType: "json",
+    //     beforeSend: function(e) {
+    //       if (e && e.overrideMimeType) {
+    //         e.overrideMimeType("application/json;charset=UTF-8");
+    //       }
+    //     },
+    //     success: function(response) {
+    //       $("#waktu").html(response.waktu).show();
+    //     },
+    //     error: function(xhr, ajaxOptions, thrownError) {
+    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //     }
+    //   });
+    // });
+
+    // Ajax
     const site_url = "<?= site_url('siswa/'); ?>";
     $('.siswa-isi').on('click', '#siswaAdd', function() {
       $('.judul').html('Tambah siswa');
