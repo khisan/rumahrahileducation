@@ -97,9 +97,6 @@
               <label for="jurusan">Jurusan</label>
               <select class="form-control" name="jurusan" id="jurusan">
                 <option selected value="">Pilih Jurusan</option>
-                <option value="IPA">IPA</option>
-                <option value="IPS">IPS</option>
-                <option value="BAHASA">BAHASA</option>
               </select>
             </div>
           </div>
@@ -153,7 +150,7 @@
   $(document).ready(function() {
     // Chained Dropdown
     $('#jenjang').change(function() {
-      if ($('#jenjang').val() == 1 || $('#jenjang').val() == 2) {
+      if ($('#jenjang').val() == 1 || $('#jenjang').val() == 2 || $('#jenjang').val() == 4) {
         document.getElementById("jurusan").disabled = true;
       } else {
         document.getElementById("jurusan").disabled = false;
@@ -162,7 +159,7 @@
         type: "POST",
         url: "<?php echo base_url("kelas/listKelas"); ?>",
         data: {
-          id_jenjang: $("#jenjang").val()
+          jenjang_id: $("#jenjang").val()
         },
         dataType: "json",
         beforeSend: function(e) {
@@ -179,72 +176,52 @@
       });
     });
 
-    // $('.babChange').change(function() {
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "<?php echo base_url("bab/listBab"); ?>",
-    //     data: {
-    //       id_mapel: $("#mapel").val(),
-    //       semester: $("#semester").val()
-    //     },
-    //     dataType: "json",
-    //     beforeSend: function(e) {
-    //       if (e && e.overrideMimeType) {
-    //         e.overrideMimeType("application/json;charset=UTF-8");
-    //       }
-    //     },
-    //     success: function(response) {
-    //       $("#bab").html(response.list_bab).show();
-    //     },
-    //     error: function(xhr, ajaxOptions, thrownError) {
-    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-    //     }
-    //   });
-    // });
+    $('#jenjang').change(function() {
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listJurusanSma"); ?>",
+        data: {
+          jenjang_id: $("#jenjang").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#jurusan").html(response.list_jurusan_sma).show();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
 
-    // $("#bab").change(function() {
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "<?php echo base_url("paket/listPaket"); ?>",
-    //     data: {
-    //       id_bab: $("#bab").val()
-    //     },
-    //     dataType: "json",
-    //     beforeSend: function(e) {
-    //       if (e && e.overrideMimeType) {
-    //         e.overrideMimeType("application/json;charset=UTF-8");
-    //       }
-    //     },
-    //     success: function(response) {
-    //       $("#paket").html(response.list_paket).show();
-    //     },
-    //     error: function(xhr, ajaxOptions, thrownError) {
-    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-    //     }
-    //   });
-    // });
-
-    // $("#paket").change(function() {
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "<?php echo base_url("paket/getWaktu"); ?>",
-    //     data: {
-    //       id_paket: $("#paket").val()
-    //     },
-    //     dataType: "json",
-    //     beforeSend: function(e) {
-    //       if (e && e.overrideMimeType) {
-    //         e.overrideMimeType("application/json;charset=UTF-8");
-    //       }
-    //     },
-    //     success: function(response) {
-    //       $("#waktu").html(response.waktu).show();
-    //     },
-    //     error: function(xhr, ajaxOptions, thrownError) {
-    //       alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-    //     }
-    //   });
-    // });
+    $('#kelas').change(function() {
+      if ($('#kelas').val() == 19 || $('#kelas').val() == 20 || $('#kelas').val() == 21 || $('#kelas').val() == 22 || $('#kelas').val() == 23) {
+        document.getElementById("jurusan").disabled = false;
+      }
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listJurusanLainnya"); ?>",
+        data: {
+          kelas_id: $("#kelas").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#jurusan").html(response.list_jurusan_lainnya).show();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
 
     // Ajax
     const site_url = "<?= site_url('siswa/'); ?>";

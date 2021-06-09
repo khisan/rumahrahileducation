@@ -57,9 +57,9 @@ class Kelas extends CI_Controller
 
   public function listKelas()
   {
-    $id_jenjang = $this->input->post('id_jenjang');
+    $jenjang_id = $this->input->post('jenjang_id');
 
-    $kelas = $this->kelas->get(null, $id_jenjang)->result();
+    $kelas = $this->kelas->get(null, $jenjang_id)->result();
 
     $lists = "<option value=''>Pilih Kelas</option>";
 
@@ -68,6 +68,40 @@ class Kelas extends CI_Controller
     }
 
     $callback = array('list_kelas' => $lists);
+
+    echo json_encode($callback);
+  }
+
+  public function listJurusanSma()
+  {
+    $jenjang_id = $this->input->post('jenjang_id');
+
+    $jurusan = $this->kelas->getJurusanSma($jenjang_id)->result();
+
+    $lists = "<option value=''>Pilih Jurusan</option>";
+
+    foreach ($jurusan as $data) {
+      $lists .= "<option value='" . $data->id_kelas . "'>" . $data->jurusan . "</option>";
+    }
+
+    $callback = array('list_jurusan_sma' => $lists);
+
+    echo json_encode($callback);
+  }
+
+  public function listJurusanLainnya()
+  {
+    $kelas_id = $this->input->post('kelas_id');
+
+    $jurusan = $this->kelas->getJurusanLainnya($kelas_id)->result();
+
+    $lists = "<option value=''>Pilih Jurusan</option>";
+
+    foreach ($jurusan as $data) {
+      $lists .= "<option value='" . $data->id_kelas . "'>" . $data->jurusan . "</option>";
+    }
+
+    $callback = array('list_jurusan_lainnya' => $lists);
 
     echo json_encode($callback);
   }
