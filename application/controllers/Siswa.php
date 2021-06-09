@@ -84,6 +84,7 @@ class Siswa extends CI_Controller
     $this->form_validation->set_rules('kelas_id', 'Kelas', 'required');
     $this->form_validation->set_rules('sekolah', 'Sekolah', 'required');
     $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+    $this->form_validation->set_rules('image', 'Foto', 'required');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tb_siswa_profile.email]', [
       'valid_email' => '%s bukan email',
       'is_unique' => '%s sudah di pakai'
@@ -111,10 +112,10 @@ class Siswa extends CI_Controller
         $post['id_siswa_profile'] = "$jj$post[kelas_id]$post[jurusan]" . substr(md5(rand()), 0, 5);
       } elseif ($post['kelas_id'] == 19) {
         $jj = 'SBM';
-        $post['id_siswa_profile'] = "$jj$post[kelas_id]" . substr(md5(rand()), 0, 5);
+        $post['id_siswa_profile'] = "$jj$post[kelas_id]$post[jurusan]" . substr(md5(rand()), 0, 5);
       } elseif ($post['kelas_id'] == 20) {
         $jj = 'Kedinasan';
-        $post['id_siswa_profile'] = "$jj$post[kelas_id]" . substr(md5(rand()), 0, 5);
+        $post['id_siswa_profile'] = "$jj$post[kelas_id]$post[jurusan]" . substr(md5(rand()), 0, 5);
       }
       $config['upload_path']    = './uploads/siswa/';
       $config['allowed_types']  = 'gif|png|jpg|jpeg';

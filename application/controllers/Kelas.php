@@ -48,12 +48,28 @@ class Kelas extends CI_Controller
     $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
 
-  public function Lainnya()
+  public function SBM()
   {
-    $data['jenjang'] = 'Lainnya' or 4;
-    $data['kelas'] = $this->kelas->get(null, "Lainnya")->result();
+    $data['jenjang'] = 'SBM';
+    $data['kelas'] = $this->kelas->get(null, "SBM")->result();
+    var_dump($data['kelas']);
     $this->template->load('template', 'master/tes-menu/kelas', $data);
   }
+
+  public function Kedinasan()
+  {
+    $data['jenjang'] = 'Kedinasan';
+    $data['kelas'] = $this->kelas->get(null, "Kedinasan")->result();
+    var_dump($data['kelas']);
+    $this->template->load('template', 'master/tes-menu/kelas', $data);
+  }
+
+  // public function Lainnya()
+  // {
+  //   $data['jenjang'] = 'Lainnya' or 4;
+  //   $data['kelas'] = $this->kelas->get(null, "Lainnya")->result();
+  //   $this->template->load('template', 'master/tes-menu/kelas', $data);
+  // }
 
   public function listKelas()
   {

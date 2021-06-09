@@ -124,8 +124,10 @@
                 <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
                 <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-                <li><a href="<?= site_url("paket/lainnya/4/19"); ?>">SBM</a></li>
-                <li><a href="<?= site_url("paket/lainnya/4/20"); ?>">Kedinasan</a></li>
+                <!-- <li><a href="<?= site_url("paket/lainnya/4/19"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("paket/lainnya/4/20"); ?>">Kedinasan</a></li> -->
+                <li><a href="<?= site_url("kelas/sbm"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("kelas/kedinasan"); ?>">Kedinasan</a></li>
               </ul>
             </li>
           <?php } else { ?>
