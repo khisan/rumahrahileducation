@@ -7,7 +7,7 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="#!"><?= $jenjang; ?></a></li>
+          <li class="breadcrumb-item"><a href="#!"><?= $nama_jenjang; ?></a></li>
         </ul>
       </div>
     </div>
@@ -20,7 +20,7 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong>Kelas <?= $jenjang; ?></strong></h3>
+        <h3 class="text-primary"><strong>Kelas <?= $nama_jenjang; ?></strong></h3>
       </div>
       <div class="card-body">
         <div class="row">

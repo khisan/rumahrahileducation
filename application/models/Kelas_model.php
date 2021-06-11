@@ -43,39 +43,20 @@ class Kelas_model extends CI_Model
     } elseif ($jenjang_id === "SMA" or $jenjang_id == 3) {
       $this->db->where("id_kelas >= 10");
       $this->db->where("id_kelas <= 18");
-    } else if ($jenjang_id === "SBM") {
+    } else if ($jenjang_id === "SBM" or $jenjang_id == 4) {
       $this->db->where("id_kelas >= 19");
-      $this->db->where("id_kelas <= 20");
-    } else if ($jenjang_id === "Kedinasan") {
-      $this->db->where("id_kelas >= 21");
       $this->db->where("id_kelas <= 23");
     }
     $query = $this->db->get('tb_kelas');
     return $query;
   }
 
-  public function getJurusanSma($jenjang_id = null)
+  public function getJurusan($kelas_id = null)
   {
-    if ($jenjang_id == 3) {
-      $this->db->where("id_kelas >= 10");
-      $this->db->where("id_kelas <= 18");
-    }
-    $this->db->group_by('jurusan')->order_by('id_kelas');
-    $query = $this->db->get('tb_kelas');
-    return $query;
-  }
-
-  public function getJurusanLainnya($kelas_id = null)
-  {
-    if ($kelas_id == 19 or $kelas_id == 20) {
-      $this->db->where("id_kelas >= 19");
-      $this->db->where("id_kelas <= 20");
-    } elseif ($kelas_id == 21 or $kelas_id == 22 or $kelas_id == 23) {
-      $this->db->where("id_kelas >= 21");
-      $this->db->where("id_kelas <= 23");
-    }
-    $this->db->group_by('jurusan')->order_by('id_kelas');
-    $query = $this->db->get('tb_kelas');
+    $this->db->select('jurusan');
+    $this->db->from('tb_kelas');
+    $this->db->where("id_kelas", $kelas_id);
+    $query = $this->db->get();
     return $query;
   }
 }

@@ -93,11 +93,7 @@
                 <option selected value="">Pilih Kelas</option>
               </select>
             </div>
-            <div class="form-group col-md-4 fill">
-              <label for="jurusan">Jurusan</label>
-              <select class="form-control" name="jurusan" id="jurusan">
-                <option selected value="">Pilih Jurusan</option>
-              </select>
+            <div class="form-group" id="jurusanView">
             </div>
           </div>
           <div class="form-group fill">
@@ -150,11 +146,6 @@
   $(document).ready(function() {
     // Chained Dropdown
     $('#jenjang').change(function() {
-      if ($('#jenjang').val() == 1 || $('#jenjang').val() == 2 || $('#jenjang').val() == 4) {
-        document.getElementById("jurusan").disabled = true;
-      } else {
-        document.getElementById("jurusan").disabled = false;
-      }
       $.ajax({
         type: "POST",
         url: "<?php echo base_url("kelas/listKelas"); ?>",
@@ -176,35 +167,10 @@
       });
     });
 
-    $('#jenjang').change(function() {
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url("kelas/listJurusanSma"); ?>",
-        data: {
-          jenjang_id: $("#jenjang").val()
-        },
-        dataType: "json",
-        beforeSend: function(e) {
-          if (e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
-          }
-        },
-        success: function(response) {
-          $("#jurusan").html(response.list_jurusan_sma).show();
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      });
-    });
-
     $('#kelas').change(function() {
-      if ($('#kelas').val() == 19 || $('#kelas').val() == 20 || $('#kelas').val() == 21 || $('#kelas').val() == 22 || $('#kelas').val() == 23) {
-        document.getElementById("jurusan").disabled = false;
-      }
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("kelas/listJurusanLainnya"); ?>",
+        url: "<?php echo base_url("kelas/listJurusan"); ?>",
         data: {
           kelas_id: $("#kelas").val()
         },
@@ -215,7 +181,7 @@
           }
         },
         success: function(response) {
-          $("#jurusan").html(response.list_jurusan_lainnya).show();
+          $("#jurusanView").html(response.jurusan);
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
