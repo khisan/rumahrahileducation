@@ -51,12 +51,26 @@ class Mapel extends CI_Controller
     $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
-  public function lainnya($id = null)
+  public function sbm($id = null)
   {
-    $data['paket'] = $this->paket->get($id)->row();
-    $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
-    $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
+    $data['kelas'] = $this->kelas->get($id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
+
+  public function kedinasan($id = null)
+  {
+    $data['kelas'] = $this->kelas->get($id)->row();
+    $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    $this->template->load('template', 'master/tes-menu/mapel', $data);
+  }
+
+  // public function lainnya($id = null)
+  // {
+  //   $data['paket'] = $this->paket->get($id)->row();
+  //   $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
+  //   $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
+  // }
 
   public function getAjax($id = null, $id_paket = null)
   {

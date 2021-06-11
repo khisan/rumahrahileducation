@@ -133,7 +133,7 @@ class Paket_model extends CI_Model
 
   public function updateLainnya($post)
   {
-    $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
+    // $params['mapel_id'] = htmlspecialchars($post['mapel_id']);
     $params['nama_paket'] = htmlspecialchars($post['nama_paket']);
     $params['waktu'] = htmlspecialchars($post['waktu']);
     $params['updated'] = date('Y-m-d H:i:s');

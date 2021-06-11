@@ -21,7 +21,7 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?> <?= $jenjang->nama_jenjang; ?></strong></h3>
+        <h3 class="text-primary"><strong><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?> <?= $kelas->nama_jurusan; ?></strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">

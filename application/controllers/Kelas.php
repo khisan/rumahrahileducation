@@ -50,18 +50,16 @@ class Kelas extends CI_Controller
 
   public function SBM()
   {
-    $data['jenjang'] = 'SBM';
+    $data['jenjang'] = '4';
     $data['kelas'] = $this->kelas->get(null, "SBM")->result();
-    var_dump($data['kelas']);
-    $this->template->load('template', 'master/tes-menu/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas_lainnya', $data);
   }
 
   public function Kedinasan()
   {
-    $data['jenjang'] = 'Kedinasan';
+    $data['jenjang'] = '4';
     $data['kelas'] = $this->kelas->get(null, "Kedinasan")->result();
-    var_dump($data['kelas']);
-    $this->template->load('template', 'master/tes-menu/kelas', $data);
+    $this->template->load('template', 'master/tes-menu/kelas_lainnya', $data);
   }
 
   // public function Lainnya()
