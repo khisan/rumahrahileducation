@@ -348,7 +348,7 @@
           className: 'text-center'
         },
         {
-          targets: [0, 7, 8, 9, -2, -1],
+          targets: [-1, -2, -3],
           orderable: false
         }
       ]

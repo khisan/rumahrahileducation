@@ -75,7 +75,8 @@ class Auth extends CI_Controller
           'kelas'       => $row->nama_kelas,
           'id_jenjang'  => $row->id_jenjang,
           'id_kelas'    => $row->id_kelas,
-          'sekolah'     => $row->sekolah
+          'sekolah'     => $row->sekolah,
+          'jurusan'     => $row->jurusan
         ];
         $this->session->set_userdata($session_siswa);
         echo '<script>
