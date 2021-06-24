@@ -27,6 +27,7 @@
     };
   </script>
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -401,11 +402,8 @@
         beforeSend: function() {
           simpan();
         },
-        success: function(r) {
-          console.log(r);
-          if (r.status) {
-            window.location.href = base_url + "Dashboard";
-          }
+        success: function() {
+          swal("Hello world!");
         },
       });
     }
