@@ -81,7 +81,6 @@
       </a>
     </div>
     <div class="collapse navbar-collapse">
-
       <ul class="navbar-nav ml-auto">
         <li>
           <div class="dropdown drp-user">
@@ -159,7 +158,7 @@
                       <a class="action next btn btn-primary" rel="1" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
                       <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
                       <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
-                      <input type="hidden" name="soal_id" id="soal_id" value="<?= $soal_id; ?>">
+                      <!-- <input type="hidden" name="soal_id" id="soal_id" value="<?= $soal_id; ?>"> -->
                       <input type="hidden" name="siswa_profile_id" id="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
                       <input type="hidden" name="id_test" id="id_test" value="<?= $id_test; ?>">
                     </div>
@@ -171,7 +170,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
   <!-- Required Js -->
   <script src="<?= base_url('assets/able/'); ?>assets/js/lottie.js"></script>
@@ -397,7 +395,7 @@
         url: base_url + "test/simpan_akhir",
         data: {
           id_test: id_test,
-          soal_id: $("#soal_id").val(),
+          // soal_id: $("#soal_id").val(),
           siswa_profile_id: $("#siswa_profile_id").val()
         },
         beforeSend: function() {

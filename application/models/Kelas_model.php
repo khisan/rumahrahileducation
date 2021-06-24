@@ -37,14 +37,17 @@ class Kelas_model extends CI_Model
     }
     if ($jenjang_id == "SD" or $jenjang_id == 1) {
       $this->db->where("id_kelas <= 6");
-    } elseif ($jenjang_id === "SMP" or $jenjang_id == 2) {
+    } elseif ($jenjang_id == "SMP" or $jenjang_id == 2) {
       $this->db->where("id_kelas >= 7");
       $this->db->where("id_kelas <= 9");
-    } elseif ($jenjang_id === "SMA" or $jenjang_id == 3) {
+    } elseif ($jenjang_id == "SMA" or $jenjang_id == 3) {
       $this->db->where("id_kelas >= 10");
       $this->db->where("id_kelas <= 18");
-    } else if ($jenjang_id === "SBM" or $jenjang_id == 4) {
+    } else if ($jenjang_id == "SBM" or $jenjang_id == 4) {
       $this->db->where("id_kelas >= 19");
+      $this->db->where("id_kelas <= 20");
+    } else if ($jenjang_id == "Kedinasan" or $jenjang_id == 4) {
+      $this->db->where("id_kelas >= 21");
       $this->db->where("id_kelas <= 23");
     }
     $query = $this->db->get('tb_kelas');

@@ -47,6 +47,7 @@ class Test extends CI_Controller
     date_default_timezone_set("Asia/Jakarta");
     $tgl_test =  date("Y-m-d h:i:sa");
 
+    $post['paket_id'] = $paket_id;
     $post['list_soal'] = $list_id_soal;
     $post['list_jawaban'] = $list_jw_soal;
     $post['siswa_profile_id'] = $siswa_profile_id;
@@ -69,8 +70,7 @@ class Test extends CI_Controller
     foreach ($data as $test) {
       $html .= '<input type="hidden" name="id_soal_' . $no . '" value="' . $test->id_soal . '">';
       $html .= '<div class="step" id="widget_' . $no . '">';
-      $html .= '<img src=' . $url . $test->soal_gambar . ' alt="..." class="img-thumbnail">';
-      $html .= '<p style="font-size: 20px;">' . $test->soal_text . '</p>';
+      $html .= '<p style="font-size: 20px;">' . $test->soal . '</p>';
       $html .= '<div class="funkyradio">';
       for ($i = 0; $i < 5; $i++) {
         $opsi = "option_" . $arr_opsi[$i];
@@ -85,7 +85,7 @@ class Test extends CI_Controller
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
       'id_test' => $siswa_id->id_h_test,
-      'soal_id' => $soal->id_soal,
+      // 'soal_id' => $soal->id_soal,
       'waktu' => $waktu
     );
     $this->load->view('user/mulai_test', $data);
@@ -98,7 +98,7 @@ class Test extends CI_Controller
     $paket_id = $this->input->post('paket');
     $id_test = $this->input->post('id_test');
     $jml_soal = $this->input->post('jml_soal');
-    $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
+    $soal = $this->soal->get(null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";
     foreach ($soal as $soal) {
       $list_id_soal .= $soal->id_soal . ",";
@@ -122,9 +122,9 @@ class Test extends CI_Controller
   public function simpan_akhir()
   {
     $id_test = $this->input->post('id_test');
-    $soal_id = $this->input->post('soal_id');
+    // $soal_id = $this->input->post('soal_id');
     $siswa_profile_id = $this->input->post('siswa_profile_id');
-    var_dump($id_test, $soal_id, $siswa_profile_id);
+    // var_dump($soal_id);
 
     $list_jawaban = $this->test->getJawaban($id_test)->row()->list_jawaban;
 
@@ -140,18 +140,29 @@ class Test extends CI_Controller
       $id_soal   = $pc_dt[0];
       $jawaban   = $pc_dt[1];
 
-      $cek_jwb   = $this->soal->get($id_soal, $paket_id = null, $mapel_id = null)->row();
+      $cek_jwb   = $this->soal->get($id_soal, null, null)->row();
 
       $jawaban == $cek_jwb->jawaban_benar ? $jumlah_benar++ : $jumlah_salah++;
     }
+    var_dump($cek_jwb->jawaban_benar);
+
 
     $nilai = ($jumlah_benar / $jumlah_soal)  * 100;
 
+    // for ($i = 1; $i < $pc_jawaban; $i++) {
+    //   $jawab   = "opsi_" . $i;
+    //   $id_soal   = "id_soal_" . $i;
+    //   // $jawaban   = empty($post[$jawab]) ? "" : $post[$jawab];
+    //   // $list_jawaban  .= "" . $post[$id_soal] . ":" . $jawaban . ",";
+    // }
+    // $list_jawaban  = substr($list_jawaban, 0, -1);
+
     $update = [
-      'soal_id' => $soal_id,
+      // 'soal_id' => $soal_id,
       'siswa_profile_id' => $siswa_profile_id,
       'jml_benar'    => $jumlah_benar,
       'nilai'      => number_format(floor($nilai), 0),
+      'list_jawaban_benar' => $jawaban
     ];
 
     $data = $this->test->update('tb_h_test', $update, 'id_h_test', $id_test);
