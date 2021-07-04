@@ -22,7 +22,6 @@ class H_test extends CI_Controller
   public function getAjax($siswa_profile_id)
   {
     $list = $this->h_test->getDataTables($siswa_profile_id);
-    var_dump($list);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $h_test) {

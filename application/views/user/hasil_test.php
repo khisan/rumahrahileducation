@@ -45,7 +45,7 @@
 <script>
   let table = $('#table').DataTable({
     processing: true,
-    serverSide: true,
+    // serverSide: true,
     ajax: {
       url: '<?= site_url("h_test/getAjax/$siswa->siswa_profile_id"); ?>',
       type: 'POST'
