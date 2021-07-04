@@ -159,9 +159,10 @@
                       <a class="action next btn btn-primary" rel="1" onclick="return next();"><i class="glyphicon glyphicon-chevron-right"></i> Next</a>
                       <a class="selesai action submit btn btn-danger" onclick="return simpan_akhir();"><i class="glyphicon glyphicon-stop"></i> Selesai</a>
                       <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
-                      <!-- <input type="hidden" name="soal_id" id="soal_id" value="<?= $soal_id; ?>"> -->
                       <input type="hidden" name="siswa_profile_id" id="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
                       <input type="hidden" name="id_test" id="id_test" value="<?= $id_test; ?>">
+                      <input type="hidden" id="paket_id" value="<?= $paket_id; ?>">
+                      <input type="hidden" id="mapel_id" value="<?= $mapel_id; ?>">
                     </div>
                   </form>
                 </div>
@@ -396,14 +397,30 @@
         url: base_url + "test/simpan_akhir",
         data: {
           id_test: id_test,
-          // soal_id: $("#soal_id").val(),
           siswa_profile_id: $("#siswa_profile_id").val()
         },
         beforeSend: function() {
           simpan();
         },
         success: function() {
-          swal("Hello world!");
+          $.ajax({
+            type: "POST",
+            url: base_url + "h_test/Nilai",
+            data: {
+              paket_id: $("#paket_id").val(),
+              mapel_id: $("#mapel_id").val(),
+              siswa_profile_id: $("#siswa_profile_id").val()
+            },
+            success: function() {
+              swal({
+                title: "Selesai!",
+                text: "Anda telah menyelesaikan kuis",
+                icon: "success"
+              }).then(function() {
+                window.location = "<?= base_url('H_test/Nilai') ?>";
+              });
+            }
+          });
         },
       });
     }

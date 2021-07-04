@@ -132,7 +132,10 @@
             </li>
           <?php } else { ?>
             <li class="nav-item">
-              <a href="<?= site_url("test/$jenjang_id/$kelas_id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">List Test</span></a>
+              <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url("test/$jenjang_id/$kelas_id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">Mulai Test</span></a>
             </li>
           <?php } ?>
         </ul>

@@ -7,6 +7,7 @@ class Test_model extends CI_Model
   {
     $params = [
       'paket_id' => $post['paket_id'],
+      'mapel_id' => $post['mapel_id'],
       'siswa_profile_id' => $post['siswa_profile_id'],
       'list_soal' => $post['list_soal'],
       'list_jawaban' => $post['list_jawaban'],

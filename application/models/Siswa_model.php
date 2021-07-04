@@ -96,6 +96,13 @@ class Siswa_model extends CI_Model
     return $query;
   }
 
+  public function getSiswa($siswa_profile_id)
+  {
+    $this->db->where('id_siswa_profile', $siswa_profile_id);
+    $query = $this->db->get('tb_siswa_profile')->result();
+    return $query;
+  }
+
   public function login($post)
   {
     $this->db->select('*');

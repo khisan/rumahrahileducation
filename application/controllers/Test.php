@@ -33,6 +33,7 @@ class Test extends CI_Controller
   {
     $post   = $this->input->post();
     $mapel_id = $this->input->post('mapel');
+    $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $siswa_profile_id = $this->session->userdata('userid');
     $waktu = $this->session->userdata('waktu');
@@ -48,6 +49,7 @@ class Test extends CI_Controller
     $tgl_test =  date("Y-m-d h:i:sa");
 
     $post['paket_id'] = $paket_id;
+    $post['mapel_id'] = $mapel_id;
     $post['list_soal'] = $list_id_soal;
     $post['list_jawaban'] = $list_jw_soal;
     $post['siswa_profile_id'] = $siswa_profile_id;
@@ -85,7 +87,8 @@ class Test extends CI_Controller
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
       'id_test' => $siswa_id->id_h_test,
-      // 'soal_id' => $soal->id_soal,
+      'paket_id' => $siswa_id->paket_id,
+      'mapel_id' => $siswa_id->mapel_id,
       'waktu' => $waktu
     );
     $this->load->view('user/mulai_test', $data);
@@ -118,13 +121,11 @@ class Test extends CI_Controller
     $data = $this->test->update('tb_h_test', $simpan, 'id_h_test', $id_test);
     echo json_encode($data);
   }
-
+  var $final;
   public function simpan_akhir()
   {
     $id_test = $this->input->post('id_test');
-    // $soal_id = $this->input->post('soal_id');
     $siswa_profile_id = $this->input->post('siswa_profile_id');
-    // var_dump($soal_id);
 
     $list_jawaban = $this->test->getJawaban($id_test)->row()->list_jawaban;
 
@@ -149,22 +150,12 @@ class Test extends CI_Controller
 
     $nilai = ($jumlah_benar / $jumlah_soal)  * 100;
 
-    // for ($i = 1; $i < $pc_jawaban; $i++) {
-    //   $jawab   = "opsi_" . $i;
-    //   $id_soal   = "id_soal_" . $i;
-    //   // $jawaban   = empty($post[$jawab]) ? "" : $post[$jawab];
-    //   // $list_jawaban  .= "" . $post[$id_soal] . ":" . $jawaban . ",";
-    // }
-    // $list_jawaban  = substr($list_jawaban, 0, -1);
-
     $update = [
-      // 'soal_id' => $soal_id,
       'siswa_profile_id' => $siswa_profile_id,
       'jml_benar'    => $jumlah_benar,
       'nilai'      => number_format(floor($nilai), 0),
-      'list_jawaban_benar' => $jawaban
     ];
-
+    $this->final = $nilai;
     $data = $this->test->update('tb_h_test', $update, 'id_h_test', $id_test);
     echo json_encode($data);
   }
