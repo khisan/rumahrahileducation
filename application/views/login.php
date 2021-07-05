@@ -33,8 +33,7 @@
       <div class="row align-items-center text-center">
         <div class="col-md-12">
           <div class="card-body">
-            <img src="<?= site_url('assets/able/'); ?>assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
-            <h4 class="mb-3 f-w-400">Signin</h4>
+            <h4 class="mb-3 f-w-400">Login</h4>
             <form action="<?= site_url('auth/process'); ?>" method="post">
               <div class="form-group mb-3">
                 <label class="floating-label" for="username">Username</label>

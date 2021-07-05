@@ -74,7 +74,7 @@
         </div>
         <form id="submitForm">
           <input type="hidden" name="id_mapel" id="id">
-          <input type="number" name="paket_id" id="paket" value="<?= $paket->id_paket; ?>">
+          <input type="hidden" name="paket_id" id="paket" value="<?= $paket->id_paket; ?>">
           <div class="form-group fill">
             <label for="mapel">Mapel</label>
             <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="Ketik Nama Mapel">
@@ -198,7 +198,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/$paket->id_paket"); ?>',
+        url: '<?= site_url("mapel/getAjaxLainnya/$paket->id_paket"); ?>',
         type: 'POST'
       },
       columnDefs: [{
