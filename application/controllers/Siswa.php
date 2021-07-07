@@ -55,10 +55,7 @@ class Siswa extends CI_Controller
       $row[] = $siswa->alamat;
       $row[] = $siswa->email;
       $row[] = $siswa->image != null ? '<img src="' . site_url('uploads/siswa/') . $siswa->image . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
-      // $row[] = $siswa->created;
-      // $row[] = $siswa->updated;
       $row[] = '
-          <a href="' . site_url('pengajar/get/') . $siswa->id_siswa_profile . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-list"></i>Lihat Guru Kelas<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
           <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';

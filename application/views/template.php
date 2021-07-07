@@ -110,7 +110,7 @@
               <ul class="pcoded-submenu">
                 <li><a href="<?= site_url('admin'); ?>">Admin</a></li>
                 <li><a href="<?= site_url('siswa'); ?>">Siswa</a></li>
-                <li><a href="<?= site_url('guru'); ?>">Guru</a></li>
+                <!-- <li><a href="<?= site_url('guru'); ?>">Guru</a></li> -->
               </ul>
             </li>
           <?php }
@@ -124,8 +124,6 @@
                 <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
                 <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-                <!-- <li><a href="<?= site_url("paket/lainnya/4/19"); ?>">SBM</a></li>
-                <li><a href="<?= site_url("paket/lainnya/4/20"); ?>">Kedinasan</a></li> -->
                 <li><a href="<?= site_url("kelas/sbm"); ?>">SBM</a></li>
                 <li><a href="<?= site_url("kelas/kedinasan"); ?>">Kedinasan</a></li>
               </ul>

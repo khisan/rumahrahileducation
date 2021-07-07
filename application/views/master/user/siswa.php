@@ -125,7 +125,7 @@
             <label for="inputGroupFile01">Photo Profile</label>
             <div class="image"></div>
             <div class="custom-file mt-3">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" name="image" accept="image/*">
+              <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
               <label class="custom-file-label" for="inputGroupFile01">Pilih Photo Profile</label>
             </div>
           </div>
@@ -251,7 +251,7 @@
       let email = $('#email').val();
       let password1 = $('#password1').val();
       let password2 = $('#password2').val();
-      let image = $('[name="image"]')[0].files[0];
+      let image = $('#image')[0].files[0];
 
       let formData = new FormData();
 

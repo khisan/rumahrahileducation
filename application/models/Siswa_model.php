@@ -127,7 +127,7 @@ class Siswa_model extends CI_Model
     $params['alamat'] = htmlspecialchars($post['alamat']);
     $params['email'] = htmlspecialchars($post['email']);
     $params['password'] = sha1($post['password1']);
-    $params['image'] = htmlspecialchars($post['image']);
+    $params['image'] = $post['image'];
 
     $this->db->insert('tb_siswa_profile', $params);
     return $this->db->affected_rows();
