@@ -56,7 +56,6 @@ class Siswa extends CI_Controller
       $row[] = $siswa->email;
       $row[] = $siswa->image != null ? '<img src="' . site_url('uploads/siswa/') . $siswa->image . '"  class="rounded mx-auto d-block" width="200px">' : '<img src="' . site_url('assets/able/assets/images/') . 'default.png" class="rounded mx-auto d-block" width="200px">';
       $row[] = '
-          <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $siswa->id_siswa_profile . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';
 
@@ -71,9 +70,21 @@ class Siswa extends CI_Controller
     echo json_encode($output);
   }
 
+  public function get()
+  {
+    $get = $this->input->get(null, TRUE);
+    if ($get == null) {
+      $query = $this->siswa->get();
+      echo json_encode($query->result_array());
+    } else {
+      $query = $this->siswa->get($get['id']);
+      echo json_encode($query->row());
+    }
+  }
+
   public function add()
   {
-    $post = $this->input->post(null);
+    $post = $this->input->post();
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
     $this->form_validation->set_rules('username', 'Username', 'required');
@@ -120,29 +131,13 @@ class Siswa extends CI_Controller
 
       $this->load->library('upload', $config);
 
-      if ($_FILES['image']['name'] == "") {
-        if ($this->upload->do_upload('image')) {
-          $post['image'] = $this->upload->data('file_name');
-          $data = $this->siswa->create($post);
-          echo json_encode($data);
-        }
+      if ($this->upload->do_upload('image')) {
+        $post['image'] = $this->upload->data('file_name');
       } else {
-        $image_default = "./uploads/siswa/student.png";
-        $post['image'] = $this->upload->data($image_default);
-        $data = $this->siswa->create($post);
-        echo json_encode($data);
+        $post['image'] = 'student.png';
       }
-    }
-  }
-  public function get()
-  {
-    $get = $this->input->get(null, TRUE);
-    if ($get == null) {
-      $query = $this->siswa->get();
-      echo json_encode($query->result_array());
-    } else {
-      $query = $this->siswa->get($get['id']);
-      echo json_encode($query->row());
+      $data = $this->siswa->create($post);
+      echo json_encode($data);
     }
   }
 
@@ -203,7 +198,6 @@ class Siswa extends CI_Controller
             $target_file = './uploads/siswa/' . $siswa->image;
             unlink($target_file);
           }
-
 
           $post['image'] = $this->upload->data('file_name');
           $data = $this->siswa->update($post);
