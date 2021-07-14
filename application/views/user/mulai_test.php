@@ -193,31 +193,55 @@
     var base_url = "<?php echo base_url(); ?>";
     var id_test = "<?= $id_test; ?>";
 
-    function mulaiTimer(waktu, display) {
+    // localStorage.setItem("timer", mulaiTimer(waktu, display));
+    // waktu = localStorage.getItem("timer");
+    // $('#sisawaktu').html(mulaiTimer());
+
+    function mulaiTimer(waktu) {
+      var waktu = localStorage.getItem('waktu')
       var timer = waktu,
-        hours, minutes, seconds;
-      setInterval(function() {
+        hours, minutes, seconds, hasilWaktu;
+      setInterval(function(waktu, display) {
         minutes = parseInt(timer / 60);
         seconds = parseInt(timer % 60);
 
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+        // seconds = window.localStorage.getItem("seconds");
+        // minutes = window.localStorage.getItem("minutes");
 
-        $('#sisawaktu').html(minutes + " menit " + seconds + " detik ");
-        console.log(display);
+        hours = hours < 10 ? "0" + hours : hours;
+        min = minutes < 10 ? "0" + minutes : minutes;
+        sec = seconds < 10 ? "0" + seconds : seconds;
+
+        // hasilWaktu = min + " menit " + sec + " detik ";
+        // localStorage.setItem('hasilWaktu', hasilWaktu);
+        $('#sisawaktu').html(minutes + " menit " + seconds + " detik");
+        // display.textContent = minutes + " " + " " + seconds;
 
         if (--timer < 0) {
-          timer = waktu;
+          waktu = timer;
+          localStorage.setItem("waktu", waktu);
         }
       }, 1000);
     }
 
+    // window.onload = function() {
+    //   var fiveMinutes = 60 * 5,
+    //     display = document.querySelector('#time');
+    //   startTimer(fiveMinutes, display);
+    // };
+
     $(document).ready(function() {
+      // if (localStorage.getItem("waktu")) {
+      //   var waktu = localStorage.getItem("waktu");
+      // } else {
+      //   var waktuAwal = $("#waktu").val();
+      //   var waktu = waktuAwal * 60;
+      // }
       var waktuAwal = $("#waktu").val();
       var waktu = waktuAwal * 60;
-      display = $('#sisawaktu');
-      mulaiTimer(waktu, display);
+      waktu = localStorage.setItem('waktu', waktu);
+      // display = $('#sisawaktu');
+      mulaiTimer(waktu);
 
       simpan_sementara();
       buka(1);
