@@ -12,17 +12,17 @@ CKEDITOR.editorConfig = function (config) {
 		"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML";
 	// Integrasi ckfinder
 	config.filebrowserBrowseUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html";
+		"https://rumahrahileducation.com/assets/ckfinder/ckfinder.html";
 	config.filebrowserImageBrowseUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html?type=Images";
+		"https://rumahrahileducation.com/assets/ckfinder/ckfinder.html?type=Images";
 	config.filebrowserFlashBrowseUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/ckfinder.html?type=Flash";
+		"https://rumahrahileducation.com/assets/ckfinder/ckfinder.html?type=Flash";
 	config.filebrowserUploadUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files";
+		"https://rumahrahileducation.com/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files";
 	config.filebrowserImageUploadUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images";
+		"https://rumahrahileducation.com/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images";
 	config.filebrowserFlashUploadUrl =
-		"http://localhost/rumahrahileducation/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash";
+		"https://rumahrahileducation.com/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash";
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
