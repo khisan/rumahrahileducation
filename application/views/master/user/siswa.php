@@ -91,9 +91,10 @@
               <label for="kelas">Kelas</label>
               <select class="form-control" name="kelas_id" id="kelas">
                 <option selected value="">Pilih Kelas</option>
+                <?php foreach ($kelas->result() as $kel) { ?>
+                  <option value="<?= $kel->id_kelas; ?>"><?= $kel->nama_kelas; ?></option>
+                <?php } ?>
               </select>
-            </div>
-            <div class="form-group" id="jurusanView">
             </div>
           </div>
           <div class="form-group fill">
@@ -160,28 +161,6 @@
         },
         success: function(response) {
           $("#kelas").html(response.list_kelas);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      });
-    });
-
-    $('#kelas').change(function() {
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url("kelas/listJurusan"); ?>",
-        data: {
-          kelas_id: $("#kelas").val()
-        },
-        dataType: "json",
-        beforeSend: function(e) {
-          if (e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
-          }
-        },
-        success: function(response) {
-          $("#jurusanView").html(response.jurusan);
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
