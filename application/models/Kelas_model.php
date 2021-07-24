@@ -57,9 +57,12 @@ class Kelas_model extends CI_Model
   public function getJurusan($kelas_id = null)
   {
     $this->db->select('jurusan');
-    $this->db->from('tb_kelas');
-    $this->db->where("id_kelas", $kelas_id);
-    $query = $this->db->get();
+    if ($kelas_id != null) {
+      $this->db->where('id_kelas', $kelas_id);
+    }
+    $this->db->group_by('jurusan');
+    $this->db->where('jurusan IS NOT NULL', null, false);
+    $query = $this->db->get('tb_kelas');
     return $query;
   }
 }

@@ -96,6 +96,15 @@
                 <?php } ?>
               </select>
             </div>
+            <div class="form-group col-md-4 fill">
+              <label for="jurusan">Jurusan</label>
+              <select class="form-control" name="jurusan_id" id="jurusan">
+                <option selected value="">Pilih Jurusan</option>
+                <?php foreach ($jurusan->result() as $jur) { ?>
+                  <option value="<?= $jur->jurusan; ?>"><?= $jur->jurusan; ?></option>
+                <?php } ?>
+              </select>
+            </div>
           </div>
           <div class="form-group fill">
             <label for="sekolah">Sekolah</label>
@@ -168,6 +177,28 @@
       });
     });
 
+    $('#kelas').change(function() {
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listJurusan"); ?>",
+        data: {
+          kelas_id: $("#kelas").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#jurusan").html(response.list_jurusan);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
+
     // Ajax
     const site_url = "<?= site_url('siswa/'); ?>";
     $('.siswa-isi').on('click', '#siswaAdd', function() {
@@ -203,7 +234,7 @@
           $('#username').val(response.username);
           $('#jenjang').val(response.jenjang_id);
           $('#kelas').val(response.kelas_id);
-          $('#jurusan').val(response.jurusan);
+          $('#jurusan').val(response.jurusan_id);
           $('#sekolah').val(response.sekolah);
           $('#alamat').val(response.alamat);
           $('#email').val(response.email);
@@ -239,7 +270,7 @@
       formData.append('username', username);
       formData.append('jenjang_id', jenjang);
       formData.append('kelas_id', kelas);
-      formData.append('jurusan', jurusan);
+      formData.append('jurusan_id', jurusan);
       formData.append('sekolah', sekolah);
       formData.append('alamat', alamat);
       formData.append('email', email);
