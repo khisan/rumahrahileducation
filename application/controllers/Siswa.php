@@ -34,6 +34,7 @@ class Siswa extends CI_Controller
   {
     $data['jenjang'] = $this->jenjang->get();
     $data['kelas'] = $this->kelas->get();
+    $data['jurusan'] = $this->kelas->getJurusan();
     $this->template->load('template', 'master/user/siswa', $data);
   }
 
@@ -223,7 +224,7 @@ class Siswa extends CI_Controller
     $post = $this->input->post(null, TRUE);
     $siswa = $this->siswa->get($post['id'])->row();
 
-    if ($siswa->image != null) {
+    if ($siswa->image != null && $siswa->image != 'student.png') {
       $target_file = './uploads/siswa/' . $siswa->image;
       unlink($target_file);
     }

@@ -92,11 +92,15 @@ class Kelas extends CI_Controller
   {
     $kelas_id = $this->input->post('kelas_id');
 
-    $kelas = $this->kelas->getJurusan($kelas_id)->row();
+    $jurusan = $this->kelas->getJurusan($kelas_id)->result();
 
-    $list = "<input type='hidden' id='jurusan' value='" . $kelas->jurusan . "'>";
+    $lists = "<option value=''>Pilih Jurusan</option>";
 
-    $callback = array('jurusan' => $list);
+    foreach ($jurusan as $data) {
+      $lists .= "<option value='" . $data->jurusan . "'>" . $data->jurusan . "</option>";
+    }
+
+    $callback = array('list_jurusan' => $lists);
 
     echo json_encode($callback);
   }

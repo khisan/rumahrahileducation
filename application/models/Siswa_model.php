@@ -122,7 +122,7 @@ class Siswa_model extends CI_Model
     $params['username'] = htmlspecialchars($post['username']);
     $params['jenjang_id'] = htmlspecialchars($post['jenjang_id']);
     $params['kelas_id'] = $post['kelas_id'];
-    $params['jurusan'] = htmlspecialchars($post['jurusan']);
+    $params['jurusan'] = htmlspecialchars($post['jurusan_id']);
     $params['sekolah'] = htmlspecialchars($post['sekolah']);
     $params['alamat'] = htmlspecialchars($post['alamat']);
     $params['email'] = htmlspecialchars($post['email']);
