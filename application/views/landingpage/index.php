@@ -42,7 +42,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo"><a href="index.html">Rumah Rahil Education</a></h1>
+      <h1 class="logo"><a href="#">Rumah Rahil Education</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/landingpage/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -181,21 +181,28 @@
             <div class="icon-box">
               <i class="icofont-credit-card"></i>
               <h4><a href="#">Kelas Digital</a></h4>
-              <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran via online</p>
+              <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran secara daring</p>
             </div>
           </div>
           <div class="col-md-6 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="icofont-video"></i>
               <h4><a href="#">Video Pembelajaran</a></h4>
-              <p>Tersedia materi vido paling terupdate sesuai Kurikulum dengan penjelasan secara visual dan kontekstual  </p>
+              <p>Tersedia materi sesuai kurikulum dan ribuan video pembahasan soal-soal yang berkualitas</p>
             </div>
           </div>
           <div class="col-md-6 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="icofont-people"></i>
-              <h4><a href="#">Bimbel Offline</a></h4>
-              <p>Pembelajaran dengan 10 siswa setiap kelas dan didukung dengan fasilitas lengkap untuk membuat nyaman siswa</p>
+              <h4><a href="#">Bimbel Kelas</a></h4>
+              <p>Bimbel Super Intensif untuk masuk PTN & Kedinasan, serta SMP & SMA dengan Sistem Drill dan Quality Control Siswa</p>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4 mt-md-0">
+            <div class="icon-box">
+              <i class="icofont-teacher"></i>
+              <h4><a href="#">Guru Privat</a></h4>
+              <p>Bimbingan privat mulai dari tingkat TK s/d Perkuliahan dengan Luring ke rumah ataupun Daring untuk seluruh Indonesia</p>
             </div>
           </div>
         </div>
@@ -215,7 +222,7 @@
           <div class="col-lg-3 col-md-6">
             <p><a><i class="icofont-google-map">  </i></a><strong>Alamat</strong></p>
             
-            <p>Jl. Puntodewo Raya no. 32</p>
+            <p>Jl. Puntodewo Raya no. 32<br>Kota Malang, Jawa Timur</p>
           </div>
 
           <div class="col-lg-3 col-md-6">
@@ -238,7 +245,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Build by <strong><span href="https://github.com/rferdian516">rferdian</span></strong>. All Rights Reserved
+        &copy; Build by <strong><span><a href="https://github.com/rferdian516" style="color:white;">rferdian</a></span></strong>. All Rights Reserved
       </div>
       <div class="credits">
       </div>
