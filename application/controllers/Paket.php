@@ -80,8 +80,6 @@ class Paket extends CI_Controller
   public function getAjaxLainnya($id_kelas)
   {
     $list = $this->paket->getDataTablesLainnya($id_kelas);
-    // $kelas = $this->kelas->get($id_kelas)->row();
-    // $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $paket) {

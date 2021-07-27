@@ -35,6 +35,7 @@
                   <label for="exampleFormControlSelect1">Kelas</label>
                   <div class="form-control">
                     <label for="exampleFormControlSelect1"><?= $kelas->nama_kelas ?></label>
+                    <input type="hidden" id="kelas" value="<?= $kelas->id_kelas ?>">
                   </div>
                 </div>
               </div>
@@ -133,71 +134,6 @@
                   <label for="exampleFormControlSelect1">Mapel</label>
                   <select class="form-control" id="mapel_lainnya" name="mapel">
                     <option selected value="">Pilih Mapel</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-2 mx-auto">
-                <div class="form-group">
-                  <button type="submit" class="btn btn-success" style="margin-top: 20px;">Mulai Test</button>
-                  <input type="hidden" name="tgl_test" value="<?php date_default_timezone_set("Asia/Jakarta");
-                                                              echo date("Y-m-d h:i:sa") ?>">
-                  <div id="waktu"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      <?php } else { ?>
-        <div class="card-body">
-          <form action="<?php echo site_url('test/mulaiTest'); ?>" method="post">
-            <div class="row">
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Jenjang</label>
-                  <div class="form-control">
-                    <label for="exampleFormControlSelect1"><?= $jenjang->nama_jenjang ?></label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Kelas</label>
-                  <div class="form-control">
-                    <label for="exampleFormControlSelect1"><?= $kelas->nama_kelas ?></label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Mapel</label>
-                  <select class="form-control babChange" id="mapel" name="mapel">
-                    <option selected value="">Pilih Mapel</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Semester</label>
-                  <select class="form-control babChange" id="semester">
-                    <option selected value="">Pilih Semester</option>
-                    <option value="1">Semester 1</option>
-                    <option value="2">Semester 2</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Bab</label>
-                  <select class="form-control" id="bab">
-                    <option selected value="">Pilih Bab</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Paket</label>
-                  <select class="form-control" id="paket" name="paket">
-                    <option selected value="">Pilih Paket</option>
                   </select>
                 </div>
               </div>
