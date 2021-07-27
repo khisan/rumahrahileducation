@@ -160,55 +160,55 @@
     </div>
   </section><!-- End Hero -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container">
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services">
+    <div class="container">
 
-        <div class="section-title">
-          <h2>Layanan Kami</h2>
-          <!-- <p>The Services We Offer</p> -->
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="icofont-computer"></i>
-              <h4><a href="#">Tes Online</a></h4>
-              <p>Simulasi ujian dengan tes online mulai dari tingkat Sekolah Dasar hingga SMBPTN ataupun Kedinasan </p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-credit-card"></i>
-              <h4><a href="#">Kelas Digital</a></h4>
-              <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran secara daring</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-video"></i>
-              <h4><a href="#">Video Pembelajaran</a></h4>
-              <p>Tersedia materi sesuai kurikulum dan ribuan video pembahasan soal-soal yang berkualitas</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-people"></i>
-              <h4><a href="#">Bimbel Kelas</a></h4>
-              <p>Bimbel Super Intensif untuk masuk PTN & Kedinasan, serta SMP & SMA dengan Sistem Drill dan Quality Control Siswa</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-teacher"></i>
-              <h4><a href="#">Guru Privat</a></h4>
-              <p>Bimbingan privat mulai dari tingkat TK s/d Perkuliahan dengan Luring ke rumah ataupun Daring untuk seluruh Indonesia</p>
-            </div>
-          </div>
-        </div>
-
+      <div class="section-title">
+        <h2>Layanan Kami</h2>
+        <!-- <p>The Services We Offer</p> -->
       </div>
-    </section><!-- End Services Section -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="icon-box">
+            <i class="icofont-computer"></i>
+            <h4><a href="#">Tes Online</a></h4>
+            <p>Simulasi ujian dengan tes online mulai dari tingkat Sekolah Dasar hingga SMBPTN ataupun Kedinasan </p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-credit-card"></i>
+            <h4><a href="#">Kelas Digital</a></h4>
+            <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran secara daring</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-video"></i>
+            <h4><a href="#">Video Pembelajaran</a></h4>
+            <p>Tersedia materi sesuai kurikulum dan ribuan video pembahasan soal-soal yang berkualitas</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-people"></i>
+            <h4><a href="#">Bimbel Kelas</a></h4>
+            <p>Bimbel Super Intensif untuk masuk PTN & Kedinasan, serta SMP & SMA dengan Sistem Drill dan Quality Control Siswa</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-teacher"></i>
+            <h4><a href="#">Guru Privat</a></h4>
+            <p>Bimbingan privat mulai dari tingkat TK s/d Perkuliahan dengan Luring ke rumah ataupun Daring untuk seluruh Indonesia</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
 
   </main><!-- End #main -->
 
@@ -218,25 +218,25 @@
       <div class="container">
         <h3>Rumah Rahil Education</h3>
         <div class="row">
-          
+
           <div class="col-lg-3 col-md-6">
-            <p><a><i class="icofont-google-map">  </i></a><strong>Alamat</strong></p>
-            
+            <p><a><i class="icofont-google-map"> </i></a><strong>Alamat</strong></p>
+
             <p>Jl. Puntodewo Raya no. 32<br>Kota Malang, Jawa Timur</p>
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <p><a><i class="icofont-phone">  </i></a><strong>Telepon</strong></p>
+            <p><a><i class="icofont-phone"> </i></a><strong>Telepon</strong></p>
             <p>0896 8234 8649</p>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <p><strong>Sosial Media</strong></p>
-              <div class="social-links mt-3">
-                <a href="https://www.facebook.com/rumah.rahil" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="https://www.instagram.com/rumahrahil_education/" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="https://wa.me/6289682348649?text=Halo,%20saya%20tertarik%20dengan%20Rumah%20Rahil%20Education.%20Apakah%20ada%20informasi%20lebih%20lanjut?" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
-              </div>
+            <div class="social-links mt-3">
+              <a href="https://www.facebook.com/rumah.rahil" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com/rumahrahil_education/" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://wa.me/6289682348649?text=Halo,%20saya%20tertarik%20dengan%20Rumah%20Rahil%20Education.%20Apakah%20ada%20informasi%20lebih%20lanjut?" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+            </div>
           </div>
 
         </div>

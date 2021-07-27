@@ -202,7 +202,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("paket/getAjax/$kelas->id_kelas"); ?>',
+        url: '<?= site_url("paket/getAjaxLainnya/$kelas->id_kelas"); ?>',
         type: 'POST'
       },
       columnDefs: [{
