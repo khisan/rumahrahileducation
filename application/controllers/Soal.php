@@ -120,7 +120,7 @@ class Soal extends CI_Controller
 
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
-    }else {
+    } else {
       $data = $this->soal->update($post);
       echo json_encode($data);
     }

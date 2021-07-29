@@ -130,7 +130,7 @@
                   <div class="card table-card">
                     <div class="card-header">
                       <center>
-                        <h5>Navigasi Soal
+                        <h5>Navigasi Soal <?= $id_test; ?>
                         </h5>
                       </center>
                     </div>
@@ -415,7 +415,6 @@
     }
 
     function selesai() {
-      simpan();
       $.ajax({
         type: "POST",
         url: base_url + "test/simpan_akhir",
@@ -427,23 +426,12 @@
           simpan();
         },
         success: function() {
-          $.ajax({
-            type: "POST",
-            url: base_url + "h_test/Nilai",
-            data: {
-              paket_id: $("#paket_id").val(),
-              mapel_id: $("#mapel_id").val(),
-              siswa_profile_id: $("#siswa_profile_id").val()
-            },
-            success: function() {
-              swal({
-                title: "Selesai!",
-                text: "Anda telah menyelesaikan kuis",
-                icon: "success"
-              }).then(function() {
-                window.location = "<?= base_url('H_test/Nilai') ?>";
-              });
-            }
+          swal({
+            title: "Selesai!",
+            text: "Anda telah menyelesaikan kuis",
+            icon: "success"
+          }).then(function() {
+            window.location = "<?= base_url('H_test') ?>";
           });
         },
       });

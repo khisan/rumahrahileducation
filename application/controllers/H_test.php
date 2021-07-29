@@ -13,8 +13,9 @@ class H_test extends CI_Controller
     $this->load->model('Siswa_model', 'siswa');
   }
 
-  public function index($siswa_profile_id)
+  public function index()
   {
+    $siswa_profile_id = $this->session->userdata('userid');
     $data['siswa'] = $this->h_test->getAllData($siswa_profile_id)->row();
     $this->template->load('template', 'user/hasil_test', $data);
   }
@@ -43,16 +44,4 @@ class H_test extends CI_Controller
     ];
     echo json_encode($output);
   }
-
-  // public function nilai()
-  // {
-  //   $paket_id = $this->input->post('paket_id');
-  //   $mapel_id = $this->input->post('mapel_id');
-  //   $siswa_profile_id = $this->input->post('siswa_profile_id');
-  //   var_dump($siswa_profile_id, $paket_id, $mapel_id);
-  //   $data['nama'] = $this->siswa->getSiswa($siswa_profile_id);
-  //   // echo $data['nama'];
-  //   $data['nilai'] = $this->h_test->getNilai($paket_id, $mapel_id, $siswa_profile_id);
-  //   $this->template->load('template', 'user/nilai', $data);
-  // }
 }

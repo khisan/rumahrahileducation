@@ -33,11 +33,10 @@ class Test extends CI_Controller
   {
     $post   = $this->input->post();
     $mapel_id = $this->input->post('mapel');
-    $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $siswa_profile_id = $this->session->userdata('userid');
     $waktu = $this->session->userdata('waktu');
-    $soal = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
+    $soal = $this->soal->getSoal($paket_id, $mapel_id)->result();
     $list_id_soal = "";
     $list_jw_soal   = "";
     foreach ($soal as $soal) {
@@ -64,7 +63,7 @@ class Test extends CI_Controller
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $waktu = $this->input->post('waktu');
-    $data = $this->soal->get($id = null, $paket_id, $mapel_id)->result();
+    $data = $this->soal->getSoal($paket_id, $mapel_id)->result();
     $html = '';
     $no = 1;
     $url = base_url("uploads/soal/");
@@ -145,7 +144,6 @@ class Test extends CI_Controller
 
       $jawaban == $cek_jwb->jawaban_benar ? $jumlah_benar++ : $jumlah_salah++;
     }
-    var_dump($cek_jwb->jawaban_benar);
 
 
     $nilai = ($jumlah_benar / $jumlah_soal)  * 100;
