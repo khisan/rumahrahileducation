@@ -171,7 +171,6 @@ class Mapel extends CI_Controller
   public function add()
   {
     $post = $this->input->post(null, TRUE);
-    // var_dump(($this->input->post('kelas_id') == false));
 
     $this->form_validation->set_rules('nama_mapel', 'Mapel', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
@@ -198,7 +197,11 @@ class Mapel extends CI_Controller
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
-      $data = $this->mapel->update($post);
+      if ($this->input->post('kelas_id') == false) {
+        $data = $this->mapel->updateLainnya($post);
+      } elseif ($this->input->post('paket_id') == false) {
+        $data = $this->mapel->update($post);
+      }
       echo json_encode($data);
     }
   }

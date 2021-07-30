@@ -168,6 +168,16 @@ class Mapel_model extends CI_Model
     return $this->db->affected_rows();
   }
 
+  public function updateLainnya($post)
+  {
+    $params['paket_id'] = htmlspecialchars($post['paket_id']);
+    $params['nama_mapel'] = htmlspecialchars($post['nama_mapel']);
+    $params['updated'] = date('Y-m-d H:i:s');
+    $this->db->where('id_mapel', $post['id_mapel']);
+    $this->db->update('tb_mapel', $params);
+    return $this->db->affected_rows();
+  }
+
   public function delete($id)
   {
     $this->db->where('id_mapel', $id);
