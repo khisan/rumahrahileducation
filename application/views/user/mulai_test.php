@@ -130,7 +130,7 @@
                   <div class="card table-card">
                     <div class="card-header">
                       <center>
-                        <h5>Navigasi Soal <?= $id_test; ?>
+                        <h5>Navigasi Soal
                         </h5>
                       </center>
                     </div>
@@ -161,8 +161,8 @@
                       <input type="hidden" name="jml_soal" id="jml_soal" value="<?= $no; ?>">
                       <input type="hidden" name="siswa_profile_id" id="siswa_profile_id" value="<?= $siswa_profile_id; ?>">
                       <input type="hidden" name="id_test" id="id_test" value="<?= $id_test; ?>">
-                      <input type="hidden" id="paket_id" value="<?= $paket_id; ?>">
-                      <input type="hidden" id="mapel_id" value="<?= $mapel_id; ?>">
+                      <input type="hidden" name="paket_id" id="paket_id" value="<?= $paket_id; ?>">
+                      <input type="hidden" name="mapel_id" id="mapel_id" value="<?= $mapel_id; ?>">
                     </div>
                   </form>
                 </div>
@@ -192,6 +192,11 @@
     var total_widget = widget.length;
     var base_url = "<?php echo base_url(); ?>";
     var id_test = "<?= $id_test; ?>";
+    // if (id_test = id_test) {
+    //   return id_test = id_test + 1;
+    // } else {
+    //   return id_test = id_test;
+    // }
 
     // localStorage.setItem("timer", mulaiTimer(waktu, display));
     // waktu = localStorage.getItem("timer");

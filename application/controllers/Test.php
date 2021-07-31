@@ -46,7 +46,9 @@ class Test extends CI_Controller
     $list_id_soal = substr($list_id_soal, 0, -1);
     date_default_timezone_set("Asia/Jakarta");
     $tgl_test =  date("Y-m-d h:i:sa");
+    $idWaktu = strtotime($tgl_test);
 
+    $post['id_h_test'] = $idWaktu;
     $post['paket_id'] = $paket_id;
     $post['mapel_id'] = $mapel_id;
     $post['list_soal'] = $list_id_soal;
@@ -85,7 +87,7 @@ class Test extends CI_Controller
       'html' => $html,
       'no'   => $no,
       'siswa_profile_id' => $siswa_profile_id,
-      'id_test' => $siswa_id->id_h_test,
+      'id_test' => $idWaktu,
       'paket_id' => $siswa_id->paket_id,
       'mapel_id' => $siswa_id->mapel_id,
       'waktu' => $waktu
@@ -96,9 +98,10 @@ class Test extends CI_Controller
   public function simpan_satu()
   {
     $post   = $this->input->post();
-    $mapel_id = $this->input->post('mapel');
-    $paket_id = $this->input->post('paket');
+    $mapel_id = $this->input->post('mapel_id');
+    $paket_id = $this->input->post('paket_id');
     $id_test = $this->input->post('id_test');
+    // var_dump($mapel_id);
     $jml_soal = $this->input->post('jml_soal');
     $soal = $this->soal->get(null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";

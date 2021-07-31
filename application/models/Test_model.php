@@ -6,6 +6,7 @@ class Test_model extends CI_Model
   public function create($post)
   {
     $params = [
+      'id_h_test' => $post['id_h_test'],
       'paket_id' => $post['paket_id'],
       'mapel_id' => $post['mapel_id'],
       'siswa_profile_id' => $post['siswa_profile_id'],
