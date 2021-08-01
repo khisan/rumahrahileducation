@@ -17,7 +17,7 @@ class Test extends CI_Controller
     $this->load->model('Test_model', 'test');
   }
 
-  public function index($jenjang, $kelas)
+  public function index($jenjang = null, $kelas = null)
   {
     $data['id_jenjang'] = $jenjang;
     $data['id_kelas'] = $kelas;
@@ -101,7 +101,6 @@ class Test extends CI_Controller
     $mapel_id = $this->input->post('mapel_id');
     $paket_id = $this->input->post('paket_id');
     $id_test = $this->input->post('id_test');
-    // var_dump($mapel_id);
     $jml_soal = $this->input->post('jml_soal');
     $soal = $this->soal->get(null, $paket_id, $mapel_id)->result();
     $list_id_soal = "";
