@@ -124,7 +124,7 @@
                 <li><a href="<?= site_url('kelas/sd'); ?>">SD</a></li>
                 <li><a href="<?= site_url('kelas/smp'); ?>">SMP</a></li>
                 <li><a href="<?= site_url('kelas/sma'); ?>">SMA</a></li>
-                <li><a href="<?= site_url("kelas/sbm"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("kelas/sbmptn"); ?>">SBMPTN</a></li>
                 <li><a href="<?= site_url("kelas/kedinasan"); ?>">Kedinasan</a></li>
               </ul>
             </li>

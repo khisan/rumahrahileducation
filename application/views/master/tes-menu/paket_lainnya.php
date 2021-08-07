@@ -7,7 +7,7 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= site_url("Kelas/$kelas->nama_kelas"); ?>"><?= $kelas->nama_kelas; ?></a></li>
         </ul>
       </div>
     </div>
