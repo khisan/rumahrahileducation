@@ -28,7 +28,7 @@
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("Paket/lainnya/19"); ?>" class="btn btn-warning btn-flat">
+              <a href="<?= site_url("Paket/lainnya/$jenjang/$kelas->id_kelas"); ?>" class="btn btn-warning btn-flat">
                 <i class="fa fa-undo"></i> Back</a>
             </div>
           </div>
