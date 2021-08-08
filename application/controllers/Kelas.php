@@ -64,13 +64,6 @@ class Kelas extends CI_Controller
     $this->template->load('template', 'master/tes-menu/kelas_lainnya', $data);
   }
 
-  // public function Lainnya()
-  // {
-  //   $data['jenjang'] = 'Lainnya' or 4;
-  //   $data['kelas'] = $this->kelas->get(null, "Lainnya")->result();
-  //   $this->template->load('template', 'master/tes-menu/kelas', $data);
-  // }
-
   public function listKelas()
   {
     $jenjang_id = $this->input->post('jenjang_id');
