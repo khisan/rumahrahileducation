@@ -69,6 +69,7 @@ class Mapel extends CI_Controller
   {
     $data['paket'] = $this->paket->get($id)->row();
     $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
+    $data['jenjang'] = 4;
     $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
   }
 
