@@ -51,7 +51,7 @@ class Kelas extends CI_Controller
   public function SBMPTN()
   {
     $data['jenjang'] = 4;
-    $data['nama_jenjang'] = 'SBM';
+    $data['nama_jenjang'] = 'SBMPTN';
     $data['kelas'] = $this->kelas->get(null, "SBM")->result();
     $this->template->load('template', 'master/tes-menu/kelas_lainnya', $data);
   }
