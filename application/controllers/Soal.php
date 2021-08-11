@@ -64,7 +64,7 @@ class Soal extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->soal->countAll(),
-      'recordsFiltered' => $this->soal->countFiltered($id),
+      'recordsFiltered' => $this->soal->countFiltered($id, $id_mapel),
       'data' => $data
     ];
     echo json_encode($output);

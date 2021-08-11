@@ -74,9 +74,9 @@ class Soal_model extends CI_Model
     return $query->result();
   }
 
-  public function countFiltered($id)
+  public function countFiltered($id, $id_mapel)
   {
-    $this->_getDataTablesQuery($id);
+    $this->_getDataTablesQuery($id, $id_mapel);
     $query = $this->db->get();
     return $query->num_rows();
   }
