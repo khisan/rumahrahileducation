@@ -163,6 +163,13 @@
   <!-- ======= Services Section ======= -->
   <section id="services" class="services">
     <div class="container">
+      <div class="section-title">
+        <h2>Headline Video</h2>
+        <video controls="controls" src="<?= base_url(); ?>assets/landingpage/video.mp4" type="video/mp4" width="1105" height="480">
+          Your browser does not support the HTML5 Video element.
+        </video>
+      </div>
+
 
       <div class="section-title">
         <h2>Layanan Kami</h2>
