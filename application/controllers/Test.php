@@ -148,8 +148,6 @@ class Test extends CI_Controller
       $jawaban == $cek_jwb->jawaban_benar ? $jumlah_benar++ : $jumlah_salah++;
     }
 
-    var_dump($id_jenjang);
-
     if ($id_jenjang == 4) {
       $nilai = ($jumlah_benar / $jumlah_soal)  * 1000;
     } else {
