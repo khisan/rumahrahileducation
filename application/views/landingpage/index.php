@@ -165,57 +165,53 @@
     <div class="container">
       <div class="section-title">
         <h2>Headline Video</h2>
-        <div style="width: 1105px; height: 480px; position: relative;">
-          <iframe width="1105" height="480" src="https://drive.google.com/file/d/1oKlvkWEh6_rVy0XGWsOeNjnguWGszR_Y/preview" frameborder="0" scrolling="no" seamless="">
-          </iframe>
-          <div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>
-        </div>
-
-
-        <div class="section-title">
-          <h2>Layanan Kami</h2>
-          <!-- <p>The Services We Offer</p> -->
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="icofont-computer"></i>
-              <h4><a href="#">Tes Online</a></h4>
-              <p>Simulasi ujian dengan tes online mulai dari tingkat Sekolah Dasar hingga SMBPTN ataupun Kedinasan </p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-credit-card"></i>
-              <h4><a href="#">Kelas Digital</a></h4>
-              <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran secara daring</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-video"></i>
-              <h4><a href="#">Video Pembelajaran</a></h4>
-              <p>Tersedia materi sesuai kurikulum dan ribuan video pembahasan soal-soal yang berkualitas</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-people"></i>
-              <h4><a href="#">Bimbel Kelas</a></h4>
-              <p>Bimbel Super Intensif untuk masuk PTN & Kedinasan, serta SMP & SMA dengan Sistem Drill dan Quality Control Siswa</p>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4 mt-md-0">
-            <div class="icon-box">
-              <i class="icofont-teacher"></i>
-              <h4><a href="#">Guru Privat</a></h4>
-              <p>Bimbingan privat mulai dari tingkat TK s/d Perkuliahan dengan Luring ke rumah ataupun Daring untuk seluruh Indonesia</p>
-            </div>
-          </div>
-        </div>
-
+        <iframe style="padding-top: 30px;" width="1105" height="480" src="https://www.youtube.com/embed/f4JRaELfYOo" title="Headline Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
+
+      <div class="section-title" style="margin-top: 20px;">
+        <h2>Layanan Kami</h2>
+        <!-- <p>The Services We Offer</p> -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="icon-box">
+            <i class="icofont-computer"></i>
+            <h4><a href="#">Tes Online</a></h4>
+            <p>Simulasi ujian dengan tes online mulai dari tingkat Sekolah Dasar hingga SMBPTN ataupun Kedinasan </p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-credit-card"></i>
+            <h4><a href="#">Kelas Digital</a></h4>
+            <p>Memudahkan siswa berinteraksi langsung dengan kelas dan pengajar untuk pembelajaran secara daring</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-video"></i>
+            <h4><a href="#">Video Pembelajaran</a></h4>
+            <p>Tersedia materi sesuai kurikulum dan <br>ribuan video pembahasan soal-soal yang berkualitas</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-people"></i>
+            <h4><a href="#">Bimbel Kelas</a></h4>
+            <p>Bimbel Super Intensif untuk masuk PTN & Kedinasan, serta SMP & SMA dengan Sistem Drill dan Quality Control Siswa</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-md-0">
+          <div class="icon-box">
+            <i class="icofont-teacher"></i>
+            <h4><a href="#">Guru Privat</a></h4>
+            <p>Bimbingan privat mulai dari tingkat TK s/d Perkuliahan dengan Luring ke rumah ataupun Daring untuk seluruh Indonesia</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section><!-- End Services Section -->
 
   </main><!-- End #main -->
