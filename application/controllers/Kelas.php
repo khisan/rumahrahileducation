@@ -66,9 +66,9 @@ class Kelas extends CI_Controller
 
   public function listKelas()
   {
-    $jenjang_id = $this->input->post('jenjang_id');
+    $id_jenjang = $this->input->post('id_jenjang');
 
-    $kelas = $this->kelas->get(null, $jenjang_id)->result();
+    $kelas = $this->kelas->get(null, $id_jenjang)->result();
 
     $lists = "<option value=''>Pilih Kelas</option>";
 
@@ -77,6 +77,23 @@ class Kelas extends CI_Controller
     }
 
     $callback = array('list_kelas' => $lists);
+
+    echo json_encode($callback);
+  }
+
+  public function listKelasReport()
+  {
+    $id_jenjang = $this->input->post('id_jenjang');
+
+    $kelas = $this->kelas->getKelas($id_jenjang)->result();
+
+    $lists = "<option value=''>Pilih Kelas</option>";
+
+    foreach ($kelas as $data) {
+      $lists .= "<option value='" . $data->id_kelas . "'>" . $data->nama_kelas . " " . $data->jurusan . "</option>";
+    }
+
+    $callback = array('list_kelas_report' => $lists);
 
     echo json_encode($callback);
   }
