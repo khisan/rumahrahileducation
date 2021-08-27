@@ -128,6 +128,12 @@
                 <li><a href="<?= site_url("kelas/kedinasan"); ?>">Kedinasan</a></li>
               </ul>
             </li>
+            <li class="nav-item pcoded-menu-caption">
+              <label>Report</label>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url('Report_test'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-archive"></i></span><span class="pcoded-mtext">Laporan Test</span></a>
+            </li>
           <?php } else { ?>
             <li class="nav-item">
               <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>

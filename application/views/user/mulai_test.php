@@ -73,9 +73,6 @@
     <div class="m-header">
       <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
       <a href="<?= site_url('dashboard'); ?>" class="b-brand">
-        <!-- ========   change your logo hear   ============ -->
-        <img src="<?= base_url('assets/able/'); ?>assets/images/logo.png" alt="" class="logo">
-        <img src="<?= base_url('assets/able/'); ?>assets/images/logo-icon.png" alt="" class="logo-thumb">
       </a>
       <a href="#!" class="mob-toggler">
         <i class="feather icon-more-vertical"></i>

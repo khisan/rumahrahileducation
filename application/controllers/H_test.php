@@ -44,4 +44,22 @@ class H_test extends CI_Controller
     ];
     echo json_encode($output);
   }
+
+  public function listHTest()
+  {
+    $id_paket = $this->input->post('id_paket');
+    $id_mapel = $this->input->post('id_mapel');
+
+    $h_test = $this->h_test->getSiswa($id_paket, $id_mapel)->result();
+
+    $lists = "<option value=''>Pilih Siswa</option>";
+
+    foreach ($h_test as $data) {
+      $lists .= "<option value='" . $data->siswa_profile_id . "'>" . $data->nama . "</option>";
+    }
+
+    $callback = array('list_siswa' => $lists);
+
+    echo json_encode($callback);
+  }
 }

@@ -54,6 +54,24 @@ class Kelas_model extends CI_Model
     return $query;
   }
 
+  public function getKelas($jenjang_id = null)
+  {
+    if ($jenjang_id == 1) {
+      $this->db->where("id_kelas <= 6");
+    } elseif ($jenjang_id == 2) {
+      $this->db->where("id_kelas >= 7");
+      $this->db->where("id_kelas <= 9");
+    } elseif ($jenjang_id == 3) {
+      $this->db->where("id_kelas >= 10");
+      $this->db->where("id_kelas <= 18");
+    } else {
+      $this->db->where("id_kelas >= 19");
+      $this->db->where("id_kelas <= 23");
+    }
+    $query = $this->db->get('tb_kelas');
+    return $query;
+  }
+
   public function getJurusan($kelas_id = null)
   {
     $this->db->select('jurusan');
