@@ -97,6 +97,22 @@ class Auth extends CI_Controller
       'userid',
       'level',
     ];
+
+    // jika yang login adalah siswa, maka hapus juga session siswa
+    if($this->session->has_userdata('jenjang')) {
+      $params = [
+        'userid',
+        'nama',
+        'gambar',
+        'jenjang',
+        'kelas',
+        'id_jenjang',
+        'id_kelas',
+        'sekolah',
+        'jurusan'
+      ];
+    }
+
     $this->session->unset_userdata($params);
     redirect('auth/login');
   }

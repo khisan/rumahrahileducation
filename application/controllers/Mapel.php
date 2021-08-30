@@ -44,11 +44,12 @@ class Mapel extends CI_Controller
     $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
-  public function sma($id = null)
+  public function sma($id = null, $video = null)
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'master/tes-menu/mapel', $data);
+    if(!is_null($video)) $this->template->load('template', 'master/video-menu/mapel', $data);
+    else $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
   // public function sbm($id = null)
@@ -65,15 +66,21 @@ class Mapel extends CI_Controller
   //   $this->template->load('template', 'master/tes-menu/mapel', $data);
   // }
 
-  public function lainnya($id = null)
+  public function lainnya($id = null, $video = null, $id_kelas = null)
   {
-    $data['paket'] = $this->paket->get($id)->row();
-    $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
-    $data['jenjang'] = 4;
-    $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
+    if(is_null($id_kelas) && strtolower($id) != 'null') {
+      $data['paket'] = $this->paket->get($id)->row();
+      $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
+    } elseif(strtolower($id) == 'null') {
+      $data['kelas'] = $this->kelas->get($id_kelas)->row();
+      $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+      $data['paket'] = $this->paket->get(null, null, $id_kelas)->result();
+    } 
+    if(is_null($video)) $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
+    else $this->template->load('template', 'master/video-menu/mapel_lainnya', $data);
   }
 
-  public function getAjax($id)
+  public function getAjax($id, $video = null)
   {
     $kelas = $this->kelas->get($id)->row();
     $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
@@ -87,7 +94,7 @@ class Mapel extends CI_Controller
       $row[] = $mapel->nama_mapel;
       $row[] = $mapel->created;
       $row[] = $mapel->updated;
-      $row[] = '<a  href="' . site_url("bab/$jenjang->nama_jenjang/") . $mapel->id_mapel . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+      $row[] = '<a  href="' . site_url("bab/$jenjang->nama_jenjang/") . $mapel->id_mapel . (is_null($video) ? '' : '/video') .'" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
       $data[] = $row;
@@ -128,6 +135,36 @@ class Mapel extends CI_Controller
     echo json_encode($output);
   }
 
+  public function getAjaxLainnyaVideo($id_kelas)
+  {
+    $data = [];
+    $paket = $this->paket->get(null, null, $id_kelas)->result();
+    if(count($paket) > 0) {
+      $list = $this->mapel->getDataTablesLainnya($paket);
+      $no = @$_POST['start'];
+      foreach ($list as $mapel) {
+        $no++;
+        $row = [];
+        $row[] = $no . '.';
+        $row[] = $mapel->nama_mapel;
+        $row[] = $mapel->created;
+        $row[] = $mapel->updated;
+        $row[] = '
+        <a  href="' . site_url("video/index/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+        <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+        <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
+        $data[] = $row;
+      }
+    }
+    $output = [
+      'draw' => @$_POST['draw'],
+      'recordsTotal' => $this->mapel->countAll(),
+      'recordsFiltered' => $this->mapel->countFiltered(null),
+      'data' => $data
+    ];
+    echo json_encode($output);
+  }
+
   public function get()
   {
     $get = $this->input->get(null, TRUE);
@@ -154,7 +191,13 @@ class Mapel extends CI_Controller
 
   public function listMapelLainnya()
   {
-    $id_paket = $this->input->post('id_paket');
+    if(NULL !== ($this->input->post('id_paket'))) {
+      $id_paket = $this->input->post('id_paket');
+    
+    } elseif(NULL !== ($this->input->post('id_kelas'))) {
+      $id_kelas = $this->input->post('id_kelas');
+      $id_paket = $this->paket->get(null, null, $id_kelas)->result();
+    }
 
     $mapels_lainnya = $this->mapel->get(null, null, $id_paket)->result();
 

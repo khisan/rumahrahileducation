@@ -134,12 +134,26 @@
             <li class="nav-item">
               <a href="<?= site_url('Report_test'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-archive"></i></span><span class="pcoded-mtext">Laporan Test</span></a>
             </li>
+            <li class="nav-item pcoded-menu-caption">
+              <label>Video Online</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-play"></i></span><span class="pcoded-mtext">Video Management</span></a>
+              <ul class="pcoded-submenu">                
+                <li><a href="<?= site_url('video/sma'); ?>">SMA</a></li>
+                <li><a href="<?= site_url("video/sbm"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("video/kedinasan"); ?>">Kedinasan</a></li>
+              </ul>
+            </li>
           <?php } else { ?>
             <li class="nav-item">
               <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>
             </li>
             <li class="nav-item">
               <a href="<?= site_url("test/$jenjang_id/$kelas_id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-book-open"></i></span><span class="pcoded-mtext">Mulai Test</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url("video/daftarVideo/$jenjang_id/$kelas_id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-play"></i></span><span class="pcoded-mtext">Video</span></a>
             </li>
           <?php } ?>
         </ul>

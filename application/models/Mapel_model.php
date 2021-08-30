@@ -55,7 +55,14 @@ class Mapel_model extends CI_Model
     $this->db->from("tb_mapel");
     $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id", "left");
     $this->db->join("tb_paket", "tb_paket.id_paket = tb_mapel.paket_id", "left");
-    $this->db->where('tb_mapel.paket_id', $id_paket);
+
+    // Apakah id paket adalah array? 
+    // jika iya maka parameter id_paket dikirim dari controller video
+    if(is_array($id_paket)) {
+      foreach ($id_paket as $key) {
+        $this->db->where('tb_mapel.paket_id', $key->id_paket);
+      }
+    } else $this->db->where('tb_mapel.paket_id', $id_paket);
 
     $i = 0;
 
@@ -121,7 +128,12 @@ class Mapel_model extends CI_Model
     } elseif ($id_kelas != null) {
       $this->db->where('kelas_id', $id_kelas);
     } else {
-      $this->db->where('paket_id', $id_paket);
+      if(is_array($id_paket)) {
+        foreach ($id_paket as $key) {
+          $this->db->where('paket_id', $key->id_paket);
+        }
+      } 
+      else $this->db->where('paket_id', $id_paket);
     }
     $final = $this->db->get('tb_mapel');
     return $final;
@@ -168,6 +180,19 @@ class Mapel_model extends CI_Model
     $this->db->where('id_mapel', $id);
     $this->db->delete('tb_mapel');
     return $this->db->affected_rows();
+  }
+
+  public function getMapelForVideo()
+  {
+    $this->db->select("*");
+    $this->db->from("tb_mapel");
+    $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id", "left");
+    $this->db->join("tb_paket", "tb_paket.id_paket = tb_mapel.paket_id", "left");
+    $this->db->where('tb_kelas.jenjang_id', '3');
+    $this->db->where('tb_kelas.jenjang_id', '4');
+    $query = $this->db->get();
+    print_r($query->result());
+    die();
   }
 
 
