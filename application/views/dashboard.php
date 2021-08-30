@@ -113,6 +113,7 @@
       <div class="card">
         <div class="card-header text-center">
           <h3 class="text-primary"><strong>Rumah Rahil Education</strong></h3>
+          <h1><?= $output ?></h1>
         </div>
         <div class="card-body ">
           <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_JYe5t7/data2.json" background="transparent" speed="1" style="width: 600px; height: 600px;" loop autoplay class="mx-auto my-auto"></lottie-player>

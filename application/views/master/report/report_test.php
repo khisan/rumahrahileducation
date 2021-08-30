@@ -47,7 +47,7 @@
   let table = $('#table').DataTable({
     processing: true,
     ajax: {
-      url: '<?= site_url("report_test/getAjax/$paket_id/$mapel_id/$siswa_profile_id"); ?>',
+      url: '<?= site_url("report_test/getAjax/$paket_id/$mapel_id"); ?>',
       type: 'POST'
     },
     columnDefs: [{

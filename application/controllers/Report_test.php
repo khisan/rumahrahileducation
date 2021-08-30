@@ -36,30 +36,29 @@ class Report_test extends CI_Controller
     } else {
       $data['mapel_id'] = $this->input->post('mapel_lainnya');
     }
-    $data['siswa_profile_id'] = $this->input->post('siswa');
     $this->template->load('template', 'master/report/report_test', $data);
   }
 
-  public function getAjax($paket_id, $mapel_id, $siswa_profile_id)
+  public function getAjax($paket_id, $mapel_id)
   {
-    $list = $this->h_test->getDataTablesReport($paket_id, $mapel_id, $siswa_profile_id);
+    $list = $this->h_test->getDataTablesReport($paket_id, $mapel_id);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $h_test) {
       $no++;
       $row = [];
       $row[] = $no . '.';
+      $row[] = $h_test->nama;
       $row[] = $h_test->nama_paket;
       $row[] = $h_test->nama_mapel;
-      $row[] = $h_test->nama;
       $row[] = $h_test->nilai;
       $row[] = $h_test->tgl_test;
       $data[] = $row;
     }
     $output = [
       'draw' => @$_POST['draw'],
-      'recordsTotal' => $this->h_test->countAllreport($paket_id, $mapel_id, $siswa_profile_id),
-      'recordsFiltered' => $this->h_test->countFilteredreport($paket_id, $mapel_id, $siswa_profile_id),
+      'recordsTotal' => $this->h_test->countAllreport($paket_id, $mapel_id),
+      'recordsFiltered' => $this->h_test->countFilteredreport($paket_id, $mapel_id),
       'data' => $data
     ];
     echo json_encode($output);

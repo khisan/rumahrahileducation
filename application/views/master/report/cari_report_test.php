@@ -76,14 +76,6 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Siswa</label>
-                <select class="form-control" id="siswa" name="siswa">
-                  <option selected value="">Pilih Siswa</option>
-                </select>
-              </div>
-            </div>
             <div class="col-sm-12 text-center">
               <button type="submit" class="btn btn-success">Lihat Report Test</button>
             </div>
@@ -210,26 +202,6 @@
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
         }
       });
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url("h_test/listHTest"); ?>",
-        data: {
-          id_paket: $("#paket").val(),
-          id_mapel: $("#mapel").val()
-        },
-        dataType: "json",
-        beforeSend: function(e) {
-          if (e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
-          }
-        },
-        success: function(response) {
-          $("#siswa").html(response.list_siswa).show();
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      });
     });
 
     $("#mapel").change(function() {
@@ -247,29 +219,6 @@
         },
         success: function(response) {
           $("#bab").html(response.list_bab).show();
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        }
-      });
-    });
-
-    $("#mapel_lainnya").change(function() {
-      $.ajax({
-        type: "POST",
-        url: "<?php echo base_url("h_test/listHTest"); ?>",
-        data: {
-          id_paket: $("#paket").val(),
-          id_mapel: $("#mapel_lainnya").val()
-        },
-        dataType: "json",
-        beforeSend: function(e) {
-          if (e && e.overrideMimeType) {
-            e.overrideMimeType("application/json;charset=UTF-8");
-          }
-        },
-        success: function(response) {
-          $("#siswa").html(response.list_siswa).show();
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

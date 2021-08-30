@@ -82,17 +82,17 @@ class H_test_model extends CI_Model
   }
 
   // Datatables Report Test
-  public function _getDataTablesQueryReport($paket_id = null, $mapel_id = null, $siswa_profile_id = null)
+  public function _getDataTablesQueryReport($paket_id = null, $mapel_id = null)
   {
     $this->db->select('*');
     $this->db->from('tb_h_test h_test');
     $this->db->join('tb_paket paket', 'paket.id_paket=h_test.paket_id');
     $this->db->join('tb_mapel mapel', 'mapel.id_mapel=h_test.mapel_id');
     $this->db->join('tb_siswa_profile siswa', 'siswa.id_siswa_profile=h_test.siswa_profile_id');
-    $this->db->where('h_test.siswa_profile_id', $siswa_profile_id);
     $this->db->where('h_test.paket_id', $paket_id);
     $this->db->where('h_test.mapel_id', $mapel_id);
     $this->db->order_by('h_test.tgl_test', 'asc');
+    $this->db->group_by('h_test.siswa_profile_id');
 
     $i = 0;
 
@@ -118,9 +118,9 @@ class H_test_model extends CI_Model
     }
   }
 
-  public function getDataTablesReport($paket_id, $mapel_id, $siswa_profile_id)
+  public function getDataTablesReport($paket_id, $mapel_id)
   {
-    $this->_getDataTablesQueryReport($paket_id, $mapel_id, $siswa_profile_id);
+    $this->_getDataTablesQueryReport($paket_id, $mapel_id);
 
     if (@$_POST['length'] != -1)
       $this->db->limit(@$_POST['length'], @$_POST['start']);
@@ -128,17 +128,17 @@ class H_test_model extends CI_Model
     return $query->result();
   }
 
-  public function countFilteredReport($paket_id, $mapel_id, $siswa_profile_id)
+  public function countFilteredReport($paket_id, $mapel_id)
   {
-    $this->_getDataTablesQueryReport($paket_id, $mapel_id, $siswa_profile_id);
+    $this->_getDataTablesQueryReport($paket_id, $mapel_id);
     $query = $this->db->get();
     return $query->num_rows();
   }
 
-  public function countAllReport($paket_id, $mapel_id, $siswa_profile_id)
+  public function countAllReport($paket_id, $mapel_id)
   {
     $this->db->from('tb_h_test');
-    $this->db->where('tb_h_test.siswa_profile_id', $siswa_profile_id);
+    $this->db->where('tb_h_test.siswa_profile_id');
     $this->db->where('tb_h_test.paket_id', $paket_id);
     $this->db->where('tb_h_test.mapel_id', $mapel_id);
     return $this->db->count_all_results();
