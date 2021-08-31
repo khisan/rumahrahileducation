@@ -47,15 +47,16 @@ class Bab extends CI_Controller
     $this->template->load('template', 'master/tes-menu/bab', $data);
   }
 
-  public function sma($id = null)
+  public function sma($id = null, $video = null)
   {
     $data['mapel'] = $this->mapel->get($id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    $this->template->load('template', 'master/tes-menu/bab', $data);
+    if(!is_null($video)) $this->template->load('template', 'master/video-menu/bab', $data);
+    else $this->template->load('template', 'master/tes-menu/bab', $data);
   }
 
-  public function getAjax($id = null)
+  public function getAjax($id = null, $video = null)
   {
     $list = $this->bab->getDataTables($id);
     $data = [];
@@ -68,8 +69,10 @@ class Bab extends CI_Controller
       $row[] = $bab->semester == 1 ? 'Semester 1' : 'Semester 2';
       $row[] = $bab->created;
       $row[] = $bab->updated;
-      $row[] = '
-          <a  href="' . site_url("paket/index/") . $bab->id_bab . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Paket Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+      $row[] = ((is_null($video)) ? 
+                '<a  href="' . site_url("paket/index/") . $bab->id_bab . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>' : 
+                '<a  href="' . site_url("video/index/null/$bab->id_bab") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>'
+              ).'
           <button type="button" value="' . $bab->id_bab . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $bab->id_bab . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';

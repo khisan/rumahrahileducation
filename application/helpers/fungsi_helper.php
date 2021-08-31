@@ -33,7 +33,13 @@ function check_not_login()
   }
 }
 
-
+// Cek apakah yang login adalah admin atau bukan
+function isAdmin()
+{
+  $ci = &get_instance();
+  if(isset($ci->session->jenjang) && !empty($ci->session->jenjang)) return false;
+  return true;
+}
 
 // ------------------------------------------------------------------------
 

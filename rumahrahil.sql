@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Jul 2021 pada 04.12
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 7.4.16
+-- Generation Time: Aug 30, 2021 at 01:37 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_admin`
+-- Table structure for table `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -37,7 +37,7 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_admin`
+-- Dumping data for table `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `username`, `name`, `password`, `created`, `updated`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `tb_admin` (`id_admin`, `username`, `name`, `password`, `created`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_bab`
+-- Table structure for table `tb_bab`
 --
 
 CREATE TABLE `tb_bab` (
@@ -59,16 +59,19 @@ CREATE TABLE `tb_bab` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_bab`
+-- Dumping data for table `tb_bab`
 --
 
 INSERT INTO `tb_bab` (`id_bab`, `mapel_id`, `nama_bab`, `semester`, `created`, `updated`) VALUES
-(17, 40, 'Subtema 1', 1, '2021-04-27 09:07:34', NULL);
+(17, 40, 'Subtema 1', 1, '2021-04-27 09:07:34', NULL),
+(19, 77, 'Bab 1', 1, '2021-08-30 17:35:23', NULL),
+(20, 78, 'Bab 1: Kehidupan Sosial', 1, '2021-08-30 17:48:49', '2021-08-30 17:48:59'),
+(21, 79, 'Anatomi Tubuh Manusia', 1, '2021-08-30 18:18:51', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_guru_profile`
+-- Table structure for table `tb_guru_profile`
 --
 
 CREATE TABLE `tb_guru_profile` (
@@ -84,7 +87,7 @@ CREATE TABLE `tb_guru_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_guru_profile`
+-- Dumping data for table `tb_guru_profile`
 --
 
 INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
@@ -95,7 +98,7 @@ INSERT INTO `tb_guru_profile` (`id_guru_profile`, `nama`, `username`, `alamat`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_h_test`
+-- Table structure for table `tb_h_test`
 --
 
 CREATE TABLE `tb_h_test` (
@@ -111,7 +114,7 @@ CREATE TABLE `tb_h_test` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_h_test`
+-- Dumping data for table `tb_h_test`
 --
 
 INSERT INTO `tb_h_test` (`id_h_test`, `paket_id`, `mapel_id`, `siswa_profile_id`, `list_soal`, `list_jawaban`, `jml_benar`, `nilai`, `tgl_test`) VALUES
@@ -146,7 +149,7 @@ INSERT INTO `tb_h_test` (`id_h_test`, `paket_id`, `mapel_id`, `siswa_profile_id`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jenjang`
+-- Table structure for table `tb_jenjang`
 --
 
 CREATE TABLE `tb_jenjang` (
@@ -155,7 +158,7 @@ CREATE TABLE `tb_jenjang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jenjang`
+-- Dumping data for table `tb_jenjang`
 --
 
 INSERT INTO `tb_jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
@@ -167,7 +170,7 @@ INSERT INTO `tb_jenjang` (`id_jenjang`, `nama_jenjang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kelas`
+-- Table structure for table `tb_kelas`
 --
 
 CREATE TABLE `tb_kelas` (
@@ -178,7 +181,7 @@ CREATE TABLE `tb_kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_kelas`
+-- Dumping data for table `tb_kelas`
 --
 
 INSERT INTO `tb_kelas` (`id_kelas`, `jenjang_id`, `nama_kelas`, `jurusan`) VALUES
@@ -209,7 +212,7 @@ INSERT INTO `tb_kelas` (`id_kelas`, `jenjang_id`, `nama_kelas`, `jurusan`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mapel`
+-- Table structure for table `tb_mapel`
 --
 
 CREATE TABLE `tb_mapel` (
@@ -222,19 +225,22 @@ CREATE TABLE `tb_mapel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mapel`
+-- Dumping data for table `tb_mapel`
 --
 
 INSERT INTO `tb_mapel` (`id_mapel`, `kelas_id`, `paket_id`, `nama_mapel`, `created`, `updated`) VALUES
 (40, 1, NULL, 'Tema 1', '2021-04-27 09:07:14', NULL),
 (72, NULL, 40, 'Matematika', '2021-05-26 10:33:19', NULL),
 (75, NULL, 51, 'SKD', '2021-05-29 11:12:57', NULL),
-(76, NULL, 52, 'Coba Mapel STIS Kedinasan', '2021-07-05 06:53:49', NULL);
+(76, NULL, 52, 'Coba Mapel STIS Kedinasan', '2021-07-05 06:53:49', NULL),
+(77, 10, NULL, 'IPA Dasar', '2021-08-30 17:33:42', NULL),
+(78, 11, NULL, 'IPS Dasar', '2021-08-30 17:48:24', NULL),
+(79, 10, NULL, 'Biologi', '2021-08-30 18:18:07', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_paket`
+-- Table structure for table `tb_paket`
 --
 
 CREATE TABLE `tb_paket` (
@@ -248,7 +254,7 @@ CREATE TABLE `tb_paket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_paket`
+-- Dumping data for table `tb_paket`
 --
 
 INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`, `created`, `updated`) VALUES
@@ -260,7 +266,7 @@ INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_siswa_profile`
+-- Table structure for table `tb_siswa_profile`
 --
 
 CREATE TABLE `tb_siswa_profile` (
@@ -280,7 +286,7 @@ CREATE TABLE `tb_siswa_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_siswa_profile`
+-- Dumping data for table `tb_siswa_profile`
 --
 
 INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`, `password`, `image`, `created`, `updated`) VALUES
@@ -298,7 +304,7 @@ INSERT INTO `tb_siswa_profile` (`id_siswa_profile`, `nama`, `username`, `jenjang
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_soal`
+-- Table structure for table `tb_soal`
 --
 
 CREATE TABLE `tb_soal` (
@@ -317,7 +323,7 @@ CREATE TABLE `tb_soal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_soal`
+-- Dumping data for table `tb_soal`
 --
 
 INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal`, `option_a`, `option_b`, `option_c`, `option_d`, `option_e`, `jawaban_benar`, `created`, `updated`) VALUES
@@ -345,31 +351,59 @@ INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal`, `option_a`, `o
 (64, 47, 40, '<p><img alt=\"\" src=\"/ckfinder/userfiles/images/__thumbs/backlit-2178297_1920.jpg/backlit-2178297_1920__300x200.jpg\" xss=\"removed\"></p>\n\n<p>coba soal woi</p>\n', '<p>a</p>\n', '<p>b</p>\n', '<p>c</p>\n', '<p>d</p>\n', '<p>e</p>\n', 'e', '2021-06-06 14:10:03', '2021-06-06 14:13:57'),
 (65, 47, 40, '<p><span class=\"CharacterStyle1\" xss=removed><span lang=\"IN\" xss=removed><span xss=removed>Jika a, b, ≥</span></span></span> <span class=\"CharacterStyle1\" xss=removed><span lang=\"IN\" xss=removed><span xss=removed>0, maka pernyataan </span></span></span><span class=\"CharacterStyle1\" xss=removed><span xss=removed><span xss=removed>b</span></span></span><span class=\"CharacterStyle1\" xss=removed><span lang=\"IN\" xss=removed><span xss=removed>awah ini </span></span></span><span class=\"CharacterStyle1\" xss=removed><span lang=\"IN\" xss=removed><span xss=removed>yang benar adalah</span></span></span><span class=\"CharacterStyle1\" xss=removed><span xss=removed><span xss=removed>…</span></span></span></p>\n', '<p><img alt=\"\" src=\"/ckfinder/userfiles/images/image-20210606190704-2.png\" xss=removed></p>\n\n<p>&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;<msqrt><mi>ab</mi></msqrt><mi> </mi><mo>≥</mo><mo> </mo><mfrac><mrow><mi mathvariant=\"normal\">a</mi><mo>+</mo><mi mathvariant=\"normal\">b</mi></mrow><mn>2</mn></mfrac>&lt;/math&gt;</p>\n', '<p>&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;<msqrt><mi>ab</mi></msqrt><mo> </mo><mo>≤</mo><mi> </mi><mi mathvariant=\"normal\"> </mi><mi mathvariant=\"normal\">b</mi><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo><mo> </mo>&lt;/math&gt;</p>\n', '<p>&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;<msqrt><mi>ab</mi></msqrt><mi> </mi><mo>≥</mo><mi mathvariant=\"normal\"> </mi><mfrac><mi>ab</mi><mn>2</mn></mfrac>&lt;/math&gt;</p>\n', '<p>&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;<msqrt><mi>ab</mi></msqrt><mo>≥</mo><mi mathvariant=\"normal\">a</mi><msqrt><mi>b</mi></msqrt>&lt;/math&gt;</p>\n', '<p>&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;<mi> </mi><msqrt><mi>ab</mi></msqrt><mi> </mi><mo>≤</mo><mi mathvariant=\"normal\"> </mi><mi>ab</mi>&lt;/math&gt;</p>\n', 'a', '2021-06-19 11:31:17', '2021-06-19 11:38:51');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_video`
+--
+
+CREATE TABLE `tb_video` (
+  `id_video` int(11) NOT NULL,
+  `mapel_id` int(11) NOT NULL,
+  `bab_id` int(11) DEFAULT NULL,
+  `nama_video` varchar(256) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `link` varchar(128) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_video`
+--
+
+INSERT INTO `tb_video` (`id_video`, `mapel_id`, `bab_id`, `nama_video`, `deskripsi`, `link`, `created`, `updated`) VALUES
+(1, 76, NULL, 'Video Mapel STIS Kedinasan', '<p>Percobaan untuk video mapel stis kedinasan</p>\n', 'https://www.youtube.com/embed/S7Y75KfMUjk', '2021-08-30 17:32:17', '0000-00-00 00:00:00'),
+(2, 77, 19, 'Video IPA Dasar', '<p>Video diperuntukkan untuk siswa kelas 10, Jurusan IPA. Maetri dalam video ini berisikan mengenai bab 1 semester 1</p>\n', 'https://www.youtube.com/embed/ZX4w2C_76Os', '2021-08-30 17:46:27', '2021-08-30 17:47:49'),
+(3, 78, 20, 'VIdeo IPS Dasar', '<p>VIdeo untuk siswa kelas 10 IPS, Bab Pengenalan IPS</p>\n', 'https://www.youtube.com/embed/zbrOpXsDazM', '2021-08-30 18:06:41', '0000-00-00 00:00:00'),
+(4, 79, 21, 'Video Anatomi Tubuh Manusia', '<p>Biologi dalam tubuh manusia</p>\n', 'https://www.youtube.com/embed/XG-IZQMI6Ec', '2021-08-30 18:21:05', '0000-00-00 00:00:00'),
+(5, 72, NULL, 'VIdeo SOshum', '<p>materi mengenai soshum</p>\n', 'https://www.youtube.com/embed/c5MJEcZGTZw', '2021-08-30 18:22:13', '0000-00-00 00:00:00');
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tb_admin`
+-- Indexes for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `tb_bab`
+-- Indexes for table `tb_bab`
 --
 ALTER TABLE `tb_bab`
   ADD PRIMARY KEY (`id_bab`),
   ADD KEY `mapel_id` (`mapel_id`);
 
 --
--- Indeks untuk tabel `tb_guru_profile`
+-- Indexes for table `tb_guru_profile`
 --
 ALTER TABLE `tb_guru_profile`
   ADD PRIMARY KEY (`id_guru_profile`);
 
 --
--- Indeks untuk tabel `tb_h_test`
+-- Indexes for table `tb_h_test`
 --
 ALTER TABLE `tb_h_test`
   ADD PRIMARY KEY (`id_h_test`),
@@ -377,20 +411,20 @@ ALTER TABLE `tb_h_test`
   ADD KEY `mapel_id` (`mapel_id`);
 
 --
--- Indeks untuk tabel `tb_jenjang`
+-- Indexes for table `tb_jenjang`
 --
 ALTER TABLE `tb_jenjang`
   ADD PRIMARY KEY (`id_jenjang`);
 
 --
--- Indeks untuk tabel `tb_kelas`
+-- Indexes for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
   ADD PRIMARY KEY (`id_kelas`),
   ADD KEY `jenjang_id` (`jenjang_id`);
 
 --
--- Indeks untuk tabel `tb_mapel`
+-- Indexes for table `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
   ADD PRIMARY KEY (`id_mapel`),
@@ -398,7 +432,7 @@ ALTER TABLE `tb_mapel`
   ADD KEY `paket_id` (`paket_id`);
 
 --
--- Indeks untuk tabel `tb_paket`
+-- Indexes for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD PRIMARY KEY (`id_paket`),
@@ -406,7 +440,7 @@ ALTER TABLE `tb_paket`
   ADD KEY `tb_paket_ibfk_3` (`kelas_id`);
 
 --
--- Indeks untuk tabel `tb_siswa_profile`
+-- Indexes for table `tb_siswa_profile`
 --
 ALTER TABLE `tb_siswa_profile`
   ADD PRIMARY KEY (`id_siswa_profile`),
@@ -414,7 +448,7 @@ ALTER TABLE `tb_siswa_profile`
   ADD KEY `kelas_id` (`kelas_id`);
 
 --
--- Indeks untuk tabel `tb_soal`
+-- Indexes for table `tb_soal`
 --
 ALTER TABLE `tb_soal`
   ADD PRIMARY KEY (`id_soal`),
@@ -422,107 +456,129 @@ ALTER TABLE `tb_soal`
   ADD KEY `tb_soal_ibfk_2` (`mapel_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- Indexes for table `tb_video`
+--
+ALTER TABLE `tb_video`
+  ADD PRIMARY KEY (`id_video`),
+  ADD KEY `tb_paket_ibfk_2` (`mapel_id`),
+  ADD KEY `tb_bab_ibfk_2` (`bab_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_admin`
+-- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_bab`
+-- AUTO_INCREMENT for table `tb_bab`
 --
 ALTER TABLE `tb_bab`
-  MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_bab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_h_test`
+-- AUTO_INCREMENT for table `tb_h_test`
 --
 ALTER TABLE `tb_h_test`
   MODIFY `id_h_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_jenjang`
+-- AUTO_INCREMENT for table `tb_jenjang`
 --
 ALTER TABLE `tb_jenjang`
   MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_kelas`
+-- AUTO_INCREMENT for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_mapel`
+-- AUTO_INCREMENT for table `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_paket`
+-- AUTO_INCREMENT for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
   MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_soal`
+-- AUTO_INCREMENT for table `tb_soal`
 --
 ALTER TABLE `tb_soal`
   MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for table `tb_video`
+--
+ALTER TABLE `tb_video`
+  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_bab`
+-- Constraints for table `tb_bab`
 --
 ALTER TABLE `tb_bab`
   ADD CONSTRAINT `tb_bab_ibfk_1` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_h_test`
+-- Constraints for table `tb_h_test`
 --
 ALTER TABLE `tb_h_test`
   ADD CONSTRAINT `tb_h_test_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_h_test_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_kelas`
+-- Constraints for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
   ADD CONSTRAINT `tb_kelas_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_mapel`
+-- Constraints for table `tb_mapel`
 --
 ALTER TABLE `tb_mapel`
   ADD CONSTRAINT `tb_mapel_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_mapel_ibfk_2` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_paket`
+-- Constraints for table `tb_paket`
 --
 ALTER TABLE `tb_paket`
   ADD CONSTRAINT `tb_paket_ibfk_1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_paket_ibfk_3` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_siswa_profile`
+-- Constraints for table `tb_siswa_profile`
 --
 ALTER TABLE `tb_siswa_profile`
   ADD CONSTRAINT `tb_siswa_profile_ibfk_1` FOREIGN KEY (`jenjang_id`) REFERENCES `tb_jenjang` (`id_jenjang`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_siswa_profile_ibfk_2` FOREIGN KEY (`kelas_id`) REFERENCES `tb_kelas` (`id_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_soal`
+-- Constraints for table `tb_soal`
 --
 ALTER TABLE `tb_soal`
   ADD CONSTRAINT `tb_soal_ibfk_1` FOREIGN KEY (`paket_id`) REFERENCES `tb_paket` (`id_paket`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_soal_ibfk_2` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_video`
+--
+ALTER TABLE `tb_video`
+  ADD CONSTRAINT `fk_bab1` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`),
+  ADD CONSTRAINT `tb_bab_ibfk_2` FOREIGN KEY (`bab_id`) REFERENCES `tb_bab` (`id_bab`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tb_video_ibfk_1` FOREIGN KEY (`mapel_id`) REFERENCES `tb_mapel` (`id_mapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
