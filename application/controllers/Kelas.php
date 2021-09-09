@@ -66,9 +66,9 @@ class Kelas extends CI_Controller
 
   public function listKelas()
   {
-    $id_jenjang = $this->input->post('id_jenjang');
+    $id_jenjang = $this->input->post('jenjang_id');
 
-    $kelas = $this->kelas->get(null, $id_jenjang)->result();
+    $kelas = $this->kelas->getKelas($id_jenjang)->result();
 
     $lists = "<option value=''>Pilih Kelas</option>";
 

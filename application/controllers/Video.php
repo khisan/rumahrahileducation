@@ -38,8 +38,8 @@ class Video extends CI_Controller
     $id_mapel = (isset($id_mapel) && strtolower($id_mapel) != 'null') ? $id_mapel : NULL;
     $id_bab = (isset($id_bab) && strtolower($id_bab) != 'null') ? $id_bab : NULL;
 
-    if(!isAdmin()) return redirect('dashboard');
-    if(is_null($id_mapel)) {
+    if (!isAdmin()) return redirect('dashboard');
+    if (is_null($id_mapel)) {
       $data['paket'] = NULL;
       $data['bab'] = $this->bab->get($id_bab)->row();
       $data['mapel'] = $this->mapel->get($data['bab']->mapel_id)->row();
@@ -52,7 +52,7 @@ class Video extends CI_Controller
       $data['bab'] = null;
       $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
     }
-    
+
     $this->template->load('template', 'master/video-menu/video', $data);
   }
 
@@ -61,11 +61,11 @@ class Video extends CI_Controller
     $id_mapel = NULL === ($this->input->post('id_mapel')) ? null : $this->input->post('id_mapel');
     $id_bab = NULL === ($this->input->post('id_bab')) ? null : $this->input->post('id_bab');
     $id = (empty($this->input->post('id')) || NULL === $this->input->post('id')) ? null : $this->input->post('id');
-    
+
     $list = $this->video->getDataTables($id, $id_mapel, null, $id_bab);
     $data = [];
     $no = @$_POST['start'];
-    
+
     foreach ($list as $video) {
       $bab = $this->bab->get(null, $video->mapel_id, null)->result();
       $no++;
@@ -77,11 +77,11 @@ class Video extends CI_Controller
       $row[] = html_entity_decode($video->link);
       $row[] = '
           <button type="button" value="' . $video->id_video . '"
-          data-mapel="'.$video->id_mapel.'"
-          data-kelas="'.$this->getKelas($video->id_mapel, false)[0]->id_kelas.'"
-          data-jenjang="'.$this->getKelas($video->id_mapel, false)[0]->jenjang_id.'"
-          data-bab="'.(empty($bab) ? null : $bab[0]->id_bab).'"
-          data-semester="'.(empty($bab) ? null : $bab[0]->semester).'"
+          data-mapel="' . $video->id_mapel . '"
+          data-kelas="' . $this->getKelas($video->id_mapel, false)[0]->id_kelas . '"
+          data-jenjang="' . $this->getKelas($video->id_mapel, false)[0]->jenjang_id . '"
+          data-bab="' . (empty($bab) ? null : $bab[0]->id_bab) . '"
+          data-semester="' . (empty($bab) ? null : $bab[0]->semester) . '"
           class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $video->id_video . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';
@@ -116,7 +116,7 @@ class Video extends CI_Controller
     $this->form_validation->set_rules('deskripsi', 'deskripsi', 'required');
     $this->form_validation->set_rules('link', 'link', 'required|callback_link_check');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
-    
+
     if ($this->form_validation->run() == false) {
       echo json_encode(validation_errors());
     } else {
@@ -151,7 +151,7 @@ class Video extends CI_Controller
 
   public function SMA()
   {
-    if(!isAdmin()) redirect('dashboard');
+    if (!isAdmin()) redirect('dashboard');
     $data['jenjang'] = 'SMA' or 3;
     $data['kelas'] = $this->kelas->get(null, "SMA")->result();
     $this->template->load('template', 'master/video-menu/kelas', $data);
@@ -175,30 +175,28 @@ class Video extends CI_Controller
 
   public function link_check($url)
   {
-    if ($this->video->getEmbedUrl($url) == FALSE)
-    {
+    if ($this->video->getEmbedUrl($url) == FALSE) {
       $this->form_validation->set_message('link_check', 'Link video harus berasal dari Youtube atau Google Drive');
       return FALSE;
-    }
-    else return TRUE;
+    } else return TRUE;
   }
 
   public function getKelas($mapel_id = null, $jsonExport = true)
   {
     if ($mapel_id != null) {
       $dataKelas = $this->db->where('id_mapel', $mapel_id)->get('tb_mapel')->row();
-      if($dataKelas->kelas_id==null) $dataKelas=$this->db->where('id_paket', $dataKelas->paket_id)->get('tb_paket')->row();
+      if ($dataKelas->kelas_id == null) $dataKelas = $this->db->where('id_paket', $dataKelas->paket_id)->get('tb_paket')->row();
       $this->db->where('id_kelas', $dataKelas->kelas_id);
-    } 
-    
+    }
+
     $data = $this->db->get('tb_kelas')->result();
-    if($jsonExport) echo json_encode($data);
+    if ($jsonExport) echo json_encode($data);
     else return $data;
   }
 
   public function daftarVideo($jenjang = null, $kelas = null)
   {
-    if(isAdmin()) redirect('dashboard');
+    if (isAdmin()) redirect('dashboard');
 
     $data['id_jenjang'] = $jenjang;
     $data['id_kelas'] = $kelas;
@@ -208,7 +206,6 @@ class Video extends CI_Controller
     $data['bab'] = $this->bab->get()->result();
     $data['paket'] = $this->paket->get()->result();
     $this->template->load('template', 'user/video', $data);
-
   }
 
   public function getListVideo()
@@ -217,33 +214,33 @@ class Video extends CI_Controller
     $id_mapel = (!empty($this->input->post('id_mapel'))) ? $this->input->post('id_mapel') : null;
     $id_bab = (!empty($this->input->post('id_bab'))) ? $this->input->post('id_bab') : null;
     $searchData = (!empty($this->input->post('search_data'))) ? $this->input->post('search_data') : null;
-    
+
     $list = $this->video->getDataTables($id, $id_mapel, $searchData, $id_bab);
     $data = '<tbody>';
     foreach ($list as $video) {
-      if(strpos($video->link, 'youtube.com')) {
+      if (strpos($video->link, 'youtube.com')) {
         $thumbnail = str_replace('https://www.youtube.com/embed/', 'https://img.youtube.com/vi/', $video->link);
         $thumbnail .= '/default.jpg';
       } else {
         $thumbnail = str_replace('/preview?usp=sharing', '', $video->link);
         $thumbnail = str_replace('file/d/', 'thumbnail?id=', $thumbnail);
       }
-     $data .='
+      $data .= '
         <tr class="border-bottom">
           <th>
           <div class="row px-0 mx-0">
             <div class="col-4 px-0">
-              <img class="img img-responsive w-100 h-100" src="'.$thumbnail.'">
+              <img class="img img-responsive w-100 h-100" src="' . $thumbnail . '">
             </div>
             <div class="col-8 pl-2 pr-0">
               <div class="col-12 px-0">
-                <p class="font-weight-bold h5">'.$video->nama_video.'<p>
+                <p class="font-weight-bold h5">' . $video->nama_video . '<p>
               </div>
               <div class="col-12 px-0 mb-2">
-              '.$video->nama_mapel.' '.(isset($video->nama_bab) ? '&#9679;'.$video->nama_bab : '').'
+              ' . $video->nama_mapel . ' ' . (isset($video->nama_bab) ? '&#9679;' . $video->nama_bab : '') . '
               </div>
               <div class="col-12 px-0 update-container">
-                <button value="'.$video->id_video.'" 
+                <button value="' . $video->id_video . '" 
                   class="btn btn-outline-primary hasRipple btn-rounded w-100 play text-center"><i class="feather mr-2 icon-play"></i>Tonton Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
               </div>
             </div>
@@ -259,7 +256,6 @@ class Video extends CI_Controller
     ];
     echo json_encode($output);
   }
-
 }
 
 

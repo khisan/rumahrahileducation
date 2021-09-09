@@ -79,6 +79,7 @@
       </nav><!-- .nav-menu -->
 
       <a href="<?= site_url("dashboard"); ?>" class="get-started-btn ml-auto">Login</a>
+      <a href="<?= site_url("Authprivate"); ?>" class="get-started-btn">Register</a>
 
     </div>
   </header><!-- End Header -->
