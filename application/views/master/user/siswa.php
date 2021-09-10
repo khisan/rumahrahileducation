@@ -96,6 +96,15 @@
                 <?php } ?>
               </select>
             </div>
+            <div class="form-group col-md-4 fill">
+              <label for="jurusan">Jurusan</label>
+              <select class="form-control" name="jurusan_id" id="jurusan">
+                <option selected value="">Pilih Jurusan</option>
+                <?php foreach ($jurusan->result() as $jur) { ?>
+                  <option value="<?= $jur->id_kelas; ?>"><?= $jur->jurusan; ?></option>
+                <?php } ?>
+              </select>
+            </div>
           </div>
           <div class="form-group fill">
             <label for="sekolah">Sekolah</label>

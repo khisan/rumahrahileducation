@@ -23,18 +23,25 @@ class Authprivate extends CI_Controller
 
   public function process()
   {
-    $username = $this->input->post('username');
-    $name = $this->input->post('name');
-    $password = $this->input->post('password');
-    $pass = password_hash($password, PASSWORD_DEFAULT);
+    $nama = $this->input->post('nama');
+    $jenjang_id = $this->input->post('jenjang_id');
+    $kelas_id = $this->input->post('kelas_id');
+    $jurusan_id = $this->input->post('jurusan_id');
+    $sekolah = $this->input->post('sekolah');
+    $alamat = $this->input->post('alamat');
+    $email = $this->input->post('email');
     $data = [
-      'username' => $username,
-      'name' => $name,
-      'password' => $pass
+      'nama' => $nama,
+      'jenjang_id' => $jenjang_id,
+      'kelas_id' => $kelas_id,
+      'jurusan' => $jurusan_id,
+      'sekolah' => $sekolah,
+      'alamat' => $alamat,
+      'email' => $email,
     ];
-    $insert = $this->auth_model->register("users", $data);
+    $insert = $this->private->register($data);
     if ($insert) {
-      echo '<script>alert("Sukses! Anda berhasil melakukan register. Silahkan login untuk mengakses data.");window.location.href="' . base_url('index.php/auth/login') . '";</script>';
+      echo '<script>alert("Sukses! Anda berhasil melakukan pendaftaran");window.location.href="' . base_url('landingpage') . '";</script>';
     }
   }
 }

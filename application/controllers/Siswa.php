@@ -1,23 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-/**
- *
- * Controller Siswa
- *
- * This controller for ...
- *
- * @package   CodeIgniter
- * @category  Controller CI
- * @author    Setiawan Jodi <jodisetiawan@fisip-untirta.ac.id>
- * @author    Raul Guerrero <r.g.c@me.com>
- * @link      https://github.com/setdjod/myci-extension/
- * @param     ...
- * @return    ...
- *
- */
-
 class Siswa extends CI_Controller
 {
 
@@ -233,7 +216,3 @@ class Siswa extends CI_Controller
     echo $data;
   }
 }
-
-
-/* End of file Siswa.php */
-/* Location: ./application/controllers/Siswa.php */

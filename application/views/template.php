@@ -135,11 +135,17 @@
               <a href="<?= site_url('Report_test'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-archive"></i></span><span class="pcoded-mtext">Laporan Test</span></a>
             </li>
             <li class="nav-item pcoded-menu-caption">
+              <label>Private Management</label>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url('Privatemanagement'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">List Private</span></a>
+            </li>
+            <li class="nav-item pcoded-menu-caption">
               <label>Video Online</label>
             </li>
             <li class="nav-item pcoded-hasmenu">
               <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-play"></i></span><span class="pcoded-mtext">Video Management</span></a>
-              <ul class="pcoded-submenu">                
+              <ul class="pcoded-submenu">
                 <li><a href="<?= site_url('video/sma'); ?>">SMA</a></li>
                 <li><a href="<?= site_url("video/sbm"); ?>">SBM</a></li>
                 <li><a href="<?= site_url("video/kedinasan"); ?>">Kedinasan</a></li>

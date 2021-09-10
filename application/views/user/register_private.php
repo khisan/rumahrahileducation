@@ -27,10 +27,9 @@
         <div class="col-md-12">
           <div class="card-body">
             <h4 class="mb-3 f-w-400">Daftar</h4>
-            <form action="<?= site_url('auth/process'); ?>" method="post">
+            <form action="<?= site_url('authprivate/process'); ?>" method="post">
               <div class="form-group mb-3">
-                <label class="floating-label">Nama</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="">
+                <input type="text" class="form-control" name="nama" placeholder="Nama">
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12 fill">
@@ -57,22 +56,19 @@
                   <select class="form-control" name="jurusan_id" id="jurusan">
                     <option selected value="">Pilih Jurusan</option>
                     <?php foreach ($jurusan->result() as $jur) { ?>
-                      <option value="<?= $jur->jurusan; ?>"><?= $jur->jurusan; ?></option>
+                      <option value="<?= $jur->id_kelas; ?>"><?= $jur->jurusan; ?></option>
                     <?php } ?>
                   </select>
                 </div>
               </div>
               <div class="form-group mb-3">
-                <label class="floating-label">Sekolah</label>
-                <input type="text" class="form-control" id="sekolah" name="sekolah" placeholder="">
+                <input type="text" class="form-control" name="sekolah" placeholder="Sekolah">
               </div>
               <div class="form-group mb-3">
-                <label class="floating-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="">
+                <input type="text" class="form-control" name="alamat" placeholder="Alamat">
               </div>
               <div class="form-group mb-3">
-                <label class="floating-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="">
+                <input type="text" class="form-control" name="email" placeholder="Email">
               </div>
           </div>
           <button type="submit" class="btn btn-block btn-primary mb-4" name="register">Daftar</button>
@@ -82,15 +78,67 @@
     </div>
   </div>
 </div>
-<!-- [ auth-signin ] end -->
 
 <!-- Required Js -->
 <script src="<?= site_url('assets/able/'); ?>assets/js/vendor-all.min.js"></script>
 <script src="<?= site_url('assets/able/'); ?>assets/js/plugins/bootstrap.min.js"></script>
 <script src="<?= site_url('assets/able/'); ?>assets/js/ripple.js"></script>
 <script src="<?= site_url('assets/able/'); ?>assets/js/pcoded.min.js"></script>
+<script src="<?= base_url('assets/able/') ?>assets/js/jquery.js"></script>
 
+<script>
+  $(document).ready(function() {
+    // Chained Dropdown
+    $('#jenjang').change(function() {
+      if ($('#jenjang').val() == 1 || $('#jenjang').val() == 2) {
+        $('#jurusan').attr('disabled', 'disabled')
+      } else {
+        $('#jurusan').removeAttr('disabled');
+      }
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listKelas"); ?>",
+        data: {
+          jenjang_id: $("#jenjang").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#kelas").html(response.list_kelas);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
 
+    $('#kelas').change(function() {
+      $.ajax({
+        type: "POST",
+        url: "<?php echo base_url("kelas/listJurusan"); ?>",
+        data: {
+          kelas_id: $("#kelas").val()
+        },
+        dataType: "json",
+        beforeSend: function(e) {
+          if (e && e.overrideMimeType) {
+            e.overrideMimeType("application/json;charset=UTF-8");
+          }
+        },
+        success: function(response) {
+          $("#jurusan").html(response.list_jurusan);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+      });
+    });
+  })
+</script>
 
 </body>
 
