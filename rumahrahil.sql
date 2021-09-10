@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 01:37 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Sep 10, 2021 at 04:20 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -144,7 +144,9 @@ INSERT INTO `tb_h_test` (`id_h_test`, `paket_id`, `mapel_id`, `siswa_profile_id`
 (221, 47, 40, 'SD179322', '41,42,64,65', '41:,42:,64:,65:,', 0, 0, '2021-07-12 01:46:09'),
 (222, 47, 40, 'SD179322', '41,42,64,65', '41:,42:,64:,65:,', 0, 0, '2021-07-12 01:46:34'),
 (223, 47, 40, 'SD179322', '41,42,64,65', '41:,42:,64:,65:,', 0, 0, '2021-07-12 01:46:40'),
-(224, 47, 40, 'SD179322', '41,42,64,65', '41:,42:,64:,65:,', 0, 0, '2021-07-12 01:46:52');
+(224, 47, 40, 'SD179322', '41,42,64,65', '41:,42:,64:,65:,', 0, 0, '2021-07-12 01:46:52'),
+(1630326774, 40, 72, 'SBM19432d5', '45,46', '45:,46:,', 0, 0, '2021-08-30 07:32:54'),
+(1630326930, 40, 72, 'SBM19beda5', '45,46', '45:a,46:c', 0, 0, '2021-08-30 07:35:30');
 
 -- --------------------------------------------------------
 
@@ -262,6 +264,30 @@ INSERT INTO `tb_paket` (`id_paket`, `bab_id`, `kelas_id`, `nama_paket`, `waktu`,
 (47, 17, NULL, 'Paket 1', 120, '2021-04-27 09:07:46', NULL),
 (51, NULL, 20, 'Paket 1 SAINTEK', 120, '2021-05-29 11:12:47', '2021-06-11 08:48:18'),
 (52, NULL, 21, 'Coba', 100, '2021-07-04 10:42:28', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_private`
+--
+
+CREATE TABLE `tb_private` (
+  `id_private` int(11) NOT NULL,
+  `nama` varchar(1000) NOT NULL,
+  `jenjang_id` int(11) NOT NULL,
+  `kelas_id` int(11) NOT NULL,
+  `jurusan` varchar(100) DEFAULT NULL,
+  `sekolah` varchar(100) NOT NULL,
+  `alamat` varchar(500) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_private`
+--
+
+INSERT INTO `tb_private` (`id_private`, `nama`, `jenjang_id`, `kelas_id`, `jurusan`, `sekolah`, `alamat`, `email`) VALUES
+(1, 'coba private 1', 1, 1, NULL, 'coba', 'DUSUN KRAJAN', 'coba@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -440,6 +466,12 @@ ALTER TABLE `tb_paket`
   ADD KEY `tb_paket_ibfk_3` (`kelas_id`);
 
 --
+-- Indexes for table `tb_private`
+--
+ALTER TABLE `tb_private`
+  ADD PRIMARY KEY (`id_private`);
+
+--
 -- Indexes for table `tb_siswa_profile`
 --
 ALTER TABLE `tb_siswa_profile`
@@ -483,7 +515,7 @@ ALTER TABLE `tb_bab`
 -- AUTO_INCREMENT for table `tb_h_test`
 --
 ALTER TABLE `tb_h_test`
-  MODIFY `id_h_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id_h_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1630326931;
 
 --
 -- AUTO_INCREMENT for table `tb_jenjang`
@@ -508,6 +540,12 @@ ALTER TABLE `tb_mapel`
 --
 ALTER TABLE `tb_paket`
   MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `tb_private`
+--
+ALTER TABLE `tb_private`
+  MODIFY `id_private` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_soal`
