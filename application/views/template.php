@@ -71,10 +71,10 @@
             ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" alt="User-Profile-Image">
               <div class="user-details">
-                <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
+                <div id="more-details"><i class="fa fa-caret-down"></i></div>
               </div>
-            <?php } elseif (strpos($id, 'guru') == 'true') { ?>
-              <img class="img-radius" src="<?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image">
+            <?php } elseif (str_contains($id, 'tentor') == 'true') { ?>
+              <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/tentor.png" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
               </div>
@@ -110,11 +110,9 @@
               <ul class="pcoded-submenu">
                 <li><a href="<?= site_url('admin'); ?>">Admin</a></li>
                 <li><a href="<?= site_url('siswa'); ?>">Siswa</a></li>
-                <!-- <li><a href="<?= site_url('guru'); ?>">Guru</a></li> -->
+                <li><a href="<?= site_url('tentor'); ?>">Tentor</a></li>
               </ul>
             </li>
-          <?php }
-          if (is_numeric($id) == 'true' or strpos($id, 'guru') == 'true') { ?>
             <li class="nav-item pcoded-menu-caption">
               <label>Test Online</label>
             </li>
@@ -129,6 +127,17 @@
               </ul>
             </li>
             <li class="nav-item pcoded-menu-caption">
+              <label>Video Online</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-play"></i></span><span class="pcoded-mtext">Video Management</span></a>
+              <ul class="pcoded-submenu">
+                <li><a href="<?= site_url('video/sma'); ?>">SMA</a></li>
+                <li><a href="<?= site_url("video/sbm"); ?>">SBM</a></li>
+                <li><a href="<?= site_url("video/kedinasan"); ?>">Kedinasan</a></li>
+              </ul>
+            </li>
+            <li class="nav-item pcoded-menu-caption">
               <label>Report</label>
             </li>
             <li class="nav-item">
@@ -140,18 +149,15 @@
             <li class="nav-item">
               <a href="<?= site_url('Privatemanagement'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">List Private</span></a>
             </li>
+          <?php }
+          if (str_contains($id, 'tentor') == 'true') { ?>
             <li class="nav-item pcoded-menu-caption">
-              <label>Video Online</label>
+              <label>Report</label>
             </li>
-            <li class="nav-item pcoded-hasmenu">
-              <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-play"></i></span><span class="pcoded-mtext">Video Management</span></a>
-              <ul class="pcoded-submenu">
-                <li><a href="<?= site_url('video/sma'); ?>">SMA</a></li>
-                <li><a href="<?= site_url("video/sbm"); ?>">SBM</a></li>
-                <li><a href="<?= site_url("video/kedinasan"); ?>">Kedinasan</a></li>
-              </ul>
+            <li class="nav-item">
+              <a href="<?= site_url('Report_test'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-archive"></i></span><span class="pcoded-mtext">List Nilai Test</span></a>
             </li>
-          <?php } else { ?>
+          <?php } elseif (str_contains($id, 'Kedinasan') == 'true' or str_contains($id, 'SBM') == 'true' or str_contains($id, 'SMA') == 'true' or str_contains($id, 'SMP') == 'true' or str_contains($id, 'SD') == 'true') { ?>
             <li class="nav-item">
               <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>
             </li>
@@ -196,8 +202,8 @@
                 ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
-                <?php } elseif (strpos($id, 'guru') == 'true') { ?>
-                  <img src=" <?= base_url() . 'uploads/guru/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">
+                <?php } elseif (str_contains($id, 'tentor') == 'true') { ?>
+                  <img src="<?= base_url('assets/able/'); ?>assets/images/user/tentor.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
                 <?php } else { ?>
                   <img src=" <?= base_url() . 'uploads/siswa/' . $this->session->userdata("gambar"); ?>" alt="User-Profile-Image" class="img-radius">

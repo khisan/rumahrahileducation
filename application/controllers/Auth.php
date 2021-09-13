@@ -25,7 +25,8 @@ class Auth extends CI_Controller
   {
     parent::__construct();
     $this->load->model('Admin_model', 'admin');
-    $this->load->model('Guru_model', 'guru');
+    $this->load->model('Tentor_model', 'tentor');
+    $this->load->model('tentor_model', 'tentor');
     $this->load->model('Siswa_model', 'siswa');
   }
 
@@ -40,8 +41,8 @@ class Auth extends CI_Controller
     $post = $this->input->post(null, TRUE);
     if (isset($post['login'])) {
       $cek_admin = $this->admin->login($post);
-      // $cek_guru = $this->guru->login($post);
       $cek_siswa = $this->siswa->login($post);
+      $cek_tentor = $this->tentor->login($post);
       if ($cek_admin->num_rows() > 0) {
         $row = $cek_admin->row();
         $session_admin = [
@@ -53,18 +54,17 @@ class Auth extends CI_Controller
                 alert("selamat, Login Berhasil");
                 window.location = `' . site_url('Dashboard') . '`;
               </script>';
-        // } elseif ($cek_guru->num_rows() > 0) {
-        //   $row = $cek_guru->row();
-        //   $session_guru = [
-        //     'userid'  => $row->id_guru_profile,
-        //     'nama'    => $row->nama,
-        //     'gambar'  => $row->image
-        //   ];
-        //   $this->session->set_userdata($session_guru);
-        //   echo '<script>
-        //           alert("selamat, Login Berhasil");
-        //           window.location = `' . site_url('Dashboard') . '`;
-        //         </script>';
+      } elseif ($cek_tentor->num_rows() > 0) {
+        $row = $cek_tentor->row();
+        $session_tentor = [
+          'userid'  => $row->id_tentor,
+          'nama'    => $row->name,
+        ];
+        $this->session->set_userdata($session_tentor);
+        echo '<script>
+                  alert("selamat, Login Berhasil");
+                  window.location = `' . site_url('Dashboard') . '`;
+                </script>';
       } elseif ($cek_siswa->num_rows() > 0) {
         $row = $cek_siswa->row();
         $session_siswa = [
@@ -99,7 +99,7 @@ class Auth extends CI_Controller
     ];
 
     // jika yang login adalah siswa, maka hapus juga session siswa
-    if($this->session->has_userdata('jenjang')) {
+    if ($this->session->has_userdata('jenjang')) {
       $params = [
         'userid',
         'nama',
