@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2021 at 04:20 AM
+-- Generation Time: Sep 13, 2021 at 11:41 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -380,6 +380,26 @@ INSERT INTO `tb_soal` (`id_soal`, `paket_id`, `mapel_id`, `soal`, `option_a`, `o
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_tentor`
+--
+
+CREATE TABLE `tb_tentor` (
+  `id_tentor` varchar(11) NOT NULL,
+  `username` varchar(128) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `password` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_tentor`
+--
+
+INSERT INTO `tb_tentor` (`id_tentor`, `username`, `name`, `password`) VALUES
+('tentor-a0f5', 'tentor', 'Tentor', 'ef221fca7d4ec219675a1e7a0ef1357a4f563b36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_video`
 --
 
@@ -486,6 +506,12 @@ ALTER TABLE `tb_soal`
   ADD PRIMARY KEY (`id_soal`),
   ADD KEY `paket_id` (`paket_id`),
   ADD KEY `tb_soal_ibfk_2` (`mapel_id`);
+
+--
+-- Indexes for table `tb_tentor`
+--
+ALTER TABLE `tb_tentor`
+  ADD PRIMARY KEY (`id_tentor`);
 
 --
 -- Indexes for table `tb_video`
