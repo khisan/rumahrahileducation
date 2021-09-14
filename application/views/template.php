@@ -71,9 +71,9 @@
             ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" alt="User-Profile-Image">
               <div class="user-details">
-                <div id="more-details"><i class="fa fa-caret-down"></i></div>
+                <div id="more-details"><?= $nama ?><i class="fa fa-caret-down"></i></div>
               </div>
-            <?php } elseif (str_contains($id, 'tentor') == 'true') { ?>
+            <?php } elseif (strpos($id, 'tentor') !== 'false') { ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/tentor.png" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
@@ -149,15 +149,14 @@
             <li class="nav-item">
               <a href="<?= site_url('Privatemanagement'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">List Private</span></a>
             </li>
-          <?php }
-          if (str_contains($id, 'tentor') == 'true') { ?>
+          <?php } elseif (strpos($id, 'tentor') !== false) { ?>
             <li class="nav-item pcoded-menu-caption">
               <label>Report</label>
             </li>
             <li class="nav-item">
               <a href="<?= site_url('Report_test'); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-archive"></i></span><span class="pcoded-mtext">List Nilai Test</span></a>
             </li>
-          <?php } elseif (str_contains($id, 'Kedinasan') == 'true' or str_contains($id, 'SBM') == 'true' or str_contains($id, 'SMA') == 'true' or str_contains($id, 'SMP') == 'true' or str_contains($id, 'SD') == 'true') { ?>
+          <?php } elseif ((strpos($id, 'Kedinasan') !== 'false' or strpos($id, 'SBM') !== 'false' or strpos($id, 'SMA') !== 'false' or strpos($id, 'SMP') !== 'false' or strpos($id, 'SD') !== 'false')) { ?>
             <li class="nav-item">
               <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>
             </li>
@@ -202,7 +201,7 @@
                 ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/admin.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
-                <?php } elseif (str_contains($id, 'tentor') == 'true') { ?>
+                <?php } elseif (strpos($id, 'tentor') == 'true') { ?>
                   <img src="<?= base_url('assets/able/'); ?>assets/images/user/tentor.png" class="img-radius" alt="User-Profile-Image">
                   <span><?= $nama; ?></span>
                 <?php } else { ?>
