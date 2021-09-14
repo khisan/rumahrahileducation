@@ -73,7 +73,7 @@
               <div class="user-details">
                 <div id="more-details"><?= $nama ?><i class="fa fa-caret-down"></i></div>
               </div>
-            <?php } elseif (strpos($id, 'tentor') !== 'false') { ?>
+            <?php } elseif (strpos($id, 'tentor') == 'true') { ?>
               <img class="img-radius" src="<?= base_url('assets/able/'); ?>assets/images/user/tentor.png" alt="User-Profile-Image">
               <div class="user-details">
                 <div id="more-details"><?= $nama ?> <i class="fa fa-caret-down"></i></div>
