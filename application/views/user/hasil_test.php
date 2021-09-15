@@ -30,6 +30,7 @@
                 <th>Nama Siswa</th>
                 <th>Nilai</th>
                 <th>Tanggal Test</th>
+                <th>Detail Test</th>
               </tr>
             </thead>
             <tbody>
@@ -45,7 +46,6 @@
 <script>
   let table = $('#table').DataTable({
     processing: true,
-    // serverSide: true,
     ajax: {
       url: '<?= site_url("h_test/getAjax/$siswa->siswa_profile_id"); ?>',
       type: 'POST'

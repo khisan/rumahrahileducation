@@ -122,7 +122,7 @@ class Test extends CI_Controller
     $data = $this->test->update('tb_h_test', $simpan, 'id_h_test', $id_test);
     echo json_encode($data);
   }
-  var $final;
+
   public function simpan_akhir()
   {
     $id_test = $this->input->post('id_test');
