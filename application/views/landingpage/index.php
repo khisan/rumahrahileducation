@@ -50,8 +50,8 @@
 
       </nav><!-- .nav-menu -->
 
-      <a href="<?= site_url("dashboard"); ?>" class="get-started-btn ml-auto">Login</a>
-      <a href="<?= site_url("Authprivate"); ?>" class="get-started-btn">Register</a>
+      <a href="<?= site_url("Authprivate"); ?>" class="float-right ml-auto">Daftar Kelas Sekarang !</a>
+      <a href="<?= site_url("dashboard"); ?>" class="get-started-btn float-right">Login</a>
 
     </div>
   </header><!-- End Header -->
