@@ -231,6 +231,7 @@
             <div class="page-wrapper">
               <!-- [ breadcrumb ] start -->
               <script src="<?= base_url('assets/able/') ?>assets/js/jquery.js"></script>
+              <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js" defer></script>
               <?= $contents; ?>
             </div>
           </div>
