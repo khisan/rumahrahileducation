@@ -71,9 +71,17 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
+<!-- Datatables JS --->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.js"></script>
 </script>
 <script>
+  var judul = '<?= $h_test->nama_mapel . " " . $h_test->nama_paket; ?>';
   let table = $('#table').DataTable({
     processing: true,
     // serverSide: true,
@@ -89,6 +97,11 @@
         targets: [-1, -2, -3],
         orderable: false
       }
-    ]
+    ],
+    dom: 'Bflrtip',
+    buttons: [{
+      extend: 'pdf',
+      title: judul
+    }]
   });
 </script>

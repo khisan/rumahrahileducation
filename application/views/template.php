@@ -16,6 +16,9 @@
   <meta name="description" content="" />
   <meta name="keywords" content="">
   <meta name="author" content="Phoenixcoded" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css" />
+
   <!-- Favicon icon -->
   <link rel="icon" href="<?= base_url('assets/able/'); ?>assets/images/favicon.ico" type="image/x-icon">
 
@@ -235,20 +238,13 @@
       </div>
     </div>
   </div>
-
   <!-- Required Js -->
   <script src="<?= base_url('assets/able/'); ?>assets/js/lottie.js"></script>
   <script src="<?= base_url('assets/able/'); ?>assets/js/vendor-all.min.js"></script>
   <script src="<?= base_url('assets/able/'); ?>assets/js/plugins/bootstrap.min.js"></script>
   <script src="<?= base_url('assets/able/'); ?>assets/js/ripple.js"></script>
   <script src="<?= base_url('assets/able/'); ?>assets/js/pcoded.min.js"></script>
-
-  <!-- prism Js -->
   <script src="<?= base_url('assets/able/'); ?>assets/js/plugins/prism.js"></script>
-
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
-  </script>
-
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 

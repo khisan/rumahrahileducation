@@ -41,8 +41,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
-</script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
 <script>
   let table = $('#table').DataTable({
     processing: true,
@@ -50,14 +49,5 @@
       url: '<?= site_url("h_test/getAjax/$siswa->siswa_profile_id"); ?>',
       type: 'POST'
     },
-    columnDefs: [{
-        targets: [-1],
-        className: 'text-center'
-      },
-      {
-        targets: [-1, -2, -3],
-        orderable: false
-      }
-    ]
   });
 </script>
