@@ -59,7 +59,6 @@
               <tr>
                 <th>No</th>
                 <th>Jawab</th>
-                <th>Kunci Jawaban</th>
                 <th>Cek</th>
               </tr>
             </thead>

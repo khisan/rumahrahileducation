@@ -25,7 +25,6 @@ class Detail_h_test extends CI_Controller
     $list = $this->detail_h_test->getDataTables($id_h_test);
     $list_jawaban = $this->test->getJawaban($id_h_test)->row()->list_jawaban;
     $preg_jawaban = trim(preg_replace("/[^A-Za-z]/", "", $list_jawaban));
-    $pc_jawaban = explode(",", $preg_jawaban);
     $data = [];
     $no = @$_POST['start'];
     $i = 0;
@@ -34,7 +33,6 @@ class Detail_h_test extends CI_Controller
       $no++;
       $row = [];
       $row[] = $no . '.';
-      $row[] = $preg_jawaban[$i];
       $row[] = $detail_h_test->jawaban_benar;
       $row[] = $cek;
       $data[] = $row;
