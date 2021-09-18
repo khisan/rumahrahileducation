@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Admin-RumahRahil</title>
+  <title><?= $nama = $this->session->userdata('nama'); ?>-RumahRahil</title>
   <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 11]>
@@ -20,7 +20,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css" />
 
   <!-- Favicon icon -->
-  <link rel="icon" href="<?= base_url('assets/able/'); ?>assets/images/favicon.ico" type="image/x-icon">
+  <link href="<?= site_url('assets/landingpage/img/rumahrahil.jpeg') ?>" rel="icon">
 
   <!-- prism css -->
   <link rel="stylesheet" href="<?= base_url('assets/able/'); ?>assets/css/plugins/prism-coy.css">

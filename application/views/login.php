@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>Login Admin</title>
+  <title>Login Page</title>
   <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 11]>
@@ -18,7 +18,7 @@
   <meta name="keywords" content="">
   <meta name="author" content="Phoenixcoded" />
   <!-- Favicon icon -->
-  <link rel="icon" href="<?= site_url('assets/able/'); ?>assets/images/favicon.ico" type="image/x-icon">
+  <link href="<?= site_url('assets/landingpage/img/rumahrahil.jpeg') ?>" rel="icon">
 
   <!-- vendor css -->
   <link rel="stylesheet" href="<?= site_url('assets/able/'); ?>assets/css/style.css">
