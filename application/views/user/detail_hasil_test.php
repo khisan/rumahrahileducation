@@ -82,6 +82,11 @@
 <script>
   var judul = '<?= $h_test->nama_mapel . " " . $h_test->nama_paket; ?>';
   let table = $('#table').DataTable({
+    rowCallback: function(row, data, index) {
+      if (data[2] == "Salah") {
+        $(row).find('td:eq(2)').css('color', 'red');
+      }
+    },
     processing: true,
     // serverSide: true,
     ajax: {
@@ -98,9 +103,33 @@
       }
     ],
     dom: 'Bflrtip',
+    dom: "<'row'<'col-sm-4'l><'col-sm-4'B><'col-sm-4'f>>" +
+      "<'row'<'col-sm-12'tr>>" +
+      "<'row'<'col-sm-5'i><'col-sm-7'p>>",
     buttons: [{
       extend: 'pdf',
-      title: judul
-    }]
+      text: '<i class="fa fa-print" aria-hidden="true"> Cetak PDF</i>',
+      title: judul,
+      customize: function(doc) {
+        doc.content[1].table.widths =
+          Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+        doc.styles.tableBodyEven.alignment = 'center';
+        doc.styles.tableBodyOdd.alignment = 'center';
+        for (var column = 2; column <= 2; column++) {
+          cek = table.column(column).data().toArray();
+          for (var i = 0; i < cek.length; i++) {
+            if (cek[i] == "Salah") {
+              doc.content[1].table.body[i + 1][column].fillColor = 'red';
+            }
+          }
+        }
+      }
+    }],
+    initComplete: function() {
+      var btns = $('.dt-button');
+      btns.addClass('btn btn-success btn-sm');
+      btns.removeClass('dt-button');
+
+    }
   });
 </script>
