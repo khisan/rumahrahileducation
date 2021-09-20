@@ -4,13 +4,6 @@
 <head>
 
   <title>Login Page</title>
-  <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 11]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-  <!-- Meta -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,34 +16,58 @@
   <!-- vendor css -->
   <link rel="stylesheet" href="<?= site_url('assets/able/'); ?>assets/css/style.css">
 
+  <style>
+    #buku {
+      height: auto;
+      width: auto;
+      max-width: 600px;
+      max-height: 600px;
+    }
 
+    body {
+      background: white;
+    }
+  </style>
 </head>
 
 <!-- [ auth-signin ] start -->
-<div class="auth-wrapper">
-  <div class="auth-content">
-    <div class="card">
+
+<body>
+  <div class="auth-wrapper">
+    <div class="col-md-6 vh-100" style="background: white">
       <div class="row align-items-center text-center">
-        <div class="col-md-12">
-          <div class="card-body">
-            <h4 class="mb-3 f-w-400">Login</h4>
-            <form action="<?= site_url('auth/process'); ?>" method="post">
-              <div class="form-group mb-3">
-                <label class="floating-label" for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="">
+        <div class="col-md-12 mx-auto" style="margin-top: 100px;"">
+        <h1 class=" mb-3 f-w-400">Rumahrahil Education</h1>
+          <img src=" <?= base_url('assets/able/'); ?>assets/images/auth/books_icon.jpg" alt="" id="buku">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 vh-100" style="background: #4680ff;">
+      <div class="auth-content mx-auto" style="margin-top: 130px;">
+        <div class="card">
+          <div class="row align-items-center text-center">
+            <div class="col-md-12">
+              <div class="card-body">
+                <h4 class="mb-3 f-w-400">Login</h4>
+                <form action="<?= site_url('auth/process'); ?>" method="post">
+                  <div class="form-group mb-3">
+                    <label class="floating-label" for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="">
+                  </div>
+                  <div class="form-group mb-4">
+                    <label class="floating-label" for="Password">Password</label>
+                    <input type="password" class="form-control" id="Password" name="password" placeholder="">
+                  </div>
+                  <button type="submit" class="btn btn-block btn-primary mb-4" name="login">Signin</button>
+                </form>
               </div>
-              <div class="form-group mb-4">
-                <label class="floating-label" for="Password">Password</label>
-                <input type="password" class="form-control" id="Password" name="password" placeholder="">
-              </div>
-              <button type="submit" class="btn btn-block btn-primary mb-4" name="login">Signin</button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 <!-- [ auth-signin ] end -->
 
 <!-- Required Js -->
