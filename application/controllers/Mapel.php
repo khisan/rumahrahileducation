@@ -138,24 +138,22 @@ class Mapel extends CI_Controller
 
   public function getAjaxLainnyaVideo($id_kelas)
   {
-    $data = [];
     $paket = $this->paket->get(null, null, $id_kelas)->result();
-    if (count($paket) > 0) {
-      $list = $this->mapel->getDataTablesLainnya($paket);
-      $no = @$_POST['start'];
-      foreach ($list as $mapel) {
-        $no++;
-        $row = [];
-        $row[] = $no . '.';
-        $row[] = $mapel->nama_mapel;
-        $row[] = $mapel->created;
-        $row[] = $mapel->updated;
-        $row[] = '
+    $list = $this->mapel->getDataTablesLainnya($paket);
+    $data = [];
+    $no = @$_POST['start'];
+    foreach ($list as $mapel) {
+      $no++;
+      $row = [];
+      $row[] = $no . '.';
+      $row[] = $mapel->nama_mapel;
+      $row[] = $mapel->created;
+      $row[] = $mapel->updated;
+      $row[] = '
         <a  href="' . site_url("video/index/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
-        $data[] = $row;
-      }
+      $data[] = $row;
     }
     $output = [
       'draw' => @$_POST['draw'],

@@ -58,11 +58,11 @@ class Mapel_model extends CI_Model
 
     // Apakah id paket adalah array? 
     // jika iya maka parameter id_paket dikirim dari controller video
-    if(is_array($id_paket)) {
-      foreach ($id_paket as $key) {
-        $this->db->where('tb_mapel.paket_id', $key->id_paket);
-      }
-    } else $this->db->where('tb_mapel.paket_id', $id_paket);
+    // if (is_array($id_paket)) {
+    //   foreach ($id_paket as $key) {
+    //     $this->db->where('tb_mapel.paket_id', $key->id_paket);
+    //   }
+    // } else $this->db->where('tb_mapel.paket_id', $id_paket);
 
     $i = 0;
 
@@ -128,12 +128,11 @@ class Mapel_model extends CI_Model
     } elseif ($id_kelas != null) {
       $this->db->where('kelas_id', $id_kelas);
     } else {
-      if(is_array($id_paket)) {
+      if (is_array($id_paket)) {
         foreach ($id_paket as $key) {
           $this->db->where('paket_id', $key->id_paket);
         }
-      } 
-      else $this->db->where('paket_id', $id_paket);
+      } else $this->db->where('paket_id', $id_paket);
     }
     $final = $this->db->get('tb_mapel');
     return $final;

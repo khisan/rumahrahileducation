@@ -20,16 +20,16 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong>Mapel <?= $kelas->nama_kelas.' '.$kelas->jurusan ?></strong></strong></h3>
+        <h3 class="text-primary"><strong>Mapel <?= $kelas->nama_kelas . ' ' . $kelas->jurusan ?></strong></strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1><?= $kelas->nama_kelas.' '.$kelas->jurusan; ?></h1>
+            <h1><?= $kelas->nama_kelas . ' ' . $kelas->jurusan; ?></h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-            <a href="<?= site_url("Video/$kelas->nama_kelas"); ?>" class="btn btn-warning btn-flat">
+              <a href="<?= site_url("Video/$kelas->nama_kelas"); ?>" class="btn btn-warning btn-flat">
                 <i class="fa fa-undo"></i> Back </a>
             </div>
           </div>
@@ -87,7 +87,7 @@
               <option value="">Pilih Paket</option>
               <?php foreach ($paket as $row) {
                 echo "<option value='$row->id_paket'>$row->nama_paket</option>";
-              }?>
+              } ?>
             </select>
           </div>
         </form>
