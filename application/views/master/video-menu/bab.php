@@ -8,7 +8,7 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
                     <li class="breadcrumb-item"><a href="<?= site_url("Video/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-                    <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>/video"><?= $kelas->nama_kelas.' '.$kelas->jurusan; ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id"); ?>/video"><?= $kelas->nama_kelas . ' ' . $kelas->jurusan; ?></a></li>
                     <li class="breadcrumb-item"><a href="#!"><?= $mapel->nama_mapel; ?></a></li>
                 </ul>
             </div>
@@ -214,7 +214,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: '<?= site_url('bab/getAjax/') . $mapel->id_mapel; ?>/video',
+                url: '<?= site_url('bab/getAjaxVideo/') . $mapel->id_mapel; ?>',
                 type: 'POST'
             },
             columnDefs: [{

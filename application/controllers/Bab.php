@@ -51,11 +51,15 @@ class Bab extends CI_Controller
     $data['mapel'] = $this->mapel->get($id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    if ($video == "null") $this->template->load('template', 'master/tes-menu/bab', $data);
-    else $this->template->load('template', 'master/video-menu/bab', $data);
+    // var_dump($video);
+    if ($video == "") {
+      $this->template->load('template', 'master/tes-menu/bab', $data);
+    } else {
+      $this->template->load('template', 'master/video-menu/bab', $data);
+    }
   }
 
-  public function getAjax($id = null, $video = null)
+  public function getAjax($id = null)
   {
     $list = $this->bab->getDataTables($id);
     $data = [];
@@ -68,9 +72,36 @@ class Bab extends CI_Controller
       $row[] = $bab->semester == 1 ? 'Semester 1' : 'Semester 2';
       $row[] = $bab->created;
       $row[] = $bab->updated;
-      $row[] = ((is_null($video)) ?
-        '<a  href="' . site_url("paket/index/") . $bab->id_bab . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Soal<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>' :
-        '<a  href="' . site_url("video/index/null/$bab->id_bab") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>') . '
+      $row[] = '<a  href="' . site_url("paket/index/") . $bab->id_bab . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Paket<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+          <button type="button" value="' . $bab->id_bab . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+          <button type="button" value="' . $bab->id_bab . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+      ';
+
+      $data[] = $row;
+    }
+    $output = [
+      'draw' => @$_POST['draw'],
+      'recordsTotal' => $this->bab->countAll(),
+      'recordsFiltered' => $this->bab->countFiltered($id),
+      'data' => $data
+    ];
+    echo json_encode($output);
+  }
+
+  public function getAjaxVideo($id = null)
+  {
+    $list = $this->bab->getDataTables($id);
+    $data = [];
+    $no = @$_POST['start'];
+    foreach ($list as $bab) {
+      $no++;
+      $row = [];
+      $row[] = $no . '.';
+      $row[] = $bab->nama_bab;
+      $row[] = $bab->semester == 1 ? 'Semester 1' : 'Semester 2';
+      $row[] = $bab->created;
+      $row[] = $bab->updated;
+      $row[] = '<a  href="' . site_url("video/index/null/$bab->id_bab") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
           <button type="button" value="' . $bab->id_bab . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
           <button type="button" value="' . $bab->id_bab . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       ';
