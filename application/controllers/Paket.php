@@ -41,11 +41,17 @@ class Paket extends CI_Controller
     $this->template->load('template', 'master/tes-menu/paket', $data);
   }
 
-  public function lainnya($id_jenjang, $id_kelas)
+  public function lainnya($id_jenjang = null, $video = null, $id_kelas = null)
   {
-    $data['kelas'] = $this->kelas->get($id_kelas)->row();
-    $data['jenjang'] = $this->jenjang->get($id_jenjang)->row();
-    $this->template->load('template', 'master/tes-menu/paket_lainnya', $data);
+    if (!is_null($id_jenjang)) {
+      $data['kelas'] = $this->kelas->get($id_kelas)->row();
+      $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
+    } else {
+      $data['kelas'] = $this->kelas->get($id_kelas)->row();
+      $data['jenjang'] = $this->jenjang->get($id_jenjang)->row();
+    }
+    if ($video == "null") $this->template->load('template', 'master/tes-menu/paket_lainnya', $data);
+    else $this->template->load('template', 'master/video-menu/paket_lainnya', $data);
   }
 
   public function getAjax($id_bab)
@@ -90,7 +96,34 @@ class Paket extends CI_Controller
       $row[] = $paket->waktu . ' Menit';
       $row[] = $paket->created;
       $row[] = $paket->updated;
-      $row[] = '<a  href="' . site_url("mapel/lainnya/$paket->id_paket") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+      $row[] = '<a  href="' . site_url("mapel/lainnya/$paket->id_paket/null") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+        <button type="button" value="' . $paket->id_paket . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+        <button type="button" value="' . $paket->id_paket . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
+      $data[] = $row;
+    }
+    $output = [
+      'draw' => @$_POST['draw'],
+      'recordsTotal' => $this->paket->countAll(),
+      'recordsFiltered' => $this->paket->countFilteredLainnya($id_kelas),
+      'data' => $data
+    ];
+    echo json_encode($output);
+  }
+
+  public function getAjaxLainnyaVideo($id_kelas)
+  {
+    $list = $this->paket->getDataTablesLainnya($id_kelas);
+    $data = [];
+    $no = @$_POST['start'];
+    foreach ($list as $paket) {
+      $no++;
+      $row = [];
+      $row[] = $no . '.';
+      $row[] = $paket->nama_paket;
+      $row[] = $paket->waktu . ' Menit';
+      $row[] = $paket->created;
+      $row[] = $paket->updated;
+      $row[] = '<a  href="' . site_url("mapel/lainnya/$paket->id_paket/video") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Mapel<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
         <button type="button" value="' . $paket->id_paket . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         <button type="button" value="' . $paket->id_paket . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
       $data[] = $row;

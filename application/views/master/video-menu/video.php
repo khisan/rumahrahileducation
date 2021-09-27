@@ -8,12 +8,12 @@
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-users"></i></a></li>
           <li class="breadcrumb-item"><a href="<?= (!is_null($bab)) ? site_url("Video/$jenjang->nama_jenjang") : site_url("Video/$kelas->nama_kelas"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-          <li class="breadcrumb-item"><a href="<?= (is_null($bab) ? site_url("Video/$kelas->nama_kelas") : site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id")); ?>/video"><?= $kelas->nama_kelas.' '.$kelas->jurusan; ?></a></li>
-          <?php if(!is_null($bab)): ?>
-          <li class="breadcrumb-item"><a href="<?= (is_null($bab) ? '#!' : site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel")); ?>/video"><?= $mapel->nama_mapel; ?></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel") ?>/video"><?= $bab->nama_bab; ?></a></li>
-          <?php else: ?> 
-          <li class="breadcrumb-item"><a href="<?= site_url("mapel/lainnya/null/video/$kelas->id_kelas"); ?>"><?= $mapel->nama_mapel; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= (is_null($bab) ? site_url("Video/$kelas->nama_kelas") : site_url("mapel/$jenjang->nama_jenjang/$mapel->kelas_id")); ?>/video"><?= $kelas->nama_kelas . ' ' . $kelas->jurusan; ?></a></li>
+          <?php if (!is_null($bab)) : ?>
+            <li class="breadcrumb-item"><a href="<?= (is_null($bab) ? '#!' : site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel")); ?>/video"><?= $mapel->nama_mapel; ?></a></li>
+            <li class="breadcrumb-item"><a href="<?= site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel") ?>/video"><?= $bab->nama_bab; ?></a></li>
+          <?php else : ?>
+            <li class="breadcrumb-item"><a href="<?= site_url("mapel/lainnya/null/video/$kelas->id_kelas"); ?>"><?= $mapel->nama_mapel; ?></a></li>
           <?php endif; ?>
           <li class="breadcrumb-item"><a href="#!">Video</a></li>
         </ul>
@@ -51,8 +51,8 @@
           <button type="button" class="btn btn-primary has-ripple" id="videoAdd"><i class="feather mr-2 icon-plus"></i>Tambah Data<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
         </div>
         <div class="table-responsive">
-          <input type="hidden" name="id_mapel" id="id_mapel" value="<?= $mapel->id_mapel?>">
-          <input type="hidden" name="id_bab" id="id_bab" value="<?= ($bab !== NULL) ? $bab->id_bab : ''?>">
+          <input type="hidden" name="id_mapel" id="id_mapel" value="<?= $mapel->id_mapel ?>">
+          <input type="hidden" name="id_bab" id="id_bab" value="<?= ($bab !== NULL) ? $bab->id_bab : '' ?>">
           <table class="table table-bordered table-striped" id="table">
             <thead>
               <tr>
@@ -118,10 +118,9 @@
 </div>
 <script src="<?= site_url("assets/ckeditor") ?>/ckeditor.js"></script>
 <script>
-
   $(document).ready(function() {
     const site_url = "<?= site_url('video/'); ?>";
-    
+
     $('.video-isi').on('click', '#videoAdd', function() {
       resetForm();
       CKEDITOR.instances.deskripsi.setData('');
@@ -150,10 +149,10 @@
         url: site_url + "get",
         data: {
           id: id,
-          <?php if(isset($paket)) { ?>
-          paket_id: <?= $paket->id_paket ?>,
+          <?php if (isset($paket)) { ?>
+            paket_id: <?= $paket->id_paket ?>,
           <?php } else { ?>
-          bab_id: <?= $bab->id_bab ?>,
+            bab_id: <?= $bab->id_bab ?>,
           <?php } ?>
           mapel_id: $("id_mapel").val()
         },
@@ -179,7 +178,7 @@
       let id = $('#id').val();
       let mapel_id = $('#id_mapel').val();
       let bab_id = $('#id_bab').val();
-      let nama_video =$('#nama_video').val();
+      let nama_video = $('#nama_video').val();
       let deskripsi = CKEDITOR.instances.deskripsi.getData('');
       let link = $('#link').val();
       let formData = new FormData();
@@ -268,10 +267,10 @@
         type: 'POST',
         data: {
           id_mapel: <?= $mapel->id_mapel ?>,
-          <?php if(isset($paket)) { ?>
-          id_paket: <?= $paket->id_paket ?>,
+          <?php if (isset($paket)) { ?>
+            id_paket: <?= $paket->id_paket ?>,
           <?php } else { ?>
-          id_bab: <?= $bab->id_bab ?>,
+            id_bab: <?= $bab->id_bab ?>,
           <?php } ?>
           id: null
         },
@@ -310,6 +309,6 @@
       $("#submitForm")[0].reset();
       $('.validation').html(null);
     }
-    
+
   })
 </script>

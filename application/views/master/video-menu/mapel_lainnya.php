@@ -6,8 +6,7 @@
           <h5 class="m-b-10">Mapel</h5>
         </div>
         <ul class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("Video/$kelas->nama_kelas"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= site_url("Video/$paket->nama_paket"); ?>"></a></li>
         </ul>
       </div>
     </div>
@@ -209,7 +208,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("mapel/getAjaxLainnyaVideo/$kelas->id_kelas"); ?>',
+        url: '<?= site_url("mapel/getAjaxLainnyaVideo/$paket->id_paket"); ?>',
         type: 'POST'
       },
       columnDefs: [{

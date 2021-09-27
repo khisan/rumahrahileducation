@@ -27,7 +27,7 @@
           <?php foreach ($kelas as $key) { ?>
             <div class="col-lg-4">
               <div class="card p-2">
-                <a class="card-block stretched-link text-decoration-none" href="<?= site_url("mapel/lainnya/null/video/$key->id_kelas"); ?>">
+                <a class="card-block stretched-link text-decoration-none" href="<?= site_url("paket/lainnya/$nama_jenjang/video/$key->id_kelas"); ?>">
                   <div class="row">
                     <div class="col-sm-6">
                       <h2 class="card-title"><?= $key->nama_kelas; ?></h2>

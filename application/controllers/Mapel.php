@@ -52,32 +52,19 @@ class Mapel extends CI_Controller
     else $this->template->load('template', 'master/tes-menu/mapel', $data);
   }
 
-  // public function sbm($id = null)
-  // {
-  //   $data['kelas'] = $this->kelas->get($id)->row();
-  //   $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-  //   $this->template->load('template', 'master/tes-menu/mapel', $data);
-  // }
-
-  // public function kedinasan($id = null)
-  // {
-  //   $data['kelas'] = $this->kelas->get($id)->row();
-  //   $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-  //   $this->template->load('template', 'master/tes-menu/mapel', $data);
-  // }
-
   public function lainnya($id = null, $video = null, $id_kelas = null)
   {
-    if (is_null($id_kelas) && strtolower($id) != 'null') {
+    if (!is_null($id)) {
       $data['paket'] = $this->paket->get($id)->row();
       $data['kelas'] = $this->kelas->get($data['paket']->kelas_id)->row();
       $data['jenjang'] = 4;
-    } elseif (strtolower($id) == 'null') {
+    } else {
       $data['kelas'] = $this->kelas->get($id_kelas)->row();
       $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
       $data['paket'] = $this->paket->get(null, null, $id_kelas)->result();
     }
-    if (is_null($video)) $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
+    var_dump($id, $video, $id_kelas);
+    if ($video == "null") $this->template->load('template', 'master/tes-menu/mapel_lainnya', $data);
     else $this->template->load('template', 'master/video-menu/mapel_lainnya', $data);
   }
 
@@ -136,10 +123,37 @@ class Mapel extends CI_Controller
     echo json_encode($output);
   }
 
-  public function getAjaxLainnyaVideo($id_kelas)
+  // public function getAjaxLainnyaVideo($id_kelas)
+  // {
+  //   $paket = $this->paket->get(null, null, $id_kelas)->result();
+  //   $list = $this->mapel->getDataTablesLainnya($paket);
+  //   $data = [];
+  //   $no = @$_POST['start'];
+  //   foreach ($list as $mapel) {
+  //     $no++;
+  //     $row = [];
+  //     $row[] = $no . '.';
+  //     $row[] = $mapel->nama_mapel;
+  //     $row[] = $mapel->created;
+  //     $row[] = $mapel->updated;
+  //     $row[] = '
+  //       <a  href="' . site_url("video/index/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class="feather mr-2 icon-edit"></i>Daftar Video<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+  //       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+  //       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
+  //     $data[] = $row;
+  //   }
+  //   $output = [
+  //     'draw' => @$_POST['draw'],
+  //     'recordsTotal' => $this->mapel->countAll(),
+  //     'recordsFiltered' => $this->mapel->countFiltered(null),
+  //     'data' => $data
+  //   ];
+  //   echo json_encode($output);
+  // }
+
+  public function getAjaxLainnyaVideo($id_paket)
   {
-    $paket = $this->paket->get(null, null, $id_kelas)->result();
-    $list = $this->mapel->getDataTablesLainnya($paket);
+    $list = $this->mapel->getDataTablesLainnya($id_paket);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $mapel) {
@@ -158,7 +172,7 @@ class Mapel extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->mapel->countAll(),
-      'recordsFiltered' => $this->mapel->countFiltered(null),
+      'recordsFiltered' => $this->mapel->countFiltered($id_paket),
       'data' => $data
     ];
     echo json_encode($output);

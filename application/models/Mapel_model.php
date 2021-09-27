@@ -55,9 +55,9 @@ class Mapel_model extends CI_Model
     $this->db->from("tb_mapel");
     $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_mapel.kelas_id", "left");
     $this->db->join("tb_paket", "tb_paket.id_paket = tb_mapel.paket_id", "left");
-
-    // Apakah id paket adalah array? 
-    // jika iya maka parameter id_paket dikirim dari controller video
+    $this->db->where('tb_mapel.paket_id', $id_paket);
+    /*Apakah id paket adalah array? 
+    jika iya maka parameter id_paket dikirim dari controller video*/
     // if (is_array($id_paket)) {
     //   foreach ($id_paket as $key) {
     //     $this->db->where('tb_mapel.paket_id', $key->id_paket);

@@ -206,7 +206,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("paket/getAjaxLainnya/$kelas->id_kelas/video"); ?>',
+        url: '<?= site_url("paket/getAjaxLainnyaVideo/$kelas->id_kelas"); ?>',
         type: 'POST'
       },
       columnDefs: [{

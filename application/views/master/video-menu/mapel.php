@@ -7,8 +7,7 @@
         </div>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a href="#!"><i class="fas fa-school"></i></a></li>
-          <li class="breadcrumb-item"><a href="<?= site_url("Video/$jenjang->nama_jenjang"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
-          <li class="breadcrumb-item"><a href="#!"><?= $kelas->nama_kelas.' '.$kelas->jurusan; ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= site_url("Video/$kelas->nama_kelas"); ?>"><?= $jenjang->nama_jenjang; ?></a></li>
         </ul>
       </div>
     </div>
@@ -21,20 +20,17 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header text-center">
-        <h3 class="text-primary"><strong><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?> <?= $jenjang->nama_jenjang; ?></strong></h3>
+        <h3 class="text-primary"><strong>Mapel <?= $kelas->nama_kelas . ' ' . $kelas->jurusan ?></strong></strong></h3>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-sm-5">
-            <h1><?= $kelas->nama_kelas; ?></h1>
-            <?php if ($jenjang->id_jenjang == 3) { ?>
-              <h5><?= $kelas->jurusan; ?></h5>
-            <?php } ?>
+            <h1><?= $kelas->nama_kelas . ' ' . $kelas->jurusan; ?></h1>
           </div>
           <div class="offset-sm-6 col-sm-1">
             <div class="float-right">
-              <a href="<?= site_url("Video/$jenjang->nama_jenjang"); ?>" class="btn btn-warning btn-flat">
-                <i class="fa fa-undo"></i> Back</a>
+              <a href="<?= site_url("Video/$kelas->nama_kelas"); ?>" class="btn btn-warning btn-flat">
+                <i class="fa fa-undo"></i> Back </a>
             </div>
           </div>
         </div>
@@ -46,7 +42,7 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?></th>
+                <th>Mapel</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Action</th>
@@ -79,10 +75,20 @@
         </div>
         <form id="submitForm">
           <input type="hidden" name="id_mapel" id="id">
-          <input type="hidden" name="kelas_id" id="kelas" value="<?= $kelas->id_kelas; ?>">
+          <!-- <input type="hidden" name="paket_id" id="paket" value="<?= $paket->id_paket; ?>"> -->
           <div class="form-group fill">
-            <label for="mapel"><?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?></label>
-            <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="<?= $jenjang->id_jenjang == 1 ? 'Ketik Nama Tema' : 'Ketik Nama Mapel'; ?>">
+            <label for="mapel">Mapel</label>
+            <input type="text" class="form-control" id="mapel" name="nama_mapel" placeholder="Ketik Nama Mapel">
+          </div>
+
+          <div class="form-group fill">
+            <label for="paket">Paket</label>
+            <select class="form-control" id="paket" name="paket_id">
+              <option value="">Pilih Paket</option>
+              <?php foreach ($paket as $row) {
+                echo "<option value='$row->id_paket'>$row->nama_paket</option>";
+              } ?>
+            </select>
           </div>
         </form>
       </div>
@@ -101,7 +107,7 @@
   $(document).ready(function() {
     const site_url = "<?= site_url('mapel/'); ?>";
     $('.mapel-isi').on('click', '#mapelAdd', function() {
-      $('.judul').html('Tambah <?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?>');
+      $('.judul').html('Tambah Mapel');
       $('.simpan').html('Tambah Data');
       $('.simpan').attr('id', 'add');
       $("#myModal").modal('show');
@@ -110,7 +116,7 @@
     });
 
     $('.mapel-isi').on('click', '.update', function() {
-      $('.judul').html('Update <?= $jenjang->id_jenjang == 1 ? 'Tema' : 'Mapel'; ?>');
+      $('.judul').html('Update Mapel');
       $('.simpan').html('Update Data');
       $('.simpan').attr('id', 'update');
       $("#myModal").modal('show');
@@ -128,6 +134,7 @@
         success: function(response) {
           $('#id').val(response.id_mapel);
           $('#kelas').val(response.kelas_id);
+          $('#paket').val(response.paket_id);
           $('#mapel').val(response.nama_mapel);
         }
       });
@@ -167,9 +174,6 @@
 
     $('.mapel-isi').on('click', '.delete', function() {
       let id = $(this).attr('value');
-
-
-
       swal({
           title: "Apakah anda yakin?",
           text: "data akan terkapus secara permanent!",
@@ -205,7 +209,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("mapel/getAjax/$kelas->id_kelas/video"); ?>',
+        url: '<?= site_url("mapel/getAjaxLainnyaVideo/$kelas->id_kelas"); ?>',
         type: 'POST'
       },
       columnDefs: [{
