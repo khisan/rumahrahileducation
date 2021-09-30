@@ -90,7 +90,7 @@ class Video extends CI_Controller
     $output = [
       'draw' => @$_POST['draw'],
       'recordsTotal' => $this->video->countAll(),
-      'recordsFiltered' => $this->video->countFiltered($id_mapel),
+      'recordsFiltered' => $this->video->countFiltered($id = null, $id_mapel, $searchData = null, $id_bab),
       'data' => $data
     ];
     echo json_encode($output);

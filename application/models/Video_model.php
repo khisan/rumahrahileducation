@@ -35,55 +35,54 @@ class Video_model extends CI_Model
     $this->db->select("*");
     $this->db->from("tb_video");
     $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-    if(!is_null($id)) $this->db->where('tb_video.id_video', $id);
-    if(!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
-    if(!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
+    if (!is_null($id)) $this->db->where('tb_video.id_video', $id);
+    if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+    if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
     $tempRes = $this->db->get()->row();
-    
-    if(!is_null($tempRes) && $tempRes->bab_id != NULL ) {
+
+    if (!is_null($tempRes) && $tempRes->bab_id != NULL) {
       $this->db->select("*");
       $this->db->from("tb_video");
       $this->db->join("tb_bab", "tb_bab.id_bab = tb_video.bab_id");
       $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-      if(!is_null($id)) $this->db->where('tb_video.id_video', $id);
-      if(!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
-      if(!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
-    
+      if (!is_null($id)) $this->db->where('tb_video.id_video', $id);
+      if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+      if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
     } else {
       $this->db->select("*");
       $this->db->from("tb_video");
       $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-      if(!is_null($id)) $this->db->where('tb_video.id_video', $id);
-      if(!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
-      if(!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
+      if (!is_null($id)) $this->db->where('tb_video.id_video', $id);
+      if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+      if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
     }
 
-    $data=null;
-    if(!is_null($searchData)) {
+    $data = null;
+    if (!is_null($searchData)) {
       foreach ($searchData as $table => $column) {
         foreach ($column as $key => $value) {
-          $this->db->like($table.'.'.$key, $value);
+          $this->db->like($table . '.' . $key, $value);
         }
       }
     }
 
     $i = 0;
 
-    if(null !== $this->column_search) {
-    foreach ($this->column_search as $item) {
-      if (@$_POST['search']['value']) {
-        if ($i == 0) {
-          $this->db->group_start();
-          $this->db->like($item, $_POST['search']['value']);
-        } else {
-          $this->db->or_like($item, $_POST['search']['value']);
+    if (null !== $this->column_search) {
+      foreach ($this->column_search as $item) {
+        if (@$_POST['search']['value']) {
+          if ($i == 0) {
+            $this->db->group_start();
+            $this->db->like($item, $_POST['search']['value']);
+          } else {
+            $this->db->or_like($item, $_POST['search']['value']);
+          }
+          if (count($this->column_search) - 1 == $i) {
+            $this->db->group_end();
+          }
         }
-        if (count($this->column_search) - 1 == $i) {
-          $this->db->group_end();
-        }
+        $i++;
       }
-      $i++;
-    }
     }
     if (isset($_POST['order'])) {
       $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
@@ -103,9 +102,9 @@ class Video_model extends CI_Model
     return $query->result();
   }
 
-  public function countFiltered($id)
+  public function countFiltered($id = null, $id_mapel, $searchData = null, $id_bab)
   {
-    $this->_getDataTablesQuery($id);
+    $this->_getDataTablesQuery($id = null, $id_mapel, $searchData = null, $id_bab);
     $query = $this->db->get();
     return $query->num_rows();
   }
@@ -121,7 +120,7 @@ class Video_model extends CI_Model
     $this->db->select("*");
     $this->db->from("tb_video");
     $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-    
+
     if ($id != null) {
       $this->db->where('tb_video.id_video', $id);
     } elseif ($mapel_id != null) {
@@ -130,41 +129,39 @@ class Video_model extends CI_Model
       $this->db->where('tb_video.bab_id', $bab_id);
     }
     $query = $this->db->get();
-    if(isset($query->row()->bab_id)) {
-    if($query->row()->bab_id != null) {
-      $this->db->select("*");
-      $this->db->from("tb_video");
-      $this->db->join("tb_bab", "tb_bab.id_bab = tb_video.bab_id");
-      $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-      if ($id != null) {
-        $this->db->where('tb_video.id_video', $id);
-      } elseif ($mapel_id != null) {
-        $this->db->where('tb_video.mapel_id', $mapel_id);
-      } elseif ($bab_id != null) {
-        $this->db->where('tb_video.bab_id', $bab_id);
+    if (isset($query->row()->bab_id)) {
+      if ($query->row()->bab_id != null) {
+        $this->db->select("*");
+        $this->db->from("tb_video");
+        $this->db->join("tb_bab", "tb_bab.id_bab = tb_video.bab_id");
+        $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
+        if ($id != null) {
+          $this->db->where('tb_video.id_video', $id);
+        } elseif ($mapel_id != null) {
+          $this->db->where('tb_video.mapel_id', $mapel_id);
+        } elseif ($bab_id != null) {
+          $this->db->where('tb_video.bab_id', $bab_id);
+        }
+      } else {
+        $this->db->select("*");
+        $this->db->from("tb_video");
+        $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
+        if ($id != null) {
+          $this->db->where('tb_video.id_video', $id);
+        } elseif ($mapel_id != null) {
+          $this->db->where('tb_video.mapel_id', $mapel_id);
+        } elseif ($bab_id != null) {
+          $this->db->where('tb_video.bab_id', $bab_id);
+        }
       }
-
-    } else {
-      $this->db->select("*");
-      $this->db->from("tb_video");
-      $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
-      if ($id != null) {
-        $this->db->where('tb_video.id_video', $id);
-      } elseif ($mapel_id != null) {
-        $this->db->where('tb_video.mapel_id', $mapel_id);
-      } elseif ($bab_id != null) {
-        $this->db->where('tb_video.bab_id', $bab_id);
-      }
-
-    }
-    $query = $this->db->get();
+      $query = $this->db->get();
     }
     return $query;
   }
 
   public function getVideo($paket_id = null, $mapel_id = null)
   {
-    if($mapel_id != null) {
+    if ($mapel_id != null) {
       $this->db->where('mapel_id', $mapel_id);
     }
     $query = $this->db->get('tb_video');
@@ -207,33 +204,34 @@ class Video_model extends CI_Model
   public function getEmbedUrl($url)
   {
     if (!function_exists('str_contains')) {
-      function str_contains($haystack, $needle) {
-          return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+      function str_contains($haystack, $needle)
+      {
+        return $needle !== '' && mb_strpos($haystack, $needle) !== false;
       }
     }
-    if(str_contains($url, 'https://www.youtube.com/embed/') || 
-      str_contains($url, 'preview?usp=sharing')) return $url;
+    if (
+      str_contains($url, 'https://www.youtube.com/embed/') ||
+      str_contains($url, 'preview?usp=sharing')
+    ) return $url;
 
-    if(str_contains($url, 'drive.google.com')) {
+    if (str_contains($url, 'drive.google.com')) {
       $convertedUrl = str_replace('/view?usp=sharing', '/preview?usp=sharing', $url);
-    }
-    else if(str_contains($url, 'youtu.be') || str_contains($url, 'youtube.com')) {
+    } else if (str_contains($url, 'youtu.be') || str_contains($url, 'youtube.com')) {
       $shortUrlRegex = '/youtu.be\/([a-zA-Z0-9_-]+)\??/i';
       $longUrlRegex = '/youtube.com\/((?:embed)|(?:watch))((?:\?v\=)|(?:\/))([a-zA-Z0-9_-]+)/i';
 
       if (preg_match($longUrlRegex, $url, $matches)) {
-          $youtube_id = $matches[count($matches) - 1];
+        $youtube_id = $matches[count($matches) - 1];
       }
 
       if (preg_match($shortUrlRegex, $url, $matches)) {
-          $youtube_id = $matches[count($matches) - 1];
+        $youtube_id = $matches[count($matches) - 1];
       }
-      $convertedUrl = 'https://www.youtube.com/embed/' .$youtube_id;
-    }
-    else {
+      $convertedUrl = 'https://www.youtube.com/embed/' . $youtube_id;
+    } else {
       return FALSE;
     }
-    
+
     return $convertedUrl;
   }
   // ------------------------------------------------------------------------
