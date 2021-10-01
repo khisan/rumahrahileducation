@@ -63,12 +63,12 @@ class Paket_model extends CI_Model
     }
   }
 
-  public function _getDataTablesQueryLainnya($id_paket)
+  public function _getDataTablesQueryLainnya($id_kelas)
   {
     $this->db->select("*");
     $this->db->from("tb_paket");
     $this->db->join("tb_kelas", "tb_kelas.id_kelas = tb_paket.kelas_id");
-    $this->db->where('tb_paket.kelas_id', $id_paket);
+    $this->db->where('tb_paket.kelas_id', $id_kelas);
 
     $i = 0;
 
@@ -104,9 +104,9 @@ class Paket_model extends CI_Model
     return $query->result();
   }
 
-  public function getDataTablesLainnya($id_paket)
+  public function getDataTablesLainnya($id_kelas)
   {
-    $this->_getDataTablesQueryLainnya($id_paket);
+    $this->_getDataTablesQueryLainnya($id_kelas);
 
     if (@$_POST['length'] != -1)
       $this->db->limit(@$_POST['length'], @$_POST['start']);
@@ -121,9 +121,9 @@ class Paket_model extends CI_Model
     return $query->num_rows();
   }
 
-  public function countFilteredLainnya($id_paket)
+  public function countFilteredLainnya($id_kelas)
   {
-    $this->_getDataTablesQuery($id_paket);
+    $this->_getDataTablesQueryLainnya($id_kelas);
     $query = $this->db->get();
     return $query->num_rows();
   }
