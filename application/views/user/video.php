@@ -126,6 +126,14 @@
               </div>
               <div class="col-sm-3">
                 <div class="form-group">
+                  <label for="exampleFormControlSelect1">Paket</label>
+                  <select class="form-control" id="paket_lainnya" name="paket">
+                    <option selected value="">Pilih Paket</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
                   <label for="exampleFormControlSelect1">Mapel</label>
                   <select class="form-control" id="mapel_lainnya" name="mapel">
                     <option selected value="">Pilih Mapel</option>
@@ -327,7 +335,7 @@
 
       $.ajax({
         type: "POST",
-        url: "<?php echo base_url("mapel/listMapelLainnya"); ?>",
+        url: "<?php echo base_url("paket/listPaketLainnya"); ?>",
         data: {
           id_kelas: $("#kelas_lainnya").val()
         },
@@ -338,11 +346,33 @@
           }
         },
         success: function(response) {
-          $("#mapel_lainnya").html(response.list_mapel_lainnya).show();
+          $("#paket_lainnya").html(response.list_paket_lainnya).show();
         },
         error: function(xhr, ajaxOptions, thrownError) {
           alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
         }
+      });
+
+      $("#paket_lainnya").change(function() {
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url("mapel/listMapelLainnya"); ?>",
+          data: {
+            id_paket: $("#paket_lainnya").val(),
+          },
+          dataType: "json",
+          beforeSend: function(e) {
+            if (e && e.overrideMimeType) {
+              e.overrideMimeType("application/json;charset=UTF-8");
+            }
+          },
+          success: function(response) {
+            $("#mapel_lainnya").html(response.list_mapel_lainnya).show();
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+          }
+        });
       });
 
       $('#mapel_lainnya').change(function() {

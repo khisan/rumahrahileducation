@@ -51,15 +51,14 @@ class Bab extends CI_Controller
     $data['mapel'] = $this->mapel->get($id)->row();
     $data['kelas'] = $this->kelas->get($data['mapel']->kelas_id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    // var_dump($video);
-    if ($video == "") {
+    if (is_null($video)) {
       $this->template->load('template', 'master/tes-menu/bab', $data);
     } else {
       $this->template->load('template', 'master/video-menu/bab', $data);
     }
   }
 
-  public function getAjax($id = null)
+  public function getAjax($id)
   {
     $list = $this->bab->getDataTables($id);
     $data = [];
@@ -88,7 +87,7 @@ class Bab extends CI_Controller
     echo json_encode($output);
   }
 
-  public function getAjaxVideo($id = null)
+  public function getAjaxVideo($id)
   {
     $list = $this->bab->getDataTables($id);
     $data = [];

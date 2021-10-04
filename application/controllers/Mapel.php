@@ -182,7 +182,6 @@ class Mapel extends CI_Controller
       $id_paket = $this->paket->get(null, null, $id_kelas)->result();
     }
     $mapels_lainnya = $this->mapel->get(null, null, $id_paket)->result();
-    var_dump($mapels_lainnya);
 
     $lists = "<option value=''>Pilih Mapel</option>";
 
