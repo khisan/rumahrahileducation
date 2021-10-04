@@ -89,7 +89,7 @@ class Bab extends CI_Controller
 
   public function getAjaxVideo($id)
   {
-    $list = $this->bab->getDataTables($id);
+    $list = $this->bab->getDataTablesVideo($id);
     $data = [];
     $no = @$_POST['start'];
     foreach ($list as $bab) {

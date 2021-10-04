@@ -209,7 +209,7 @@
       processing: true,
       serverSide: true,
       ajax: {
-        url: '<?= site_url("mapel/getAjaxLainnyaVideo/$kelas->id_kelas"); ?>',
+        url: '<?= site_url("mapel/getAjaxVideo/$kelas->id_kelas"); ?>',
         type: 'POST'
       },
       columnDefs: [{

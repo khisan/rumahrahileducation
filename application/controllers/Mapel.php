@@ -26,6 +26,7 @@ class Mapel extends CI_Controller
     parent::__construct();
     $this->load->model('Jenjang_model', 'jenjang');
     $this->load->model('Kelas_model', 'kelas');
+    $this->load->model('Bab_model', 'bab');
     $this->load->model('Mapel_model', 'mapel');
     $this->load->model('Paket_model', 'paket');
   }
@@ -48,8 +49,8 @@ class Mapel extends CI_Controller
   {
     $data['kelas'] = $this->kelas->get($id)->row();
     $data['jenjang'] = $this->jenjang->get($data['kelas']->jenjang_id)->row();
-    if (!is_null($video)) $this->template->load('template', 'master/video-menu/mapel', $data);
-    else $this->template->load('template', 'master/tes-menu/mapel', $data);
+    if (is_null($video)) $this->template->load('template', 'master/tes-menu/mapel', $data);
+    else $this->template->load('template', 'master/video-menu/mapel', $data);
   }
 
   public function lainnya($id = null, $video = null, $id_kelas = null)
@@ -82,6 +83,34 @@ class Mapel extends CI_Controller
       $row[] = $mapel->created;
       $row[] = $mapel->updated;
       $row[] = '<a  href="' . site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel") . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
+      <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
+      <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
+      $data[] = $row;
+    }
+    $output = [
+      'draw' => @$_POST['draw'],
+      'recordsTotal' => $this->mapel->countAll(),
+      'recordsFiltered' => $this->mapel->countFiltered($id),
+      'data' => $data
+    ];
+    echo json_encode($output);
+  }
+
+  public function getAjaxVideo($id = null)
+  {
+    $kelas = $this->kelas->get($id)->row();
+    $jenjang = $this->jenjang->get($kelas->jenjang_id)->row();
+    $list = $this->mapel->getDataTables($id);
+    $data = [];
+    $no = @$_POST['start'];
+    foreach ($list as $mapel) {
+      $no++;
+      $row = [];
+      $row[] = $no . '.';
+      $row[] = $mapel->nama_mapel;
+      $row[] = $mapel->created;
+      $row[] = $mapel->updated;
+      $row[] = '<a  href="' . site_url("bab/$jenjang->nama_jenjang/$mapel->id_mapel/video") . '" class="btn btn-primary has-ripple"><i class=" mr-2 fas fa-clipboard-list"></i>Daftar Bab<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></a>
       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-success has-ripple update"><i class="feather mr-2 icon-edit"></i>Update<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>
       <button type="button" value="' . $mapel->id_mapel . '" class="btn btn-danger has-ripple delete"><i class="feather mr-2 icon-trash"></i>Delete<span class="ripple ripple-animate" style="height: 112.65px; width: 112.65px; animation-duration: 0.7s; animation-timing-function: linear; background: rgb(255, 255, 255) none repeat scroll 0% 0%; opacity: 0.4; top: -38.825px; left: -2.85833px;"></span></button>';
       $data[] = $row;
