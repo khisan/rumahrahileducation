@@ -101,6 +101,11 @@ class Admin_model extends CI_Model
     return $query;
   }
 
+  public function login_rest($user)
+  {
+    return $this->db->get_where("tb_admin", $user);
+  }
+
   public function create($post)
   {
     $params = [

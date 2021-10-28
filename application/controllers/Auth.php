@@ -49,6 +49,7 @@ class Auth extends CI_Controller
           'userid'  => $row->id_admin,
           'nama'    => $row->name
         ];
+        // var_dump($this->input->post('username'));
         $this->session->set_userdata($session_admin);
         echo '<script>
                 alert("selamat, Login Berhasil");
