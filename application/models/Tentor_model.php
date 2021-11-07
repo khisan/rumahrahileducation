@@ -86,6 +86,11 @@ class Tentor_model extends CI_Model
     return $query;
   }
 
+  public function login_rest($user)
+  {
+    return $this->db->get_where("tb_tentor", $user);
+  }
+
   public function create($post)
   {
     $params = [

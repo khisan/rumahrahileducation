@@ -7,17 +7,11 @@ class Dashboard extends CI_Controller
   {
     parent::__construct();
     check_not_login();
-    $this->auth();
   }
 
   public function index()
   {
     $this->template->load('template', 'dashboard');
-  }
-
-  public function backend_page_post(){
-    $theCredential = $this->user_data;
-    $this->response($theCredential, 200); // OK (200) being the HTTP response code
   }
 }
 

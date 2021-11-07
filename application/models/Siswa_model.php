@@ -1,36 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- *
- * Model Siswa_model
- *
- * This Model for ...
- * 
- * @package		CodeIgniter
- * @category	Model
- * @author    Setiawan Jodi <jodisetiawan@fisip-untirta.ac.id>
- * @link      https://github.com/setdjod/myci-extension/
- * @param     ...
- * @return    ...
- *
- */
-
 class Siswa_model extends CI_Model
 {
-
-  // ------------------------------------------------------------------------
-
   var $column_order = [null, 'nama', 'jenjang_name', 'kelas_name', 'jurusan', 'sekolah', 'alamat', 'email'];
   var $column_search = ['nama', 'tb_jenjang.nama_jenjang', 'tb_kelas.nama_kelas', 'sekolah', 'alamat', 'email'];
-
   var $order = ['id_siswa_profile' => 'asc'];
-  // ------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------
-
-
-  // ------------------------------------------------------------------------
 
   public function _getDataTablesQuery()
   {
@@ -113,6 +88,11 @@ class Siswa_model extends CI_Model
     $this->db->where('password', sha1($post['password']));
     $query = $this->db->get();
     return $query;
+  }
+
+  public function login_rest($user)
+  {
+    return $this->db->get_where("tb_siswa_profile", $user);
   }
 
   public function create($post)
