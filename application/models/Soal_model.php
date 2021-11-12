@@ -1,34 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- *
- * Model Soal_model
- *
- * This Model for ...
- * 
- * @package		CodeIgniter
- * @category	Model
- * @author    Setiawan Jodi <jodisetiawan@fisip-untirta.ac.id>
- * @link      https://github.com/setdjod/myci-extension/
- * @param     ...
- * @return    ...
- *
- */
-
 class Soal_model extends CI_Model
 {
-
   var $column_order = [null, 'soal'];
   var $column_search = ['soal'];
 
   var $order = ['id_soal' => 'asc'];
-  // ------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------
-
-
-  // ------------------------------------------------------------------------
 
   public function _getDataTablesQuery($id = null, $id_mapel = null)
   {
@@ -98,6 +76,18 @@ class Soal_model extends CI_Model
     }
     $query = $this->db->get('tb_soal');
     return $query;
+  }
+
+  public function getRest($id, $id_paket, $id_mapel)
+  {
+    if ($id != null) {
+      $this->db->where("id_soal", $id);
+    } elseif ($id_paket != null) {
+      $this->db->where("paket_id", $id_paket);
+    } elseif ($id_mapel != null) {
+      $this->db->where("mapel_id", $id_mapel);
+    }
+    return $this->db->get("tb_soal")->result();
   }
 
   public function getSoal($paket_id = null, $mapel_id = null)

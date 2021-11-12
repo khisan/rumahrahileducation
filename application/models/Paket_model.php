@@ -134,7 +134,6 @@ class Paket_model extends CI_Model
     return $this->db->count_all_results();
   }
 
-  // ------------------------------------------------------------------------
   public function get($id = null, $id_bab = null, $id_kelas = null)
   {
     if ($id != null) {
@@ -146,6 +145,18 @@ class Paket_model extends CI_Model
     }
     $query = $this->db->get('tb_paket');
     return $query;
+  }
+
+  public function getRest($id, $id_bab, $id_kelas)
+  {
+    if ($id != null) {
+      $this->db->where("id_paket", $id);
+    } elseif ($id_bab != null) {
+      $this->db->where("bab_id", $id_bab);
+    } elseif ($id_kelas != null) {
+      $this->db->where("kelas_id", $id_kelas);
+    }
+    return $this->db->get("tb_paket")->result();
   }
 
   public function create($post)

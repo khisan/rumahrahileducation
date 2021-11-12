@@ -11,17 +11,10 @@ class Auth extends BD_Controller
     parent::__construct();
     $this->load->model('Admin_model', 'admin');
     $this->load->model('Tentor_model', 'tentor');
-    $this->load->model('tentor_model', 'tentor');
     $this->load->model('Siswa_model', 'siswa');
   }
 
-  public function login()
-  {
-    check_already_login();
-    $this->load->view('login');
-  }
-
-  public function process_post()
+  public function index_post()
   {
     $username = $this->post('username'); //Username Posted
     $password = sha1($this->post('password')); //Pasword Posted
@@ -84,7 +77,3 @@ class Auth extends BD_Controller
     }
   }
 }
-
-
-/* End of file Auth.php */
-/* Location: ./application/controllers/Auth.php */

@@ -4,18 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Mapel_model extends CI_Model
 {
 
-  // ------------------------------------------------------------------------
-
   var $column_order = [null, 'nama_mapel', 'created'];
   var $column_search = ['nama_mapel'];
 
   var $order = ['id_mapel' => 'asc'];
-  // ------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------
-
-
-  // ------------------------------------------------------------------------
 
   public function _getDataTablesQuery($id)
   {
@@ -136,6 +128,18 @@ class Mapel_model extends CI_Model
     }
     $final = $this->db->get('tb_mapel');
     return $final;
+  }
+
+  public function getRest($id, $id_kelas, $id_paket)
+  {
+    if ($id != null) {
+      $this->db->where("id_mapel", $id);
+    } elseif ($id_kelas != null) {
+      $this->db->where("kelas_id", $id_kelas);
+    } elseif ($id_paket != null) {
+      $this->db->where("paket_id", $id_paket);
+    }
+    return $this->db->get("tb_mapel")->result();
   }
 
   public function create($post)

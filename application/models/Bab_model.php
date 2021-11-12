@@ -1,36 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-/**
- *
- * Model Bab_model
- *
- * This Model for ...
- * 
- * @package		CodeIgniter
- * @category	Model
- * @author    Setiawan Jodi <jodisetiawan@fisip-untirta.ac.id>
- * @link      https://github.com/setdjod/myci-extension/
- * @param     ...
- * @return    ...
- *
- */
-
 class Bab_model extends CI_Model
 {
-
-  // ------------------------------------------------------------------------
-
   var $column_order = [null, 'nama_bab', 'semester', 'created'];
   var $column_search = ['nama_bab'];
 
   var $order = ['id_bab' => 'asc'];
-  // ------------------------------------------------------------------------
-
-  // ------------------------------------------------------------------------
-
-
-  // ------------------------------------------------------------------------
 
   public function _getDataTablesQuery($id = null)
   {
@@ -86,7 +62,6 @@ class Bab_model extends CI_Model
     return $this->db->count_all_results();
   }
 
-  // ------------------------------------------------------------------------
   public function get($id = null, $id_mapel = null, $semester = null)
   {
     $this->db->from('tb_bab');
@@ -99,6 +74,18 @@ class Bab_model extends CI_Model
     }
     $query = $this->db->get();
     return $query;
+  }
+
+  public function getRest($id, $id_mapel, $semester)
+  {
+    if ($id != null) {
+      $this->db->where("id_mapel", $id);
+    } elseif ($id_mapel != null) {
+      $this->db->where("mapel_id", $id_mapel);
+    } elseif ($semester != null) {
+      $this->db->where("semester", $semester);
+    }
+    return $this->db->get("tb_bab")->result();
   }
 
   public function create($post)
