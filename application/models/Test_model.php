@@ -18,6 +18,11 @@ class Test_model extends CI_Model
     return $this->db->affected_rows();
   }
 
+  public function createRest($post)
+  {
+    $this->db->insert('tb_h_test', $post);
+  }
+
   public function update($table, $data, $pk, $id = null, $batch = false)
   {
     if ($batch === false) {
@@ -28,6 +33,13 @@ class Test_model extends CI_Model
     return $insert;
   }
 
+  public function updateRest($post, $id_h_test)
+  {
+    $this->db->set($post);
+    $this->db->where('id_h_test', $id_h_test);
+    return $this->db->update('tb_h_test');
+  }
+
   public function get($siswa_profile_id)
   {
     $this->db->where('siswa_profile_id', $siswa_profile_id);
@@ -35,10 +47,26 @@ class Test_model extends CI_Model
     return $query;
   }
 
+  public function getRest($siswa_profile_id)
+  {
+    if ($siswa_profile_id !== null) {
+      $this->db->where("siswa_profile_id", $siswa_profile_id);
+    } else {
+      $this->db->get("tb_h_test")->result();
+    }
+    return $this->db->get("tb_h_test")->result();
+  }
+
   public function getJawaban($id_test)
   {
     $this->db->where('id_h_test', $id_test);
     $query = $this->db->get('tb_h_test');
     return $query;
+  }
+
+  public function getJawabanRest($id_test)
+  {
+    $this->db->where('id_h_test', $id_test);
+    return $this->db->get('tb_h_test')->result();
   }
 }

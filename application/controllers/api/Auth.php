@@ -20,7 +20,8 @@ class Auth extends BD_Controller
     $password = sha1($this->post('password')); //Pasword Posted
     $user = array('username' => $username); //For where query condition
     $kunci = $this->config->item('thekey');
-    $invalidLogin = ['status' => 'Invalid Login']; //Respon if login invalid
+    $invalidUserPass = ['status' => 'Login/Password Wrong']; //Respon if login invalid
+    $invalidUsername = ['status' => 'Invalid Login']; //Respon if login invalid
     if ($this->admin->login_rest($user)->num_rows() > 0) {
       $val = $this->admin->login_rest($user)->row(); //Model to get single data row from database base on username
       $match = $val->password;   //Get password for user from database
@@ -34,7 +35,7 @@ class Auth extends BD_Controller
         $output['token'] = JWT::encode($token, $kunci); //This is the output token
         $this->set_response($output, REST_Controller::HTTP_OK); //This is the respon if success
       } else {
-        $this->set_response($invalidLogin, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
+        $this->set_response($invalidUserPass, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
       }
     } elseif ($this->tentor->login_rest($user)->num_rows() > 0) {
       $val = $this->tentor->login_rest($user)->row(); //Model to get single data row from database base on username
@@ -49,7 +50,7 @@ class Auth extends BD_Controller
         $output['token'] = JWT::encode($token, $kunci); //This is the output token
         $this->set_response($output, REST_Controller::HTTP_OK); //This is the respon if success
       } else {
-        $this->set_response($invalidLogin, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
+        $this->set_response($invalidUserPass, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
       }
     } elseif ($this->siswa->login_rest($user)->num_rows() > 0) {
       $val = $this->siswa->login_rest($user)->row(); //Model to get single data row from database base on username
@@ -70,10 +71,10 @@ class Auth extends BD_Controller
         $output['token'] = JWT::encode($token, $kunci); //This is the output token
         $this->set_response($output, REST_Controller::HTTP_OK); //This is the respon if success
       } else {
-        $this->set_response($invalidLogin, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
+        $this->set_response($invalidUserPass, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
       }
     } else {
-      $this->set_response($invalidLogin, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
+      $this->set_response($invalidUsername, REST_Controller::HTTP_NOT_FOUND); //This is the respon if failed
     }
   }
 }
