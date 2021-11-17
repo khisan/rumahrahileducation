@@ -80,7 +80,7 @@ class H_test_model extends CI_Model
     $query = $this->db->get('tb_h_test');
     return $query;
   }
-
+  
   // Datatables Report Test
   public function _getDataTablesQueryReport($paket_id = null, $mapel_id = null)
   {
@@ -116,6 +116,13 @@ class H_test_model extends CI_Model
       $order = $this->order;
       $this->db->order_by(key($order), $order[key($order)]);
     }
+  }
+
+  public function getReportRest($paket_id, $mapel_id)
+  {
+    $this->db->where('paket_id', $paket_id);
+    $this->db->where('mapel_id', $mapel_id);
+    return $this->db->get("tb_h_test")->result();
   }
 
   public function getDataTablesReport($paket_id, $mapel_id)
