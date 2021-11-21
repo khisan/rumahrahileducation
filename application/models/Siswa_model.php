@@ -71,6 +71,14 @@ class Siswa_model extends CI_Model
     return $query;
   }
 
+  public function get_rest($username)
+  {
+    $this->db->select("id_siswa_profile,nama,username,jenjang_id,kelas_id,jurusan,sekolah,alamat,email,image");
+    $this->db->from("tb_siswa_profile");
+    $this->db->where("username", $username);
+    return $this->db->get()->row();
+  }
+
   public function getSiswa($siswa_profile_id)
   {
     $this->db->where('id_siswa_profile', $siswa_profile_id);

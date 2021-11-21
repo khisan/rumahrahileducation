@@ -91,6 +91,14 @@ class Admin_model extends CI_Model
     return $query;
   }
 
+  public function get_rest($username)
+  {
+    $this->db->select("id_admin,username,name");
+    $this->db->from("tb_admin");
+    $this->db->where("username", $username);
+    return $this->db->get()->row();
+  }
+
   public function login($post)
   {
     $this->db->select('*');
