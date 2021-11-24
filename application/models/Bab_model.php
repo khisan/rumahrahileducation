@@ -78,6 +78,8 @@ class Bab_model extends CI_Model
 
   public function getRest($id, $id_mapel, $semester)
   {
+    $this->db->select("id_bab,mapel_id,nama_bab,semester");
+    $this->db->from("tb_bab");
     if ($id != null) {
       $this->db->where("id_mapel", $id);
     } elseif ($id_mapel != null) {
@@ -85,7 +87,7 @@ class Bab_model extends CI_Model
     } elseif ($semester != null) {
       $this->db->where("semester", $semester);
     }
-    return $this->db->get("tb_bab")->result();
+    return $this->db->get()->result();
   }
 
   public function create($post)

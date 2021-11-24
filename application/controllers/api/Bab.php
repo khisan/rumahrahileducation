@@ -11,15 +11,13 @@ class Bab extends BD_Controller
     $this->load->model('Bab_model', 'bab');
   }
 
-  // public function index_post()
-  // {
-  //   $theCredential = $this->user_data;
-  //   $this->response($theCredential, 200);
-  // }
-
   public function index_get($id = null, $id_mapel = null, $semester = null)
   {
     $query = $this->bab->getRest($id, $id_mapel, $semester);
-    $this->set_response($query, REST_Controller::HTTP_OK);
+    $this->set_response([
+      'status' => REST_Controller::HTTP_OK,
+      'message' => "Get Data Bab Berhasil",
+      'data' => $query,
+    ]);
   }
 }
