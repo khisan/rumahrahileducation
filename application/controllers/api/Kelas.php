@@ -14,6 +14,10 @@ class Kelas extends BD_Controller
   public function index_get($id = null, $id_jenjang = null)
   {
     $query = $this->kelas->getRest($id, $id_jenjang);
-    $this->set_response($query, REST_Controller::HTTP_OK);
+    $this->set_response([
+      'status' => REST_Controller::HTTP_OK,
+      'message' => "Get Data Kelas Berhasil",
+      'data' => $query,
+    ]);
   }
 }
