@@ -14,6 +14,10 @@ class Jenjang extends BD_Controller
   public function index_get($id = null)
   {
     $query = $this->jenjang->getRest($id);
-    $this->set_response($query, REST_Controller::HTTP_OK);
+    $this->set_response([
+      'status' => REST_Controller::HTTP_OK,
+      'message' => "Get Data Jenjang Berhasil",
+      'data' => $query,
+    ]);
   }
 }

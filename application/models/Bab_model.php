@@ -81,7 +81,7 @@ class Bab_model extends CI_Model
     $this->db->select("id_bab,mapel_id,nama_bab,semester");
     $this->db->from("tb_bab");
     if ($id != null) {
-      $this->db->where("id_mapel", $id);
+      $this->db->where("id_bab", $id);
     } elseif ($id_mapel != null) {
       $this->db->where("mapel_id", $id_mapel);
     } elseif ($semester != null) {

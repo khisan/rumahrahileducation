@@ -27,8 +27,15 @@ class Jenjang_model extends CI_Model
     return $query;
   }
 
-  // ------------------------------------------------------------------------
-
+  public function getRest($id)
+  {
+    $this->db->select("id_jenjang,nama_jenjang");
+    $this->db->from("tb_jenjang");
+    if ($id != null) {
+      $this->db->where("id_jenjang", $id);
+    }
+    return $this->db->get()->result();
+  }
 }
 
 /* End of file Jenjang_model.php */
