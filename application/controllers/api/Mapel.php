@@ -14,6 +14,10 @@ class Mapel extends BD_Controller
   public function index_get($id = null, $id_kelas = null, $id_paket = null)
   {
     $query = $this->mapel->getRest($id, $id_kelas, $id_paket);
-    $this->set_response($query, REST_Controller::HTTP_OK);
+    $this->set_response([
+      'status' => REST_Controller::HTTP_OK,
+      'message' => "Get Data Mapel Berhasil",
+      'data' => $query,
+    ]);
   }
 }
