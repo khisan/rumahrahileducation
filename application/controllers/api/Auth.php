@@ -23,8 +23,8 @@ class Auth extends BD_Controller
     $password = sha1($this->post('password')); //Pasword Posted
     $user = array('username' => $username); //For where query condition
     $kunci = $this->config->item('thekey');
-    $invalidUserPass = ['status' => 'Username/Password salah']; //Respon if login invalid
-    $invalidUsername = ['status' => 'Akun tidak ditemukan']; //Respon if login invalid
+    $invalidUserPass = ['status' => 'Password salah']; //Respon if login invalid
+    $invalidUsername = ['status' => 'Username Salah/Akun tidak ditemukan']; //Respon if login invalid
     if ($this->admin->login_rest($user)->num_rows() > 0) {
       $val = $this->admin->login_rest($user)->row(); //Model to get single data row from database base on username
       $data = $this->admin->get_rest($username);
