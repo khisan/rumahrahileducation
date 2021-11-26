@@ -132,6 +132,8 @@ class Mapel_model extends CI_Model
 
   public function getRest($id, $id_kelas, $id_paket)
   {
+    $this->db->select("id_mapel,kelas_id,paket_id,nama_mapel");
+    $this->db->from("tb_mapel");
     if ($id != null) {
       $this->db->where("id_mapel", $id);
     } elseif ($id_kelas != null) {
@@ -139,7 +141,7 @@ class Mapel_model extends CI_Model
     } elseif ($id_paket != null) {
       $this->db->where("paket_id", $id_paket);
     }
-    return $this->db->get("tb_mapel")->result();
+    return $this->db->get()->result();
   }
 
   public function create($post)
