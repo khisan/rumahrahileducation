@@ -80,6 +80,8 @@ class Soal_model extends CI_Model
 
   public function getRest($id, $id_paket, $id_mapel)
   {
+    $this->db->select("id_soal,paket_id,mapel_id,soal,option_a,option_b,option_c,option_d,option_e,jawaban_benar");
+    $this->db->from("tb_soal");
     if ($id != null) {
       $this->db->where("id_soal", $id);
     } elseif ($id_paket != null) {
@@ -87,7 +89,24 @@ class Soal_model extends CI_Model
     } elseif ($id_mapel != null) {
       $this->db->where("mapel_id", $id_mapel);
     }
-    return $this->db->get("tb_soal")->result();
+    return $this->db->get()->result();
+    // $html_decoded = "";
+    // $query = $this->db->query("SELECT * FROM `tb_soal`");
+    // for ($i = 0; $i < $query->num_rows(); $i++) {
+    //   // var_dump($query->id_soal);
+    //   $result_query[] = $query->result();
+    //   $html_decoded[$i]['id_soal'] = html_entity_decode($result_query->id_soal);
+    //   $html_decoded[$i]['paket_id'] = html_entity_decode($result_query->paket_id);
+    //   $html_decoded[$i]['mapel_id'] = html_entity_decode($result_query->mapel_id);
+    //   $html_decoded[$i]['soal'] = html_entity_decode($result_query->soal);
+    //   $html_decoded[$i]['option_a'] = html_entity_decode($result_query->option_a);
+    //   $html_decoded[$i]['option_b'] = html_entity_decode($result_query->option_b);
+    //   $html_decoded[$i]['option_c'] = html_entity_decode($result_query->option_c);
+    //   $html_decoded[$i]['option_d'] = html_entity_decode($result_query->option_d);
+    //   $html_decoded[$i]['option_e'] = html_entity_decode($result_query->option_e);
+    //   $html_decoded[$i]['jawaban_benar'] = html_entity_decode($result_query->jawaban_benar);
+    // }
+    // return  $html_decoded;
   }
 
   public function getSoal($paket_id = null, $mapel_id = null)

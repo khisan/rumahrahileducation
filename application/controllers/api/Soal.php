@@ -14,6 +14,10 @@ class Soal extends BD_Controller
   public function index_get($id = null, $id_paket = null, $id_mapel = null)
   {
     $query = $this->soal->getRest($id, $id_paket, $id_mapel);
-    $this->set_response($query, REST_Controller::HTTP_OK);
+    $this->set_response([
+      'status' => REST_Controller::HTTP_OK,
+      'message' => "Get Data Soal Berhasil",
+      'data' => $query,
+    ]);
   }
 }
