@@ -65,7 +65,7 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/landingpage/img/slide/new_img.jpg)">
+        <div class="carousel-item active" style="background-image: url(assets/landingpage/img/slide/new_img.png); margin-top: 50px;">
           <div class="carousel-container">
             <div class="container">
               <!-- <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Sailor</span></h2>
