@@ -92,6 +92,38 @@ class Video_model extends CI_Model
     }
   }
 
+  public function getListVideoRest($id_mapel = null, $searchData = null, $id_bab = null)
+  {
+    $this->db->select("*");
+    $this->db->from("tb_video");
+    $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
+    if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+    if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
+    $tempRes = $this->db->get()->row();
+    if (!is_null($tempRes) && $tempRes->bab_id != NULL) {
+      $this->db->select("*");
+      $this->db->from("tb_video");
+      $this->db->join("tb_bab", "tb_bab.id_bab = tb_video.bab_id");
+      $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
+      if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+      if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
+    } else {
+      $this->db->select("*");
+      $this->db->from("tb_video");
+      $this->db->join("tb_mapel", "tb_mapel.id_mapel = tb_video.mapel_id");
+      if (!is_null($id_mapel)) $this->db->where('tb_video.mapel_id', $id_mapel);
+      if (!is_null($id_bab)) $this->db->where('tb_video.bab_id', $id_bab);
+    }
+
+    if (!is_null($searchData)) {
+      $this->db->where('tb_video.mapel_id', $id_mapel);
+      $this->db->where('tb_video.bab_id', $id_bab);
+      $this->db->like('tb_video.nama_video', $searchData);
+    }
+    $query = $this->db->get();
+    return $query->result();
+  }
+
   public function getDataTables($id = null, $id_mapel = null, $searchData = null, $id_bab = null)
   {
     $this->_getDataTablesQuery($id, $id_mapel, $searchData, $id_bab);

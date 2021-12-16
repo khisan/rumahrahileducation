@@ -32,6 +32,11 @@ class Test extends BD_Controller
 
   public function mulaiTest_post()
   {
+    date_default_timezone_set("Asia/Jakarta");
+    $tgl_test =  date("Y-m-d h:i:sa");
+    $idWaktu = strtotime($tgl_test);
+
+    $post['id_h_test'] = $idWaktu;
     $post['paket_id'] = $this->input->post('paket_id');
     $post['mapel_id'] = $this->input->post('mapel_id');
     $post['siswa_profile_id'] = $this->input->post('siswa_profile_id');
@@ -40,29 +45,7 @@ class Test extends BD_Controller
     $post['jml_benar'] = $this->input->post('jml_benar');
     $post['nilai'] = $this->input->post('nilai');
     $post['tgl_test'] = $this->input->post('tgl_test');
-    // Setting form validation
-    $this->form_validation->set_data($post);
-    $this->form_validation->set_rules('paket_id', 'ID Paket', 'required');
-    $this->form_validation->set_rules('mapel_id', 'ID Mapel', 'required');
-    $this->form_validation->set_rules('siswa_profile_id', 'ID Siswa Profile', 'required');
-    $this->form_validation->set_rules('list_soal', 'List Soal', 'required');
-    $this->form_validation->set_rules('list_jawaban', 'List Jawaban', 'required');
-    $this->form_validation->set_rules('jml_benar', 'Jumlah Benar', 'required');
-    $this->form_validation->set_rules('nilai', 'Nilai', 'required');
-    $this->form_validation->set_rules('tgl_test', 'Tanggal Test', 'required');
-    if ($this->form_validation->run() == FALSE) {
-      return $this->response([
-        'status' => REST_Controller::HTTP_NOT_FOUND,
-        'message' => $this->form_validation->error_array(),
-        'data' => null,
-      ]);
-    } else {
-      $this->test->createRest($post);
-      return $this->set_response([
-        'status' => REST_Controller::HTTP_OK,
-        'message' => "Data Berhasil Ditambahkan",
-      ]);
-    }
+    $this->load->library('form_validation');
   }
 
   // public function simpanSatu_post()
