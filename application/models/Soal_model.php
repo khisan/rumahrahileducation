@@ -78,26 +78,16 @@ class Soal_model extends CI_Model
     return $query;
   }
 
-  public function getRest($id, $id_paket, $id_mapel)
+  public function getRest($id, $id_mapel)
   {
-    // $this->db->select("id_soal,paket_id,mapel_id,soal,option_a,option_b,option_c,option_d,option_e,jawaban_benar");
-    // $this->db->from("tb_soal");
-    // if ($id != null) {
-    //   $this->db->where("id_soal", $id);
-    // } elseif ($id_paket != null) {
-    //   $this->db->where("paket_id", $id_paket);
-    // } elseif ($id_mapel != null) {
-    //   $this->db->where("mapel_id", $id_mapel);
-    // }
-    // return $this->db->get()->result();
     $this->db->select("id_soal,paket_id,mapel_id,soal,option_a,option_b,option_c,option_d,option_e,jawaban_benar");
     $this->db->from("tb_soal");
-    if ($id != null) {
-      $this->db->where('id_soal', $id);
-    } elseif ($id_paket != null) {
-      $this->db->where('paket_id', $id_paket);
-    } elseif ($id_mapel != null) {
+    if ($id != null && $id_mapel != null) {
+      $this->db->where('paket_id', $id);
       $this->db->where('mapel_id', $id_mapel);
+    } elseif ($id) {
+      $this->db->where('paket_id', $id);
+      $this->db->or_where('mapel_id', $id);
     }
     $query = $this->db->get();
     return $query->result();

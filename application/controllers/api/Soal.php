@@ -11,9 +11,9 @@ class Soal extends BD_Controller
     $this->load->model('Soal_model', 'soal');
   }
 
-  public function index_get($id = null, $id_paket = null, $id_mapel = null)
+  public function index_get($id = null, $id_mapel = null)
   {
-    $query = $this->soal->getRest($id, $id_paket, $id_mapel);
+    $query = $this->soal->getRest($id, $id_mapel);
     $data = [];
     foreach ($query as $res) {
       $row['id_soal'] = $res->id_soal;
@@ -28,10 +28,18 @@ class Soal extends BD_Controller
       $row['jawaban_benar'] = $res->jawaban_benar;
       $data[] = $row;
     }
-    $this->set_response([
-      'status' => REST_Controller::HTTP_OK,
-      'message' => "Get Data Soal Berhasil",
-      'data' => $data,
-    ]);
+    if ($data == null) {
+      $this->set_response([
+        'status' => REST_Controller::HTTP_OK,
+        'message' => "Get Data Soal Gagal",
+        'data' => null,
+      ]);
+    } else {
+      $this->set_response([
+        'status' => REST_Controller::HTTP_OK,
+        'message' => "Get Data Soal Berhasil",
+        'data' => $data,
+      ]);
+    }
   }
 }

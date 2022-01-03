@@ -147,16 +147,13 @@ class Paket_model extends CI_Model
     return $query;
   }
 
-  public function getRest($id, $id_bab, $id_kelas)
+  public function getRest($id)
   {
     $this->db->select("id_paket,bab_id,kelas_id,nama_paket,waktu");
     $this->db->from("tb_paket");
     if ($id != null) {
-      $this->db->where("id_paket", $id);
-    } elseif ($id_bab != null) {
-      $this->db->where("bab_id", $id_bab);
-    } elseif ($id_kelas != null) {
-      $this->db->where("kelas_id", $id_kelas);
+      $this->db->where("bab_id", $id);
+      $this->db->or_where("kelas_id", $id);
     }
     return $this->db->get()->result();
   }
