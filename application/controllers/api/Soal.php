@@ -11,9 +11,11 @@ class Soal extends BD_Controller
     $this->load->model('Soal_model', 'soal');
   }
 
-  public function index_get($id = null, $id_mapel = null)
+  public function index_get()
   {
-    $query = $this->soal->getRest($id, $id_mapel);
+    $paket_id = $this->input->get('paket_id');
+    $mapel_id = $this->input->get('mapel_id');
+    $query = $this->soal->getRest($paket_id, $mapel_id);
     $data = [];
     foreach ($query as $res) {
       $row['id_soal'] = $res->id_soal;

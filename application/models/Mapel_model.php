@@ -130,13 +130,15 @@ class Mapel_model extends CI_Model
     return $final;
   }
 
-  public function getRest($id)
+  public function getRest($id, $id_mapel)
   {
     $this->db->select("id_mapel,kelas_id,paket_id,nama_mapel");
     $this->db->from("tb_mapel");
     if ($id != null) {
       $this->db->where("kelas_id", $id);
       $this->db->or_where("paket_id", $id);
+    } elseif ($id == null && $id_mapel != null) {
+      $this->db->where("id_mapel", $id_mapel);
     }
     return $this->db->get()->result();
   }

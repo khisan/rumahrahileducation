@@ -11,9 +11,11 @@ class Paket extends BD_Controller
     $this->load->model('Paket_model', 'paket');
   }
 
-  public function index_get($id = null)
+  public function index_get()
   {
-    $query = $this->paket->getRest($id);
+    $id = $this->input->get('id');
+    $id_paket = $this->input->get('id_paket');
+    $query = $this->paket->getRest($id, $id_paket);
     if ($query == null) {
       $this->set_response([
         'status' => REST_Controller::HTTP_OK,

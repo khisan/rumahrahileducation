@@ -11,9 +11,11 @@ class Mapel extends BD_Controller
     $this->load->model('Mapel_model', 'mapel');
   }
 
-  public function index_get($id = null)
+  public function index_get()
   {
-    $query = $this->mapel->getRest($id);
+    $id = $this->input->get('id');
+    $id_mapel = $this->input->get('id_mapel');
+    $query = $this->mapel->getRest($id, $id_mapel);
     if ($query == null) {
       $this->set_response([
         'status' => REST_Controller::HTTP_OK,

@@ -11,8 +11,10 @@ class Bab extends BD_Controller
     $this->load->model('Bab_model', 'bab');
   }
 
-  public function index_get($id = null, $semester = null)
+  public function index_get()
   {
+    $id = $this->input->get('mapel_id');
+    $semester = $this->input->get('semester');
     $query = $this->bab->getRest($id, $semester);
     if ($query == null) {
       $this->set_response([
