@@ -144,6 +144,20 @@ class Siswa_model extends CI_Model
     return $this->db->affected_rows();
   }
 
+  public function insert_token($token, $id)
+  {
+    $data = array('token' => $token);
+    $this->db->where('id_siswa_profile', $id);
+    $this->db->update('tb_siswa_profile', $data);
+  }
+
+  public function logout($id)
+  {
+    $data = array('token' => '');
+    $this->db->where('id_siswa_profile', $id);
+    $this->db->update('tb_siswa_profile', $data);
+  }
+
   public function delete($id)
   {
     $this->db->where('id_siswa_profile', $id);
