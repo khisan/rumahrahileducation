@@ -1,0 +1,1 @@
+{"result":{"text":"blank to the power of begin inline style blank over blank end style end exponent"},"status":"ok"}

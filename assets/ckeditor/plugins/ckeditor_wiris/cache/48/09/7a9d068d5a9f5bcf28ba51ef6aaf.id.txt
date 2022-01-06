@@ -1,0 +1,1 @@
+{"result":{"text":"square root of ab greater or equal than straight a square root of b"},"status":"ok"}

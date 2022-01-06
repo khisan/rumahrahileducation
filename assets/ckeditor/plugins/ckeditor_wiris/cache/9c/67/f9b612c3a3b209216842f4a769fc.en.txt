@@ -1,0 +1,1 @@
+{"result":{"text":"square root of ab blank greater or equal than blank ab over 2"},"status":"ok"}
