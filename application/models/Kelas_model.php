@@ -54,15 +54,17 @@ class Kelas_model extends CI_Model
     return $query;
   }
 
-  public function getRest($id, $id_jenjang)
+  public function getRest($id_kelas, $id_jenjang)
   {
     $this->db->select("id_kelas,jenjang_id,nama_kelas,jurusan");
     $this->db->from("tb_kelas");
-    if ($id != null and $id_jenjang != null) {
-      $this->db->where("id_kelas", $id);
-      $this->db->where("jenjang_id", $id);
-    } elseif ($id != null) {
-      $this->db->where("jenjang_id", $id);
+    if ($id_kelas != null and $id_jenjang != null) {
+      $this->db->where("id_kelas", $id_kelas);
+      $this->db->where("jenjang_id", $id_jenjang);
+    } elseif ($id_jenjang != null) {
+      $this->db->where("jenjang_id", $id_jenjang);
+    } elseif ($id_kelas != null) {
+      $this->db->where("id_kelas", $id_kelas);
     }
     return $this->db->get()->result();
   }

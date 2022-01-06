@@ -10,7 +10,6 @@ class Detail_h_test_model extends CI_Model
     $this->db->select('*');
     $this->db->from('tb_h_test h_test');
     $this->db->join('tb_soal soal', 'soal.paket_id=h_test.paket_id and soal.mapel_id=h_test.mapel_id');
-    // $this->db->join('tb_soal soal', '');
     $this->db->where('h_test.id_h_test', $id_h_test);
 
     $i = 0;
@@ -48,6 +47,17 @@ class Detail_h_test_model extends CI_Model
   }
 
   public function get($id_h_test)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_h_test h_test');
+    $this->db->join('tb_paket paket', 'paket.id_paket=h_test.paket_id');
+    $this->db->join('tb_mapel mapel', 'mapel.id_mapel=h_test.mapel_id');
+    $this->db->join('tb_siswa_profile siswa', 'siswa.id_siswa_profile=h_test.siswa_profile_id');
+    $this->db->where('h_test.id_h_test', $id_h_test);
+    return $this->db->get();
+  }
+
+  public function getRest($id_h_test)
   {
     $this->db->select('*');
     $this->db->from('tb_h_test h_test');

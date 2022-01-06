@@ -1,25 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Detail_h_test extends CI_Controller
+class Detail_h_test extends BD_Controller
 {
   public function __construct()
   {
     parent::__construct();
-    check_not_login();
+    $this->auth();
     $this->load->model('Detail_h_test_model', 'detail_h_test');
     $this->load->model('Test_model', 'test');
     $this->load->model('Siswa_model', 'siswa');
   }
 
-  public function index($id_h_test)
+  public function index_get()
   {
-    $data['h_test'] = $this->detail_h_test->get($id_h_test)->row();
-    $this->template->load('template', 'user/detail_hasil_test', $data);
-  }
-
-  public function getAjax($id_h_test)
-  {
+    $id_h_test = $this->input->get('id_h_test');
     $list = $this->detail_h_test->getDataTables($id_h_test);
     $list_jawaban = $this->test->getJawaban($id_h_test)->row()->list_jawaban;
     function multiexplode($delimiters, $string)
@@ -30,24 +25,28 @@ class Detail_h_test extends CI_Controller
     }
     $exp_jawaban = multiexplode(array(',', ':'), $list_jawaban);
     $data = [];
-    $no = @$_POST['start'];
     $i = 1;
+    $no = 1;
     foreach ($list as $detail_h_test) {
       $cek = $exp_jawaban[$i] == $detail_h_test->jawaban_benar ? "Benar" : "Salah";
-      $no++;
-      $row = [];
-      $row[] = $no . '.';
-      $row[] = $exp_jawaban[$i];
-      $row[] = $cek;
+      $row['no'] = $no++;
+      $row['jawab'] = $exp_jawaban[$i];
+      $row['cek'] = $cek;
       $data[] = $row;
       $i += 2;
     }
-    $output = [
-      'draw' => @$_POST['draw'],
-      'recordsTotal' => $this->detail_h_test->countAll($id_h_test),
-      'recordsFiltered' => $this->detail_h_test->countFiltered($id_h_test),
-      'data' => $data
-    ];
-    echo json_encode($output);
+    if ($data == null) {
+      $this->set_response([
+        'status' => REST_Controller::HTTP_OK,
+        'message' => "Get Data Detail Report Gagal",
+        'data' => null,
+      ]);
+    } else {
+      $this->set_response([
+        'status' => REST_Controller::HTTP_OK,
+        'message' => "Get Data Detail Report Berhasil",
+        'data' => $data,
+      ]);
+    }
   }
 }

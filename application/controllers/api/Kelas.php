@@ -11,9 +11,11 @@ class Kelas extends BD_Controller
     $this->load->model('Kelas_model', 'kelas');
   }
 
-  public function index_get($id = null, $id_jenjang = null)
+  public function index_get()
   {
-    $query = $this->kelas->getRest($id, $id_jenjang);
+    $id_kelas = $this->input->get('id_kelas');
+    $id_jenjang = $this->input->get('id_jenjang');
+    $query = $this->kelas->getRest($id_kelas, $id_jenjang);
     if ($query == null) {
       $this->set_response([
         'status' => REST_Controller::HTTP_OK,
