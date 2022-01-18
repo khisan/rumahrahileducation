@@ -68,6 +68,8 @@ class Auth extends CI_Controller
                 </script>';
       } elseif ($cek_siswa->num_rows() > 0) {
         $row = $cek_siswa->row();
+        // var_dump($row);
+        // die;
         $session_siswa = [
           'userid'      => $row->id_siswa_profile,
           'nama'        => $row->nama,

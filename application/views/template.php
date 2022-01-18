@@ -161,6 +161,9 @@
             </li>
           <?php } elseif ((strpos($id, 'Kedinasan') !== 'false' or strpos($id, 'SBM') !== 'false' or strpos($id, 'SMA') !== 'false' or strpos($id, 'SMP') !== 'false' or strpos($id, 'SD') !== 'false')) { ?>
             <li class="nav-item">
+              <a href="<?= site_url("profil/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">Profil</span></a>
+            </li>
+            <li class="nav-item">
               <a href="<?= site_url("h_test/index/$id"); ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Hasil Test</span></a>
             </li>
             <li class="nav-item">

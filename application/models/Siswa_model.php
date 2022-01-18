@@ -73,7 +73,7 @@ class Siswa_model extends CI_Model
 
   public function get_rest($username)
   {
-    $this->db->select("id_siswa_profile,nama,username,jenjang_id,kelas_id,jurusan,sekolah,alamat,email,image");
+    $this->db->select("id_siswa_profile,nama,username,jenjang_id,kelas_id,jurusan,sekolah,alamat,email,foto");
     $this->db->from("tb_siswa_profile");
     $this->db->where("username", $username);
     return $this->db->get()->row();
@@ -82,7 +82,7 @@ class Siswa_model extends CI_Model
   public function getSiswa($siswa_profile_id)
   {
     $this->db->where('id_siswa_profile', $siswa_profile_id);
-    $query = $this->db->get('tb_siswa_profile')->result();
+    $query = $this->db->get('tb_siswa_profile')->row();
     return $query;
   }
 
@@ -115,7 +115,7 @@ class Siswa_model extends CI_Model
     $params['alamat'] = htmlspecialchars($post['alamat']);
     $params['email'] = htmlspecialchars($post['email']);
     $params['password'] = sha1($post['password1']);
-    $params['image'] = $post['image'];
+    $params['foto'] = $post['foto'];
 
     $this->db->insert('tb_siswa_profile', $params);
     return $this->db->affected_rows();
@@ -134,8 +134,22 @@ class Siswa_model extends CI_Model
     if (!empty($post['password1'])) {
       $params['password'] = sha1($post['password1']);
     }
-    if ($post['image'] != null) {
-      $params['image'] = htmlspecialchars($post['image']);
+    if ($post['foto'] != null) {
+      $params['foto'] = htmlspecialchars($post['foto']);
+    }
+    $params['updated'] = date('Y-m-d H:i:s');
+
+    $this->db->where('id_siswa_profile', $post['id_siswa']);
+    $this->db->update('tb_siswa_profile', $params);
+    return $this->db->affected_rows();
+  }
+
+  public function update_profil($post)
+  {
+    $params['nama'] = htmlspecialchars($post['nama']);
+    $params['sekolah'] = htmlspecialchars($post['sekolah']);
+    if ($post['foto'] != null) {
+      $params['image'] = htmlspecialchars($post['foto']);
     }
     $params['updated'] = date('Y-m-d H:i:s');
 
