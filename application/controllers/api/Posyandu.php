@@ -18,40 +18,42 @@ class Posyandu extends BD_Controller
     // $this->load->library('pdf');
     if ($id == 1) {
       $html = $this->load->view('posyandu/posyandu_pdf', [], true);
-      $dompdf->setPaper('A4', 'landscape');
+      $dompdf->setPaper('legal', 'landscape');
       $dompdf->loadHtml($html);
       // Render the HTML as PDF
       $dompdf->render();
       // Get the generated PDF file contents
-      $pdf = $dompdf->output();
+      $dompdf->output();
       // Output the generated PDF to Browser
       $dompdf->stream();
     } elseif ($id == 2) {
       $html = $this->load->view('posyandu/posyandu2_pdf', [], true);
-      $dompdf->setPaper('A4', 'landscape');
+      $dompdf->setPaper('legal', 'landscape');
       $dompdf->loadHtml($html);
       // Render the HTML as PDF
       $dompdf->render();
       // Get the generated PDF file contents
-      $pdf = $dompdf->output();
+      $dompdf->output();
       // Output the generated PDF to Browser
       $dompdf->stream();
     } elseif ($id == 3) {
       $html = $this->load->view('posyandu/posyandu3_pdf', [], true);
+      $dompdf->setPaper('legal', 'landscape');
       $dompdf->loadHtml($html);
       // Render the HTML as PDF
       $dompdf->render();
       // Get the generated PDF file contents
-      $pdf = $dompdf->output();
+      $dompdf->output();
       // Output the generated PDF to Browser
       $dompdf->stream();
     } else {
       $html = $this->load->view('posyandu/posyandu_pdf', [], true);
+      $dompdf->setPaper('legal', 'landscape');
       $dompdf->loadHtml($html);
       // Render the HTML as PDF
       $dompdf->render();
       // Get the generated PDF file contents
-      $pdf = $dompdf->output();
+      $dompdf->output();
       // Output the generated PDF to Browser
       $dompdf->stream();
     }

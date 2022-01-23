@@ -25,7 +25,7 @@
         <h5>Edit Profil</h5>
       </div>
       <center>
-        <img src="<?= base_url() . 'uploads/siswa/' . $data->image; ?>" class="img-fluid mt-4" />
+        <img src="<?= base_url() . './uploads/siswa/' . $data->image; ?>" class="img-fluid mt-4" />
         <div class="card-body">
           <h4 class="card-title m-t-10"> <?= $data->nama ?> </h4>
           <p><?= $data->sekolah ?></p>
