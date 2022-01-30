@@ -18,18 +18,6 @@ class Test extends BD_Controller
     $this->load->model('Test_model', 'test');
   }
 
-  // public function index_get($siswa_profile_id = null)
-  // {
-  //   $query = $this->test->getRest($siswa_profile_id);
-  //   $this->set_response($query, REST_Controller::HTTP_OK);
-  // }
-
-  // public function getJawaban_get($id_test)
-  // {
-  //   $query = $this->test->getJawabanRest($id_test);
-  //   $this->set_response($query, REST_Controller::HTTP_OK);
-  // }
-
   public function mulaiTest_post()
   {
     date_default_timezone_set("Asia/Jakarta");
@@ -47,27 +35,4 @@ class Test extends BD_Controller
     $post['tgl_test'] = $this->input->post('tgl_test');
     $this->load->library('form_validation');
   }
-
-  // public function simpanSatu_post()
-  // {
-  //   $post['id_h_test'] = $this->input->post('id_h_test');
-  //   $post['list_jawaban'] = $this->input->post('list_jawaban');
-  //   $this->test->updateRest($post, $post['id_h_test']);
-  //   return $this->set_response([
-  //     'status' => true,
-  //     'message' => 'Data Updated'
-  //   ]);
-  // }
-
-  // public function simpanAkhir_post()
-  // {
-  //   $post['id_h_test'] = $this->input->post('id_h_test');
-  //   $post['jml_benar'] = $this->input->post('jml_benar');
-  //   $post['nilai'] = $this->input->post('nilai');
-  //   $this->test->updateRest($post, $post['id_h_test']);
-  //   return $this->set_response([
-  //     'status' => true,
-  //     'message' => 'Data Updated'
-  //   ]);
-  // }
 }

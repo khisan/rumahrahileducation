@@ -93,7 +93,6 @@ class Soal extends CI_Controller
     $this->form_validation->set_rules('option_b', 'option_b', 'required');
     $this->form_validation->set_rules('option_c', 'option_c', 'required');
     $this->form_validation->set_rules('option_d', 'option_d', 'required');
-    $this->form_validation->set_rules('option_e', 'option_e', 'required');
     $this->form_validation->set_rules('jawaban_benar', 'jawaban_benar', 'required');
     $this->form_validation->set_message('required', '%s masih kosong, silahkan isi');
 

@@ -35,6 +35,7 @@ class Test extends CI_Controller
     $mapel_id = $this->input->post('mapel');
     $paket_id = $this->input->post('paket');
     $siswa_profile_id = $this->session->userdata('userid');
+    $id_jenjang = $this->session->userdata('id_jenjang');
     $waktu = $this->session->userdata('waktu');
     $soal = $this->soal->getSoal($paket_id, $mapel_id)->result();
     $list_id_soal = "";
@@ -69,19 +70,37 @@ class Test extends CI_Controller
     $html = '';
     $no = 1;
     $url = base_url("uploads/soal/");
-    $arr_opsi = array("a", "b", "c", "d", "e");
-    foreach ($data as $test) {
-      $html .= '<input type="hidden" name="id_soal_' . $no . '" value="' . $test->id_soal . '">';
-      $html .= '<div class="step" id="widget_' . $no . '">';
-      $html .= '<p style="font-size: 20px;">' . $test->soal . '</p>';
-      $html .= '<div class="funkyradio">';
-      for ($i = 0; $i < 5; $i++) {
-        $opsi = "option_" . $arr_opsi[$i];
-        $pilihan_opsi = !empty($test->$opsi) ? $test->$opsi : "";
-        $html .= '<div class="funkyradio-success" onclick="return simpan_sementara();"><input type="radio" id="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '" name="opsi_' . $no . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
+    echo $id_jenjang;
+    if ($id_jenjang == 4 or $id_jenjang == 3) {
+      $arr_opsi = array("a", "b", "c", "d", "e");
+      foreach ($data as $test) {
+        $html .= '<input type="hidden" name="id_soal_' . $no . '" value="' . $test->id_soal . '">';
+        $html .= '<div class="step" id="widget_' . $no . '">';
+        $html .= '<p style="font-size: 20px;">' . $test->soal . '</p>';
+        $html .= '<div class="funkyradio">';
+        for ($i = 0; $i < 5; $i++) {
+          $opsi = "option_" . $arr_opsi[$i];
+          $pilihan_opsi = !empty($test->$opsi) ? $test->$opsi : "";
+          $html .= '<div class="funkyradio-success" onclick="return simpan_sementara();"><input type="radio" id="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '" name="opsi_' . $no . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
+        }
+        $html .= '</div></div>';
+        $no++;
       }
-      $html .= '</div></div>';
-      $no++;
+    } elseif ($id_jenjang == 2 || $id_jenjang == 1) {
+      $arr_opsi = array("a", "b", "c", "d");
+      foreach ($data as $test) {
+        $html .= '<input type="hidden" name="id_soal_' . $no . '" value="' . $test->id_soal . '">';
+        $html .= '<div class="step" id="widget_' . $no . '">';
+        $html .= '<p style="font-size: 20px;">' . $test->soal . '</p>';
+        $html .= '<div class="funkyradio">';
+        for ($i = 0; $i < 4; $i++) {
+          $opsi = "option_" . $arr_opsi[$i];
+          $pilihan_opsi = !empty($test->$opsi) ? $test->$opsi : "";
+          $html .= '<div class="funkyradio-success" onclick="return simpan_sementara();"><input type="radio" id="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '" name="opsi_' . $no . '" value="' . $arr_opsi[$i] . '"/><label for="opsi_' . $arr_opsi[$i] . '_' . $test->id_soal . '"><div class="huruf_opsi">' . $arr_opsi[$i] . '</div><p>' . $pilihan_opsi . '</p></label></div>';
+        }
+        $html .= '</div></div>';
+        $no++;
+      }
     }
     $data = array(
       'html' => $html,

@@ -88,6 +88,7 @@ class Login extends BD_Controller
         $token['sekolah'] = $val->sekolah;
         $token['alamat'] = $val->alamat;
         $token['email'] = $val->email;
+        $token['image'] = base_url() . '' . $val->image;
         $output['user'] = $this->siswa->get_rest($username);
         $date = new DateTime();
         $token['iat'] = $date->getTimestamp();

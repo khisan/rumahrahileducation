@@ -71,19 +71,12 @@ class Siswa_model extends CI_Model
     return $query;
   }
 
-  public function get_rest($username)
+  public function getRest($id)
   {
-    $this->db->select("id_siswa_profile,nama,username,jenjang_id,kelas_id,jurusan,sekolah,alamat,email,foto");
+    $this->db->select("id_siswa_profile,nama,username,jenjang_id,kelas_id,jurusan,sekolah,alamat,email,image");
     $this->db->from("tb_siswa_profile");
-    $this->db->where("username", $username);
+    $this->db->where("id_siswa_profile", $id);
     return $this->db->get()->row();
-  }
-
-  public function getSiswa($siswa_profile_id)
-  {
-    $this->db->where('id_siswa_profile', $siswa_profile_id);
-    $query = $this->db->get('tb_siswa_profile')->row();
-    return $query;
   }
 
   public function login($post)
@@ -156,6 +149,20 @@ class Siswa_model extends CI_Model
     $this->db->where('id_siswa_profile', $post['id_siswa']);
     $this->db->update('tb_siswa_profile', $params);
     return $this->db->affected_rows();
+  }
+
+  public function updateRest($post, $id_h_test)
+  {
+    $this->db->set($post);
+    $this->db->where('id_h_test', $id_h_test);
+    return $this->db->update('tb_h_test');
+  }
+
+  public function updateProfilRest($post, $id_siswa)
+  {
+    $this->db->set($post);
+    $this->db->where('id_siswa_profile', $id_siswa);
+    return $this->db->update('tb_siswa_profile');
   }
 
   public function insert_token($token, $id)
