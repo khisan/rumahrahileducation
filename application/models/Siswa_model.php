@@ -137,7 +137,7 @@ class Siswa_model extends CI_Model
     return $this->db->affected_rows();
   }
 
-  public function update_profil($post)
+  public function update_profil($post, $id_siswa)
   {
     $params['nama'] = htmlspecialchars($post['nama']);
     $params['sekolah'] = htmlspecialchars($post['sekolah']);
@@ -146,7 +146,7 @@ class Siswa_model extends CI_Model
     }
     $params['updated'] = date('Y-m-d H:i:s');
 
-    $this->db->where('id_siswa_profile', $post['id_siswa']);
+    $this->db->where('id_siswa_profile', $id_siswa);
     $this->db->update('tb_siswa_profile', $params);
     return $this->db->affected_rows();
   }
